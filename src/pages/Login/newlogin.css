@@ -1,0 +1,209 @@
+body{
+  background-color: rgb(254, 207, 214);
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed; 
+  top:0; 
+  left:0;
+  right: 0; 
+  bottom: 0; 
+  background-color:rgb(254, 207, 214);
+  padding: 20px;
+  border:none;
+}
+
+.child-container {
+  position: fixed;
+  top: 80px;
+  left: 30px;
+  right: 30px;
+  bottom: 80px;
+  border-radius: 30px;
+  background-color: rgb(201, 224, 233); 
+  padding: 200px; 
+}
+
+.wrapper-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin:15px;
+  margin-top:14px;
+  margin-bottom: 14px;
+  border: none;
+  border-radius: 30px;
+  overflow: hidden;
+  background: url('ex.jpg') center center/cover;
+}
+
+.inner-container {
+  border: none;
+  background-color:rgba(245, 243, 243,0.8);
+  border-radius: 30px;
+  padding: 100px 60px; 
+  position: absolute;
+  top: 50%; 
+  height:96%;
+  right: 79%;
+  transform: translate(50%, -50%); 
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  width: 40%; 
+}
+
+.LogIn {
+  color: black;
+  font-weight: bold;
+  font-size:x-small;
+  margin-left: 180px;
+  margin-top:40px;
+  margin-bottom:50px;
+  font-size:x-large;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#currentEmail{
+  color: #034295;
+  font-weight:500;
+  width: 82%;
+  margin-left:40px;
+}
+
+.currentPassword{
+  color: #034295;
+  font-weight:500;
+  width: 139px;
+  margin-left:39px;
+}
+
+.input {
+  width: 82%;
+  padding: 10px;
+  margin: 5px auto; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: black;
+  background-color:#f2f0f0;
+  transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s; 
+}
+
+.input:hover {
+  background-color:#f2f0f0;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); 
+}
+
+.input:focus {
+  border-color:#f2f0f0
+}
+
+.btn{
+  width:82%;
+  height:8%;
+  margin-left: 40px;
+  margin-top:50px;
+  border-radius: 8px;
+  color:white;
+  background-color:black;
+}
+
+.btn:hover{
+  box-shadow: 10px;
+  background-color: black;
+  transition: 0.1s;
+}
+
+.noAccount{
+  color:black;
+  font-size: small;
+  margin-top:15px;
+  margin-left:130px;
+}
+
+.checkbox-forgot-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3px; 
+}
+
+.checkbox-input {
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  width: 17px;
+  height: 17px;
+  background-color: rgb(230, 229, 229);
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  margin-left:40px;
+   margin-right:2px; 
+}
+
+.checkbox-input:checked {
+  background-color: rgb(230, 229, 229);
+  border:1px solid black;
+}
+
+.checkbox-input:checked::before {
+  content: '\2713'; 
+  font-size: 15px;
+  color: black; 
+  position: absolute;
+  top: 48%;
+  left: 18%;
+  transform: translate(-15%, -32%);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  color: black;
+  font-weight: 300;
+}
+
+.checkbox-label:hover {
+  color: #646cff; 
+  transition: color 0.1s;
+}
+
+.forgotpassword {
+  color: black;
+  font-weight: 300;
+  margin-right: 45px; 
+  text-decoration: none;
+}
+
+.forgotpassword:hover{
+  color: #646cff;
+  transition: color 0.1s;
+}
+
+.footer-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 180px; 
+  color:black;
+  font-size:small;
+}
+
+.footer-text p {
+  margin: 0;
+  padding: 0 10px; 
+}
+
+.vertical-line {
+  height: 15px; 
+  width: 1px;
+  background-color: #000; 
+  margin: 0 1px; 
+}

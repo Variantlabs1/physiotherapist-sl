@@ -1,0 +1,135 @@
+.rootExercises {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 2vw;
+
+    .header {
+        margin-bottom: 2vw;
+        width: 95%;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+
+        .title {
+            width: 30%;
+            p {
+                font-weight: 700;
+                font-size: 2.3rem;
+                color: #3b3c40;
+            }
+        }
+
+        // .buttons {
+
+        // }
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+
+        .listContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+
+            .card {
+                width: 70vw;
+                height: fit-content;
+                margin-bottom: 1em;
+                // background-color: #e7f3ff;   
+                padding: 0.5vw;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                justify-content: space-between;
+                border-radius: 1vw;
+
+                box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+                .imageContainer {
+                    width: 15%;
+                    // background-color: red;
+                    .profilePicture {
+                        width: 3vw;
+                        height: 3vw;
+                        border-radius: 50%;
+                        overflow: hidden;
+
+                        object-fit: cover;
+                    }
+                }
+
+                .textContainer {
+                    // background-color: yellow;
+                    width: 85%;
+
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .info {
+                        width: 70%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        .username,
+                        .userEmail,
+                        .userAccDate {
+                            p {
+                                font-weight: 500;
+                                font-size: 1.53rem;
+                                // color: #0d1dac;
+                                color: #000000;
+                            }
+                        }
+                    }
+
+                    .buttons {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .accept,
+                        .decline {
+                            border: 1px solid #000000;
+                            border-radius: 15px;
+                            padding: 10px 15px;
+                            margin: 0 10px;
+                            p {
+                                font-weight: 600;
+                                font-size: 1.28rem;
+                                color: #000000;
+                                transition: color 0.3s;
+                            }
+                        }
+
+                        .accept:hover {
+                            cursor: pointer;
+                            background-color: green;
+                            transition: background-color 0.3s;
+                            p {
+                                color: #ffffff;
+                            }
+                        }
+
+                        .decline:hover {
+                            cursor: pointer;
+                            background-color: red;
+                            transition: background-color 0.3s;
+                            p {
+                                color: #ffffff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

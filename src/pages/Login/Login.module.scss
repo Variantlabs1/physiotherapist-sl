@@ -1,0 +1,303 @@
+.rootLogin {
+    width: 100vw;
+    height: 100vh;
+    // background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .containerMain {
+        width: 55%;
+        height: auto;
+        // background-color: aqua;
+        margin: auto;
+
+        .header {
+            display: flex;
+            justify-content: center;
+            height: auto;
+            // background-color: red;
+            padding-bottom: 2vw;
+            p {
+                font-weight: 600;
+                font-size: 5vw;
+                color: #0d30ac;
+            }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            // background-color: green;
+            .left {
+                width: 45%;
+                height: 500px;
+                // background-color: yellow;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                .email {
+                    display: flex;
+                    flex-direction: column;
+
+                    width: 100%;
+
+                    margin-bottom: 40px;
+                    // background-color: red;
+
+                    .label {
+                        font-weight: 600;
+                        font-size: 1.5vw;
+                        color: #0d30ac;
+
+                        margin-bottom: 15px;
+                    }
+
+                    .input {
+                        width: 100%;
+                        height: 3.5rem;
+                        // background-color: yellow;
+                        background-color: #f8f8f8;
+                        border-radius: 5px;
+
+                        display: flex;
+                        align-items: center;
+
+                        .icon {
+                            width: 20%;
+                            height: 60%;
+                            display: flex;
+                            align-items: center;
+
+                            .emailIcon {
+                                width: 100%;
+                                height: 80%;
+                                color: #002e53;
+                            }
+                        }
+
+                        .inputEmail {
+                            // width: 90%;
+                            // height: 100%;
+                            // background-color: red;
+
+                            input {
+                                width: 20vw;
+                                height: 5dvh;
+                                outline: none;
+                                border: none;
+                                background-color: #f8f8f8;
+
+                                font-size: 22px;
+                                font-weight: 500;
+                                color: #0d30ac;
+
+                                &:focus {
+                                    outline: none;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .password {
+                    display: flex;
+                    flex-direction: column;
+
+                    width: 100%;
+
+                    // background-color: red;
+
+                    .label {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        margin-bottom: 15px;
+                        .pass {
+                            font-weight: 600;
+                            font-size: 1.5vw;
+                            color: #0d30ac;
+                            display: block;
+                        }
+
+                        .forgot {
+                            // margin-bottom:% ;
+                            display: block;
+
+                            font-size: 1vw;
+                            font-weight: 600;
+                            color: #0d30ac;
+
+                            display: flex;
+                            align-items: center;
+
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                    .input {
+                        width: 100%;
+                        height: 3.5rem;
+                        // background-color: yellow;
+                        background-color: #f8f8f8;
+                        border-radius: 5px;
+
+                        display: flex;
+                        align-items: center;
+
+                        .icon {
+                            width: 20%;
+                            height: 60%;
+                            display: flex;
+                            align-items: center;
+
+                            .passwordIcon {
+                                width: 100%;
+                                height: 80%;
+                                color: #002e53;
+                            }
+                        }
+
+                        .inputPassword {
+                            input {
+                                width: 20vw;
+                                height: 5vh;
+                                outline: none;
+                                border: none;
+                                background-color: #f8f8f8;
+
+                                font-size: 18px;
+                                font-weight: 500;
+                                color: #0d30ac;
+
+                                &:focus {
+                                    outline: none;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .buttons {
+                    width: 25vw;
+                    height: 8rem;
+                    // background-color: red;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .signin {
+                        width: 40%;
+                        height: 45%;
+                        background-color: #0d30ac;
+
+                        border-radius: 8px;
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        p {
+                            color: white;
+                            font-size: 1.2vw;
+                            font-weight: 600;
+                        }
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+
+                    .signup {
+                        width: 11vw;
+
+                        span {
+                            display: block;
+                            text-align: center;
+                            font-size: 1vw;
+                            font-weight: 600;
+                            color: #0d30ac;
+
+                            .link {
+                                text-decoration: none;
+                                color: inherit;
+                            }
+                        }
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+
+            .right {
+                width: 30vw;
+                height: 55vh;
+                // background-color: red;
+                border: 1px solid #d9d9ff;
+                margin-left: 10%;
+
+                border-radius: 50%;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    width: 88%;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .password {
+        .input {
+            height: 2rem !important;
+        }
+    }
+
+    .email {
+        .input {
+            height: 2rem !important;
+        }
+    }
+
+    .buttons {
+        .signin {
+            width: 43% !important;
+            height: 28% !important;
+        }
+    }
+
+    .containerMain {
+        .header {
+            padding-bottom: 0vw !important;
+            top: 10% !important;
+            position: absolute !important;
+            left: 43% !important;
+        }
+
+        .left {
+            margin-top: 20% !important;
+        }
+
+        .right {
+            margin-top: 12% !important;
+            margin-right: -21% !important;
+            height: 45vh !important;
+        }
+    }
+}

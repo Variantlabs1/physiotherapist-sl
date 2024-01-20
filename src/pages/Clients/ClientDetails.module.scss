@@ -1,0 +1,604 @@
+.rootClientDetails {
+    .header {
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .headerContainer {
+            display: flex;
+            // width: 14%;
+            width: max-content;
+            // justify-content: space-between;
+            gap: 20px;
+
+            .userImage {
+                width: 4vw;
+                height: 4vw;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+
+            .userName {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                p {
+                    font-weight: 500;
+                    font-size: 2rem;
+                    color: #0d1dac;
+                }
+            }
+        }
+
+        .headerButtons {
+            width: 22%;
+            display: flex;
+            justify-content: space-between;
+            .buttons {
+                padding: 11px 30px;
+                background-color: #6c9fff;
+                border-radius: 80px;
+
+                .button {
+                    background-color: transparent;
+                    border: none;
+                    color: #ffffff;
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+            }
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .dashboard {
+        margin: 2vw auto;
+        width: 92%;
+        height: fit-content;
+
+        .clientInfo {
+            width: 100%;
+            height: 60%;
+            // background-color: yellow;
+
+            .data {
+                height: 100%;
+                width: 100%;
+                margin: auto 0;
+            }
+        }
+
+        .bottomContainer {
+            margin-top: 70px;
+            width: 100%;
+            height: 40%;
+
+            // background-color: red;
+
+            display: flex;
+            align-items: center;
+
+            .graph {
+                width: fit-content;
+                height: fit-content;
+                background: linear-gradient(
+                    123.33deg,
+                    #7fa5ed -88.05%,
+                    #0d30ac 167.83%
+                );
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                border-radius: 56px;
+                gap: 25px;
+                padding: 25px 50px;
+                background: transparent;
+                .top{
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+                    margin-left: 30px;
+                    p{
+                     background: linear-gradient(
+                    123.33deg,
+                    #7fa5ed -88.05%,
+                    #0d30ac 167.83%);
+                        padding: 15px 25px;
+                        border-radius: 24px;
+                        color: white;
+                        cursor: pointer;
+                    }
+                }
+
+                .chart{
+                    background: linear-gradient(
+                        123.33deg,
+                        #7fa5ed -88.05%,
+                        #0d30ac 167.83%
+                    );
+                    padding: 20px 35px;
+                    border-radius: 40px;
+                    width:35vw;
+                }
+            }
+
+            .buttons {
+                width: 30%;
+                height: 100%;
+
+                display: flex;
+                gap: 25px;
+                // justify-content: flex-end;
+                flex-direction: column;
+                padding-left: 50px;
+                
+
+                .assign{
+                     background: linear-gradient(
+                    123.33deg,
+                    #7fa5ed -88.05%,
+                    #0d30ac 167.83%
+                );
+                    padding: 15px 28px;
+                    width: fit-content;
+                    font-size: 20px;
+                    border-radius: 26px;
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    /* Overlay Styles */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        background-color: rgba(0, 0, 0, 0.7);
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        // padding: 0 450px 150px 0;
+        // background-color: red;
+
+        .overlayContent {
+            background-color: #f4f9ff;
+            padding: 30px 50px 0 50px;
+
+            text-align: center;
+
+            width: fit-content;
+            height: fit-content;
+            border-radius: 20px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .inputBox {
+                display: flex;
+                flex-direction: column;
+                margin: 10px;
+                height: 91px;
+                width: 322px;
+
+                label {
+                    font-family: "Raleway";
+                    font-size: 24px;
+                    font-weight: 500;
+                    text-align: left;
+                    padding: 8px 0;
+                }
+
+                input {
+                    background: #ffffff;
+                    box-shadow: 0px 4px 8px 0px #d3d3d366;
+                    border-radius: 8px;
+                    height: 50px;
+                    width: 100%;
+                }
+            }
+
+            button {
+                margin: 20px 0;
+                background: #6c9fff;
+                box-shadow: 0px 4px 8px 0px #6c9fff40;
+
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 1rem;
+
+                &:hover {
+                    background-color: #0056b3; /* Change to a darker shade on hover if desired */
+                }
+            }
+        }
+    }
+
+    .info {
+        width: 95%;
+
+        .assignedExercises {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .container {
+                width: 22vw;
+                height: fit-content;
+                padding: 30px 20px 15px 20px;
+
+                outline: 3px solid #d6e1fe;
+                border-radius: 20px;
+                margin: auto;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                .heading {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    p {
+                        color: #2b39b6;
+                        font-weight: 700;
+                        font-size: .5rem;
+                    }
+                }
+
+                .cards {
+                    margin-top: 2vw;
+                    .exercise {
+                        width: 20vw;
+                        height: 2.5vw;
+
+                        padding: 10px 20px;
+                        margin-bottom: 0.8vw;
+
+                        background-color: #f9f6ff;
+                        border-radius: 10px;
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .exerciseName {
+                            width: 80%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            p {
+                                font-weight: 600;
+                                font-size: 1.25rem;
+                                color: #000000;
+                            }
+                        }
+
+                        // .delete {
+                        //     width: 8%;
+                        //     height: 70%;
+
+                        //     .icon {
+                        //         width: 100%;
+                        //         height: 100%;
+                        //         color: #699bf7;
+                        //     }
+
+                        //     &:hover {
+                        //         cursor: pointer;
+                        //     }
+                        // }
+                    }
+                }
+
+                .footer {
+                    margin-top: 10vw;
+                    width: 100%;
+
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: flex-end;
+
+                    .buttons {
+                        height: 3vw;
+                        width: 3vw;
+
+                        .icon {
+                            height: 100%;
+                            width: 100%;
+                            color: #8db2f9;
+                        }
+                    }
+                }
+            }
+        }
+
+        .rootExercises {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 2vw;
+
+            .header {
+                margin-bottom: 2vw;
+                width: 95%;
+                top: 0;
+                display: flex;
+                justify-content: space-between;
+
+                .title {
+                    width: 30%;
+                    p {
+                        font-weight: 700;
+                        font-size: 36px;
+                        color: #3b3c40;
+                    }
+                }
+            }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 90%;
+                .gridContainer {
+                    // display: flex;
+                    // align-items: row;
+                    // flex-wrap: wrap;
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 1.8em;
+
+                    .card {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        position: relative;
+                    }
+
+                    .card {
+                        background-color: #e7f3ff;
+                        border: 0.2em solid #e8deff;
+                        padding: 2em;
+                        text-align: center;
+                        border-radius: 1vw;
+
+                        width: 21vw;
+                        height: 22vw;
+
+                        .imageContainer {
+                            width: 80%;
+
+                            img {
+                                border-radius: 0.5em;
+                                width: 55%;
+                                height: auto;
+                                margin-bottom: 1em;
+                                object-fit: contain;
+                            }
+                        }
+
+                        .textContainer {
+                            display: flex;
+                            flex-direction: column;
+                            // align-items: left;
+                            justify-content: left;
+                            // background-color: red;
+                            h3 {
+                                margin-bottom: 0.5em;
+                                font-weight: 600;
+                                font-size: 1.25em;
+                                color: var(--secondary-color);
+                            }
+
+                            p {
+                                font-weight: 400;
+                                font-size: 1em;
+                                color: #000000;
+                            }
+                        }
+
+                        .footer {
+                            position: absolute;
+                            top: 20px;
+                            left: 40px;
+                            .icon {
+                                color: #699bf7;
+                                height: 30px;
+                                width: 30px;
+                            }
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.assignedExercises {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .container {
+        width: 22vw;
+        height: fit-content;
+        padding: 30px 20px 15px 20px;
+
+        outline: 3px solid #d6e1fe;
+        border-radius: 20px;
+        margin: auto;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .heading {
+            // background-color: yellow;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            p {
+                color: #2b39b6;
+                font-weight: 700;
+                font-size: 1.5rem;
+            }
+        }
+
+        .cards {
+            margin-top: 2vw;
+            .exercise {
+                width: 20vw;
+                height: 2.5vw;
+
+                padding: 10px 20px;
+                margin-bottom: 0.8vw;
+
+                background-color: #f9f6ff;
+                border-radius: 10px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .exerciseName {
+                    width: 80%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    p {
+                        font-weight: 600;
+                        font-size: 1.25rem;
+                        color: #000000;
+                    }
+                }
+
+                .delete {
+                    width: 8%;
+                    height: 70%;
+
+                    .icon {
+                        width: 100%;
+                        height: 100%;
+                        color: #699bf7;
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .footer {
+            margin-top: 10vw;
+            width: 100%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .buttons {
+                height: 3vw;
+                width: 3vw;
+
+                .icon {
+                    height: 100%;
+                    width: 100%;
+                    color: #8db2f9;
+                }
+            }
+        }
+    }
+}
+
+// /* Overlay Styles */
+// .overlay {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-color: rgba(
+//         0,
+//         0,
+//         0,
+//         0.7
+//     ); /* Semi-transparent black background */
+//     display: flex;
+//     justify-content: flex-end; /* Place content at the right side */
+//     align-items: flex-end; /* Place content at the bottom */
+//     z-index: 1000; /* Adjust the z-index as needed */
+
+//     padding: 0 150px 150px 0;
+// }
+
+// .overlayContent {
+//     background-color: #fff; /* Background color for the overlay content */
+//     border-radius: 5px;
+//     text-align: center;
+//     margin: 20px; /* Add some margin for spacing */
+//     padding: 20px;
+// }
+
+// h2 {
+//     font-size: 1.5rem;
+//     margin-bottom: 20px;
+// }
+
+// input {
+//     width: 100%;
+//     padding: 10px;
+//     margin-bottom: 20px;
+//     border: 1px solid #ccc;
+//     border-radius: 4px;
+//     font-size: 1rem;
+// }
+
+// button {
+//     background-color: #007bff; /* Change to your desired button color */
+//     color: #fff;
+//     border: none;
+//     padding: 10px 20px;
+//     border-radius: 4px;
+//     cursor: pointer;
+//     font-size: 1rem;
+// }
+
+// button:hover {
+//     background-color: #0056b3; /* Change to a darker shade on hover if desired */
+// }

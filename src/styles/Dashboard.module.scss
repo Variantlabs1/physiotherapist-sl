@@ -1,0 +1,79 @@
+.rootMain {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .left {
+        width: 65%;
+        padding-right: 10px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        gap: 8px;
+        overflow: hidden;
+        .welcomeCard {
+        }
+
+        .graphs {
+            display: flex;
+            margin-left: 10px;
+            gap: 20px;
+            width: 100%;
+            font-size: 14px;
+            height: 33%;
+            overflow: hidden;
+            
+            .leftGraph {
+                width: 40%;
+                height: 100%;
+                display: flex;
+                justify-content: space-around;
+                gap: 20px;
+                flex-direction: column;
+                background: linear-gradient(
+                    123.33deg,
+                    #7fa5ed -88.05%,
+                    #0d30ac 167.83%
+                );
+                border-radius: 22px;
+                padding: 25px 20px 10px 20px;
+                
+            }
+
+            .rightGraph {
+                width: 60%;
+                height: 100%;
+                background: linear-gradient(
+                    123.33deg,
+                    #7fa5ed -88.05%,
+                    #0d30ac 167.83%
+                );
+                border-radius: 22px;
+
+                padding: 5px 25px;
+                padding-top: 0;
+            }
+        }
+
+        .clientLists {
+            height: 45%;
+            width: 100%;
+            padding-left: 10px;
+            // background-color: aqua;
+        }
+    }
+
+    .right {
+        width: 40%;
+        height: 100%;
+        // background-color: pink;
+        margin-right: 50px;
+        .exercises {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

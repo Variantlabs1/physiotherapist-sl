@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+    /* max-width: 2200px; */
+}
+
+:root {
+    --secondary-color: #614d8f;
+}
+
+.text-overflow{
+        width: 250px; /* Set your desired width */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      input:disabled{
+        cursor: not-allowed;
+      }
+      button:disabled{
+        cursor: not-allowed;
+      }

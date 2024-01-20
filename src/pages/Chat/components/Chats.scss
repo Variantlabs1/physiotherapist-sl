@@ -1,0 +1,115 @@
+/* ChatComponent.scss */
+
+/* Style for the chat container */
+// div {
+//     width: 100%;
+//     max-width: 500px;
+//     margin: 0 auto;
+//     padding: 20px;
+//     border: 1px solid #ccc;
+//     border-radius: 8px;
+//     background-color: #fff;
+//     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+//     h2 {
+//         margin-bottom: 10px;
+//     }
+// }
+
+/* Style for individual messages */
+.message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    max-width: 70%; /* Adjust the width of the message box */
+
+}
+
+/* Style for sent messages */
+.sent {
+    background-color: #007bff;
+    color: #fff;
+    align-self: flex-end; /* Message alignment to the right */
+
+   
+}
+
+/* Style for received messages */
+.received {
+    background-color: #f0f0f0;
+    color: #333;
+    align-self: flex-start; /* Message alignment to the left */
+}
+
+/* Style for the input and send button */
+.chat-input {
+    display: flex;
+    margin-top: 10px;
+
+    input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        padding: 10px 15px;
+        margin-left: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+}
+
+.message img {
+    max-width: 250px;
+    max-height: 250px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+/* Enlarge the image on click */
+.message img.expanded {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(2); /* You can adjust the scale factor as needed */
+}
+
+.image-div {
+    max-width: 250px;
+    max-height: 250px;
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .message img {
+        max-width: 250px;
+        max-height: 250px;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+}
+
+.message img:target {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90vw;
+    max-height: 90vh;
+    cursor: pointer;
+    z-index: 9999;
+    transition: transform 0.3s, max-width 0.3s, max-height 0.3s;
+}
+

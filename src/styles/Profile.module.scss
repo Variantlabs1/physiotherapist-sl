@@ -1,0 +1,41 @@
+.rootProfile {
+    width: 12vw;
+    height: 12vw;
+    // background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .userPicture {
+        // background-color: red;
+        overflow: hidden;
+        width: 8vw;
+        height: 8vw;
+        border: 4px solid #0d30ac;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        // margin: auto;
+    }
+    .name {
+        margin-top: 15px;
+        font-weight: 600;
+        font-size: 26px;
+        text-align: center;
+        color: #0d30ac;
+
+        span {
+            display: block;
+            font-weight: 500;
+            font-size: 18px;
+            color: #4371cb;
+        }
+    }
+}

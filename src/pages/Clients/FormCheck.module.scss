@@ -1,0 +1,176 @@
+.exerciseDetailsContainer {
+    margin-left: 2%;
+    .header {
+        display: flex;
+        flex-direction: row;
+        width: 97%;
+        margin-top: 1.4%;
+        .exerciseTitle {
+            font-weight: 700;
+            font-size: 36px;
+            letter-spacing: 0.2px;
+            height: 4vw;
+            width: 90%;
+            p {
+                color: #3b3c40;
+            }
+        }
+
+        .buttons {
+            background-color: #6c9fff;
+            height: fit-content;
+
+            border-radius: 80px;
+
+            .button {
+                padding: 8px 20px;
+                color: #ffffff;
+                font-size: 20px;
+                font-weight: 500;
+
+                border-radius: 80px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .container {
+        margin-top: 2%;
+        .top {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .left {
+                width: 60%;
+                .thumbnailContainer {
+                    width: 100%;
+                    height: 40vw;
+
+                    .thumbnailImage {
+                        height: 100%;
+                        width: 100%;
+                        border-radius: 20px;
+                    }
+                    img{
+                        border-radius: 5px;
+                        box-shadow: 0px 0px 5px 2px lightgray;
+                    }
+
+                    .musclesList{
+                            display: flex;
+                            margin-top: 1%;
+                            .musclesInvolved {
+                                // height: 2vw;
+                                padding: 4px 14px;
+                                background-color: #e7f3ff;
+                                border-radius: 5px;
+
+                                font-size: 1vw;
+                                font-weight: 600;
+                                color: #614d8f;
+                                
+                            }
+                        }
+                }
+            }
+
+            .right {
+                padding-left: 2vw;
+                padding-right: 4vw;
+                width: 30%;
+                margin-right: 4vw;
+
+                .details {
+                    display: flex;
+
+                    .musclesInvolvedContainer,
+                    .accuracyContainer {
+                        height: 8vw;
+                        margin-left: 10px;
+
+                        margin-right: 20px;
+                        .musclesInvolvedTitle,
+                        .accuracyTitle {
+                            height: 3vw;
+                            p {
+                                font-weight: 700;
+                                font-size: 24px;
+                                color: #614d8f;
+                            }
+                        }
+
+                        .accuracyList {
+                            display: flex;
+                            flex-direction: row;
+
+                            .accuracy {
+                                // height: 2vw;
+                                padding: 8px 24px;
+                                background-color: #e7f3ff;
+                                margin-right: 1vw;
+                                border-radius: 5px;
+
+                                p {
+                                    font-size: 1vw;
+                                    font-weight: 600;
+                                    color: #614d8f;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .calendar {
+                    display: flex;
+                    align-items: center;
+                    padding: 10px;
+                    border-radius: 25px;
+                    margin-bottom: 20px;
+
+                    width: fit-content;
+
+                    background-color: #e7f3ff;
+                }
+            }
+        }
+
+        .bottom {
+            display: flex;
+            // justify-content: center;
+
+            .box {
+                margin-top: 50px;
+                width: 700px;
+                border-radius: 25px;
+            }
+        }
+    }
+}
+
+.frame{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    img{
+        max-height: 80%;
+    }
+    div{
+        // position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        z-index: 2;
+        // bottom: 30px;
+        color: rgb(87, 87, 88);
+    }
+
+    }

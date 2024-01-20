@@ -1,0 +1,169 @@
+.rootChats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    // background-color: #0d1dac;
+    // background-color: #f9fbff;
+    border-radius: 16px;
+
+    width: 95%;
+    height: 80vh;
+
+    // position: relative;
+
+    .header {
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        // justify-content: center;
+        // margin-bottom: 50px;
+
+        .userImage {
+            width: 3vw;
+            height: 3vw;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+
+        .userName {
+            width: 13%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            p {
+                font-weight: 600;
+                font-size: 2.5rem;
+                color: #0d1dac;
+            }
+        }
+    }
+
+    .chatMessages {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        width: 95%;
+        // background-color: pink;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .message {
+            &.received {
+                display: flex;
+                max-width: 100%;
+                margin-bottom: 20px;
+                .msg {
+                    background: #e4edff;
+                    padding: 10px 40px;
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                    max-width: 65%;
+                    font-size: 20px;
+                    font-weight: 500;
+                    border-radius: 16px;
+
+                    span{
+                        position: absolute;
+                        bottom: -15px;
+                        right: 0;
+                        // background-color: red;
+                        font-size: 12px!important; 
+                    }
+                      
+                    
+                }
+            }
+
+            &.sent {
+                display: flex;
+                justify-content: flex-end;
+                max-width: 100%;
+                // background-color: yellow;
+
+                margin-block: 20px;
+
+                .msg {
+                    background: #e4edff;
+                    padding: 10px 40px;
+                    max-width: 65%;
+                    font-size: 20px;
+                    font-weight: 500;
+                    border-radius: 16px;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+
+
+                    span{
+                        position: absolute;
+                        bottom: -15px;
+                        right: 0;
+                        // background-color: red;
+                        font-size: 12px!important; 
+                    }
+                }
+            }
+        }
+    }
+
+    .chatInput {
+        width: 80%;
+        margin: 0 auto;
+        // background-color: red;
+        border-radius: 16px;
+        box-shadow: 0px 4px 8px 0px #cfdfff40;
+
+        display: flex;
+        justify-content: center;
+
+        .inputContainer {
+            background-color: white;
+
+            width: 100%;
+            height: 65px;
+            outline: 1px solid transparent;
+            border-radius: 16px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 20px;
+
+            input {
+                height: 100%;
+                width: 87%;
+                border-radius: 16px;
+                outline: 1px solid transparent;
+
+                font-size: 18px;
+            }
+            .sendButton {
+                width: 160px;
+                height: 35px;
+                background-color: #f0f7ff;
+                border-radius: 112px;
+                border: 1px solid transparent;
+
+                p {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #0177fd;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,123 @@
+.rootClientlist {
+    height: 45%;
+    width: 100%;
+    padding:  15px 1.5rem;
+     margin-left: 10px;
+    border: 4px solid #d6e1fe;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    overflow-y: scroll;
+    // box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    .heading {
+        display: flex;
+        // background-color: green;
+
+        width: 91%;
+        align-self: center;
+        align-items: center;
+        justify-content: space-between;
+
+        // margin-top: 10px;
+
+        // background-color: red;
+
+        .head {
+            font-size: 25px;
+            font-weight: 700;
+            color: #0d30ac;
+        }
+        .button {
+            width: 14%;
+            padding: 10px;
+            // height: 50px;
+            background: #3e61dc;
+                font-size: 13px;
+            border-radius: 30px;
+
+            // margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            span {
+                font-weight: 500;
+                font-size: 14px;
+            }
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    table {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        tr{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        // background-color: red;
+
+        tbody{
+            display: flex;
+            width: 100%;
+            gap: 0;
+
+            flex-direction: column;
+            tr{
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+        }
+
+        th {
+            color: #4661be;
+
+            padding: 10px;
+            text-align: center;
+            padding-bottom: 8px;
+
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        td {
+            font-weight: 500;
+            font-size: 16px;
+            padding: 0px 15px;
+            // margin: 20px;
+            // height: 50px;
+            text-align: center;
+            color: #4d98ed;
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            background-color: red;
+
+        }
+
+
+    }
+}
+
+.profilePic {
+    width: 3rem;
+    height: 3rem;
+
+    padding: 6px;
+
+    // background-color: yellow;
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+}

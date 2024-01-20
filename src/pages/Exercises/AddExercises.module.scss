@@ -1,0 +1,289 @@
+.addExercises {
+    position: relative;
+    .header {
+        p {
+            color: #000;
+            font-size: 32px;
+            font-weight: 700;
+        }
+    }
+
+    .form {
+        margin-top: 30px;
+        margin-left: 10px;
+
+        .formElements {
+            // width: 45%;
+            display: flex;
+            align-items: center;
+            // justify-content: space-between;
+
+            margin-bottom: 20px;
+
+            .fieldName {
+                width: 20%;
+                // background-color: red;
+                p {
+                    color: #0d30ac;
+                    font-size: 22px;
+                    font-weight: 600;
+                }
+            }
+
+            .inputField {
+                width: 478px;
+                height: 49px;
+                // flex-shrink: 0;
+
+                border-radius: 20px;
+                background: rgba(179, 196, 235, 0.4);
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                input {
+                    width: 90%;
+                    height: 70%;
+                    background-color: transparent;
+                    font-size: 20px;
+                    border: none;
+                    outline: none;
+                }
+            }
+
+            .inputFieldSmall {
+                width: 250px;
+                height: 49px;
+
+                border-radius: 20px;
+                background: rgba(179, 196, 235, 0.4);
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                input {
+                    width: 90%;
+                    height: 70%;
+                    background-color: transparent;
+                    font-size: 20px;
+                    border: none;
+                    outline: none;
+                }
+            }
+        }
+
+        .formElementsBig {
+            // width: 45%;
+            display: flex;
+            // align-items: center;
+            // justify-content: space-between;
+
+            margin-top: 10px;
+
+            margin-bottom: 20px;
+
+            .fieldName {
+                width: 20%;
+                // background-color: red;
+                p {
+                    color: #0d30ac;
+                    font-size: 22px;
+                    font-weight: 600;
+                }
+            }
+
+            .inputFieldBig {
+                width: 700px;
+                height: 300px;
+
+                border-radius: 20px;
+                background: rgba(179, 196, 235, 0.4);
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                textarea {
+                    width: 95%;
+                    height: 90%;
+                    background-color: transparent;
+                    font-size: 20px;
+                    border: none;
+                    outline: none;
+                    resize: none;
+                }
+            }
+        }
+        .bottom {
+            width: 100%;
+            display: flex;
+
+            .left {
+                width: 40%;
+                // background-color: red;
+
+                .formElementsBottom {
+                    display: flex;
+                    align-items: center;
+
+                    margin-bottom: 20px;
+
+                    .fieldName {
+                        width: 50%;
+                        // background-color: red;
+                        p {
+                            color: #0d30ac;
+                            font-size: 22px;
+                            font-weight: 600;
+                        }
+                    }
+
+                    .inputFieldSmall {
+                        width: 250px;
+                        height: 49px;
+
+                        border-radius: 20px;
+                        background: rgba(179, 196, 235, 0.4);
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        input {
+                            width: 90%;
+                            height: 70%;
+                            background-color: transparent;
+                            font-size: 20px;
+                            border: none;
+                            outline: none;
+                        }
+                    }
+                }
+            }
+
+            .right {
+                width: 50%;
+                display: flex;
+                // background-color: yellow;
+
+                .video,
+                .image {
+                    width: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                    .field {
+                        margin-bottom: 5px;
+                        p {
+                            color: #0d30ac;
+                            font-size: 22px;
+                            font-weight: 600;
+                        }
+                    }
+
+                    .imageContainer,
+                    .videoContainer {
+                        border: 2px solid #0d30ac;
+                        width: 200px;
+                        height: 100px;
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+
+        .footer {
+            margin-top: 20px;
+            margin-bottom: 50px;
+
+            display: flex;
+            .button {
+                width: 150px;
+                height: 50px;
+                border-radius: 20px;
+                background: #6c9fff;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                margin-right: 30px;
+
+                span {
+                    color: #fff;
+                    font-size: 24px;
+                    font-weight: 400;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    scale: 1.01;
+                }
+            }
+        }
+    }
+}
+
+.successMsg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Adjust as needed based on your layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .text {
+        width: 500px;
+        height: 200px;
+        border-radius: 25px;
+        background-color: #fff;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        p {
+            color: #0d30ac;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .button {
+            width: 120px;
+            height: 40px;
+            border-radius: 20px;
+            background: #6c9fff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: 30px;
+
+            span {
+                color: #fff;
+                font-size: 20px;
+                font-weight: 400;
+            }
+
+            &:hover {
+                cursor: pointer;
+                // scale: 1.01;
+            }
+        }
+    }
+}

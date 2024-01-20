@@ -1,0 +1,221 @@
+.rootExercises {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 2vw;
+
+    .header {
+        margin-bottom: 2vw;
+        width: 95%;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+
+        .title {
+            width: 30%;
+            p {
+                font-weight: 700;
+                font-size: 36px;
+                color: #3b3c40;
+            }
+        }
+
+        .buttons {
+            width: 13%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .addExercise {
+                button {
+                    height: 2.5vw;
+                    width: 6vw;
+                    background-color: #3855b7;
+                    border: none;
+                    font-size: 1.5em;
+                    font-weight: 600;
+                    color: #e7f3ff;
+                    border-radius: 25px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .toggle {
+                height: 2.5vw;
+                width: 2vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .icon {
+                    height: inherit;
+                    width: 100%;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+
+        .listContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+            // background-color: red;
+
+            .card {
+                padding: 20px;
+                width: 48%;
+                height: 8vw;
+                margin-bottom: 1em;
+            }
+
+            .card {
+                background-color: #e7f3ff;
+                padding: 3rem;
+                padding: 20px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                // justify-content: space-between;
+                border-radius: 1vw;
+                gap: 10px;
+
+                .imageContainer {
+                    width: 45%;
+                    // height: 80px;
+                    // background-color: yellow;
+                    border-radius: 0.5em;
+                    overflow: hidden;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100%;
+
+                    img {
+                        width: 120%;
+                        height: 100%;
+                        object-fit: contain;
+                    }
+                }
+
+                .textContainer {
+                    width: 80%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    .titleBar {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        height: 2vw;
+
+                        h3 {
+                            display: block;
+                            font-weight: 600;
+                            font-size: 1.25em;
+                            color: var(--secondary-color);
+                            margin-bottom: 5%;
+                        }
+
+                        .icon {
+                            height: 1.5vw;
+                            width: 1.22vw;
+
+                            .dots {
+                                height: 100%;
+                                width: 100%;
+                                // color: #361f69;
+                            }
+                        }
+                    }
+
+                    p {
+                        font-weight: 400;
+                        font-size: 14px;
+                        color: #000000;
+                    }
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        // ........................................................................
+        .gridContainer {
+            // display: flex;
+            // align-items: row;
+            // flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8em;
+
+            .card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                background-color: #e7f3ff;
+                border: 0.2em solid #e8deff;
+                padding: 2em;
+                text-align: center;
+                border-radius: 1vw;
+
+                width: 21vw;
+                height: 22vw;
+
+                .imageContainer {
+                    width: 80%;
+
+                    img {
+                        border-radius: 0.5em;
+                        width: 55%;
+                        height: auto;
+                        margin-bottom: 1em;
+                        object-fit: contain;
+                    }
+                }
+
+                .textContainer {
+                    display: flex;
+                    flex-direction: column;
+                    // align-items: left;
+                    justify-content: left;
+                    // background-color: red;
+                    h3 {
+                        margin-bottom: 0.5em;
+                        font-weight: 600;
+                        font-size: 1.25em;
+                        color: var(--secondary-color);
+                    }
+
+                    p {
+                        font-weight: 400;
+                        font-size: 1em;
+                        color: #000000;
+                    }
+                }
+            }
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

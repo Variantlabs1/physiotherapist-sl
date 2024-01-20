@@ -1,0 +1,142 @@
+.rootHealthData {
+    width: 100%;
+    height: 100%;
+    // height: 40vh;
+    // background-color: rgb(227, 230, 227);
+
+    .heading {
+        height: 15%;
+        margin-bottom: 30px;
+        p {
+            font-size: 32px;
+            font-weight: 600;
+            color: #000000;
+        }
+    }
+
+    .graphs {
+        display: flex;
+        gap: 70px;
+        margin-left: 3%;
+
+        .heartBeat {
+            width: 25%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            // margin: auto;
+            // background-color: pink;
+            .head {
+                height: 10%;
+                p {
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+            }
+
+       
+
+            .center{
+                margin-top: 10%;
+                width: 18vw;
+                height: 18vw;
+                border-radius: 50%;
+                background: linear-gradient(
+                    122.42deg,
+                    #7fa5ed -17.1%,
+                    #0d30ac 224.81%
+                );
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .inner {
+                    width: 250px;
+                    height: 250px;
+                    border-radius: 50%;
+                    border: 15px solid #ffffff;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                    .data {
+                        font-weight: 600;
+                        font-size: 53px;
+                        color: #ffffff;
+                    }
+
+                    .tag {
+                        font-size: 25px;
+                        font-weight: 600;
+                        color: #ffffff;
+                    }
+                }
+            }
+        }
+
+        .weight {
+            width: 25%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+
+            // margin: auto;
+            // background-color: pink;
+            .head {
+                height: 10%;
+                // background-color: red;
+                p {
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+            }
+
+   
+        }
+        
+    }
+}
+.pieChart {
+    margin: auto;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 50%;
+
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .data {
+        font-weight: 600;
+        font-size: 40px;
+        color: #000000;
+    }
+    .data1 {
+        font-weight: 600;
+        font-size: 40px;
+        color: white;
+    }
+
+    .tag {
+        font-size: 22px;
+        line-height: 15px;
+        font-weight: 600;
+        color: #000000;
+    }
+    .tag1 {
+        font-size: 22px;
+        line-height: 15px;
+        font-weight: 600;
+        color: white;
+    }
+}

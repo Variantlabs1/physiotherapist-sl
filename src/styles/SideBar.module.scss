@@ -1,0 +1,55 @@
+.rootSidebar {
+    height: 100%;
+    width: 100%;
+    .sidebar {
+        height: 100%;
+        width: 100%;
+        a {
+            width: 100%;
+            height: 15%;
+            text-decoration: none;
+            display: flex;
+            flex-direction: row;
+            padding: 0 10px;
+            margin-bottom: 0.2vw;
+
+            // background-color: black;
+
+            .icon {
+                width: 30%;
+                height: 100%;
+                // background-color: red;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .option {
+                width: 70%;
+                height: 100%;
+
+                display: flex;
+                align-items: center;
+
+                font-weight: 600;
+                text-align: left;
+                font-size: 1vw;
+
+                color: #0d30ac;
+            }
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        .selectedOption {
+            background-color: white;
+            font-size: 2vw;
+            border-radius: 35px;
+
+            .icon {
+                color: #0d30ac;
+            }
+        }
+    }
+}
