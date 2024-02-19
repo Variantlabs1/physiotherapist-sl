@@ -1,8 +1,6 @@
 .rootHealthData {
     width: 100%;
     height: 100%;
-    // height: 40vh;
-    // background-color: rgb(227, 230, 227);
 
     .heading {
         height: 15%;
@@ -33,48 +31,6 @@
                 p {
                     font-size: 20px;
                     font-weight: 600;
-                }
-            }
-
-       
-
-            .center{
-                margin-top: 10%;
-                width: 18vw;
-                height: 18vw;
-                border-radius: 50%;
-                background: linear-gradient(
-                    122.42deg,
-                    #7fa5ed -17.1%,
-                    #0d30ac 224.81%
-                );
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                .inner {
-                    width: 250px;
-                    height: 250px;
-                    border-radius: 50%;
-                    border: 15px solid #ffffff;
-
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-
-                    .data {
-                        font-weight: 600;
-                        font-size: 53px;
-                        color: #ffffff;
-                    }
-
-                    .tag {
-                        font-size: 25px;
-                        font-weight: 600;
-                        color: #ffffff;
-                    }
                 }
             }
         }
@@ -138,5 +94,65 @@
         line-height: 15px;
         font-weight: 600;
         color: white;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .rootHealthData {
+        .heading {
+            margin-left: 5%;
+            p {
+                font-size: 20px;
+            }
+        }
+    
+        .graphs {
+            width: 100%;
+            margin-left: 0;
+            gap: 30px;
+            justify-content: center;
+            .heartBeat {
+                width: 25%;
+                gap: 10px;
+                .head {
+                    p {
+                        font-size: 16px;
+                    }
+                }
+            }
+    
+            .weight {
+                width: 25%;
+                gap: 10px;
+                .head {
+                    height: 10%;
+                    p {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+    .pieChart {
+        margin: auto;
+        width: 26vw;
+        height: 26vw;
+
+        .data {
+            font-size: 20px;
+        }
+        .data1 {
+            font-size: 20px;
+        }
+    
+        .tag {
+            font-size: 12px;
+            line-height: 15px;
+        }
+        .tag1 {
+            font-size: 12px;
+            line-height: 15px;
+
+        }
     }
 }

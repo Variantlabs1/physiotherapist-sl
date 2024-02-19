@@ -1,9 +1,72 @@
+// .rootSidebar {
+//     height: 100%;
+//     width: 100%;
+//     .sidebar {
+//         height: 100%;
+//         width: 100%;
+//         a {
+//             width: 100%;
+//             height: 15%;
+//             text-decoration: none;
+//             display: flex;
+//             flex-direction: row;
+//             padding: 0 10px;
+//             margin-bottom: 0.2vw;
+
+//             // background-color: black;
+
+//             .icon {
+//                 width: 30%;
+//                 height: 100%;
+//                 // background-color: red;
+//                 display: flex;
+//                 align-items: center;
+//                 justify-content: center;
+//             }
+
+//             .option {
+//                 width: 70%;
+//                 height: 100%;
+
+//                 display: flex;
+//                 align-items: center;
+
+//                 font-weight: 600;
+//                 text-align: left;
+//                 font-size: 1vw;
+
+//                 color: #0d30ac;
+//             }
+
+//             &:hover{
+//                 cursor: pointer;
+//             }
+//         }
+//         .selectedOption {
+//             background-color: white;
+//             font-size: 2vw;
+//             border-radius: 35px;
+
+//             .icon {
+//                 color: #0d30ac;
+//             }
+//         }
+//     }
+// }
+/////////////////////////////////////////////////////////////////////
+
+
 .rootSidebar {
     height: 100%;
     width: 100%;
+
     .sidebar {
+        background-color: #b3c4ea;
         height: 100%;
         width: 100%;
+        display: flex;
+        flex-direction: column; /* Default to column layout */
+
         a {
             width: 100%;
             height: 15%;
@@ -13,12 +76,9 @@
             padding: 0 10px;
             margin-bottom: 0.2vw;
 
-            // background-color: black;
-
             .icon {
                 width: 30%;
                 height: 100%;
-                // background-color: red;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -27,21 +87,20 @@
             .option {
                 width: 70%;
                 height: 100%;
-
                 display: flex;
                 align-items: center;
 
                 font-weight: 600;
                 text-align: left;
                 font-size: 1vw;
-
                 color: #0d30ac;
             }
 
-            &:hover{
+            &:hover {
                 cursor: pointer;
             }
         }
+
         .selectedOption {
             background-color: white;
             font-size: 2vw;
@@ -49,6 +108,75 @@
 
             .icon {
                 color: #0d30ac;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        a {
+            height: auto; /* Adjust height to accommodate the content */
+            margin-bottom: 10px; /* Add some space between items */
+
+            .icon,
+            .option {
+                width: auto; /* Adjust widths for mobile screens */
+            }
+
+            // .icon {
+            //     margin-right: 10px; /* Add some space between icon and text */
+            // }
+        }
+
+        /* Add styling for the bottom placement and curved borders on mobile screens */
+        @media only screen and (max-width: 480px) {
+            height: 10vh;
+            .sidebar {
+                height: 10vh;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-around;
+                
+                a {
+                    width: 15vw;
+                    padding: 10px;
+                    height: 7vh;
+                    display:block;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .icon {
+                        width: 7vw;
+                        height: auto;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                }
+
+                // .selectedOption {
+                //     background-color: rgb(40, 17, 121);
+                //     border-radius: 50%;
+                //     .icon {
+                //         color: #ffffff;
+                //     }
+                // }
+                
+            }
+
+            @media only screen and (max-width: 380px){
+                .sidebar{
+                    a{
+                        width: 12vw;
+                    }
+                }
             }
         }
     }

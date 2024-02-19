@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ClientsPage.module.scss";
 import ClientFetcher from "../../components/data_fetch/clientFetcher"; // Adjust the path
-import { useLocation } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
@@ -40,7 +39,7 @@ const ClientsPage = ({clientDocId, onSelectClient }) => {
                 {/* Render the clients */}
                 <div className={styles.listContainer}>
                     {clients.map((client) => (
-                        <div className={styles.card} key={client.userID}>
+                        <div className={styles.card} key={client.userId}>
                             <div className={styles.imageContainer}>
                                 <img
                                     className={styles.profilePicture}
@@ -60,6 +59,7 @@ const ClientsPage = ({clientDocId, onSelectClient }) => {
                                 >
                                     <p>View</p>
                                 </div>
+                                {console.log(client)}
                             </div>
                         </div>
                     ))}

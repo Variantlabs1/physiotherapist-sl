@@ -20,12 +20,6 @@ import {
     useEffect(() => {
         async function fetchLatestData() {
         try{
-            const q = query(collection(db,"Users"),where('userId',"==",clientId))
-            const res = await getDocs(q)
-            const userDocId =  res.docs[0].ref.id
-            const getWeight = await getDocs(query(collection(db,"Users",userDocId,"WeightTracker")))
-            const value = getWeight.docs[0].data().userWeight.slice(0,-3);
-           !getWeight.empty&&setLatestUserWeight(value)
 
         //    const getHeartRate = await getDocs(query(collection(db,"Users",userDocId,"HeartRateTracker"),limit(1)))
         //    !getHeartRate.empty&&setLatestHeartRate(getHeartRate.docs[0].data().avgHeartRate)
@@ -49,17 +43,22 @@ import {
             if (firstObjectKey) {
                 const firstObjectData = Heartdata[firstObjectKey];
                 setLatestHeartRate(firstObjectData.heartbeat);
-                console.log(firstObjectData);
             } else {
                 console.log('No data found.');
             }
             if (firstObjectKeyVO2) {
                 const firstObjectData = VO2data[firstObjectKeyVO2];
                 setLatestSuprior(firstObjectData.oxygenlevel);
-                console.log(firstObjectData);
             } else {
                 console.log('No data found.');
             }
+
+            const q = query(collection(db,"Users"),where('userId',"==",clientId))
+            const res = await getDocs(q)
+            const userDocId =  res.docs[0].ref.id
+            const getWeight = await getDocs(query(collection(db,"Users",userDocId,"WeightTracker")))
+            const value = getWeight.docs[0].data().userWeight.slice(0,-3);
+           !getWeight.empty&&setLatestUserWeight(value)
 
 
         }catch(e){
@@ -88,7 +87,7 @@ import {
                             <p>Heartbeat</p>
                         </div>
                         <Center className={classes.pieChart} bgGradient='linear(to-br, #7fa5ed, #2a49b6)'>
-                            <CircularProgress  value={latestHeartRate? latestHeartRate : null} color="#88A8ED" size='17rem' thickness='6px'>
+                            <CircularProgress  value={latestHeartRate? latestHeartRate : null} color="#88A8ED" size={['5.5rem','6rem','14rem','17rem']} thickness="6px">
                                 <CircularProgressLabel>
                                 <Text className={classes.data1}>{latestHeartRate ? latestHeartRate : "N/A"}</Text>
                                 <Text className={classes.tag1}>bpm</Text>
@@ -102,7 +101,7 @@ import {
                             <p>Weight</p>
                         </div>
                         <Center className={classes.pieChart} >
-                            <CircularProgress  value={latestUserWeight ? latestUserWeight : null} color="#88A8ED" size='17rem' thickness='6px'>
+                            <CircularProgress  value={latestUserWeight ? latestUserWeight : null} color="#88A8ED" size={['5.5rem','6rem','14rem','17rem']} thickness='6px'>
                                 <CircularProgressLabel>
                                 <Text className={classes.data} color="white">{latestUserWeight
                                         ? parseFloat(latestUserWeight).toFixed(0)
@@ -118,7 +117,7 @@ import {
                             <p>VO2</p>
                         </div>
                         <Center className={classes.pieChart} >
-                            <CircularProgress value={latestSuprior ? latestSuprior : null} color="#88A8ED" size='17rem' thickness='6px'>
+                            <CircularProgress value={latestSuprior ? latestSuprior : null} color="#88A8ED" size={['5.5rem','6rem','14rem','17rem']} thickness='6px'>
                                 <CircularProgressLabel>
                                 <Text className={classes.data} color="white">{latestSuprior ? latestSuprior : "N/A"}</Text>
                                 <Text className={classes.tag} fontSize="25px"  color="white">Superior</Text>

@@ -16,6 +16,7 @@ import {
 import { auth, db } from "../../firebase";
 import { AuthContext } from "../../components/data_fetch/authProvider";
 import styled from "styled-components";
+import { Center } from "@chakra-ui/react";
 
 const ClientsRequest = () => {
     const {user} = useContext(AuthContext)
@@ -117,22 +118,15 @@ const ClientsRequest = () => {
                                     src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=8"
                                     alt={client.userName}
                                 />
-                            </div>
 
-                            <div className={styles.textContainer}>
                                 <div className={styles.info}>
-                                    <div className={styles.username}>
-                                        <p>{client.userName}</p>
-                                    </div>
-
-                                    <div className={styles.userEmail}>
-                                        <p>{client.userEmail}</p>
-                                    </div>
-
-                                    <div className={styles.userAccDate}>
-                                        <p>{client.accCreated}</p>
+                                        <Center><p>{client.userName}</p></Center>
+                                    <div className={styles.info1}>
+                                        <Center><p>{client.userEmail}</p></Center>
+                                        <Center><p>{client.accCreated}</p></Center>   
                                     </div>
                                 </div>
+                            </div>
 
                                 <div className={styles.buttons}>
                                     <div
@@ -152,7 +146,6 @@ const ClientsRequest = () => {
                                         <p>Decline</p>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     )):
                     <Title>No Requests! </Title>

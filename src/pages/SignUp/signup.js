@@ -281,8 +281,7 @@ const Login = () => {
                         </div>
 
                         <div
-                            className={classes.column}
-                            style={{ width: "30%" }}
+                            className={`${classes.column} ${classes.columnph}`}
                         >
                             <div className={classes.inputBox}>
                                 <label>Phone</label>
@@ -351,7 +350,7 @@ const Login = () => {
             {showErrorPopup && (
                 <div className={classes.errorPopup}>
                     <div className={classes.errorPopupContent}>
-                        <h2>Error</h2>
+                        <h2>Error!</h2>
 
                         <ul>
                             {nameError && <li>{nameError}</li>}

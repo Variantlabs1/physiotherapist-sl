@@ -8,6 +8,8 @@ const Profile = () => {
     // const user = useAuth(); // Use the authentication state from the context
     const [userData, setUserData] = useState(null);
     const {user} = useContext(AuthContext)
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 430);
+
 
     console.log(userData);
 
@@ -22,6 +24,20 @@ const Profile = () => {
         return ()=>unSub()}
     },[user])
 
+    useEffect(() => {
+        const handleResize = () => {
+          setIsMobile(window.innerWidth <= 430);
+        };
+    
+        // Add event listener for window resize
+        window.addEventListener('resize', handleResize);
+    
+        // Remove event listener on component unmount
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
+
 
     const defaultImage =
         "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=";
@@ -34,9 +50,9 @@ const Profile = () => {
                     alt="profile"
                 ></img>
             </div>
-            <p className={classes.name}>
+            {!isMobile && <p className={classes.name}>
                 {userData ? userData.username : "Loading..."}
-            </p>
+            </p>}
         </div>
     );
 };

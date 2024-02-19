@@ -42,135 +42,73 @@
 
     .container {
         margin-top: 2%;
-        .top {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            .left {
-                width: 60%;
-                .thumbnailContainer {
-                    width: 100%;
-                    height: 40vw;
-
-                    .thumbnailImage {
-                        height: 100%;
-                        width: 100%;
-                        border-radius: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        gap: 20px;
+        width: 100%;
+        .card{
+            background-color: #e7f3ff;
+                padding: 1.6rem;
+                margin-right: 4%;
+                margin-left: 1%;
+                margin-bottom: 2%;
+                border-radius: 1vw;
+                .tag{
+                    .exerciseName{
+                        font-weight: 600;
+                        font-size: 1.4rem;
+                        color: #0d1dac;
+                        margin-bottom: 1%;
                     }
-                    img{
-                        border-radius: 5px;
-                        box-shadow: 0px 0px 5px 2px lightgray;
-                    }
-
-                    .musclesList{
-                            display: flex;
-                            margin-top: 1%;
-                            .musclesInvolved {
-                                // height: 2vw;
-                                padding: 4px 14px;
-                                background-color: #e7f3ff;
-                                border-radius: 5px;
-
-                                font-size: 1vw;
-                                font-weight: 600;
-                                color: #614d8f;
-                                
-                            }
-                        }
+                    
                 }
+                .musclesInvolved{
+                    padding: 2px 0px;
+                    // background-color: #e7f3ff;
+                    margin-top: 10px;
+                    border-radius: 5px;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: #614d8f;
+                }
+        }
+    }
+    @media only screen and (max-width: 450px) {
+        .header {   
+            width: 97%;
+            margin-top: 1.4%;
+            .exerciseTitle {
+                font-size: 1.7rem;
             }
-
-            .right {
-                padding-left: 2vw;
-                padding-right: 4vw;
-                width: 30%;
-                margin-right: 4vw;
-
-                .details {
-                    display: flex;
-
-                    .musclesInvolvedContainer,
-                    .accuracyContainer {
-                        height: 8vw;
-                        margin-left: 10px;
-
-                        margin-right: 20px;
-                        .musclesInvolvedTitle,
-                        .accuracyTitle {
-                            height: 3vw;
-                            p {
-                                font-weight: 700;
-                                font-size: 24px;
-                                color: #614d8f;
-                            }
-                        }
-
-                        .accuracyList {
-                            display: flex;
-                            flex-direction: row;
-
-                            .accuracy {
-                                // height: 2vw;
-                                padding: 8px 24px;
-                                background-color: #e7f3ff;
-                                margin-right: 1vw;
-                                border-radius: 5px;
-
-                                p {
-                                    font-size: 1vw;
-                                    font-weight: 600;
-                                    color: #614d8f;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .calendar {
-                    display: flex;
-                    align-items: center;
-                    padding: 10px;
-                    border-radius: 25px;
-                    margin-bottom: 20px;
-
-                    width: fit-content;
-
-                    background-color: #e7f3ff;
+    
+            .buttons {
+                .button {
+                    padding: 6px 20px;
+                    font-size: 14px;
                 }
             }
         }
-
-        .bottom {
-            display: flex;
-            // justify-content: center;
-
-            .box {
-                margin-top: 50px;
-                width: 700px;
-                border-radius: 25px;
+    
+        .container {
+            margin-top: 6%;
+            gap: 10px;
+            .card{
+                    padding: 1rem;
+                    border-radius: 10px;
+                    .tag{
+                        .exerciseName{
+                            font-size: 1.4rem;
+                        }
+                        
+                    }
+                    .musclesInvolved{
+                        padding: 1px 0px;
+                        
+                    }
             }
         }
     }
 }
 
-.frame{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-    position: relative;
-    img{
-        max-height: 80%;
-    }
-    div{
-        // position: absolute;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        z-index: 2;
-        // bottom: 30px;
-        color: rgb(87, 87, 88);
-    }
 
-    }

@@ -5,13 +5,7 @@
     display: flex;
     gap: 20px;
     padding: 10px;
-    /* justify-content: center; */
     flex-direction: column;
-    /* align-items: center; */
-    /* width: 1420px; */
-
-    /* padding: 50px; */
-    /* border-radius: 25px; */
 }
 
 .exercisesButton{
@@ -53,7 +47,38 @@
     align-items: center;
     justify-content: center;
     height: 60%;
+    .chart{
+        width: 89%;
+    }
+}
 
+@media only screen and (max-width: 450px){
+    .lineChart{
+        gap: 0;
+        padding: 0;
+        padding-top: 10px;
+    }
+    .exercisesButton{
+        font-size: 16px;
+        padding: 5px 10px;
+    
+    }
+    
+    .exercisesTop{
+        padding-left: 5px;
+        padding:0 5px;
+        span{
+            font-size: 22px;
+            font-weight: 600;
+        }
+    }
+    /* .apexChart{
+        .chart{
+            width: 60%;
+            margin: auto;
+        }
+    } */
+    
 }
 
 

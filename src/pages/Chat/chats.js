@@ -14,9 +14,10 @@ import {
 import { db } from "../../firebase";
 import classes from "./Chats.module.scss";
 import { format } from "timeago.js";
+import { Link } from "react-router-dom";
 
 
-const Chats = ({ user, client }) => {
+const Chats = ({ user, client, onBack }) => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const chatId = client.userId+user.user.uid;
@@ -81,15 +82,26 @@ const Chats = ({ user, client }) => {
     return (
         <div className={classes.rootChats}>
             <div className={classes.header}>
-                <div className={classes.userImage}>
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTte_W3r44Rc7MYnXPQZLP-z3pfAJCKJuz1GA&usqp=CAU"
-                        alt="userName"
-                    />
+                <div className={classes.headerContainer}>
+                    <div className={classes.userImage}>
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTte_W3r44Rc7MYnXPQZLP-z3pfAJCKJuz1GA&usqp=CAU"
+                            alt={client.userName}
+                        />
+                    </div>
+
+                    <div className={classes.userName}>
+                        <p>{client.userName}</p>
+                    </div>
                 </div>
 
-                <div className={classes.userName}>
-                    <p>{client.userName}</p>
+                <div className={classes.headerButtons}>
+                    <div
+                        className={classes.buttons}
+                        onClick={onBack}
+                    >
+                        <div className={classes.button}>Back</div>
+                    </div>
                 </div>
             </div>
             <div className={classes.chatMessages}>
@@ -129,7 +141,7 @@ const Chats = ({ user, client }) => {
                         onClick={sendMessage}
                         className={classes.sendButton}
                     >
-                        <p>Send message</p>
+                        <p>Send</p>
                     </button>
                 </div>
             </div>

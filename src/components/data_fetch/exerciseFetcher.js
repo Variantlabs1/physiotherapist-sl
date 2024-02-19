@@ -16,7 +16,7 @@ const ExerciseFetcher = ({ onExercisesFetched }) => {
             try {
                 const q = query(
                     collection(db, "exercises"),
-                    where("userId", "==", user?.uid)
+                    where("physioId", "==", user?.uid)
                 );
 
                 const querySnapshot = await getDocs(q);

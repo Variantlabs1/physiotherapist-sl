@@ -2,11 +2,13 @@ import classes from "./Login.module.scss";
 import login from "../../assets/login.png";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { IoEyeOutline,IoEyeOffOutline  } from "react-icons/io5";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import { Center } from "@chakra-ui/react";
 
 function Login() {
     //for authentication
@@ -17,6 +19,8 @@ function Login() {
     });
     const [errorMsg, setErrorMsg] = useState("");
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const handleSubmission = () => {
         if (!values.email || !values.pass) {
@@ -29,7 +33,7 @@ function Login() {
         signInWithEmailAndPassword(auth, values.email, values.pass)
             .then(async (res) => {
                 setSubmitButtonDisabled(false);
-                navigate("/home");
+                navigate("/Dashboard");
             })
             .catch((err) => {
                 setSubmitButtonDisabled(false);
@@ -37,7 +41,7 @@ function Login() {
                 console.log(err)
             });
     };
-    console.log(errorMsg)
+
 
     return (
         <div className={classes.rootLogin}>
@@ -75,7 +79,7 @@ function Login() {
                             <div className={classes.label}>
                                 <p className={classes.pass}>Password</p>
                                 <p className={classes.forgot}>
-                                    Forgot Password?
+                                    <Link to="/password-recovery">Forgot Password?</Link>
                                 </p>
                             </div>
                             <div className={classes.input}>
@@ -87,7 +91,7 @@ function Login() {
 
                                 <div className={classes.inputPassword}>
                                     <input
-                                        type="password"
+                                        type={showPassword ? "text" : "password"}
                                         onChange={(event) =>
                                             setValues((prev) => ({
                                                 ...prev,
@@ -96,6 +100,21 @@ function Login() {
                                         }
                                     />
                                 </div>
+                                <Center className={classes.passicon}>
+                                    {showPassword ? 
+                                    <IoEyeOutline 
+                                    className={classes.EyeIcon}
+                                    onClick={() =>
+                                        setShowPassword(!showPassword)
+                                    }
+                                    /> :
+                                    <IoEyeOffOutline  
+                                    className={classes.EyeIcon}
+                                    onClick={() =>
+                                        setShowPassword(!showPassword)
+                                    }
+                                    />}
+                                </Center>
                             </div>
                         </div>
 
@@ -103,17 +122,16 @@ function Login() {
                             <motion.div
                                 whileTap={{ scale: 0.9 }}
                                 className={classes.signin}
-
-                                onClick={handleSubmission}                                disabled={submitButtonDisabled}
+                                onClick={handleSubmission}                                
+                                disabled={submitButtonDisabled}
                             >
                                 <p>Log In</p>
                             </motion.div>
                             <div className={classes.signup}>
-                                <span>
-                                    <Link to="sign-up" className={classes.link}>
-                                        Don't have an account? Register here
+                                    <p>Don't have an account? </p>
+                                    <Link to="/signup" className={classes.link}>
+                                        Register here
                                     </Link>
-                                </span>
                             </div>
                         </div>
                     </div>

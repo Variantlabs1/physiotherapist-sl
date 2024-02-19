@@ -3,6 +3,9 @@
     height: 100%;
 
     .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         .header {
             width: 100%;
 
@@ -93,6 +96,57 @@
 
                         &:hover {
                             cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 450px){
+        .container {
+            .header {
+                .title {
+                    font-size: 26px;
+                }
+            }
+    
+            .cardsContainer {
+                width: 90vw;
+                display: flex;
+                flex-direction: column;
+                margin-top: 5%;
+                .card {
+                    width: 90vw;
+                    margin-bottom: 1em;
+                    padding: 1rem 1.2rem;
+                    justify-content: space-between;
+                    border-radius: 10px;
+                    margin-right: 0px;
+    
+                    .imageContainer {
+                        width: 10vw;
+                        .profilePicture {
+                            width: 10vw;
+                            height: 10vw;
+                        }
+                    }
+    
+                    .textContainer {
+                        // background-color: yellow;
+                        width: 80%;
+                        .username {
+                            p {
+                                font-size: 1.33rem;
+                            }
+                        }
+    
+                        .buttons {
+                            margin-right: 2vw;
+                            width: 16vw;
+                            height: 7vw;
+                            p {
+                                font-size: 1rem;
+                            }
                         }
                     }
                 }

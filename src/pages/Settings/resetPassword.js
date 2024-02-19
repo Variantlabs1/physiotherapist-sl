@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SiSpringsecurity } from "react-icons/si";
-import { BsFillEyeSlashFill } from "react-icons/bs";
+import { IoEyeOutline,IoEyeOffOutline  } from "react-icons/io5";
+import { RxCross1 } from "react-icons/rx";
 import "./ResetPassword.scss";
 
 import {
@@ -9,6 +10,7 @@ import {
     updatePassword,
     EmailAuthProvider,
 } from "firebase/auth";
+import { Center } from "@chakra-ui/react";
 
 const ResetPassword = ({ onSubmit }) => {
     const [currentPassword, setCurrentPassword] = useState("");
@@ -51,6 +53,7 @@ const ResetPassword = ({ onSubmit }) => {
 
     return (
         <div className="container">
+            <Center><RxCross1  className="cancelIcon" onClick={onSubmit}/></Center>
             <div>
                 <h1>Reset Password</h1>
             </div>
@@ -66,12 +69,19 @@ const ResetPassword = ({ onSubmit }) => {
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
                     />
-                    <BsFillEyeSlashFill
+                    {showCurrentPassword ? 
+                    <IoEyeOutline
                         className="EyeIcon"
                         onClick={() =>
                             setShowCurrentPassword(!showCurrentPassword)
                         }
-                    />
+                    /> :
+                    <IoEyeOffOutline 
+                        className="EyeIcon"
+                        onClick={() =>
+                            setShowCurrentPassword(!showCurrentPassword)
+                        }
+                    />}
                 </div>
                 <div>
                     <h2>Enter new password</h2>
@@ -83,10 +93,19 @@ const ResetPassword = ({ onSubmit }) => {
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
-                    <BsFillEyeSlashFill
+                    {showNewPassword ? 
+                    <IoEyeOutline
                         className="EyeIcon"
-                        onClick={() => setShowNewPassword(!showNewPassword)}
-                    />
+                        onClick={() =>
+                            setShowCurrentPassword(!showNewPassword)
+                        }
+                    /> :
+                    <IoEyeOffOutline 
+                        className="EyeIcon"
+                        onClick={() =>
+                            setShowCurrentPassword(!showNewPassword)
+                        }
+                    />}
                 </div>
                 <div>
                     <h2>Re-enter new password</h2>
@@ -98,12 +117,19 @@ const ResetPassword = ({ onSubmit }) => {
                         value={reenteredPassword}
                         onChange={(e) => setReenteredPassword(e.target.value)}
                     />
-                    <BsFillEyeSlashFill
+                    {showReenteredPassword ? 
+                    <IoEyeOutline 
                         className="EyeIcon"
                         onClick={() =>
-                            setShowReenteredPassword(!showReenteredPassword)
+                            setShowCurrentPassword(!showReenteredPassword)
                         }
-                    />
+                    /> :
+                    <IoEyeOffOutline  
+                        className="EyeIcon"
+                        onClick={() =>
+                            setShowCurrentPassword(!showReenteredPassword)
+                        }
+                    />}
                 </div>
             </div>
             <div className="submitBtn">
@@ -113,7 +139,7 @@ const ResetPassword = ({ onSubmit }) => {
                 <button onClick={handleSubmit}> Done</button>
             </div> */}
             <div className="fpLink">
-                <a href="#">Forgot Password</a>
+                <a href="/password-recovery">Forgot Password</a>
             </div>
 
             {successMessage && <p>{successMessage}</p>}

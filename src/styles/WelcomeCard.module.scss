@@ -51,4 +51,44 @@ box-shadow: 0px 4px 8px 0px rgba(180, 196, 235, 0.25);
             height: 90%;
         }
     }
+
+    @media only screen and (max-width: 450px){
+        width: 95vw; 
+        .left{
+            margin-left: 1rem;
+            .heading {
+                font-size: 1.4rem;
+                font-weight: 600;
+            }
+    
+            .subText {
+                font-weight: 500;
+                font-size: 12px;
+            }
+        }  
+        .right {
+            width: 25vw;
+            height: 100%;
+    
+            img {
+                margin-left: 3rem;
+                height: 8vh;
+            }
+        }
+        @media only screen and (max-width: 380px){
+            .left{
+                .heading {
+                    font-size: 1.2rem;
+                }
+                .subText {
+                    font-size: 10px;
+                }
+            }  
+            .right {
+                img {
+                    height: 11vh;
+                }
+            }
+        }
+    }
 }

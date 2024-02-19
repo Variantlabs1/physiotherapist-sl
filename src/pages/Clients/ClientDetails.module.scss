@@ -9,9 +9,7 @@
 
         .headerContainer {
             display: flex;
-            // width: 14%;
             width: max-content;
-            // justify-content: space-between;
             gap: 20px;
 
             .userImage {
@@ -171,7 +169,7 @@
         width: 100%;
         height: 100%;
 
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(94, 94, 94, 0.329);
 
         display: flex;
         justify-content: flex-end;
@@ -185,17 +183,25 @@
         .overlayContent {
             background-color: #f4f9ff;
             padding: 30px 50px 0 50px;
-
+            outline: 3px solid #d6e1fe;
             text-align: center;
 
             width: fit-content;
             height: fit-content;
-            border-radius: 20px;
+            border-radius: 20px ;
 
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+
+            .closeicon{
+                position: relative;
+                left: 52%;
+            }
+            .closeicon{
+                cursor: pointer;
+            }
 
             .inputBox {
                 display: flex;
@@ -207,7 +213,7 @@
                 label {
                     font-family: "Raleway";
                     font-size: 24px;
-                    font-weight: 500;
+                    font-weight: 600;
                     text-align: left;
                     padding: 8px 0;
                 }
@@ -239,212 +245,6 @@
             }
         }
     }
-
-    .info {
-        width: 95%;
-
-        .assignedExercises {
-            height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            .container {
-                width: 22vw;
-                height: fit-content;
-                padding: 30px 20px 15px 20px;
-
-                outline: 3px solid #d6e1fe;
-                border-radius: 20px;
-                margin: auto;
-
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-
-                .heading {
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    p {
-                        color: #2b39b6;
-                        font-weight: 700;
-                        font-size: .5rem;
-                    }
-                }
-
-                .cards {
-                    margin-top: 2vw;
-                    .exercise {
-                        width: 20vw;
-                        height: 2.5vw;
-
-                        padding: 10px 20px;
-                        margin-bottom: 0.8vw;
-
-                        background-color: #f9f6ff;
-                        border-radius: 10px;
-
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-
-                        .exerciseName {
-                            width: 80%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            p {
-                                font-weight: 600;
-                                font-size: 1.25rem;
-                                color: #000000;
-                            }
-                        }
-
-                        // .delete {
-                        //     width: 8%;
-                        //     height: 70%;
-
-                        //     .icon {
-                        //         width: 100%;
-                        //         height: 100%;
-                        //         color: #699bf7;
-                        //     }
-
-                        //     &:hover {
-                        //         cursor: pointer;
-                        //     }
-                        // }
-                    }
-                }
-
-                .footer {
-                    margin-top: 10vw;
-                    width: 100%;
-
-                    display: flex;
-                    justify-content: flex-end;
-                    align-items: flex-end;
-
-                    .buttons {
-                        height: 3vw;
-                        width: 3vw;
-
-                        .icon {
-                            height: 100%;
-                            width: 100%;
-                            color: #8db2f9;
-                        }
-                    }
-                }
-            }
-        }
-
-        .rootExercises {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin: 0 2vw;
-
-            .header {
-                margin-bottom: 2vw;
-                width: 95%;
-                top: 0;
-                display: flex;
-                justify-content: space-between;
-
-                .title {
-                    width: 30%;
-                    p {
-                        font-weight: 700;
-                        font-size: 36px;
-                        color: #3b3c40;
-                    }
-                }
-            }
-
-            .container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 90%;
-                .gridContainer {
-                    // display: flex;
-                    // align-items: row;
-                    // flex-wrap: wrap;
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 1.8em;
-
-                    .card {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        position: relative;
-                    }
-
-                    .card {
-                        background-color: #e7f3ff;
-                        border: 0.2em solid #e8deff;
-                        padding: 2em;
-                        text-align: center;
-                        border-radius: 1vw;
-
-                        width: 21vw;
-                        height: 22vw;
-
-                        .imageContainer {
-                            width: 80%;
-
-                            img {
-                                border-radius: 0.5em;
-                                width: 55%;
-                                height: auto;
-                                margin-bottom: 1em;
-                                object-fit: contain;
-                            }
-                        }
-
-                        .textContainer {
-                            display: flex;
-                            flex-direction: column;
-                            // align-items: left;
-                            justify-content: left;
-                            // background-color: red;
-                            h3 {
-                                margin-bottom: 0.5em;
-                                font-weight: 600;
-                                font-size: 1.25em;
-                                color: var(--secondary-color);
-                            }
-
-                            p {
-                                font-weight: 400;
-                                font-size: 1em;
-                                color: #000000;
-                            }
-                        }
-
-                        .footer {
-                            position: absolute;
-                            top: 20px;
-                            left: 40px;
-                            .icon {
-                                color: #699bf7;
-                                height: 30px;
-                                width: 30px;
-                            }
-                            &:hover {
-                                cursor: pointer;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 .assignedExercises {
@@ -453,7 +253,7 @@
     align-items: center;
     justify-content: center;
     .container {
-        width: 22vw;
+        width: 24vw;
         height: fit-content;
         padding: 30px 20px 15px 20px;
 
@@ -483,7 +283,7 @@
             margin-top: 2vw;
             .exercise {
                 width: 20vw;
-                height: 2.5vw;
+                min-height: 2.5vw;
 
                 padding: 10px 20px;
                 margin-bottom: 0.8vw;
@@ -493,16 +293,16 @@
 
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                justify-content: space-between;
 
                 .exerciseName {
                     width: 80%;
                     display: flex;
                     align-items: center;
-                    justify-content: center;
+                    // justify-content:center;
                     p {
                         font-weight: 600;
-                        font-size: 1.25rem;
+                        font-size: 1.2rem;
                         color: #000000;
                     }
                 }
@@ -546,59 +346,163 @@
     }
 }
 
-// /* Overlay Styles */
-// .overlay {
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     background-color: rgba(
-//         0,
-//         0,
-//         0,
-//         0.7
-//     ); /* Semi-transparent black background */
-//     display: flex;
-//     justify-content: flex-end; /* Place content at the right side */
-//     align-items: flex-end; /* Place content at the bottom */
-//     z-index: 1000; /* Adjust the z-index as needed */
+@media only screen and (max-width: 450px) {
+    .rootClientDetails {
+        .header {
+            width: 90vw;
+            margin-bottom: 3%;
+            margin-top: 2%;
+            .headerContainer {
+                gap: 20px;
+                .userImage {
+                    width: 12vw;
+                    height: 12vw;
+                }
+                .userName {
+                    p {
+                        font-size: 1.3rem;
+                    }
+                }
+            }
+            .headerButtons {
+                width: 20vw;
+                display: flex;
+                justify-content: space-between;
+                .buttons {
+                    padding: 6px 16px;
+                    .button {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    
+        .dashboard {
+            margin: 0;
+            width: 92%;
+    
+            .clientInfo {
+                width: 100vw;
+                height: 60%;
+                // background-color: yellow;
+    
+                .data {
+                    height: 100%;
+                    width: 100%;
+                    margin: auto 0;
+                }
+            }
+    
+            .bottomContainer {
+                margin-top: 10px;
+                width: 100vw;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .graph {
+                    flex-direction:column-reverse;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 15px 0px;
+                    .top{
+                        justify-content: space-between;
+                        gap: 0px;
+                        margin-left: 0px;
+                        width: 80vw;
+                        p{
+                            padding: 5px 10px;
+                            border-radius: 14px;
 
-//     padding: 0 150px 150px 0;
-// }
-
-// .overlayContent {
-//     background-color: #fff; /* Background color for the overlay content */
-//     border-radius: 5px;
-//     text-align: center;
-//     margin: 20px; /* Add some margin for spacing */
-//     padding: 20px;
-// }
-
-// h2 {
-//     font-size: 1.5rem;
-//     margin-bottom: 20px;
-// }
-
-// input {
-//     width: 100%;
-//     padding: 10px;
-//     margin-bottom: 20px;
-//     border: 1px solid #ccc;
-//     border-radius: 4px;
-//     font-size: 1rem;
-// }
-
-// button {
-//     background-color: #007bff; /* Change to your desired button color */
-//     color: #fff;
-//     border: none;
-//     padding: 10px 20px;
-//     border-radius: 4px;
-//     cursor: pointer;
-//     font-size: 1rem;
-// }
-
-// button:hover {
-//     background-color: #0056b3; /* Change to a darker shade on hover if desired */
-// }
+                        }
+                    }
+    
+                    .chart{
+                        padding: 10px 15px;
+                        border-radius: 20px;
+                        width:90vw;
+                    }
+                }
+    
+                .buttons {
+                    width: 80vw;
+                    gap: 0px;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-direction: row;
+                    padding-left: 0;
+                    .assign{
+                        padding: 5px 15px;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    
+        /* Overlay Styles */
+        .overlay {
+            .overlayContent {
+                padding: 20px 50px 0 50px;
+                width: 90vw;
+                height: auto;
+                border-radius: 10px;
+                outline: 5px solid #d6e1fe;
+                .closeicon{
+                    left: 56%;
+                }
+                .closeicon{
+                    cursor: pointer;
+                }
+    
+                .inputBox {
+                    margin: 0px;
+                    height: 91px;
+                    width: 70vw;
+    
+                    label {
+                        font-size: 20px;
+                    }
+    
+                    input {
+                        border-radius: 6px;
+                        height: 40px;
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+    .assignedExercises {
+        .container {
+            width: 80vw;
+            height: fit-content;
+            padding: 10px 20px 15px 20px;
+            margin-top: 5%;
+            border-radius: 10px;
+            .heading {
+                p {
+                    font-size: 1.3rem;
+                }
+            }
+    
+            .cards {
+                margin-top: 2vw;
+                .exercise {
+                    width: 70vw;
+                    margin-bottom: 4%;
+                    .exerciseName {
+                        width: 84%;
+                        p {
+                            font-size: 1rem;
+                        }
+                    }
+                }
+            }
+            .footer {
+                .buttons {
+                    height: 12vw;
+                    width: 12vw;
+                }
+            }
+        }
+    }
+}

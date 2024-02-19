@@ -26,25 +26,24 @@ const MainExercises = () => {
     };
 
     return (
-        <div>
+        <div style={{width: "100%"}}>
             {showAddExercises ? (
                 <AddExercises   onBackClick={handleBackClick} />
             ) :
-             (selectedExercise && clientId) ? (
-                <AddExercises clientId={clientId} selectedExercise={selectedExercise} onBackClick={handleBackClick} />)
+             (selectedExercise && clientId) ? 
+                (<AddExercises clientId={clientId} selectedExercise={selectedExercise} onBackClick={handleBackClick} />)
                  :selectedExercise?
 
                 <ExerciseDetails
                     exercise={selectedExercise}
                     onClose={() => setSelectedExercise(null)}
                 />
-             : (
-                <ExercisesPage
+             : (<ExercisesPage
                 clientId={clientId}
                     onAddExercisesClick={handleAddExercisesClick}
                     onExerciseCardClick={handleExerciseCardClick}
-                />
-            )}
+                />)
+            }
         </div>
     );
 };

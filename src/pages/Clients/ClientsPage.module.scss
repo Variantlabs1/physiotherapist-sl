@@ -114,4 +114,92 @@
             }
         }
     }
+    @media only screen and (max-width: 450px) {
+        margin: 0;
+        .header {
+            margin-top: 4%;
+            width: 94vw;
+            .title {
+                width: 60vw;
+                p {
+                    font-size: 1.6rem;
+                    color: #0d1dac;
+                }
+            }
+        }
+    
+        .container {
+            width: 100%;
+            .listContainer {
+                flex-direction: column;
+                gap:0;
+                .card {
+                    width: 100%;
+                    margin-bottom: 1em;
+                }
+    
+                .card {
+                    padding: 1.2rem;
+                    border-radius: 10px;
+                    .imageContainer {
+                        width: 15vw;
+                        .profilePicture {
+                            width: 10vw;
+                            height: 10vw;
+                        }
+                    }
+    
+                    .textContainer {
+                        .username {
+                            p {
+                                font-size: 1.43rem;
+                            }
+                        }
+    
+                        .buttons {
+                            width: 18vw;
+                            height: 3.5vh;
+                            p {
+                                font-size: 1.1rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        @media only screen and (max-width: 300px) {
+            .header {
+                .title {
+                    p {
+                        font-size: 1.1rem;
+                    }
+                }
+            }
+            .container {
+                .listContainer {   
+                    .card {
+                        padding: 1.1rem;
+                        .imageContainer {
+                            .profilePicture {
+                                width: 10vw;
+                                height: 10vw;
+                            }
+                        }
+                        .textContainer {
+                            .username {
+                                p {
+                                    font-size: 1.13rem;
+                                }
+                            }
+                            .buttons {
+                                p {
+                                    font-size: .9rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

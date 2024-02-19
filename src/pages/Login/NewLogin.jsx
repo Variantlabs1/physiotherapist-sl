@@ -63,14 +63,14 @@ const ForgotPassword = () => {
               <input type="checkbox" id="rememberMe" className="checkbox-input" />
               <label htmlFor="rememberMe" className="checkbox-label" >Keep me logged in</label>
             </div>
-            <a href="/password-recovery/email" className='forgotpassword'>Forgot Password?</a>
+            <a href="/password-recovery" className='forgotpassword'>Forgot Password?</a>
           </div>
           <button className='btn'
            onClick={handleSubmission}
           disabled={submitButtonDisabled}
           
           >Log In</button>
-          <div className='noAccount'>Don't have an account?<a href='/home'>Register</a></div>
+          <div className='noAccount'>Don't have an account?<a href='/signup'>Register</a></div>
           <div class="footer-text">
             <p>Terms of Use</p>
             <div class="vertical-line"></div>

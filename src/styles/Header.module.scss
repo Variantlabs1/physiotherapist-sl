@@ -1,27 +1,35 @@
 .rootHeader {
-    height: 6vw;
-    width: 97%;
+    height: 10vh; /* Use viewport height for responsive height */
+    width: 100vw;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    // background-color: red;
+    background-color: #b3c4ea;
     align-items: center;
-    padding: 15px;
+    padding: 1.5vw; /* Use viewport width for responsive padding */
+    position: relative;
+    .icon{
+        display: none;
+    }
+    .dropdown{
+        display: none;
+    }
     .greet {
-        // background-color: aqua;
         width: 16vw;
+        
         .greeting {
             font-weight: 600;
             font-size: 2vw;
             color: #0d30ac;
         }
+
         .time {
-            // background-color: red;
             display: flex;
             flex-direction: row;
             width: 80%;
             padding-right: 1vw;
             justify-content: space-between;
+
             span {
                 color: #0d30ac;
                 font-weight: 500;
@@ -30,61 +38,58 @@
         }
     }
 
-    .functionalities {
-        display: flex;
-        flex-direction: row;
-        // background-color: yellow;
-        height: 100%;
-        width: 23%;
-        align-items: center;
-        justify-content: space-between;
-        .search {
-            background-color: #ffffff;
-            width: 13vw;
-            height: 3vw;
-            border-radius: 60px;
+    /* Media query for smaller screens (adjust the max-width as needed) */
+    @media (max-width: 768px) {
+        height: 8vh;
+        .greet {
+            width: 40vw; /* Full width for smaller screens */
+            
+            .greeting {
+                font-size: 4vw; /* Adjust font size for smaller screens */
+            }
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            .searchbar {
-                width: 90%;
-                // background-color: red;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border: 1px solid transparent;
-                border-radius: 4px;
-                padding: 4px;
-
-                input {
-                    // flex: 1;
-                    border: none;
-                    outline: none;
-                    padding: 8px;
-                    font-size: 1vw;
-                    width: 70%;
-                    margin-left: 4px;
-                    color: #4371cb80;
-
-                    &::placeholder {
-                        color: #4371cb80;
+            .time {
+                width: 23vw; /* Full width for smaller screens */
+                span {
+                    font-size: 2vw; /* Adjust font size for smaller screens */
+                }
+            }
+        }
+        @media only screen and (max-width: 450px){
+            padding-right: 4%;
+            padding-left: 4%;
+            .icon{
+                display: block;
+                font-size: 2rem;
+                margin-right: 2%;
+                color: #0d30ac;
+            }
+            .dropdown{
+                display: block;
+                position: absolute;
+                top: 70%;
+                right: 5%;
+                width: 38vw;
+                color: #0d30ac;
+                background-color: white;
+                border-radius: 5px;
+                outline: 2px solid #7792f3;
+                margin: 2% auto;
+                z-index: 10;
+                .menu{
+                    padding: 4px 8px;
+                    .menuicon{
+                        width: 5vw;
+                        height: 5vw;
+                        font-size: 2rem;
+                        margin-right: 5%;
+                    }
+                    p{
+                        font-size: 1.2rem;
                         font-weight: 600;
                     }
                 }
             }
-        }
-
-        .notifications {
-            width: 3.5vw;
-            height: 3.5vw;
-            border-radius: 50%;
-            background-color: #ffffff;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
     }
 }

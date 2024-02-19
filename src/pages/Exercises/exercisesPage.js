@@ -12,17 +12,35 @@ import { db } from "../../firebase";
 import styled from "styled-components";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Button, Center } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 
 
 const ExercisesPage = ({clientId, onAddExercisesClick, onExerciseCardClick }) => {
+    const navigate = useNavigate();
     const [exercises, setExercises] = useState([]);
     const [isGrid, setIsGrid] = useState(false);
     const [client,setClient] = useState(null)
     const [pageNumber,setPageNumber] = useState(1)
     const [direction,setDirection] = useState(null)
-    const [lastDocument,setLastDocument] = useState(null)
+    const [lastDocument,setLastDocument] = useState(null);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 430);
+
     
+    useEffect(() => {
+        const handleResize = () => {
+          setIsMobile(window.innerWidth <= 430);
+        };
+    
+        // Add event listener for window resize
+        window.addEventListener('resize', handleResize);
+    
+        // Remove event listener on component unmount
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
 
 useEffect(()=>{
      const getDefaultExercises = async()=>{
@@ -34,11 +52,11 @@ useEffect(()=>{
            if(pageNumber>1 && lastDocument){
            const pointer = direction==='next'?startAfter(lastDocument):endBefore(lastDocument)
 
-              const res = await getDocs(query(collection(db,"Default excercises"),limit(3),orderBy("Exercise_Name"),pointer))
+              const res = await getDocs(query(collection(db,"Default excercises"),limit(4),orderBy("Exercise_Name"),pointer))
             setExercises(res.docs.map(doc=>(doc.data())))
             setLastDocument(res.docs[res.docs.length-1])
            }else{
-            const res = await getDocs(query(collection(db,"Default excercises"),limit(3),orderBy("Exercise_Name"),))
+            const res = await getDocs(query(collection(db,"Default excercises"),limit(4),orderBy("Exercise_Name"),))
             setExercises(res.docs.map(doc=>(doc.data())))
             setLastDocument(res.docs[res.docs.length-1])
            }
@@ -53,7 +71,7 @@ useEffect(()=>{
     },[clientId,pageNumber,direction])
 
     const handleExercisesFetched = (fetchedExercises) => {
-       !clientId&& setExercises(fetchedExercises);
+        setExercises(fetchedExercises);
     };
 
     const toggleView = () => {
@@ -71,7 +89,9 @@ useEffect(()=>{
     }
 
    }
-
+   const backHandler = () => {
+     clientId ? window.location.replace('/Clients?client='+ clientId) : navigate(-1);
+   }
     return (
         <div className={styles.rootExercises}>
             <div className={styles.header}>
@@ -80,6 +100,7 @@ useEffect(()=>{
                 </div>
 
                 <div className={styles.buttons}>
+                    <Button colorScheme="blue" variant="outline" onClick={backHandler}>Back</Button>
                     <div className={styles.addExercise}>
                         <button onClick={onAddExercisesClick}>Add</button>
                     </div>
@@ -95,22 +116,22 @@ useEffect(()=>{
 
             <div className={styles.container}>
                 {/* Render the ExerciseFetcher component to fetch data */}
-                <ExerciseFetcher onExercisesFetched={handleExercisesFetched} />
+                {!clientId && <ExerciseFetcher onExercisesFetched={handleExercisesFetched} />}
 
                 {/* Render the exercises */}
                 {
                     clientId && (
-                        <Top>
-                            <Pagination>
-                                <Button disabled={!(pageNumber>1&&pageNumber<=60)} onClick={()=>{setPageNumber(p=>p-1);setDirection('previous')}}   >
+                        <div className={styles.arrow}>
+                            <div className={styles.pagination}>
+                                <button disabled={!(pageNumber>1&&pageNumber<=60)} onClick={()=>{setPageNumber(p=>p-1);setDirection('previous')}}   >
                                 <ArrowBackIosIcon />
-                                </Button>
-                                <h4>{pageNumber}</h4>
-                                <Button disabled={!(pageNumber>0&&pageNumber<60)} onClick={()=>{setPageNumber(p=>p+1);setDirection('next')}}>
+                                </button>
+                                <Center fontSize={["1rem","1rem","1rem","1.2rem"]}>{pageNumber}</Center>
+                                <button disabled={!(pageNumber>0&&pageNumber<60)} onClick={()=>{setPageNumber(p=>p+1);setDirection('next')}}>
                                 <ArrowForwardIosIcon  />
-                                </Button>
-                            </Pagination>
-                        </Top>
+                                </button>
+                            </div>
+                        </div>
                     )
                 }
                 <div
@@ -125,34 +146,28 @@ useEffect(()=>{
                             onClick={() => onExerciseCardClick(exercise)}
                         >
                             {/* Exercise card content */}
-                          { !clientId&& <div className={styles.imageContainer}>
+                          { !clientId&& 
                                 <img 
+                                    className={styles.imageContainer}
                                     src={exercise.thumbnailURL}
                                     alt={''}
-                                />
-                            </div>}
+                                />}
                             <div  style={clientId&&{width:"100%", minHeight:"max-content"}}  className={styles.textContainer}>
                                 <div className={styles.titleBar}>
-                                    <h3  style={{fontSize:clientId&&16}} >{exercise.title?exercise.title:exercise.Exercise_Name}</h3>
-                              {!clientId &&      <div className={styles.icon} 
+                                {/* style={{fontSize:clientId&&16}} */}
+                                    <h3 >{exercise.title?exercise.title:exercise.Exercise_Name}</h3>
+                                    {!clientId && <div className={styles.icon} 
                                            onClick={(e)=>handleDelete(e,exercise.id)} >
 
-                                        <DeleteOutlineOutlinedIcon htmlColor="tomato" 
+                                        <DeleteOutlineOutlinedIcon htmlColor="#362f69" 
                                             className={styles.dot}
                                         />
                                     </div>}
                                 </div>
-                                <p     >{exercise.description?exercise.description:exercise.Preparation}</p>
+                                {/* <p>{exercise.description?exercise.description:exercise.Preparation}</p> */}
+                                {isMobile ? <p>{exercise.Preparation.substring(0, 80)}...</p> :
+                                    <p>{exercise.Preparation.substring(0, 180)}...</p> }
                             </div>
-                            {/* <button
-                                className={styles.deleteButton}
-                                onClick={(e) => {
-                                    e.stopPropagation(); // Prevent card click event from firing
-                                    handleDeleteExercise(exercise.id);
-                                }}
-                            >
-                                Delete
-                            </button> */}
                         </div>
                     ))}
                 </div>
@@ -162,26 +177,4 @@ useEffect(()=>{
 };
 
 export default ExercisesPage;
-
-const Top = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin: 20px;
- 
-`
-
-const Pagination = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-
- `
-const Button = styled.button`
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    &:disabled{
-        cursor: not-allowed;
-    }
-`
  

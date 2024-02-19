@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {AuthContext} from "../../components/data_fetch/authProvider"
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebase';
-
+import classes from "./Billing.module.css";
 
 const StripeCheckoutForm = () => {
   const {user} = useContext(AuthContext)
@@ -33,22 +33,10 @@ const StripeCheckoutForm = () => {
   };
 
   return (
-    <div>
-      <Button onClick={handlePayment}>Proceed to Payment</Button>
+    <div className={classes.button}>
+      <button onClick={handlePayment}>Proceed to Payment</button>
     </div>
   );
 };
 
 export default StripeCheckoutForm;
-
-
-const Button = styled.button`
-background-color: #614d8f;
-border: none;
-cursor: pointer;
-color: white;
-padding: 15px 35px;
-font-size: 18px;
-margin-top: 10px;
-font-weight: 500;
-`

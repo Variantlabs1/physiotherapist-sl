@@ -20,10 +20,6 @@
                 color: #3b3c40;
             }
         }
-
-        // .buttons {
-
-        // }
     }
 
     .container {
@@ -40,56 +36,47 @@
 
             .card {
                 width: 70vw;
-                height: fit-content;
+                height: 12svh;
                 margin-bottom: 1em;
                 // background-color: #e7f3ff;   
                 padding: 0.5vw;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                justify-content: center;
+                // justify-content: center;
                 justify-content: space-between;
                 border-radius: 1vw;
-
                 box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
                 .imageContainer {
-                    width: 15%;
+                    width: 100%;
+                    display: flex;
                     // background-color: red;
                     .profilePicture {
                         width: 3vw;
                         height: 3vw;
                         border-radius: 50%;
                         overflow: hidden;
-
                         object-fit: cover;
+                        margin: auto 2%;
                     }
-                }
-
-                .textContainer {
-                    // background-color: yellow;
-                    width: 85%;
-
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-
                     .info {
-                        width: 70%;
+                        width: 80%;
                         display: flex;
                         flex-direction: row;
                         justify-content: space-between;
-                        .username,
-                        .userEmail,
-                        .userAccDate {
+                        .info1{
+                            width: 34vw;
+                            display: flex;
+                            justify-content: space-between;
+                        }
                             p {
                                 font-weight: 500;
                                 font-size: 1.53rem;
                                 // color: #0d1dac;
                                 color: #000000;
                             }
-                        }
                     }
+                }
 
                     .buttons {
                         display: flex;
@@ -128,6 +115,122 @@
                             }
                         }
                     }
+                // }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 450px){
+    .rootExercises {
+        width: 94vw;
+        margin: 0;
+    
+        .header {
+            margin-bottom: 2vw;
+            width: auto;
+            .title {
+                width: auto;
+                p {
+                    font-size: 1.6rem;
+                }
+            }
+        }
+    
+        .container {
+            width: 100%;
+    
+            .listContainer {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                width: 100%;
+    
+                .card {
+                    width: 100%;
+                    flex-direction: column;
+                    height: auto;
+                    padding: 2%;
+                    border-radius: 5px;
+                    background-color: #0d1dac1f;
+                    box-shadow: rgba(17, 17, 26, 0.196) 0px  0px 1px 1px;
+                    .imageContainer {
+                        width: 100%;
+                        display: flex;
+                        .profilePicture {
+                            width: 14vw;
+                            height: 12vw;
+                            margin: 0;
+                            margin-right: 2%;
+                        }
+                        .info {
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-start;
+                            align-items: flex-start;
+                            .info1{
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                p {
+                                    font-size: .85rem;
+                                    color: #000000;
+                                }
+                            }
+                                p {
+                                    font-weight: 600;
+                                    font-size: 1.1rem;
+                                    color: #0d1dac;
+                                }
+                        }
+                    }
+    
+                        .buttons {
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-end;
+                            width: 100%;
+                            margin-top: 2%;
+                            .accept,
+                            .decline {
+                                border: 1px solid #0d1dac;
+                                border-radius: 10px;
+                                padding: 2px 8px;
+                                margin: 0;
+                                p {
+                                    font-weight: 600;
+                                    font-size: .8rem;
+                                    transition: color 0.3s;
+                                }
+                            }
+                            .decline{
+                                border: 1px solid #e83f3f;
+                                margin-left: 5%;
+                                p{
+                                    color: #e83f3f;
+
+                                }
+                            }
+    
+                            .accept:hover {
+                                cursor: pointer;
+                                background-color: green;
+                                transition: background-color 0.3s;
+                                p {
+                                    color: #ffffff;
+                                }
+                            }
+    
+                            .decline:hover {
+                                cursor: pointer;
+                                background-color: red;
+                                transition: background-color 0.3s;
+                                p {
+                                    color: #ffffff;
+                                }
+                            }
+                        }
                 }
             }
         }

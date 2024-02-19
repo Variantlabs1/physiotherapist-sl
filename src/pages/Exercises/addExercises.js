@@ -14,9 +14,9 @@ import { set,get,ref as dbRef,push } from "firebase/database";
 const AddExercises = ({ selectedExercise,onBackClick,clientId }) => {
     const {user} = useContext(AuthContext)
     const [thumbnail, setThumbnail] = useState(null);
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [musclesInvolved, setMusclesInvolved] = useState("");
+    const [Exercise_Name, setTitle] = useState("");
+    const [Preparation, setDescription] = useState("");
+    const [Target, setMusclesInvolved] = useState("");
     const [caloriesBurnPerMin, setCaloriesBurnPerMin] = useState("");
     const [duration, setDuration] = useState("");
     const [reps, setReps] = useState("");
@@ -57,9 +57,6 @@ const AddExercises = ({ selectedExercise,onBackClick,clientId }) => {
             ...selectedExercise,
             videoURL,
             thumbnailURL,
-            title,
-            description,
-            musclesInvolved,
             caloriesBurnPerMin,
             duration,
             reps,
@@ -68,13 +65,30 @@ const AddExercises = ({ selectedExercise,onBackClick,clientId }) => {
         }: {
             videoURL,
             thumbnailURL,
-            title,
-            description,
-            musclesInvolved,
+            Exercise_Name,
+            Preparation,
+            Target,
             caloriesBurnPerMin,
             duration,
             reps,
             assignedOn: Timestamp.now(),
+            physioId: user?.uid,
+        } ;
+
+        const exerciseData1 = selectedExercise ? {
+            ...selectedExercise,
+            videoURL,
+            thumbnailURL,
+            Target: selectedExercise.Target ?? Target,
+            assignedTo: [clientId],
+           physioId: user?.uid,
+        }: {
+            videoURL,
+            thumbnailURL,
+            Exercise_Name,
+            Preparation,
+            Target,
+            assignedTo: [clientId],
             physioId: user?.uid,
         } ;
 
@@ -91,6 +105,17 @@ const AddExercises = ({ selectedExercise,onBackClick,clientId }) => {
                 collectionRef,
                 exerciseData
             );
+            const  response = await getDocs(query(collection(db,"exercises"),where('Exercise_Name', 'in', [Exercise_Name, selectedExercise.Exercise_Name]))) 
+            if(response.empty){
+                await addDoc(
+                    collection(db,"exercises"),
+                    exerciseData1
+                );
+            }
+            else{
+              const docid = response.docs[0].ref.id; 
+              await updateDoc(doc(db,"exercises",docid),{assignedTo:arrayUnion(clientId)});
+            }
             console.log(docRef);
             if(clientId){
                 const getPhysios = await getDocs(query(collection(db,'physiotherapist'),where('physiotherapistId',"==",user.uid)))

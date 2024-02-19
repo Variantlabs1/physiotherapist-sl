@@ -31,9 +31,9 @@ const Exercises = () => {
                             ></img>
 
                             <div className={classes.calories}>
-                                <div className={classes.icon}>
-                                    <AiOutlineFire size={25} color="orange" />
-                                </div>
+                                {/* <div className={classes.icon}> */}
+                                    <AiOutlineFire className={classes.reacticon}/>
+                                {/* </div> */}
 
                                 <div className={classes.count}>
                                     <span>{Exercise.caloriesBurnPerMin}</span>
@@ -41,7 +41,7 @@ const Exercises = () => {
                             </div>
 
                             <div className={classes.title}>
-                                <span>{Exercise.title}</span>
+                                <span>{Exercise.Exercise_Name}</span>
                             </div>
                         </div>
                     );
@@ -56,7 +56,7 @@ const Exercises = () => {
 
                     <div className={classes.calories}>
                         <div className={classes.icon}>
-                            <AiOutlineFire size={25} color="orange" />
+                            <AiOutlineFire className={classes.reacticon}/>
                         </div>
 
                         <div className={classes.count}>

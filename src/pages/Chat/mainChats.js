@@ -37,7 +37,7 @@ const MainChats = () => {
                         onBack={handleBackToClientList}
                     />
                 ) : (
-                    <>
+                    <div>
                         <ClientFetcher
                             onClientsFetched={handleClientsFetched}
                         />
@@ -75,7 +75,7 @@ const MainChats = () => {
                                 </div>
                             ))}
                         </div>
-                    </>
+                    </div>
                 )}
             </div>
         </div>
