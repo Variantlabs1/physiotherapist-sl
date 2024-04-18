@@ -1,101 +1,172 @@
 .rootMain {
-    height: 100%;
-    width: 100%;
+  height: auto;
+  width: 100%;
+  display: flex;
+  padding: 3%;
+  flex-direction: row;
+  justify-content: space-around;
+  .left {
+    width: 70%;
     display: flex;
-    padding-top: 10px;
-    flex-direction: row;
-    justify-content: space-between;
-
-    .left {
-        width: 65%;
-        padding-right: 10px;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        gap: 8px;
-        overflow: hidden;
-        .welcomeCard {
-        }
-
-        .graphs {
-            display: flex;
-            margin-left: 10px;
-            gap: 20px;
-            width: 100%;
-            font-size: 14px;
-            height: 40%;
-            overflow: hidden;
-            
-            .leftGraph {
-                width: 40%;
-                height: 100%;
-                display: flex;
-                justify-content: space-around;
-                gap: 20px;
-                flex-direction: column;
-                background: linear-gradient(
-                    123.33deg,
-                    #7fa5ed -88.05%,
-                    #0d30ac 167.83%
-                );
-                border-radius: 22px;
-                padding: 25px 20px 10px 20px;
-                
-            }
-
-            .rightGraph {
-                width: 60%;
-                height: 100%;
-                background: linear-gradient(
-                    123.33deg,
-                    #7fa5ed -88.05%,
-                    #0d30ac 167.83%
-                );
-                border-radius: 22px;
-
-                padding: 5px 25px;
-                padding-top: 0;
-            }
-        }
-
-        .clientLists {
-            height: 45%;
-            width: 100%;
-            padding-left: 10px;
-            // background-color: aqua;
-        }
+    flex-direction: column;
+    padding: 0 !important;
+    margin: 0 !important;
+    // height: 100%;
+    // gap: 8px;
+    // overflow: scroll;
+    .welcomeCard {
+      .date {
+        display: none;
+      }
     }
+    .searchBarNotificationContainer {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin: 2% auto;
+      .searchBarContainer {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        border: 1px solid #0d30ac;
+        border-radius: 10px;
+        padding: 5px;
+        height: 5vh;
+        .searchIconContainer {
+          border-radius: 50%;
+          padding: 5px;
+        }
 
-    .right {
+        .searchInput {
+          font-size: 1rem;
+          width: 100%;
+          border: none;
+          outline: none;
+          box-shadow: none;
+          padding: 5px;
+          margin-left: 5px;
+        }
+      }
+
+      .notificationIconContainer {
+        margin-left: 3%;
+        border-radius: 50%;
+        background-color: #0d30ac;
+        width: 2.5vw;
+        height: 2.5vw;
+      }
+    }
+    .Activitytitle {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #0d30ac;
+    }
+    .graphs {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+      font-size: 14px;
+      height: 24%;
+      overflow: hidden;
+      margin: 2% auto;
+      .leftGraph {
         width: 40%;
         height: 100%;
-        // background-color: pink;
-        margin-right: 50px;
-        .exercises {
-            width: 100%;
-            height: 100%;
-        }
-    }
-
-    @media only screen and (max-width: 450px){
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
         flex-direction: column;
-        
-        .left{
-            width: 100vw;
+        background: linear-gradient(
+          123.33deg,
+          #7fa5ed -88.05%,
+          #0d30ac 167.83%
+        );
+        border-radius: 22px;
+        padding: 10px 20px 25px 20px;
+      }
 
-            .graphs{
-                flex-direction: column;
-                .leftGraph{
-                    width: 94vw;
-                }
-                .rightGraph{
-                    width: 94vw;
-                }
-            }
-        }
-        .right{
-            width: 100vw;
-            margin-right: 0;
-        }
+      .rightGraph {
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(
+          123.33deg,
+          #7fa5ed -88.05%,
+          #0d30ac 167.83%
+        );
+        border-radius: 22px;
+        padding: 5px 25px;
+        padding-top: 0;
+      }
     }
+  }
+
+  .right {
+    padding-bottom: 1.5%;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .exercises {
+      width: 100%;
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .date {
+      color: #0d30ac;
+      font-weight: 600;
+      text-align: right;
+    }
+  }
+
+  @media only screen and (max-width: 450px) {
+    flex-direction: column;
+
+    .left {
+      width: 100%;
+      .welcomeCard {
+        display: flex;
+        .date {
+          display: block;
+          font-size: 0.9rem;
+          color: #0d30ac;
+          text-align: center;
+        }
+      }
+      .searchBarNotificationContainer {
+        .searchBarContainer {
+          .searchInput {
+            font-size: 1rem;
+          }
+        }
+
+        .notificationIconContainer {
+          margin-left: 3%;
+          width: 10vw;
+          height: 10vw;
+        }
+      }
+      .Activitytitle {
+        font-size: 1.5rem;
+        margin-left: 0;
+      }
+      .graphs {
+        flex-direction: column;
+        .leftGraph {
+          width: 100%;
+        }
+        .rightGraph {
+          width: 100%;
+        }
+      }
+    }
+    .right {
+      width: 100%;
+      margin-right: 0;
+      .date {
+        display: none;
+      }
+    }
+  }
 }

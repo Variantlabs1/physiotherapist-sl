@@ -8,8 +8,13 @@ import { signOut } from "firebase/auth";
 import ResetPassword from "./resetPassword";
 import { handleUpload } from "./upload";
 import "../../styles/loading.css";
+import useDate from "../../components/useDate";
+import { Box, Flex } from "@chakra-ui/react";
+import { IoCameraOutline } from "react-icons/io5";
+import { motion } from "framer-motion";
 
 const Settings = () => {
+  const date = useDate();
   const [showResetPassword, setShowResetPassword] = useState(false);
   const [userData, setUserData] = useState(null);
   const [editedUserData, setEditedUserData] = useState({});
@@ -20,7 +25,6 @@ const Settings = () => {
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    console.log("Settings using");
     const fetchUserData = async () => {
       const storedAuthState = localStorage.getItem("authState");
       const user = JSON.parse(storedAuthState);
@@ -83,61 +87,44 @@ const Settings = () => {
       [fieldName]: value,
     });
   };
-
-  //Logout handler
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        // Logout successful, navigate to the login page
-        navigate("/login"); // Assuming your login page route is '/login'
-      })
-      .catch((error) => {
-        // Handle any errors that occurred during logout
-        console.log("Logout Error:", error);
-      });
-  };
-
   //Reset Password
   const handleResetPasswordClick = () => {
     setShowResetPassword(!showResetPassword);
   };
-  const handleEdit = () =>{
-    setDisabled((prev) => !prev)
-  }
+  const handleEdit = () => {
+    setDisabled((prev) => !prev);
+  };
 
   return (
     <div className="cont">
-      {showResetPassword ? (
-        <ResetPassword onSubmit={handleResetPasswordClick} />
-      ) : (
+      <Box p="2% 4%">
+        <div className="date">
+          <h1>Manage Account</h1>
+          <p>{date}</p>
+        </div>
         <div className="Main">
           <div className="Header">
-            <div className="Reset">
-              <button onClick={handleResetPasswordClick}>RESET PASSWORD</button>
-            </div>
-
             <div className="box">
               <div className="banner">
-                <div class="rectangle">
-                  <div className="referral">
-                    <p>{editedUserData.referralCode}</p>{" "}
-                    <span>Trainer code</span>
-                  </div>
-                </div>
                 <div className="profile">
                   <div>
                     <label htmlFor="image">
-                      <img
-                        style={{ cursor: "pointer" }}
-                        className="profileimage"
-                        src={
-                          file
-                            ? URL.createObjectURL(file)
-                            : editedUserData.profileImageURL
-                        }
-                        alt=""
-                      />
+                      <div>
+                        <IoCameraOutline
+                          color="#4371cb"
+                          className="cameraIcon"
+                        />
+                        <img
+                          style={{ cursor: "pointer" }}
+                          className="profileimage"
+                          src={
+                            file
+                              ? URL.createObjectURL(file)
+                              : editedUserData.profileImageURL
+                          }
+                          alt=""
+                        />
+                      </div>
                     </label>
                     <input
                       type="file"
@@ -155,53 +142,45 @@ const Settings = () => {
                     </h2>
                   </div>
                 </div>
-                <div className="profilebtns">
-                  <div className="cnclbtn">
-                    <button onClick={handleEdit}>{disabled ? "Edit" : "Cancel"} </button>
-                  </div>
-                  <div className="sbmtbtn">
-                    <button
-                      disabled={disabled}
-                      onClick={() => setClicked(true)}
-                    >
-                      {clicked ? (
-                        <div class="loading-container">
-                          <div class="loading-spinner"></div>
-                          {file && <p>{uploaded}</p>}
-                        </div>
-                      ) : (
-                        "Save"
-                      )}
-                    </button>
-                  </div>
+                <div className="referral">
+                  <Flex>
+                    <p>{editedUserData.referralCode}</p>
+                    <Flex alignItems="flex-end" color="#4371cb">
+                      Trainer code
+                    </Flex>
+                  </Flex>
                 </div>
               </div>
 
               <div className="details">
-                <div className="row2 row22">
-                  <div className="label1">User ID:</div>
-                  <div className="input1">
-                    <input
-                      disabled={disabled}
-                      value={editedUserData.username || "Loading..."}
-                      onChange={(e) => console.log("Dont Touch")}
-                    />
-                  </div>
-                  <div className="label2">User Name:</div>
-                  <div className="input2">
-                    <input
-                      value={editedUserData.username || ""}
-                      disabled={disabled}
-                      onChange={(e) =>
-                        handleFieldChange("username", e.target.value)
-                      }
-                    />
-                  </div>
+                <div className="double row22">
+                  <Flex className="doublecontent">
+                    <div className="label1">User ID:</div>
+                    <div className="input1">
+                      <input
+                        disabled={disabled}
+                        value={editedUserData.username || "Loading..."}
+                        onChange={(e) => console.log("Dont Touch")}
+                      />
+                    </div>
+                  </Flex>
+                  <Flex className="doublecontent">
+                    <div className="label1">User Name:</div>
+                    <div className="input1">
+                      <input
+                        value={editedUserData.username || ""}
+                        disabled={disabled}
+                        onChange={(e) =>
+                          handleFieldChange("username", e.target.value)
+                        }
+                      />
+                    </div>
+                  </Flex>
                 </div>
 
-                <div className="row1">
-                  <div className="label3">Name:</div>
-                  <div className="input3">
+                <div className="single">
+                  <div className="label1">Name:</div>
+                  <div className="inputfield">
                     <input
                       disabled={disabled}
                       value={editedUserData.name || ""}
@@ -211,55 +190,61 @@ const Settings = () => {
                     />
                   </div>
                 </div>
-                <div className="row2 row22">
-                  <div className="label1">Email:</div>
-                  <div className="input1">
-                    <input
-                      value={editedUserData.email || ""}
-                      disabled={disabled}
-                      onChange={(e) =>
-                        handleFieldChange("email", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div className="label2">Contact.No:</div>
-                  <div className="input2">
-                    <input
-                      disabled={disabled}
-                      value={editedUserData.contactNo || ""}
-                      onChange={(e) =>
-                        handleFieldChange("contactNo", e.target.value)
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="row2 row233">
-                    <div className="row23">
-                        <div className="label1">Gender:</div>
-                        <div className="input1">
-                            <input
-                            disabled={disabled}
-                            value={editedUserData.gender || ""}
-                            onChange={(e) =>
-                                handleFieldChange("gender", e.target.value)
-                            }
-                            />
-                        </div>
+                <div className="double row22">
+                  <Flex className="doublecontent">
+                    <div className="label1">Email:</div>
+                    <div className="input1">
+                      <input
+                        value={editedUserData.email || ""}
+                        disabled
+                        onChange={(e) =>
+                          handleFieldChange("email", e.target.value)
+                        }
+                      />
                     </div>
-                    <div className="row23">
-                        <div className="label2">Age:</div>
-                        <div className="ageinput">
-                            <input
-                            disabled={disabled}
-                            value={editedUserData.age || ""}
-                            onChange={(e) => handleFieldChange("age", e.target.value)}
-                            />
-                        </div>
+                  </Flex>
+                  <Flex className="doublecontent">
+                    <div className="label1">Contact.No:</div>
+                    <div className="input1">
+                      <input
+                        disabled={disabled}
+                        value={editedUserData.contactNo || ""}
+                        onChange={(e) =>
+                          handleFieldChange("contactNo", e.target.value)
+                        }
+                      />
                     </div>
+                  </Flex>
                 </div>
-                <div className="row1">
-                  <div className="label3">Experience:</div>
-                  <div className="input3">
+                <div className="double row23">
+                  <Flex className="doublecontent">
+                    <div className="label1">Gender:</div>
+                    <div className="input1">
+                      <input
+                        disabled={disabled}
+                        value={editedUserData.gender || ""}
+                        onChange={(e) =>
+                          handleFieldChange("gender", e.target.value)
+                        }
+                      />
+                    </div>
+                  </Flex>
+                  <Flex className="doublecontent">
+                    <div className="label1">Age:</div>
+                    <div className="input1">
+                      <input
+                        disabled={disabled}
+                        value={editedUserData.age || ""}
+                        onChange={(e) =>
+                          handleFieldChange("age", e.target.value)
+                        }
+                      />
+                    </div>
+                  </Flex>
+                </div>
+                <div className="single">
+                  <div className="label1">Experience:</div>
+                  <div className="inputfield">
                     <input
                       disabled={disabled}
                       value={editedUserData.experience || ""}
@@ -270,42 +255,48 @@ const Settings = () => {
                   </div>
                 </div>
                 <div className="rowlarge">
-                  <div className="label4">Your bio:</div>
+                  <div className="label1">Your bio:</div>
                   <div className="inputlarge">
                     <textarea
-                      value={editedUserData.bio || ""}
                       disabled={disabled}
+                      style={{ cursor: disabled ? "not-allowed" : "auto" }}
+                      value={editedUserData.bio || ""}
                       onChange={(e) => handleFieldChange("bio", e.target.value)}
                     />
                   </div>
                 </div>
-                <div className="profilebtns">
-                  <div className="cnclbtn">
-                  <button onClick={handleEdit}>{disabled ? "Edit" : "Cancel"} </button>
-                  </div>
-                  <div className="sbmtbtn">
-                    <button
-                      disabled={disabled}
-                      onClick={() => setClicked(true)}
-                    >
-                      {clicked ? (
-                        <div class="loading-container">
-                          <div class="loading-spinner"></div>
-                          {file && <p>{uploaded}</p>}
-                        </div>
-                      ) : (
-                        "Save"
-                      )}
-                    </button>
-                  </div>
+              </div>
+              <div className="profilebtns">
+                <div className="cnclbtn">
+                  <button onClick={handleEdit}>
+                    {disabled ? "Edit" : "Cancel"}{" "}
+                  </button>
                 </div>
+                <div className="sbmtbtn">
+                  <button disabled={disabled} onClick={() => setClicked(true)}>
+                    {clicked ? (
+                      <div class="loading-container">
+                        <div class="loading-spinner"></div>
+                        {file && <p>{uploaded}</p>}
+                      </div>
+                    ) : (
+                      "Save"
+                    )}
+                  </button>
+                </div>
+              </div>
+              <div className="Reset">
+                <button onClick={handleResetPasswordClick}>
+                  RESET PASSWORD
+                </button>
               </div>
             </div>
           </div>
-
-          <div className="logout">
-            <button onClick={handleLogout}>Log Out</button>
-          </div>
+        </div>
+      </Box>
+      {showResetPassword && (
+        <div className="resetPass">
+          <ResetPassword onSubmit={handleResetPasswordClick} />
         </div>
       )}
     </div>

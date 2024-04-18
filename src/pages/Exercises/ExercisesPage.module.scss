@@ -1,369 +1,486 @@
 .rootExercises {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .header {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 2%;
-
-    .header {
-        margin: 2% 0;
-        width: 90%;
-        top: 0;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    margin-bottom: 2%;
+    color: #0d1dac;
+    .title {
+      font-size: 2rem !important;
+      font-weight: 600;
+      letter-spacing: 0em;
+    }
+  }
+  .outerContainer {
+    min-height: 80vh;
+    padding: 1% 3%;
+    border-radius: 14px;
+    border: 3px solid #4370cb3c;
+    .searchBarNotificationContainer {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin: 2% auto;
+      .searchBarContainer {
+        flex-grow: 1;
         display: flex;
-        justify-content: space-between;
-
-        .title {
-            width: 30%;
-            p {
-                font-weight: 700;
-                font-size: 36px;
-                color: #3b3c40;
-            }
+        align-items: center;
+        border: 1px solid #0d30ac;
+        border-radius: 10px;
+        height: 2.5vw;
+        padding: 2px 5px;
+        .searchIconContainer {
+          border-radius: 50%;
+          padding: 5px;
         }
 
-        .buttons {
-            width: 18%;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-
-            .addExercise {
-                button {
-                    height: 2.5vw;
-                    width: 6vw;
-                    background-color: #3855b7;
-                    border: none;
-                    font-size: 1.5em;
-                    font-weight: 600;
-                    color: #e7f3ff;
-                    border-radius: 25px;
-
-                    &:hover {
-                        cursor: pointer;
-                    }
-                }
-            }
-
-            .toggle {
-                height: 2.5vw;
-                width: 2vw;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                .icon {
-                    height: inherit;
-                    width: 100%;
-
-                    &:hover {
-                        cursor: pointer;
-                    }
-                }
-            }
+        .searchInput {
+          font-size: 1rem;
+          width: 100%;
+          box-shadow: none;
+          border: 0;
+          outline: 0;
+          padding: 5px;
+          margin-left: 5px;
         }
+      }
+
+      .buttons {
+        margin-left: 1%;
+        // width: 28%;
+        display: flex;
+        gap: 10px;
+        flex-direction: row;
+        // justify-content: space-around;
+        .backButton {
+          color: #0d30ac;
+          height: 2.5vw;
+          border-color: #3855b7;
+          border-radius: 8px;
+        }
+        .addExercise {
+          height: 2.5vw;
+          width: 5vw;
+          border: 1px solid #0d30ac;
+          font-size: 1.2em;
+          font-weight: 600;
+          color: #0d30ac;
+          border-radius: 10px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        .toggle {
+          height: 2.5vw;
+          width: 2vw;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .icon {
+            height: inherit;
+            width: 100%;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+        .notificationIconContainer {
+          border-radius: 8px;
+          position: relative;
+          font-size: 1.2em;
+          font-weight: 500;
+          color: #e7f3ff;
+          background-color: #3855b7;
+          width: 5vw;
+          height: 5vh;
+          cursor: pointer;
+          .dropDown {
+            padding: 5% 2%;
+            width: 15vw;
+            height: auto;
+            border: 3px solid #3856b784;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0px 1px 3px 1px lightgray;
+            position: absolute;
+            left: -320%;
+            top: 50%;
+            color: #0d30ac;
+            text-align: center;
+            z-index: 5;
+            hr {
+              border-width: 1px;
+              width: 100%;
+            }
+            .dropDownContent {
+              padding: 1% 3%;
+              width: 100%;
+              input {
+                margin: 2% 4%;
+                width: 1vw;
+                cursor: pointer;
+              }
+            }
+            .button {
+              height: 4vh;
+              margin-bottom: 5%;
+              border: 1px solid #0d30ac;
+              color: #0d30ac;
+            }
+          }
+          .dropDownContent input :checked {
+            background-color: #0d30ac;
+          }
+        }
+      }
     }
 
     .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 92%;
-        .arrow{
-            margin-bottom: 20px;
-            .pagination{
-                width: 14vw;
-                margin: auto;
-                display: flex;
-                justify-content: space-evenly;
-                button{
-                    width: 3vw;
-                    height: 3vw;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-            }
-            button:hover{
-                background-color: rgba(211, 211, 211, 0.372);
-                border-radius: 50%;
-            }
-        }
-        .listContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding-top: 1%;
+      .arrow {
+        margin-bottom: 2%;
+        .pagination {
+          width: 14vw;
+          margin: auto;
+          display: flex;
+          justify-content: space-evenly;
+          button {
+            width: 3vw;
+            height: 3vw;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            width: 100%;
-            // background-color: red;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+        button:hover {
+          background-color: rgba(211, 211, 211, 0.372);
+          border-radius: 50%;
+        }
+      }
+      .listContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        .card {
+          padding: 20px;
+          width: 49%;
+          margin-bottom: 1.6em;
+        }
 
-            .card {
-                padding: 20px;
-                width: 49%;
-                margin-bottom: 1em;
-            }
+        .card {
+          background-color: #edf0f3;
+          display: flex;
+          flex-direction: row;
+          border-radius: 1vw;
+          gap: 20px;
 
-            .card {
-                background-color: #e7f3ff;
+          .imageContainer {
+            width: 7vw;
+            height: 16vh;
+            border-radius: 0.5em;
+            border: 1px solid #879fd13c;
+          }
 
-                display: flex;
-                flex-direction: row;
-                border-radius: 1vw;
-                gap: 10px;
+          .textContainer {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            margin: 2% 0;
+            .titleBar {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              height: 2vw;
+              position: relative;
+              h3 {
+                display: block;
+                font-weight: 600;
+                font-size: 1.25em;
+                color: var(--secondary-color);
+                margin-bottom: 5%;
+              }
 
-                .imageContainer {
-                    width: 8vw;
-                    height: 16vh;
-                    border-radius: 0.5em;
-                }
-
-                .textContainer {
-                    width: 80%;
-                    display: flex;
-                    flex-direction: column;
-
-                    .titleBar {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
-                        height: 2vw;
-
-                        h3 {
-                            display: block;
-                            font-weight: 600;
-                            font-size: 1.25em;
-                            color: var(--secondary-color);
-                            margin-bottom: 5%;
-                        }
-                        
-                        .icon {
-                            height: 1.5vw;
-                            width: 1.22vw;
-                            
-                            .dots {
-                                height: 100%;
-                                width: 100%;
-                                // color: #361f69;
-                            }
-                        }
-                    }
-                    
-                    p {
-                        text-align: justify;
-                        font-weight: 400;
-                        font-size: 14px;
-                        color: #000000;
-                        margin-top: 1%;
-                    }
-                }
-            }
-
-            &:hover {
+              .icon {
                 cursor: pointer;
+                position: absolute;
+                top: 0%;
+                right: 0%;
+                // z-index: ;
+              }
             }
+
+            p {
+              text-align: justify;
+              font-weight: 400;
+              font-size: 14px;
+              color: #000000;
+              margin-top: 1%;
+            }
+          }
         }
-        // ........................................................................
-        .gridContainer {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.8em;
 
-            .card {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .card {
-                background-color: #e7f3ff;
-                border: 0.2em solid #e8deff;
-                padding: 1em;
-                text-align: center;
-                border-radius: 1vw;
-                width: 21vw;
-                height: auto;
-                position: relative;
-                .imageContainer {
-                        border-radius: 5px;
-                        width: 12vw;
-                        height: 8vw;
-                        margin-bottom: 1em;
-                    }
-
-                .textContainer {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: left;
-                    // background-color: red;
-                    h3 {
-                        margin-bottom: 0.5em;
-                        font-weight: 600;
-                        font-size: 1.25em;
-                        color: var(--secondary-color);
-                    }
-
-                    p {
-                        font-weight: 400;
-                        font-size: 1em;
-                        color: #000000;
-                        text-align: justify;
-                    }
-                    .titleBar{
-                        .icon{
-                            position: absolute;
-                            top: 4%;
-                            right: 4%;
-                        }
-                    }
-                }
-            }
-        }
         &:hover {
-            cursor: pointer;
+          cursor: pointer;
         }
+      }
+      // ........................................................................
+      .gridContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        gap: 2rem;
+        width: 100%;
+        .card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .card {
+          background-color: #edf0f3;
+          padding: 1em 1.5rem;
+          text-align: center;
+          border-radius: 1vw;
+          width: 19vw;
+          min-height: 50vh;
+          position: relative;
+          .imageContainer {
+            border-radius: 5px;
+            width: 8vw;
+            height: 10vw;
+            margin-bottom: 1em;
+            border: 1px solid #879fd13c;
+          }
+
+          .textContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            h3 {
+              margin-bottom: 0.5em;
+              font-weight: 600;
+              font-size: 1.25em;
+              color: var(--secondary-color);
+            }
+
+            p {
+              font-weight: 400;
+              font-size: 1em;
+              color: #000000;
+              text-align: justify;
+            }
+            .titleBar {
+              .icon {
+                position: absolute;
+                top: 4%;
+                right: 4%;
+              }
+            }
+          }
+        }
+      }
+      .gridContainer1 {
+        width: 100% !important;
+
+        .card {
+          width: 17vw !important;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+      }
     }
+  }
 }
 
-@media only screen and (max-width: 450px){
-    .rootExercises {
-        width: 100vw;
-        margin: 0;
-        .header {
-            margin: auto;
-            margin-top: 3%;
-            width: 95%;
-            .title {
-                width: auto;
-                p {
-                    font-size: 1.4rem;
-                }
-            }
-    
-            .buttons {
-                width: auto;
-                button {
-                    height: 8vw;
-                    width: 20vw;
-                    font-size: 1.1em;
-                    margin-right: 3%;
-                }
-                .addExercise {
-                    margin-right: 8px;
-                    button {
-                        height: 8vw;
-                        width: 20vw;
-                        font-size: 1.1em;
-                    }
-                }
-                .toggle {
-                    height: 8vw;
-                    width: 8vw;
-                    .icon {
-                        width: 100%;
-                    }
-                }
-            }
-        }
-    
-        .container {
-            flex-direction: column-reverse;
-            width: 90%;
-            margin: auto;
-            .arrow{
-                .pagination{
-                    width: 40vw;
-                    button{
-                        width: 10vw;
-                        height: 10vw;
-                    }
-                }
-            }
-            .listContainer {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                margin-top: 6%;
-                // background-color: red;
-    
-                .card {
-                    padding: 16px;
-                    width: 100%;
-                }
-                .card {
-                    .imageContainer {
-                        width: 26vw;
-                        height: 16vh;
-                        border-radius: 0.5em;
-                    }
-                    .textContainer {
-                        width: 80%;
-                        .titleBar {
-                            height: auto;
-                            width: 50vw;
-                            h3 {
-                                font-size: 1.2rem;
-                                margin-bottom: 1%;
-                            }
-                            .icon {
-                                height: 1.5vw;
-                                width: 1.22vw;
-                                
-                                .dots {
-                                    height: 100%;
-                                    width: 100%;
-                                    // color: #361f69;
-                                }
-                            }
-                        }
-                        p {
-                            margin-top: 1%;
-                            font-size: 1rem;
-                            line-height: 1.3rem;
-                            text-align: justify;
-                        }
-                    }
-                }
-            }
-            // ........................................................................
-            .gridContainer {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1em;
-                margin-top: 6%;
-                margin-bottom: 4%;
-                .card {
-                    width: 100%;
-                    height: auto;
-                    padding: 14px;
-                    .imageContainer {
-                        border-radius: 5px;
-                        width: 28vw;
-                        height: 18vw;
-                        margin-bottom: 1em;
-                    }
-                    .textContainer {
-                        display: flex;
-                        flex-direction: column;
-                        // align-items: left;
-                        justify-content: left;
-                        // background-color: red;
-                        h3 {
-                            font-size: 1.1rem;
-                                margin-bottom: 1%;
-                        }
-    
-                        p {
-                            font-size: .8rem;
-                            font-weight: 500;
-                            line-height: 1.4rem;
-                            text-align: justify;
-                        }
-                        .titleBar{
-                            .icon{
-                                top: 1%;
-                                right: 1%;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+@media only screen and (max-width: 450px) {
+  .rootExercises {
+    width: 100%;
+    margin: 0;
+    .header {
+      font-size: 0.8rem;
+      .title {
+        font-size: 1.6rem !important;
+      }
     }
+    .outerContainer {
+      min-height: 70vh;
+      padding: 1% 0;
+      .searchBarNotificationContainer {
+        flex-direction: column;
+        width: 90%;
+        margin: 2% auto;
+        .searchBarContainer {
+          height: 7vw;
+          width: 100%;
+
+          .searchInput {
+            font-size: 0.8rem;
+          }
+        }
+        .buttons {
+          width: 80%;
+          margin-top: 2%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          .backButton {
+            height: 6vw;
+          }
+          .addExercise {
+            height: 7vw;
+            width: 18vw;
+            font-size: 1em;
+          }
+
+          .toggle {
+            height: 6vw;
+            width: 6vw;
+          }
+          .notificationIconContainer {
+            font-size: 1em;
+            width: 18vw;
+            height: 6vw;
+            .dropDown {
+              padding: 5% 2%;
+              width: 50vw;
+              height: auto;
+              left: -280%;
+              top: 100%;
+              color: #0d30ac;
+
+              text-align: center;
+              hr {
+                border-width: 1px;
+                width: 100%;
+              }
+              .dropDownContent {
+                padding: 1%;
+                width: 100%;
+                align-items: center;
+                font-size: 1rem;
+                input {
+                  margin: 2% 4%;
+                  width: 4vw;
+                  cursor: pointer;
+                }
+              }
+              .button {
+                height: 3vh;
+                font-size: 1rem;
+                margin-bottom: 5%;
+                border: 1px solid #0d30ac;
+                color: #0d30ac;
+              }
+            }
+          }
+        }
+      }
+
+      .container {
+        flex-direction: column-reverse;
+        width: 90%;
+        margin: auto;
+        .arrow {
+          .pagination {
+            width: 40vw;
+            button {
+              width: 10vw;
+              height: 10vw;
+            }
+          }
+        }
+        .listContainer {
+          flex-direction: column;
+          width: 100%;
+          margin-top: 2%;
+          .card {
+            padding: 12px;
+            width: 100%;
+          }
+          .card {
+            gap: 5;
+            .imageContainer {
+              width: 22vw;
+              height: 16vh;
+              border-radius: 0.5em;
+            }
+            .textContainer {
+              width: 80%;
+              .titleBar {
+                height: auto;
+                h3 {
+                  font-size: 1rem;
+                  margin-bottom: 1%;
+                  line-height: 18px;
+                }
+              }
+              p {
+                margin-top: 1%;
+                font-size: 1rem;
+                line-height: 1.2rem;
+                text-align: justify;
+              }
+            }
+          }
+        }
+        // ........................................................................
+        .gridContainer1 {
+          .card {
+            width: 40vw !important;
+          }
+        }
+        .gridContainer {
+          width: 100%;
+          gap: 10px;
+          margin: 2% 0;
+          .card {
+            width: 100%;
+            min-height: 20vh;
+            padding: 14px;
+            .imageContainer {
+              border-radius: 8px;
+              width: 40vw;
+              height: 24vw;
+              margin-bottom: 1em;
+            }
+            .textContainer {
+              display: flex;
+              flex-direction: column;
+              h3 {
+                font-size: 1.1rem;
+                margin-bottom: 1%;
+              }
+
+              p {
+                font-size: 0.8rem;
+                font-weight: 500;
+                line-height: 1.4rem;
+                text-align: center;
+              }
+              .titleBar {
+                .icon {
+                  top: 5%;
+                  right: 2%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

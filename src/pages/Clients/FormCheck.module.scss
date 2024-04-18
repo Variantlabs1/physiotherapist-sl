@@ -1,114 +1,262 @@
 .exerciseDetailsContainer {
-    margin-left: 2%;
-    .header {
+  padding: 2% 3%;
+  .heading {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    margin-bottom: 2%;
+    color: #0d1dac;
+    .title {
+      font-size: 2rem !important;
+      font-weight: 600;
+      letter-spacing: 0em;
+    }
+  }
+  .outerContainer {
+    min-height: 80vh;
+    padding: 1% 3%;
+    border-radius: 14px;
+    border: 3px solid #4370cb3c;
+    .searchBarNotificationContainer {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin: 2% auto;
+      .searchBarContainer {
+        flex-grow: 1;
         display: flex;
-        flex-direction: row;
-        width: 97%;
-        margin-top: 1.4%;
-        .exerciseTitle {
-            font-weight: 700;
-            font-size: 36px;
-            letter-spacing: 0.2px;
-            height: 4vw;
-            width: 90%;
-            p {
-                color: #3b3c40;
+        align-items: center;
+        border: 1px solid #0d30ac;
+        border-radius: 10px;
+        padding: 5px;
+        height: 5vh;
+        .searchIconContainer {
+          border-radius: 50%;
+          padding: 5px;
+        }
+
+        .searchInput {
+          font-size: 1rem;
+          width: 100%;
+          box-shadow: none;
+          border: 0;
+          outline: 0;
+          padding: 5px;
+          margin-left: 5px;
+        }
+      }
+      .button {
+        width: 5vw;
+        height: 5vh;
+        margin-left: 2%;
+        color: #0d30ac;
+        font-size: 1.2rem;
+        font-weight: 500;
+        border: 1px solid #0d30ac;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .notificationIconContainer {
+        border-radius: 8px;
+        position: relative;
+        font-size: 1.2em;
+        font-weight: 500;
+        color: #e7f3ff;
+        background-color: #3855b7;
+        width: 5vw;
+        height: 5vh;
+        cursor: pointer;
+        margin-left: 2%;
+        .dropDown {
+          padding: 5% 2%;
+          width: 15vw;
+          height: auto;
+          border: 3px solid #3856b784;
+          border-radius: 5px;
+          background-color: white;
+          box-shadow: 0px 1px 3px 1px lightgray;
+          position: absolute;
+          left: -320%;
+          top: 50%;
+          color: #0d30ac;
+          text-align: center;
+          hr {
+            border-width: 1px;
+            width: 100%;
+          }
+          .dropDownContent {
+            padding: 1% 3%;
+            width: 100%;
+            input {
+              margin: 2% 4%;
+              width: 1vw;
+              cursor: pointer;
             }
+          }
+          .button {
+            height: 4vh;
+            margin-bottom: 5%;
+            border: 1px solid #0d30ac;
+            color: #0d30ac;
+          }
         }
-
-        .buttons {
-            background-color: #6c9fff;
-            height: fit-content;
-
-            border-radius: 80px;
-
-            .button {
-                padding: 8px 20px;
-                color: #ffffff;
-                font-size: 20px;
-                font-weight: 500;
-
-                border-radius: 80px;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+        .dropDownContent input :checked {
+          background-color: #0d30ac;
         }
-        &:hover {
-            cursor: pointer;
-        }
+      }
     }
 
     .container {
-        margin-top: 2%;
+      margin: 4% 0;
+      display: flex;
+      flex-wrap: wrap;
+      //   flex-direction: row;
+      justify-content: space-around;
+      gap: 40px;
+      width: 100%;
+      .card {
+        background-color: #edf0f3;
+        padding: 1.2rem;
+        border-radius: 1vw;
         display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        gap: 20px;
-        width: 100%;
-        .card{
-            background-color: #e7f3ff;
-                padding: 1.6rem;
-                margin-right: 4%;
-                margin-left: 1%;
-                margin-bottom: 2%;
-                border-radius: 1vw;
-                .tag{
-                    .exerciseName{
-                        font-weight: 600;
-                        font-size: 1.4rem;
-                        color: #0d1dac;
-                        margin-bottom: 1%;
-                    }
-                    
-                }
-                .musclesInvolved{
-                    padding: 2px 0px;
-                    // background-color: #e7f3ff;
-                    margin-top: 10px;
-                    border-radius: 5px;
-                    font-size: 1rem;
-                    font-weight: 600;
-                    color: #614d8f;
-                }
+        align-items: center;
+        .tag {
+          height: 100%;
+          .exerciseName {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1%;
+          }
+          .musclesInvolved {
+            width: 27vw;
+            padding: 2px 0px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            font-weight: 600;
+            color: #0d1dac;
+            .musclesName {
+              font-size: 0.7rem;
+              background-color: white;
+              border-radius: 8px;
+              padding: 1.5% 2.5%;
+            }
+          }
+          .title {
+            margin-bottom: 4px;
+            color: #0d1dac;
+            font-size: 1rem;
+            font-weight: 600;
+          }
         }
+        .playButton {
+          width: 6vw;
+          height: 6vw;
+          display: flex;
+          align-items: center;
+          border-radius: 15px;
+          border: 1px solid #0d62acab;
+          background-color: white;
+          justify-content: center;
+          color: #0d30ac;
+          .icon {
+            font-size: 2.5rem;
+          }
+          p {
+            text-align: center;
+            font-weight: 500;
+          }
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
     }
-    @media only screen and (max-width: 450px) {
-        .header {   
-            width: 97%;
-            margin-top: 1.4%;
-            .exerciseTitle {
-                font-size: 1.7rem;
-            }
-    
-            .buttons {
-                .button {
-                    padding: 6px 20px;
-                    font-size: 14px;
-                }
-            }
-        }
-    
-        .container {
-            margin-top: 6%;
-            gap: 10px;
-            .card{
-                    padding: 1rem;
-                    border-radius: 10px;
-                    .tag{
-                        .exerciseName{
-                            font-size: 1.4rem;
-                        }
-                        
-                    }
-                    .musclesInvolved{
-                        padding: 1px 0px;
-                        
-                    }
-            }
-        }
-    }
+  }
 }
+@media only screen and (max-width: 450px) {
+  .exerciseDetailsContainer {
+    .header {
+      font-size: 0.9rem;
+      .title {
+        font-size: 1.6rem !important;
+        font-weight: 600;
+        letter-spacing: 0em;
+      }
+    }
+    .outerContainer {
+      min-height: 72vh;
+      .searchBarNotificationContainer {
+        .searchBarContainer {
+          height: 4.3vh;
 
+          .searchInput {
+            padding: 0 4px;
+          }
+        }
 
+        .notificationIconContainer {
+          width: 15vw;
+          height: 4vh;
+        }
+        .button {
+          width: 15vw;
+          height: 4vh;
+        }
+      }
+      .container {
+        margin-top: 3%;
+        gap: 10px;
+        .card {
+          width: 100%;
+          padding: 1rem;
+          border-radius: 10px;
+          .tag {
+            height: 100%;
+            .exerciseName {
+              font-size: 1.4rem;
+              margin-bottom: 1%;
+            }
+            .musclesInvolved {
+              width: auto;
+              padding: 2px 0px;
+              gap: 5px;
+              .musclesName {
+                font-size: 0.7rem;
+                padding: 1.5% 2.5%;
+              }
+            }
+            .title {
+              margin-bottom: 4px;
+              font-size: 1rem;
+            }
+          }
+          .playButton {
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            border-radius: 15px;
+            border: none;
+            background-color: transparent;
+            justify-content: center;
+            color: #0d30ac;
+            .icon {
+              font-size: 3rem;
+            }
+            p {
+              display: none;
+            }
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

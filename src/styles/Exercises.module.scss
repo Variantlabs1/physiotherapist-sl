@@ -1,203 +1,183 @@
 .rootExercises {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+  gap: 10px;
+  border-radius: 30px;
+  border: 4px solid #d6e1fe;
+  .heading {
+    height: 4vh;
     width: 100%;
-    height: 100%;
-    padding-left: 50px;
-    // height: 100%;
-    // background-color: black;
+    font-size: 1.5rem;
+    margin-top: 20px;
+    font-weight: 700;
+    color: #0d30ac;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
 
-    // margin-top: 2rem;
-
-    padding-bottom: 50px; //remove afterwards
-
+  .cardsContainer {
+    width: 100%;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // justify-content: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 25px;
+    .exercises {
+      // margin: 1rem;
+      overflow: hidden;
+      width: 11vw;
+      height: 28vh;
+      border: 4px solid white;
+      border-radius: 20px;
+      box-shadow: 0px 2px 8px 3px lightgray;
+      position: relative;
 
-    .heading {
-        height: 4rem;
+      img {
         width: 100%;
-        // background-color: red;
-        font-size: 1.5rem;
-        margin-top: 20px;
-        font-weight: 700;
-        color: #0d30ac;
+        height: 100%;
+      }
+
+      .calories {
+        position: absolute;
+        width: 3.5vw;
+        height: 3.2vh;
+        background: white;
+        border-radius: 30px;
+        top: 4%;
+        left: 4%;
         display: flex;
+        flex-direction: row;
+        justify-content: center;
         align-items: center;
-        text-align: center;
-        justify-content: center;
-    }
 
-    .cardsContainer {
-        width: 100%;
-        max-height: 100%;
-        padding-top: 10px;
-        // overflow-y: auto;
-        
-        display: flex;
-        flex-wrap: wrap;
-        
-        // align-items: center;
-        justify-content: center;
-        gap: 25px;
-        // background-color: #0d30ac;
-        .exercises {
-            // margin: 1rem;
-            overflow: hidden;
-            width: 9vw;
-            height: 24vh;
-            border: 4px solid white;
-            border-radius: 20px;
-
-            box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
-                rgba(0, 0, 0, 0.05) 0px 5px 10px;
-
-            // box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-            //     rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
-
-            // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
-            position: relative;
-
-            img {
-                width: 100%;
-                height: 100%;
-                // object-fit: cover;
-                // z-index: 1;
-            }
-
-            .calories {
-                position: absolute;
-                width: 44%;
-                height: 16%;
-                background: #f5f1ff;
-                border-radius: 30px;
-
-                top: 4%;
-                left: 4%;
-
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-
-                .icon {
-                    height: 100%;
-                    .reacticon{
-                        font-size: 25px;
-                        color: orange;
-                    }
-                }
-
-                .count {
-                    margin-left: 0.1vw;
-                    height: 130%;
-                    // background-color: red;
-                    span {
-                        font-size: 1.3rem;
-                        font-weight: 700;
-                        color: #0d30ac;
-                    }
-                }
-            }
-
-            .title {
-                position: absolute;
-                width: 80%;
-                height: auto;
-                background: #f5f1ff;
-                border-radius: 30px;
-                bottom: 8%;
-                left: 12%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                span {
-                    text-align: center;
-                    color: #614d8f;
-                    font-size: .7rem;
-                    font-weight: 600;
-                }
-                // left: 30%;
-                // z-index: 100;
-            }
+        .reacticon {
+          font-size: 18px;
         }
-    }
 
-    .button {
-        margin-top: 20px;
-        // width: 20%;
-        padding: 10px 15px;
-        // height: 50px;
-        background: #3e61dc;
-        cursor: pointer;
-        border-radius: 35px;
-
-        .mainbutton {
-            width: 100%;
-            height: 100%;
-            // margin: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            span {
-                font-weight: 500;
-                font-size: 16px;
-            }
-        }
-    }
-
-    @media only screen and (max-width: 450px){
-        padding: 0;
-        .heading {
-            height: 1rem;
+        .count {
+          margin-left: 0.1vw;
+          height: auto;
+          // background-color: red;
+          span {
             font-size: 1.1rem;
-            padding-left: 20px;
-            justify-content: left;
+            font-weight: 700;
+            color: #0d30ac;
+          }
         }
-        .cardsContainer{
-            gap: 15px;
-            .exercises {
-                width: 28vw;
-                height: 20vh;
-                .calories {
-                    width: 14vw;
-                    height: 2.4vh;
-                    .icon {
-                        height: 2vh;
-                        .reacticon{
-                            font-size: 18px;
-                        }
-                    }
-                    .count {
-                        height: 3vh;
-                        span {
-                            font-size: 1rem;
-                        }
-                    }
-                }
-                .title {
-                    width: 90%;
-                    left: 5%;
-                    span {
-                        padding: 4%;
-                        font-size: 10px;
-                    }
-                }
-            }
+      }
+
+      .title {
+        position: absolute;
+        min-width: 80%;
+        height: auto;
+        background: #f5f1ff;
+        border-radius: 30px;
+        bottom: 6%;
+        left: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 13px;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        span {
+          text-align: center;
+          color: #0d30ac;
+          font-size: 0.66rem;
+          font-weight: 600;
         }
-        .button {
-            margin-top: 10px;
-            .mainbutton {
-                width: 100%;
-                height: 100%;
-                span {
-                    font-size: 13px;
-                }
-            }
-        }
+      }
     }
+  }
+
+  .button {
+    margin-top: 5%;
+    // width: 20%;
+    padding: 6px 20px;
+    // height: 50px;
+    background: #3e61dc;
+    cursor: pointer;
+    border-radius: 10px;
+
+    .mainbutton {
+      width: 100%;
+      height: 100%;
+      // margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      span {
+        font-weight: 500;
+        font-size: 16px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 450px) {
+    padding: 0;
+    border: 3px solid #d6e1fe;
+    border-radius: 15px;
+    margin-top: 0;
+    .heading {
+      height: 1rem;
+      font-size: 1.1rem;
+      padding-left: 20px;
+      justify-content: left;
+    }
+    .cardsContainer {
+      flex-direction: row;
+      justify-content: space-evenly;
+      gap: 0;
+      .exercises {
+        width: 28vw;
+        height: 20vh;
+        border: 3px solid white;
+        box-shadow: 0px 1px 6px 2px lightgray;
+        .calories {
+          width: 14vw;
+          height: 2.4vh;
+          .icon {
+            height: 2vh;
+            .reacticon {
+              font-size: 18px;
+            }
+          }
+          .count {
+            height: 3vh;
+            span {
+              font-size: 1rem;
+            }
+          }
+        }
+        .title {
+          width: 90%;
+          left: 5%;
+          bottom: 2%;
+          background: #f5f1ff;
+          border-radius: 10px;
+          span {
+            padding: 4%;
+            font-size: 0.7rem;
+          }
+        }
+      }
+    }
+    .button {
+      margin: 2.5% 0;
+      .mainbutton {
+        width: 100%;
+        height: 100%;
+        span {
+          font-size: 13px;
+        }
+      }
+    }
+  }
 }

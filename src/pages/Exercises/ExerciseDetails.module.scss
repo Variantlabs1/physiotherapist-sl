@@ -1,581 +1,580 @@
 .exerciseDetailsContainer {
-    width: 96%;
-    margin: auto;
-    .header {
+  width: 100%;
+  .header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    // margin-top: 2%;
+    .exerciseTitle {
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 0.2px;
+      height: 4vw;
+      width: 100%;
+      p {
+        color: #614d8f;
+      }
+    }
+
+    .buttons {
+      border-radius: 10px;
+      background-color: #0d30ace1;
+      width: 7vw;
+      height: 6vh;
+      color: #ffffff;
+      font-size: 1.2rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .videosContainerMobile {
+    display: none;
+  }
+  .aboutContainerMobile {
+    display: none;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 3px solid #4370cb3c;
+    border-radius: 15px;
+    padding: 3% 0;
+    .left {
+      width: 30%;
+      .thumbnailContainer {
+        // width: 22.5vw;
+        // height: 26vw;
         display: flex;
-        flex-direction: row;
-        width: 98%;
-        margin-top: 2%;
-        .exerciseTitle {
-            font-weight: 700;
-            font-size: 2rem;
-            letter-spacing: 0.2px;
-            height: 4vw;
-            width: 100%;
-            p {
-                color: #614d8f;
+        flex-direction: column;
+        gap: 10px;
+
+        .thumbnailImage {
+          height: 26vw;
+          width: 26vw;
+          border-radius: 20px;
+          border: 1px solid #4370cb3c;
+        }
+      }
+
+      .aboutContainer {
+        margin-top: 4%;
+        display: block;
+        .info {
+          display: flex;
+          flex-direction: row;
+          width: 90%;
+          height: auto;
+          justify-content: space-between;
+          .items {
+            width: 6vw;
+            height: auto;
+            background-color: #e7f3ffbf;
+            border-radius: 10px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1vw 0.5vw;
+            .logo {
+              // background-color: red;
+              height: 60%;
+              width: 100%;
+
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .icons {
+                height: 1.8vw;
+                width: auto;
+              }
             }
+            input {
+              border: 1px solid rgba(0, 0, 255, 0.066);
+              text-align: center;
+              font-size: 14px;
+              width: 3vw;
+              border-right: 5%;
+              background-color: rgba(211, 211, 211, 0.237);
+              padding: 0;
+              margin-top: 5%;
+              &:focus {
+                outline: none;
+              }
+            }
+            p {
+              margin-top: 0.2vw;
+              text-align: center;
+              font-weight: 600;
+              font-size: 0.9vw;
+              color: #614d8f;
+              padding: 0 2vw;
+              line-height: 15px;
+            }
+          }
+        }
+        .aboutTitle {
+          height: 3vw;
+          p {
+            font-weight: 700;
+            font-size: 24px;
+            color: #614d8f;
+          }
+        }
+      }
+    }
+
+    .right {
+      //   padding-left: 2vw;
+      //   padding-right: 2vw;
+      width: 60%;
+      .descriptionContainer {
+        padding-bottom: 2vw;
+        .descriptionTitle {
+          width: 100%;
+          margin-bottom: 1vw;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          p {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3b3c40;
+          }
+
+          div {
+            background-color: #e7f3ff;
+            border: 1px solid lightgray;
+
+            border-radius: 50%;
+            height: 2vw;
+            width: 2vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .icon {
+              height: 60%;
+              width: 60%;
+            }
+            &:hover {
+              cursor: pointer;
+            }
+          }
         }
 
-        .buttons {
-            background-color: #6c9fff;
-            height: fit-content;
-            border-radius: 80px;
+        .descriptionContent {
+          font-weight: 400;
+          font-size: 1.4rem;
+          text-align: justify;
 
-            .button {
-                
-                width: 7vw;
-                height: 6vh;
+          .editDesc {
+            width: 90%;
+            height: 18vh;
+            margin-bottom: 5%;
+
+            textarea {
+              width: 100%;
+              height: 100%;
+              resize: none;
+              font-weight: 400;
+              font-size: 0.8em;
+              font-size: 20px;
+              margin-bottom: 2%;
+            }
+
+            .buttons {
+              display: flex;
+
+              .button {
+                background-color: #0d30ace2;
+                width: 6vw;
+                height: 5vh;
                 color: #ffffff;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 font-weight: 500;
+
                 border-radius: 80px;
+                margin-right: 2%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+              }
+              .button1 {
+                width: 6vw;
+                height: 5vh;
+                font-size: 1.1rem;
+                font-weight: 500;
+                border-radius: 80px;
+                border: 2px solid #4370cb3c;
+              }
             }
+            &:hover {
+              cursor: pointer;
+            }
+          }
         }
-        &:hover {
-            cursor: pointer;
-        }
-    }
-    .videosContainerMobile{
-        display: none;
-    }
-    .aboutContainerMobile{
-        display: none;
-    }
+      }
 
-    .container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        .left {
-            width: 30%;
-            .thumbnailContainer {
-                // width: 22.5vw;
-                // height: 26vw;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                
-                .thumbnailImage {
-                    height: 26vw;
-                    width: 26vw;
-                    border-radius: 20px;
-                }
-            }
-
-            .aboutContainer {
-                margin-top: 4%;
-                display: block;
-                .info {
-                    display: flex;
-                    flex-direction: row;
-                    width: 80%;
-                    height: auto;
-                    justify-content: space-between;
-                    .items {
-                        width: 6vw;
-                        height: auto;
-                        background-color: #e7f3ffbf;
-                        border-radius: 10px;
-
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: center;
-                        padding: 1vw 0.5vw;
-                        .logo {
-                            // background-color: red;
-                            height: 60%;
-                            width: 100%;
-
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            .icons {
-                                height: 1.8vw;
-                                width: auto;
-                            }
-                        }
-                        input{
-                            border: 1px solid rgba(0, 0, 255, 0.066);
-                            text-align: center;
-                            font-size: 14px;
-                            width: 3vw;
-                            border-right: 5%;
-                            background-color: rgba(211, 211, 211, 0.237);
-                            padding: 0;
-                            margin-top: 5%;
-                            &:focus{
-                                outline:none;
-                            }
-                        }
-                        p {
-                            margin-top: 0.2vw;
-                            text-align: center;
-                            font-weight: 600;
-                            font-size: 0.9vw;
-                            color: #614d8f;
-                            padding: 0 2vw;
-                            line-height: 15px;
-                        }
-                    }
-                }
-                .aboutTitle {
-                    height: 3vw;
-                    p {
-                        font-weight: 700;
-                        font-size: 24px;
-                        color: #614d8f;
-                    }
-                }
-            }
+      .musclesInvolvedContainer {
+        height: 7vw;
+        width: 100%;
+        margin-top: 4%;
+        .musclesInvolvedTitle {
+          height: 3vw;
+          p {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #614d8f;
+          }
         }
 
-        .right {
-            padding-left: 2vw;
-            padding-right: 2vw;
-            width: 65%;
-            .descriptionContainer {
-                padding-bottom: 2vw;
-                .descriptionTitle {
-                    width: 100%;
-                    margin-bottom: 1vw;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
+        .musclesList {
+          display: flex;
+          flex-direction: row;
 
-                    p {
-                        font-size: 2rem;
-                        font-weight: 700;
-                        color: #3b3c40;
-                    }
+          .musclesInvolved {
+            // height: 2vw;
+            padding: 0.5vw 1.5vw;
+            background-color: #e7f3ff;
+            margin-right: 1vw;
+            border-radius: 5px;
 
-                    div {
-                        background-color: #e7f3ff;
-                        border-radius: 50%;
-                        height: 2vw;
-                        width: 2vw;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        .icon {
-                            height: 60%;
-                            width: 60%;
-                        }
-                        &:hover {
-                            cursor: pointer;
-                        }
-                    }
-                }
-
-                .descriptionContent {
-                    font-weight: 400;
-                    font-size: 1.4rem;
-                    text-align: justify;
-
-                    .editDesc {
-                        width: 90%;
-                        height: 22vh;
-                        margin-bottom: 20px;
-
-                        textarea {
-                            width: 100%;
-                            height: 100%;
-                            resize: none;
-                            font-weight: 400;
-                            font-size: 0.8em;
-                            font-size: 20px;
-                            margin-bottom: 2%;
-                        }
-
-                        .buttons {
-                            display: flex;
-                            
-                            .button {
-                                background-color: #6c9fff;
-                                width: 6vw;
-                                height: 5vh;
-                                color: #ffffff;
-                                font-size: 20px;
-                                font-weight: 500;
-
-                                border-radius: 80px;
-                                margin-right: 2%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                            }
-                            .button1{
-                                width: 6vw;
-                                height: 5vh;
-                                font-size: 20px;
-                                font-weight: 500;
-                                border-radius: 80px;
-                            }
-                        }
-                        &:hover {
-                            cursor: pointer;
-                        }
-                    }
-                }
+            p {
+              font-size: 1vw;
+              font-weight: 600;
+              color: #614d8f;
             }
-
-            .musclesInvolvedContainer {
-                height: 7vw;
-                width: 100%;
-                margin-top: 4%;
-                .musclesInvolvedTitle {
-                    height: 3vw;
-                    p {
-                        font-weight: 700;
-                        font-size: 1.4rem;
-                        color: #614d8f;
-                    }
-                }
-
-                .musclesList {
-                    display: flex;
-                    flex-direction: row;
-
-                    .musclesInvolved {
-                        // height: 2vw;
-                        padding: 0.5vw 1.5vw;
-                        background-color: #e7f3ff;
-                        margin-right: 1vw;
-                        border-radius: 5px;
-
-                        p {
-                            font-size: 1vw;
-                            font-weight: 600;
-                            color: #614d8f;
-                        }
-                    }
-                }
-            }
-            .videosContainer {
-                display: block;
-                .videosTitle {
-                    p {
-                        font-weight: 700;
-                        font-size: 1.4rem;
-                        color: #614d8f;
-                    }
-                }
-
-                .videoItem {
-                    height: 10vw;
-                    width: 26vw;
-                    border-radius: 10px;
-                    display: flex;
-                    gap: 5px;
-                    align-items: center;
-                    justify-content: space-between;
-                    video {
-                        width: 14vw;
-                        height: 18vh;
-                        border-radius: 10px;
-                        overflow: hidden;
-                        object-fit: cover;
-                    }
-                    label{
-                        width: max-content;
-                    }
-                }
-            }
+          }
         }
+      }
+      .videosContainer {
+        display: block;
+        .videosTitle {
+          p {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #614d8f;
+          }
+        }
+
+        .videoItem {
+          height: 10vw;
+          width: 26vw;
+          border-radius: 10px;
+          display: flex;
+          gap: 5px;
+          align-items: center;
+          justify-content: space-between;
+          video {
+            width: 14vw;
+            height: 18vh;
+            border-radius: 10px;
+            overflow: hidden;
+            object-fit: cover;
+          }
+          label {
+            width: max-content;
+          }
+        }
+      }
     }
+  }
 }
-.label{
-    cursor: pointer;
-    padding:6px 15px;
-    width: 80%;
-    align-self: center;
-    text-align: center;
-    display:flex;
-    align-items: center;
-    gap: 10px;
-    border-radius: 8px;
-    border: 1px solid #614D8F;
-    flex-direction: column;
-    background: #FFF;
-    box-shadow: 0px 2px 8px 0px rgba(231, 243, 255, 0.15), 0px 2px 6px 0px rgba(231, 243, 255, 0.25);
-    &>span{
-        border-radius: 50%;
-    background: #E7F3FF;
+.label {
+  cursor: pointer;
+  padding: 6px 15px;
+  width: 80%;
+  align-self: center;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #614d8f;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: 0px 2px 8px 0px rgba(231, 243, 255, 0.15),
+    0px 2px 6px 0px rgba(231, 243, 255, 0.25);
+  & > span {
+    border-radius: 50%;
+    background: #e7f3ff;
     display: flex;
     width: 4vw;
     height: 4vw;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-        
-    }
-    &>label{
-        width: 100%;
-    }
+  }
+  & > label {
+    width: 100%;
+  }
 }
 
-@media only screen and (max-width: 450px){
-    .exerciseDetailsContainer {
-        width: 92%;
-        margin: auto;
-        .header {
-            margin-bottom: 5%;
-            width: 98%;
-            .exerciseTitle {
-                font-size: 1.4rem;
-                height: 4vw;
-            }
-    
-            .buttons {
-                background-color: #6c9fff;
-                height: fit-content;
-                border-radius: 15px;
-                .button {
-                    width: 18vw;
-                    height: 4vh;
-                    font-size: 1.2rem;
-                    border-radius: 80px;
-                }
-            }
-        }
-        .videosContainerMobile{
-            display: block;
-            margin-top: 4%;
-            width: 90%;
-            .videosTitle {
-                p {
-                    font-weight: 700;
-                    font-size: 1.2rem;
-                    color: #614d8f;
-                }
-            }
-
-            .videoItem {
-                margin-top: 2%;
-                height: auto;
-                width: auto;
-                border-radius: 10px;
-                display: flex;
-                gap: 5px;
-                align-items: center;
-                justify-content: space-between;
-                video {
-                    width: 48vw;
-                    height: 17vh;
-                    border-radius: 10px;
-                    overflow: hidden;
-                    object-fit: cover;
-                }
-                label{
-                    width: max-content;
-                }
-            }
-        }
-        .aboutContainerMobile{
-            display: block;
-            margin-top: 3%;
-            .info {
-                margin-top: 3%;
-                display: flex;
-                flex-direction: row;
-                width: 70%;
-                min-height: 8vh;
-                justify-content: space-between;
-                .items {
-                    width: 16vw;
-                    height: auto;
-                    background-color: #e7f3ffbf;
-                    border-radius: 10px;
-
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 1vw 0.5vw;
-                    .logo {
-                        // background-color: red;
-                        height: auto;
-                        width: auto;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        margin-top: 2%;
-                        .icons {
-                            height: 6vw;
-                            width: 6vw;
-                        }
-                    }
-                    input{
-                        border: 1px solid rgba(0, 0, 255, 0.066);
-                        text-align: center;
-                        font-size: 14px;
-                        width: 7vw;
-                        height: 2vh;
-                        border-right: 5%;
-                        background-color: rgba(211, 211, 211, 0.237);
-                        padding: 0;
-                        margin-top: 5%;
-                        &:focus{
-                            outline:none;
-                        }
-                    }
-                    p {
-                        margin-top: 0.2vw;
-                        text-align: center;
-                        font-weight: 600;
-                        font-size: .8rem;
-                        color: #614d8f;
-                        padding: 0 2vw;
-                    }
-                }
-            }
-            .aboutTitle {
-                height: auto;
-                p {
-                    font-weight: 700;
-                    font-size: 1.2rem;
-                    color: #614d8f;
-                }
-            }
-        }
-    
-        .container {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            .left {
-                width: 40%;
-                .thumbnailContainer {
-                    .thumbnailImage {
-                        height: 50vw;
-                        width: 50vw;
-                        border-radius: 10px;
-                    }
-                }
-                .aboutContainer {
-                    display: none;
-                }
-            }
-    
-            .right {
-                padding-left: 2vw;
-                padding-right: 2vw;
-                width: 56%;
-                .descriptionContainer {
-                    padding-bottom: 2vw;
-                    .descriptionTitle {
-                        align-items: center;
-                        p {
-                            font-size: 1.1rem;
-                            
-                        }
-    
-                        div {
-                            height: 6vw;
-                            width: 6vw;
-                        }
-                    }
-    
-                    .descriptionContent {
-                        font-size: 1rem;
-                        p{
-                            line-height: 1rem;
-                                font-weight: 500;
-                                font-size: .9rem;
-                                max-height: 15vh;
-                                height: auto;
-                                overflow-y: scroll;
-                                padding-right: 3%;
-                        }
-                        .editDesc {
-                            width: auto;
-                            height: auto;
-                            margin-bottom: 2%;
-                            textarea {
-                                width: 100%;
-                                height: 15vh;
-                                font-size: .9rem;
-                                padding: 0;
-                                line-height: 1rem;
-                                font-weight: 500;
-                            }
-                            .buttons {
-                                display: flex;
-                                .button {
-                                    width: 15vw;
-                                    height: 3vh;
-                                    color: #ffffff;
-                                    font-size: .8rem;
-                                }
-                                .button1{
-                                    width: 15vw;
-                                    height: 3vh;
-                                    font-size: .8rem;
-                                }
-                            }
-                        }
-                    }
-                }
-    
-                .musclesInvolvedContainer {
-                    height: auto;
-                    width: 100%;
-                    margin-top: 4%;
-                    .musclesInvolvedTitle {
-                        height: auto;
-                        p {
-                            font-size: .8rem;
-                        }
-                    }
-    
-                    .musclesList {
-                        flex-wrap: wrap;
-                        .musclesInvolved {
-                            margin-top: 3%;
-                            p {
-                                font-size: .7rem;
-                            }
-                        }
-                    }
-                }
-                .videosContainer {
-                    display: none;
-                }
-            }
-        }
-    }
-    .label{
-        cursor: pointer;
-        font-size: .8rem;
-        padding:3px 5px;
-        width: 100%;
-        align-self: center;
-        text-align: center;
-        display:flex;
-        align-items: center;
-        gap: 10px;
-        border-radius: 8px;
-        border: 1px solid #614D8F;
-        flex-direction: column;
-        background: #FFF;
-        box-shadow: 0px 2px 8px 0px rgba(231, 243, 255, 0.15), 0px 2px 6px 0px rgba(231, 243, 255, 0.25);
-        &>span{
-            border-radius: 50%;
-        background: #E7F3FF;
-        display: flex;
-        width: 4vw;
+@media only screen and (max-width: 450px) {
+  .exerciseDetailsContainer {
+    width: 92%;
+    margin: auto;
+    .header {
+      margin-bottom: 5%;
+      width: 98%;
+      .exerciseTitle {
+        font-size: 1.4rem;
         height: 4vw;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-            
+      }
+
+      .buttons {
+        background-color: #6c9fff;
+        height: fit-content;
+        border-radius: 15px;
+        .button {
+          width: 18vw;
+          height: 4vh;
+          font-size: 1.2rem;
+          border-radius: 80px;
         }
-        &>label{
-            width: 100%;
-        }
+      }
     }
+    .videosContainerMobile {
+      display: block;
+      margin-top: 4%;
+      width: 90%;
+      .videosTitle {
+        p {
+          font-weight: 700;
+          font-size: 1.2rem;
+          color: #614d8f;
+        }
+      }
+
+      .videoItem {
+        margin-top: 2%;
+        height: auto;
+        width: auto;
+        border-radius: 10px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        justify-content: space-between;
+        video {
+          width: 48vw;
+          height: 17vh;
+          border-radius: 10px;
+          overflow: hidden;
+          object-fit: cover;
+        }
+        label {
+          width: max-content;
+        }
+      }
+    }
+    .aboutContainerMobile {
+      display: block;
+      margin-top: 3%;
+      .info {
+        margin-top: 3%;
+        display: flex;
+        flex-direction: row;
+        width: 70%;
+        min-height: 8vh;
+        justify-content: space-between;
+        .items {
+          width: 16vw;
+          height: auto;
+          background-color: #e7f3ffbf;
+          border-radius: 10px;
+
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 1vw 0.5vw;
+          .logo {
+            // background-color: red;
+            height: auto;
+            width: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2%;
+            .icons {
+              height: 6vw;
+              width: 6vw;
+            }
+          }
+          input {
+            border: 1px solid rgba(0, 0, 255, 0.066);
+            text-align: center;
+            font-size: 14px;
+            width: 7vw;
+            height: 2vh;
+            border-right: 5%;
+            background-color: rgba(211, 211, 211, 0.237);
+            padding: 0;
+            margin-top: 5%;
+            &:focus {
+              outline: none;
+            }
+          }
+          p {
+            margin-top: 0.2vw;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #614d8f;
+            padding: 0 2vw;
+          }
+        }
+      }
+      .aboutTitle {
+        height: auto;
+        p {
+          font-weight: 700;
+          font-size: 1.2rem;
+          color: #614d8f;
+        }
+      }
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .left {
+        width: 40%;
+        .thumbnailContainer {
+          .thumbnailImage {
+            height: 50vw;
+            width: 50vw;
+            border-radius: 10px;
+          }
+        }
+        .aboutContainer {
+          display: none;
+        }
+      }
+
+      .right {
+        padding-left: 2vw;
+        padding-right: 2vw;
+        width: 56%;
+        .descriptionContainer {
+          padding-bottom: 2vw;
+          .descriptionTitle {
+            align-items: center;
+            p {
+              font-size: 1.1rem;
+            }
+
+            div {
+              height: 6vw;
+              width: 6vw;
+            }
+          }
+
+          .descriptionContent {
+            font-size: 1rem;
+            p {
+              line-height: 1rem;
+              font-weight: 500;
+              font-size: 0.9rem;
+              max-height: 15vh;
+              height: auto;
+              overflow-y: scroll;
+              padding-right: 3%;
+            }
+            .editDesc {
+              width: auto;
+              height: auto;
+              margin-bottom: 2%;
+              textarea {
+                width: 100%;
+                height: 15vh;
+                font-size: 0.9rem;
+                padding: 0;
+                line-height: 1rem;
+                font-weight: 500;
+              }
+              .buttons {
+                display: flex;
+                .button {
+                  width: 15vw;
+                  height: 3vh;
+                  color: #ffffff;
+                  font-size: 0.8rem;
+                }
+                .button1 {
+                  width: 15vw;
+                  height: 3vh;
+                  font-size: 0.8rem;
+                }
+              }
+            }
+          }
+        }
+
+        .musclesInvolvedContainer {
+          height: auto;
+          width: 100%;
+          margin-top: 4%;
+          .musclesInvolvedTitle {
+            height: auto;
+            p {
+              font-size: 0.8rem;
+            }
+          }
+
+          .musclesList {
+            flex-wrap: wrap;
+            .musclesInvolved {
+              margin-top: 3%;
+              p {
+                font-size: 0.7rem;
+              }
+            }
+          }
+        }
+        .videosContainer {
+          display: none;
+        }
+      }
+    }
+  }
+  .label {
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 3px 5px;
+    width: 100%;
+    align-self: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    border: 1px solid #614d8f;
+    flex-direction: column;
+    background: #fff;
+    box-shadow: 0px 2px 8px 0px rgba(231, 243, 255, 0.15),
+      0px 2px 6px 0px rgba(231, 243, 255, 0.25);
+    & > span {
+      border-radius: 50%;
+      background: #e7f3ff;
+      display: flex;
+      width: 4vw;
+      height: 4vw;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    & > label {
+      width: 100%;
+    }
+  }
 }

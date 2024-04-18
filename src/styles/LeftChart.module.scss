@@ -1,70 +1,69 @@
-.top{
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+
+  div {
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    font-weight: 500;
     align-items: center;
-    color: white;
-
-    div{
-        display: flex;
-        gap: 5px;
-        font-weight: 500;
-        font-size: 12px;
-        align-items: center;
-        gap: 10px;
-        background-color: white;
-        color: blue;
-        padding: 10px;
-        border-radius: 30px;
-
-    }
+    gap: 1px;
+    color: blue;
+    // width: 10vw;
+  }
+  p {
+    font-weight: 500;
+    font-size: 1rem;
+  }
 }
 
-    .center{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 25px;
-        gap: 20px;
-        color: white;
-        height: 100%;
-
-        div{
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            span{
-                font-size: 20px;
-            }
-        }
-
-        h1{
-            font-size: 50px;
-        }
+.center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  .percentage {
+    width: 6vw;
+    span {
+      font-size: 1rem;
+      color: rgb(50, 255, 47);
+      margin-left: 5%;
     }
+  }
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    // line-height: 15px;
+  }
+  .downarrow {
+    transform: rotate(180deg);
+  }
+}
 
 @media only screen and (max-width: 450px) {
-    .top{
-        p{
-            font-size: 22px;
-            font-weight: 600;
-        }
-        div{
-            font-size: 16px;
-        }
+  .top {
+    p {
+      font-size: 22px;
+      font-weight: 600;
     }
-    .center{
-        padding-bottom: 25px;
-        gap: 20px;
-        color: white;
-        height: 100%;
-
-        div{
-            gap: 0;
-            span{
-                font-size: 20px;
-                font-weight: 600;
-            }
-        }
+    div {
+      font-size: 16px;
     }
+  }
+  .center {
+    padding-bottom: 2%;
+    color: white;
+    .percentage {
+      width: 24vw;
+    }
+    div {
+      gap: 0;
+      span {
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+  }
 }

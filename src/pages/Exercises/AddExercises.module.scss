@@ -1,272 +1,141 @@
 .addExercises {
-    position: relative;
-    margin-left: 3%;
-    margin-top: 1%;
-    .header {
+  position: relative;
+  .header {
+    p {
+      color: #0d30ac;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+  }
+
+  .form {
+    margin-top: 30px;
+    margin-left: 10px;
+    .formElements {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      .fieldName {
+        width: 20%;
         p {
-            color: #000;
-            font-size: 32px;
-            font-weight: 700;
+          color: #0d30ac;
+          font-size: 22px;
+          font-weight: 600;
         }
-    }
+      }
 
-    .form {
-        margin-top: 30px;
-        margin-left: 10px;
-
-        .formElements {
-            // width: 45%;
-            display: flex;
-            align-items: center;
-            // justify-content: space-between;
-
-            margin-bottom: 20px;
-
-            .fieldName {
-                width: 20%;
-                // background-color: red;
-                p {
-                    color: #0d30ac;
-                    font-size: 22px;
-                    font-weight: 600;
-                }
-            }
-
-            .inputField {
-                width: 478px;
-                height: 49px;
-                // flex-shrink: 0;
-
-                border-radius: 20px;
-                background: rgba(179, 196, 235, 0.4);
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                input {
-                    width: 90%;
-                    height: 70%;
-                    background-color: transparent;
-                    font-size: 20px;
-                    border: none;
-                    outline: none;
-                }
-            }
-
-            .inputFieldSmall {
-                width: 250px;
-                height: 49px;
-
-                border-radius: 20px;
-                background: rgba(179, 196, 235, 0.4);
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                input {
-                    width: 90%;
-                    height: 70%;
-                    background-color: transparent;
-                    font-size: 20px;
-                    border: none;
-                    outline: none;
-                }
-            }
-        }
-
-        .formElementsBig {
-            // width: 45%;
-            display: flex;
-            // align-items: center;
-            // justify-content: space-between;
-
-            margin-top: 10px;
-
-            margin-bottom: 20px;
-
-            .fieldName {
-                width: 20%;
-                // background-color: red;
-                p {
-                    color: #0d30ac;
-                    font-size: 22px;
-                    font-weight: 600;
-                }
-            }
-
-            .inputFieldBig {
-                width: 700px;
-                height: 300px;
-
-                border-radius: 20px;
-                background: rgba(179, 196, 235, 0.4);
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                textarea {
-                    width: 95%;
-                    height: 90%;
-                    background-color: transparent;
-                    font-size: 20px;
-                    border: none;
-                    outline: none;
-                    resize: none;
-                }
-            }
-        }
-        .bottom {
-            width: 100%;
-            display: flex;
-
-            .left {
-                width: 40%;
-                // background-color: red;
-
-                .formElementsBottom {
-                    display: flex;
-                    align-items: center;
-
-                    margin-bottom: 20px;
-
-                    .fieldName {
-                        width: 50%;
-                        // background-color: red;
-                        p {
-                            color: #0d30ac;
-                            font-size: 22px;
-                            font-weight: 600;
-                        }
-                    }
-
-                    .inputFieldSmall {
-                        width: 250px;
-                        height: 49px;
-
-                        border-radius: 20px;
-                        background: rgba(179, 196, 235, 0.4);
-
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-
-                        input {
-                            width: 90%;
-                            height: 70%;
-                            background-color: transparent;
-                            font-size: 20px;
-                            border: none;
-                            outline: none;
-                        }
-                    }
-                }
-            }
-
-            .right {
-                width: 50%;
-                display: flex;
-                // background-color: yellow;
-
-                .video,
-                .image {
-                    width: 50%;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-
-                    .field {
-                        margin-bottom: 5px;
-                        p {
-                            color: #0d30ac;
-                            font-size: 22px;
-                            font-weight: 600;
-                        }
-                    }
-
-                    .imageContainer,
-                    .videoContainer {
-                        border: 2px solid #0d30ac;
-                        width: 200px;
-                        height: 100px;
-
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
-                }
-            }
-        }
-
-        .footer {
-            margin-top: 20px;
-            margin-bottom: 50px;
-
-            display: flex;
-            .button {
-                width: 150px;
-                height: 50px;
-                border-radius: 20px;
-                background: #6c9fff;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                margin-right: 30px;
-
-                span {
-                    color: #fff;
-                    font-size: 24px;
-                    font-weight: 400;
-                }
-
-                &:hover {
-                    cursor: pointer;
-                    scale: 1.01;
-                }
-            }
-        }
-    }
-}
-
-.successMsg {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000; /* Adjust as needed based on your layout */
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    .text {
-        width: 500px;
-        height: 200px;
-        border-radius: 25px;
-        background-color: #fff;
-
+      .inputField {
+        box-shadow: 0px 1px 3px 0.5px lightgray;
+        border: 1px solid rgb(201, 201, 201);
+        width: 478px;
+        height: 49px;
+        border-radius: 20px;
+        background: rgba(179, 196, 235, 0.4);
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
 
-        p {
-            color: #0d30ac;
-            font-size: 22px;
-            font-weight: 600;
+        input {
+          width: 90%;
+          height: 70%;
         }
+      }
 
-        .button {
-            width: 120px;
-            height: 40px;
+      .inputFieldSmall {
+        box-shadow: 0px 1px 3px 0.5px lightgray;
+        border: 1px solid rgb(201, 201, 201);
+        width: 250px;
+        height: 49px;
+        border-radius: 20px;
+        background: rgba(179, 196, 235, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1%;
+
+        input {
+          width: 90%;
+          height: 70%;
+        }
+      }
+    }
+
+    .formElementsBig {
+      display: flex;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      .fieldName {
+        width: 20%;
+        p {
+          color: #0d30ac;
+          font-size: 22px;
+          font-weight: 600;
+        }
+      }
+
+      .inputFieldBig {
+        box-shadow: 0px 1px 3px 0.5px lightgray;
+        border: 1px solid rgb(201, 201, 201);
+        width: 700px;
+        height: 300px;
+        border-radius: 20px;
+        background: rgba(179, 196, 235, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        textarea {
+          width: 95%;
+          height: 90%;
+        }
+      }
+    }
+    .bottom {
+      width: 100%;
+      display: flex;
+
+      .left {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .formElementsBottom {
+          display: flex;
+          align-items: center;
+
+          margin-bottom: 20px;
+
+          .fieldName {
+            width: 50%;
+            p {
+              color: #0d30ac;
+              font-size: 22px;
+              font-weight: 600;
+            }
+          }
+
+          .inputFieldSmall {
+            box-shadow: 0px 1px 3px 0.5px lightgray;
+            border: 1px solid rgb(201, 201, 201);
+            width: 250px;
+            height: 49px;
+            border-radius: 20px;
+            background: rgba(179, 196, 235, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 2.5%;
+            input {
+              width: 90%;
+              height: 70%;
+            }
+          }
+        }
+        .footer {
+          display: flex;
+          .button {
+            width: 150px;
+            height: 50px;
             border-radius: 20px;
             background: #6c9fff;
 
@@ -274,217 +143,312 @@
             align-items: center;
             justify-content: center;
 
-            margin-top: 30px;
+            margin-right: 30px;
 
             span {
-                color: #fff;
-                font-size: 20px;
-                font-weight: 400;
+              color: #fff;
+              font-size: 1.2rem;
+              font-weight: 600;
             }
 
             &:hover {
-                cursor: pointer;
-                // scale: 1.01;
+              cursor: pointer;
+              scale: 1.01;
             }
+          }
         }
-    }
-}
+      }
 
-@media only screen and (max-width: 450px){
-    .addExercises {
-        width: 90vw;
-        margin: 0;
-        .header {
-            p {
-                font-size: 1.5rem;
-            }
-        }
-    
-        .form {
-            margin: 0;
-            .formElements {
-                align-items: flex-start;
-                flex-direction: column;
-                margin-bottom: 7px;
-                .fieldName {
-                    width: auto;
-                    p {
-                        font-size: 1.2rem;
-                    }
-                }
-                .inputField {
-                    width: 100%;
-                    height: 5.5vh;
-                    border-radius: 8px;
-                    input {
-                        width: 90%;
-                        height: 80%;
-                        font-size: 1.2rem;
-
-                    }
-                }
-    
-                .inputFieldSmall {
-                    width: 100%;
-                    height: 5.5vh;
-                    border-radius: 8px;
-                    input {
-                        width: 90%;
-                        height: 80%;
-                        font-size: 1.2rem;
-
-                    }
-                }
-            }
-    
-            .formElementsBig {
-                display: flex;
-                flex-direction: column;
-                margin-top: 7px;
-                margin-bottom: 7px;
-                .fieldName {
-                    width: auto;
-                    p {
-                        font-size: 1.2rem;
-                    }
-                }
-    
-                .inputFieldBig {
-                    width: 100%;
-                    height: 12vh;
-                    border-radius: 8px;
-                    textarea {
-                        width: 95%;
-                        height: 80%;
-                        font-size: 1.2rem;
-                    }
-                }
-            }
-            .bottom {
-                width: 100%;
-                flex-direction: column;
-                .left {
-                    width: 100%;
-                    .formElementsBottom {
-                        align-items: flex-start;
-                        flex-direction: column;
-                        margin-bottom: 7px;
-                        .fieldName {
-                            width: 100%;
-                            // background-color: red;
-                            p {
-                                font-size: 1.2rem;
-                            }
-                        }
-    
-                        .inputFieldSmall {
-                            width: 100%;
-                            height: 5.5vh;
-                            border-radius: 8px;
-                            input {
-                                font-size: 1.2rem;
-                            }
-                        }
-                    }
-                }
-    
-                .right {
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    // background-color: yellow;
-    
-                    .video,
-                    .image {
-                        width: 100%;
-                        .field {
-                            margin-bottom: 5px;
-                            p {
-                                font-size: 1.2rem;
-                            }
-                        }
-                        .imageContainer,
-                        .videoContainer {
-                            border: 2px solid #0d30ac;
-                            width: 40vw;
-                            height: 10vh;
-                        }
-                    }
-                }
-            }
-    
-            .footer {
-                display: flex;
-                justify-content: space-between;
-                width: 66vw;
-                margin: auto;
-                .button {
-                    width: 30vw;
-                    height: 5vh;
-                    border-radius: 5px;
-                    margin: 10% auto;
-                    span {
-                        font-size: 1.2rem;
-                    }
-                }
-            }
-        }
-    }
-    
-    .successMsg {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        height: 100%;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1000; /* Adjust as needed based on your layout */
-    
+      .right {
+        width: 50%;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    
-        .text {
-            width: 500px;
-            height: 200px;
-            border-radius: 25px;
-            background-color: #fff;
-    
+        // background-color: yellow;
+
+        .video,
+        .image {
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          .field {
+            margin-bottom: 5px;
+            p {
+              color: #0d30ac;
+              font-size: 22px;
+              font-weight: 600;
+            }
+          }
+
+          .imageContainer,
+          .videoContainer {
+            border: 2px solid #0d30ac;
+            width: 200px;
+            height: 100px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-    
-            p {
-                color: #0d30ac;
-                font-size: 22px;
-                font-weight: 600;
-            }
-    
-            .button {
-                width: 120px;
-                height: 40px;
-                border-radius: 20px;
-                background: #6c9fff;
-    
-                display: flex;
-                align-items: center;
-                justify-content: center;
-    
-                margin-top: 30px;
-    
-                span {
-                    color: #fff;
-                    font-size: 20px;
-                    font-weight: 400;
-                }
-    
-                &:hover {
-                    cursor: pointer;
-                    // scale: 1.01;
-                }
-            }
+          }
         }
+      }
     }
+  }
+
+  .errorpopup {
+    width: 20vw;
+    height: 10vh;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: rgb(255, 78, 38);
+    position: absolute;
+    bottom: 1%;
+    right: 5%;
+  }
+
+  .errorpopup p {
+    color: white;
+  }
+}
+.successMsg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.16);
+  z-index: 2; /* Adjust as needed based on your layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .text {
+    width: 500px;
+    height: 200px;
+    border-radius: 25px;
+    background-color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      color: #0d30ac;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .button {
+      width: 120px;
+      height: 40px;
+      border-radius: 20px;
+      background: #6c9fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+
+      span {
+        color: #fff;
+        font-size: 20px;
+        font-weight: 400;
+      }
+
+      &:hover {
+        cursor: pointer;
+        // scale: 1.01;
+      }
+    }
+  }
+}
+input,
+textarea {
+  background-color: transparent;
+  box-shadow: none;
+  font-size: 20px;
+  border: none !important;
+  outline: none !important;
+}
+.spinner {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.16);
+  z-index: 1000; /* Adjust as needed based on your layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .spin {
+    width: 5vw;
+    height: 5vw;
+    color: #f3f3f3;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .addExercises {
+    width: 90vw;
+    margin: auto;
+    .header {
+      p {
+        font-size: 1.5rem;
+      }
+    }
+
+    .form {
+      margin: 0;
+      .formElements {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 7px;
+        .fieldName {
+          width: auto;
+          p {
+            font-size: 1.2rem;
+          }
+        }
+        .inputField {
+          width: 100%;
+          height: 5.5vh;
+          border-radius: 8px;
+        }
+
+        .inputFieldSmall {
+          width: 100%;
+          height: 5.5vh;
+          border-radius: 8px;
+        }
+      }
+
+      .formElementsBig {
+        display: flex;
+        flex-direction: column;
+        margin-top: 7px;
+        margin-bottom: 7px;
+        .fieldName {
+          width: auto;
+          p {
+            font-size: 1.2rem;
+          }
+        }
+
+        .inputFieldBig {
+          width: 100%;
+          height: 12vh;
+          border-radius: 8px;
+        }
+      }
+      .bottom {
+        width: 100%;
+        flex-direction: column;
+        .left {
+          width: 100%;
+          .formElementsBottom {
+            align-items: flex-start;
+            flex-direction: column;
+            margin-bottom: 7px;
+            .fieldName {
+              width: 100%;
+              // background-color: red;
+              p {
+                font-size: 1.2rem;
+              }
+            }
+
+            .inputFieldSmall {
+              width: 100%;
+              height: 5.5vh;
+              border-radius: 8px;
+              input {
+                font-size: 1.2rem;
+              }
+            }
+          }
+          .footer {
+            display: flex;
+            justify-content: space-between;
+            width: 66vw;
+            margin: auto;
+            .button {
+              width: 30vw;
+              height: 5vh;
+              border-radius: 5px;
+              margin: 10% auto;
+              span {
+                font-size: 1.2rem;
+              }
+            }
+          }
+        }
+
+        .right {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          .video,
+          .image {
+            width: 100%;
+            .field {
+              margin-bottom: 5px;
+              p {
+                font-size: 1.2rem;
+              }
+            }
+            .imageContainer,
+            .videoContainer {
+              border: 2px solid #0d30ac;
+              width: 40vw;
+              height: 10vh;
+            }
+          }
+        }
+      }
+    }
+    .errorpopup {
+      width: 50vw;
+      height: 7vh;
+      padding: 10px 15px;
+      top: 0;
+      right: 2px;
+    }
+  }
+  input,
+  textarea {
+    padding: 0;
+    font-size: 1.2rem;
+    width: 90%;
+    height: 80%;
+  }
+  .successMsg {
+    .text {
+      width: 80vw;
+      height: 15vh;
+      border-radius: 15px;
+      p {
+        font-size: 1.3rem;
+      }
+
+      .button {
+        width: 26vw;
+        height: 5vh;
+        border-radius: 20px;
+        margin-top: 10px;
+      }
+    }
+  }
+  .spinner {
+    .spin {
+      width: 15vw;
+      height: 15vw;
+    }
+  }
 }

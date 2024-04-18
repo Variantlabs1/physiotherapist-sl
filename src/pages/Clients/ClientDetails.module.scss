@@ -1,508 +1,472 @@
 .rootClientDetails {
+  padding: 3%;
+  position: relative;
+  .headeing {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    margin-bottom: 2%;
+    color: #0d1dac;
+    .title {
+      font-size: 2rem !important;
+      font-weight: 600;
+      letter-spacing: 0em;
+    }
+  }
+  .outerContainer {
+    min-height: 80vh;
+    padding: 1% 3%;
+    border-radius: 16px;
+    border: 3px solid #4370cb3c;
     .header {
-        width: 95%;
-        margin: 0 auto;
+      width: 100%;
+      margin: 1% auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      .headerContainer {
         display: flex;
-        flex-direction: row;
-        align-items: center;
+        width: max-content;
+        gap: 20px;
+
+        .userImage {
+          width: 4vw;
+          height: 4vw;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img {
+            border: 1px solid #0057b389;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+
+        .userName {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          p {
+            font-weight: 500;
+            font-size: 1.8rem;
+            color: #0d1dac;
+          }
+        }
+      }
+
+      .headerButtons {
+        width: 12vw;
+        display: flex;
         justify-content: space-between;
-
-        .headerContainer {
-            display: flex;
-            width: max-content;
-            gap: 20px;
-
-            .userImage {
-                width: 4vw;
-                height: 4vw;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                img {
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 50%;
-                    object-fit: cover;
-                }
-            }
-
-            .userName {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                p {
-                    font-weight: 500;
-                    font-size: 2rem;
-                    color: #0d1dac;
-                }
-            }
+        font-size: 1.2rem;
+        font-weight: 500;
+        .button {
+          padding: 4px 20px;
+          border: 1px solid #0d30ac;
+          border-radius: 10px;
+          color: #0d1dac;
         }
-
-        .headerButtons {
-            width: 22%;
-            display: flex;
-            justify-content: space-between;
-            .buttons {
-                padding: 11px 30px;
-                background-color: #6c9fff;
-                border-radius: 80px;
-
-                .button {
-                    background-color: transparent;
-                    border: none;
-                    color: #ffffff;
-                    font-size: 20px;
-                    font-weight: 500;
-                }
-            }
-            &:hover {
-                cursor: pointer;
-            }
+        .buttonChat {
+          color: #ffffff;
+          padding: 4px 20px;
+          background-color: #0d30ac;
+          border-radius: 10px;
+          border: none;
         }
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
 
     .dashboard {
-        margin: 2vw auto;
-        width: 92%;
-        height: fit-content;
+      margin: 2% auto;
+      width: 100%;
+      .healthInfo {
+      }
 
-        .clientInfo {
-            width: 100%;
-            height: 60%;
-            // background-color: yellow;
+      .bottomContainer {
+        margin-top: 3%;
+        display: flex;
 
-            .data {
-                height: 100%;
-                width: 100%;
-                margin: auto 0;
+        .graph {
+          .top {
+            margin-bottom: 3%;
+            p {
+              font-size: 1.6rem;
+              font-weight: 600;
+              color: #0d30ac;
             }
+          }
+
+          .chart {
+            background: linear-gradient(
+              123.33deg,
+              #7fa5ed -88.05%,
+              #0d30ac 167.83%
+            );
+            padding: 20px 35px;
+            border-radius: 40px;
+            width: 40vw;
+          }
         }
 
-        .bottomContainer {
-            margin-top: 70px;
-            width: 100%;
-            height: 40%;
-
-            // background-color: red;
-
-            display: flex;
-            align-items: center;
-
-            .graph {
-                width: fit-content;
-                height: fit-content;
-                background: linear-gradient(
-                    123.33deg,
-                    #7fa5ed -88.05%,
-                    #0d30ac 167.83%
-                );
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-                border-radius: 56px;
-                gap: 25px;
-                padding: 25px 50px;
-                background: transparent;
-                .top{
-                    display: flex;
-                    align-items: center;
-                    gap: 20px;
-                    margin-left: 30px;
-                    p{
-                     background: linear-gradient(
-                    123.33deg,
-                    #7fa5ed -88.05%,
-                    #0d30ac 167.83%);
-                        padding: 15px 25px;
-                        border-radius: 24px;
-                        color: white;
-                        cursor: pointer;
-                    }
-                }
-
-                .chart{
-                    background: linear-gradient(
-                        123.33deg,
-                        #7fa5ed -88.05%,
-                        #0d30ac 167.83%
-                    );
-                    padding: 20px 35px;
-                    border-radius: 40px;
-                    width:35vw;
-                }
-            }
-
-            .buttons {
-                width: 30%;
-                height: 100%;
-
-                display: flex;
-                gap: 25px;
-                // justify-content: flex-end;
-                flex-direction: column;
-                padding-left: 50px;
-                
-
-                .assign{
-                     background: linear-gradient(
-                    123.33deg,
-                    #7fa5ed -88.05%,
-                    #0d30ac 167.83%
-                );
-                    padding: 15px 28px;
-                    width: fit-content;
-                    font-size: 20px;
-                    border-radius: 26px;
-                    color: white;
-                    cursor: pointer;
-                }
-            }
+        .buttons {
+          width: 26vw;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          justify-content: flex-end;
+          .assign {
+            background: linear-gradient(
+              123.33deg,
+              #7fa5ed -88.05%,
+              #0d30ac 167.83%
+            );
+            padding: 6px 20px;
+            margin-bottom: 3%;
+            // width: fit-content;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+          }
         }
+      }
     }
 
     /* Overlay Styles */
     .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
 
-        background-color: rgba(94, 94, 94, 0.329);
-
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        // padding: 0 450px 150px 0;
-        // background-color: red;
-
-        .overlayContent {
-            background-color: #f4f9ff;
-            padding: 30px 50px 0 50px;
-            outline: 3px solid #d6e1fe;
-            text-align: center;
-
-            width: fit-content;
-            height: fit-content;
-            border-radius: 20px ;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            .closeicon{
-                position: relative;
-                left: 52%;
-            }
-            .closeicon{
-                cursor: pointer;
-            }
-
-            .inputBox {
-                display: flex;
-                flex-direction: column;
-                margin: 10px;
-                height: 91px;
-                width: 322px;
-
-                label {
-                    font-family: "Raleway";
-                    font-size: 24px;
-                    font-weight: 600;
-                    text-align: left;
-                    padding: 8px 0;
-                }
-
-                input {
-                    background: #ffffff;
-                    box-shadow: 0px 4px 8px 0px #d3d3d366;
-                    border-radius: 8px;
-                    height: 50px;
-                    width: 100%;
-                }
-            }
-
-            button {
-                margin: 20px 0;
-                background: #6c9fff;
-                box-shadow: 0px 4px 8px 0px #6c9fff40;
-
-                color: #fff;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 8px;
-                cursor: pointer;
-                font-size: 1rem;
-
-                &:hover {
-                    background-color: #0056b3; /* Change to a darker shade on hover if desired */
-                }
-            }
-        }
-    }
-}
-
-.assignedExercises {
-    height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .container {
-        width: 24vw;
-        height: fit-content;
-        padding: 30px 20px 15px 20px;
-
+      background-color: rgba(94, 94, 94, 0.329);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      //   align-items: center;
+      z-index: 2;
+      .overlayContent {
+        background-color: #f4f9ff;
+        padding: 30px 50px 0 50px;
         outline: 3px solid #d6e1fe;
         border-radius: 20px;
-        margin: auto;
-
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-bottom: 6%;
+        .closeicon {
+          padding: 2%;
+          border-radius: 50%;
+          position: relative;
+          left: 52%;
+          cursor: pointer;
+        }
+        .closeicon:hover {
+          background-color: rgba(211, 211, 211, 0.573);
+        }
 
-        .heading {
-            // background-color: yellow;
+        .inputBox {
+          display: flex;
+          flex-direction: column;
+          margin: 2px;
+          height: 6vw;
+          width: 20vw;
+
+          label {
+            font-family: "Raleway";
+            font-size: 1.4rem;
+            font-weight: 500;
+            text-align: left;
+            padding: 8px 0;
+          }
+
+          input {
+            background: #ffffff;
+            box-shadow: 0px 4px 8px 0px #d3d3d366;
+            border-radius: 8px;
+            padding: 2% 6%;
+            height: 50px;
             width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            p {
-                color: #2b39b6;
-                font-weight: 700;
-                font-size: 1.5rem;
-            }
+          }
         }
 
-        .cards {
-            margin-top: 2vw;
-            .exercise {
-                width: 20vw;
-                min-height: 2.5vw;
+        button {
+          margin: 7% 0;
+          background-color: #0d30ac;
+          box-shadow: 0px 4px 8px 0px #6c9fff40;
+          color: #fff;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 8px;
+          cursor: pointer;
+          font-size: 1rem;
 
-                padding: 10px 20px;
-                margin-bottom: 0.8vw;
-
-                background-color: #f9f6ff;
-                border-radius: 10px;
-
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-
-                .exerciseName {
-                    width: 80%;
-                    display: flex;
-                    align-items: center;
-                    // justify-content:center;
-                    p {
-                        font-weight: 600;
-                        font-size: 1.2rem;
-                        color: #000000;
-                    }
-                }
-
-                .delete {
-                    width: 8%;
-                    height: 70%;
-
-                    .icon {
-                        width: 100%;
-                        height: 100%;
-                        color: #699bf7;
-                    }
-
-                    &:hover {
-                        cursor: pointer;
-                    }
-                }
-            }
+          &:hover {
+            background-color: #0d30acdf; /* Change to a darker shade on hover if desired */
+          }
         }
-
-        .footer {
-            margin-top: 10vw;
-            width: 100%;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            .buttons {
-                height: 3vw;
-                width: 3vw;
-
-                .icon {
-                    height: 100%;
-                    width: 100%;
-                    color: #8db2f9;
-                }
-            }
-        }
+      }
     }
+  }
+}
+
+.assignedExercises {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .container {
+    width: clamp(28vw, 28vw, 80vw);
+    height: 90%;
+    padding: 1% 2%;
+    outline: 3px solid #d6e1fe;
+    box-shadow: 0px 2px 6px 2px lightgray;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    .heading {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      p {
+        color: #0d30ac;
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+    }
+
+    .cards {
+      position: relative;
+      overflow-y: scroll;
+      margin: 6% 0;
+      padding: 0 2%;
+      height: 100%;
+      width: 100%;
+      .exercise {
+        min-height: 2.5vw;
+        padding: 3%;
+        margin-bottom: 0.8vw;
+        background-color: #f9f6ff;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .exerciseName {
+          //   width: 84%;
+          display: flex;
+          align-items: center;
+          // justify-content:center;
+          p {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #000000;
+          }
+        }
+
+        .delete {
+          margin-left: 4%;
+          position: relative;
+          .icon {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            // width: 1.5vw;
+            // height: 1.5vw;
+            // color: #699bf7;
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .footer {
+      // margin-top: 10vw;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .buttons {
+        height: 3vw;
+        width: 3vw;
+
+        .icon {
+          height: 100%;
+          width: 100%;
+          color: #8db2f9;
+        }
+      }
+    }
+  }
+}
+::-webkit-scrollbar {
+  width: 0.3rem;
 }
 
 @media only screen and (max-width: 450px) {
-    .rootClientDetails {
-        .header {
-            width: 90vw;
-            margin-bottom: 3%;
-            margin-top: 2%;
-            .headerContainer {
-                gap: 20px;
-                .userImage {
-                    width: 12vw;
-                    height: 12vw;
-                }
-                .userName {
-                    p {
-                        font-size: 1.3rem;
-                    }
-                }
+  .rootClientDetails {
+    .headeing {
+      font-size: 0.9rem;
+      .title {
+        font-size: 1.6rem !important;
+        font-weight: 600;
+        letter-spacing: 0em;
+      }
+    }
+    .outerContainer {
+      min-height: 70vh;
+      .header {
+        width: 100%;
+        margin-bottom: 3%;
+        margin-top: 2%;
+        .headerContainer {
+          gap: 20px;
+          .userImage {
+            width: 12vw;
+            height: 12vw;
+          }
+          .userName {
+            p {
+              font-size: 1.3rem;
             }
-            .headerButtons {
-                width: 20vw;
-                display: flex;
-                justify-content: space-between;
-                .buttons {
-                    padding: 6px 16px;
-                    .button {
-                        font-size: 16px;
-                    }
-                }
-            }
+          }
         }
-    
-        .dashboard {
-            margin: 0;
-            width: 92%;
-    
-            .clientInfo {
-                width: 100vw;
-                height: 60%;
-                // background-color: yellow;
-    
-                .data {
-                    height: 100%;
-                    width: 100%;
-                    margin: auto 0;
-                }
-            }
-    
-            .bottomContainer {
-                margin-top: 10px;
-                width: 100vw;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                .graph {
-                    flex-direction:column-reverse;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 15px 0px;
-                    .top{
-                        justify-content: space-between;
-                        gap: 0px;
-                        margin-left: 0px;
-                        width: 80vw;
-                        p{
-                            padding: 5px 10px;
-                            border-radius: 14px;
+        .headerButtons {
+          width: 36vw;
+          display: flex;
+          justify-content: space-between;
+          font-size: 1rem;
+          .button {
+            padding: 2px 14px;
+          }
+          .buttonChat {
+            padding: 2px 14px;
+          }
+        }
+      }
 
-                        }
-                    }
-    
-                    .chart{
-                        padding: 10px 15px;
-                        border-radius: 20px;
-                        width:90vw;
-                    }
-                }
-    
-                .buttons {
-                    width: 80vw;
-                    gap: 0px;
-                    align-items: center;
-                    justify-content: space-between;
-                    flex-direction: row;
-                    padding-left: 0;
-                    .assign{
-                        padding: 5px 15px;
-                        font-size: 16px;
-                    }
-                }
-            }
+      .dashboard {
+        margin: 0;
+        width: 100%;
+        .clientInfo {
+          width: 100vw;
+          .data {
+            height: 100%;
+            width: 100%;
+            margin: auto 0;
+          }
         }
-    
-        /* Overlay Styles */
-        .overlay {
-            .overlayContent {
-                padding: 20px 50px 0 50px;
-                width: 90vw;
-                height: auto;
-                border-radius: 10px;
-                outline: 5px solid #d6e1fe;
-                .closeicon{
-                    left: 56%;
-                }
-                .closeicon{
-                    cursor: pointer;
-                }
-    
-                .inputBox {
-                    margin: 0px;
-                    height: 91px;
-                    width: 70vw;
-    
-                    label {
-                        font-size: 20px;
-                    }
-    
-                    input {
-                        border-radius: 6px;
-                        height: 40px;
-                        font-size: 1rem;
-                    }
-                }
+
+        .bottomContainer {
+          margin-top: 10px;
+          width: 100%;
+          flex-direction: column;
+          .graph {
+            .top {
+              p {
+                font-size: 1rem;
+              }
             }
-        }
-    }
-    .assignedExercises {
-        .container {
-            width: 80vw;
-            height: fit-content;
-            padding: 10px 20px 15px 20px;
+
+            .chart {
+              width: 100%;
+            }
+          }
+
+          .buttons {
             margin-top: 5%;
-            border-radius: 10px;
-            .heading {
-                p {
-                    font-size: 1.3rem;
-                }
+            width: 100%;
+            justify-content: space-around;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .assign {
+              padding: 5px 14px;
+              font-size: 1rem;
             }
-    
-            .cards {
-                margin-top: 2vw;
-                .exercise {
-                    width: 70vw;
-                    margin-bottom: 4%;
-                    .exerciseName {
-                        width: 84%;
-                        p {
-                            font-size: 1rem;
-                        }
-                    }
-                }
-            }
-            .footer {
-                .buttons {
-                    height: 12vw;
-                    width: 12vw;
-                }
-            }
+          }
         }
+      }
     }
+  }
+  /* Overlay Styles */
+  .overlay {
+    .overlayContent {
+      padding: 20px 50px 0 50px;
+      width: 90vw;
+      height: auto;
+      border-radius: 10px;
+      outline: 5px solid #d6e1fe;
+      .closeicon {
+        left: 56%;
+      }
+      .closeicon {
+        cursor: pointer;
+      }
+
+      .inputBox {
+        margin: 0px;
+        height: 91px;
+        width: 70vw;
+
+        label {
+          font-size: 20px;
+        }
+
+        input {
+          border-radius: 6px;
+          height: 40px;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  .assignedExercises {
+    .container {
+      height: fit-content;
+      padding: 10px 20px 15px 20px;
+      margin-top: 5%;
+      border-radius: 10px;
+      .heading {
+        p {
+          font-size: 1.3rem;
+        }
+      }
+
+      .cards {
+        margin-top: 2vw;
+        .exercise {
+          width: 70vw;
+          margin-bottom: 4%;
+          .exerciseName {
+            width: 84%;
+            p {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+      .footer {
+        .buttons {
+          height: 12vw;
+          width: 12vw;
+        }
+      }
+    }
+  }
 }

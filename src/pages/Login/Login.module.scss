@@ -1,370 +1,316 @@
 .rootLogin {
-    width: 100vw;
-    height: 100vh;
-    // background-color: red;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // background-image: url("../../assets/loginbackground1.jpeg");
+  // background-size: cover;
+  .bgImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../assets/loginbackground.jpeg");
+    background-size: cover;
+    background-position: center;
+    z-index: -1; /* Ensure the background image is behind the overlay component */
+  }
+  .overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.509);
+  }
+  .containerMain {
+    width: 30vw;
+    height: 70vh;
+    background-color: #f8f8f8;
+    margin: auto;
+    position: absolute;
+    z-index: 2;
+    border-radius: 3%;
+    .header {
+      display: flex;
+      justify-content: center;
+      height: auto;
+      margin-top: 5%;
+      p {
+        font-weight: 600;
+        font-size: 4rem;
+        color: #0d30ac;
+      }
+    }
+
+    .container {
+      width: 80%;
+      margin: auto;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2%;
+      .email {
+        width: 100%;
+        margin-bottom: 40px;
+        .label {
+          font-weight: 600;
+          font-size: 1.2rem;
+          color: #614d8f;
+          margin-bottom: 15px;
+        }
+
+        .input {
+          width: 100%;
+          height: 6vh;
+          background-color: #eeeeee;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          .icon {
+            width: 15%;
+            height: 60%;
+            .emailIcon {
+              width: 100%;
+              height: 80%;
+              color: #0d30ac;
+            }
+          }
+
+          .inputEmail {
+            input {
+              width: 20vw;
+              height: 5vh;
+              outline: none;
+              border: none;
+              background-color: #eeeeee;
+              font-size: 1rem;
+              font-weight: 500;
+              color: #0d30ac;
+              &:focus {
+                outline: none;
+              }
+            }
+          }
+        }
+      }
+
+      .password {
+        width: 100%;
+        .label {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          margin-bottom: 15px;
+          .pass {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #614d8f;
+            display: block;
+          }
+
+          .forgot {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0d30ac;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+
+        .input {
+          width: 100%;
+          height: 6vh;
+          background-color: #eeeeee;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .icon {
+            width: 15%;
+            height: 60%;
+            display: flex;
+            align-items: center;
+            .passwordIcon {
+              width: 100%;
+              height: 80%;
+              color: #0d30ac;
+            }
+          }
+
+          .inputPassword {
+            flex-grow: 1;
+            input {
+              width: 100%;
+              height: 5vh;
+              outline: none;
+              border: none;
+              background-color: #eeeeee;
+              font-size: 1rem;
+              font-weight: 500;
+              color: #0d30ac;
+
+              &:focus {
+                outline: none;
+              }
+            }
+          }
+          .passicon {
+            width: 5vw;
+            .EyeIcon {
+              font-size: 1.2rem;
+              color: gray;
+            }
+          }
+        }
+      }
+
+      .buttons {
+        width: 100%;
+        height: 8rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .signin {
+          width: 40%;
+          height: 6vh;
+          background-color: #0d30ac;
+          border-radius: 5px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        .signup {
+          width: 12vw;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          color: #614d8f;
+          font-weight: 600;
+          font-size: 1rem;
+          .link {
+            text-decoration: underline;
+            line-height: 15px;
+          }
+        }
+      }
+    }
+  }
+  .errorpopup {
+    width: 20vw;
+    height: 10vh;
+    padding: 10px 15px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: rgb(255, 78, 38);
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    z-index: 6;
+  }
 
+  .errorpopup p {
+    color: white;
+  }
+  @media only screen and (max-width: 450px) {
     .containerMain {
-        width: 55%;
+      width: 90vw;
+      height: 55vh;
+      margin: auto;
+      .header {
+        width: 100%;
         height: auto;
-        // background-color: aqua;
-        margin: auto;
+        margin: 10% auto 5% auto;
+        p {
+          font-size: 2rem;
+        }
+      }
 
-        .header {
-            display: flex;
-            justify-content: center;
-            height: auto;
-            // background-color: red;
-            padding-bottom: 2vw;
+      .container {
+        .email {
+          width: 80vw;
+          margin-bottom: 8%;
+          .label {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+          }
+          .input {
+            .inputEmail {
+              input {
+                width: 60vw;
+              }
+            }
+          }
+        }
+
+        .password {
+          width: 80vw;
+          .label {
+            margin-bottom: 10px;
+            .pass {
+              font-size: 1.1rem;
+            }
+            .forgot {
+              font-size: 0.8rem;
+              font-weight: 600;
+            }
+          }
+
+          .input {
+            .icon {
+              width: 16vw;
+              height: 60%;
+            }
+
+            .inputPassword {
+              input {
+                width: 48vw;
+              }
+            }
+            .passicon {
+              width: 15vw;
+            }
+          }
+        }
+
+        .buttons {
+          width: 50vw;
+          height: auto;
+          flex-direction: column;
+          margin-top: 10%;
+          .signin {
+            width: 50vw;
+            height: 5vh;
+            border-radius: 5px;
             p {
-                font-weight: 600;
-                font-size: 5vw;
-                color: #0d30ac;
+              font-size: 1rem;
             }
+          }
+
+          .signup {
+            width: 60vw;
+            margin-top: 3%;
+          }
         }
-
-        .container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-
-            // background-color: green;
-            .left {
-                width: 45%;
-                height: 500px;
-                // background-color: yellow;
-
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-
-                .email {
-                    display: flex;
-                    flex-direction: column;
-
-                    width: 100%;
-
-                    margin-bottom: 40px;
-                    // background-color: red;
-
-                    .label {
-                        font-weight: 600;
-                        font-size: 1.5vw;
-                        color: #0d30ac;
-
-                        margin-bottom: 15px;
-                    }
-
-                    .input {
-                        width: 100%;
-                        height: 3.5rem;
-                        // background-color: yellow;
-                        background-color: #f8f8f8;
-                        border-radius: 5px;
-
-                        display: flex;
-                        align-items: center;
-
-                        .icon {
-                            width: 20%;
-                            height: 60%;
-                            display: flex;
-                            align-items: center;
-
-                            .emailIcon {
-                                width: 100%;
-                                height: 80%;
-                                color: #002e53;
-                            }
-                        }
-
-                        .inputEmail {
-                            // width: 90%;
-                            // height: 100%;
-                            // background-color: red;
-
-                            input {
-                                width: 20vw;
-                                height: 5dvh;
-                                outline: none;
-                                border: none;
-                                background-color: #f8f8f8;
-
-                                font-size: 22px;
-                                font-weight: 500;
-                                color: #0d30ac;
-
-                                &:focus {
-                                    outline: none;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .password {
-                    display: flex;
-                    flex-direction: column;
-
-                    width: 100%;
-
-                    // background-color: red;
-
-                    .label {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
-                        margin-bottom: 15px;
-                        .pass {
-                            font-weight: 600;
-                            font-size: 1.5vw;
-                            color: #0d30ac;
-                            display: block;
-                        }
-
-                        .forgot {
-                            // margin-bottom:% ;
-                            display: block;
-
-                            font-size: 1vw;
-                            font-weight: 600;
-                            color: #0d30ac;
-
-                            display: flex;
-                            align-items: center;
-
-                            &:hover {
-                                cursor: pointer;
-                            }
-                        }
-                    }
-
-                    .input {
-                        width: 100%;
-                        height: 3.5rem;
-                        // background-color: yellow;
-                        background-color: #f8f8f8;
-                        border-radius: 5px;
-
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        .icon {
-                            width: 5vw;
-                            height: 60%;
-                            display: flex;
-                            align-items: center;
-
-                            .passwordIcon {
-                                width: 100%;
-                                height: 80%;
-                                color: #002e53;
-                            }
-                        }
-
-                        .inputPassword {
-                            input {
-                                width: 100%;
-                                height: 5vh;
-                                outline: none;
-                                border: none;
-                                background-color: #f8f8f8;
-
-                                font-size: 18px;
-                                font-weight: 500;
-                                color: #0d30ac;
-
-                                &:focus {
-                                    outline: none;
-                                }
-                            }
-                        }
-                        .passicon{
-                            width: 5vw;
-                            .EyeIcon{
-                                font-size: 1.5rem;
-                                color: rgb(86, 85, 85);
-                            }
-                        }
-                    }
-                }
-
-                .buttons {
-                    width: 25vw;
-                    height: 8rem;
-                    // background-color: red;
-
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-
-                    .signin {
-                        width: 40%;
-                        height: 45%;
-                        background-color: #0d30ac;
-
-                        border-radius: 8px;
-
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-
-                        p {
-                            color: white;
-                            font-size: 1.2vw;
-                            font-weight: 600;
-                        }
-
-                        &:hover {
-                            cursor: pointer;
-                        }
-                    }
-
-                    .signup {
-                        width: 12vw;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        color: #0d30ac;
-                        font-weight: 600;
-                        font-size: 1rem;
-                            .link {
-                                text-decoration: underline;
-                                line-height: 15px;
-                            }
-
-                    }
-                }
-            }
-
-            .right {
-                width: 30vw;
-                height: 55vh;
-                // background-color: red;
-                border: 1px solid #d9d9ff;
-                margin-left: 10%;
-
-                border-radius: 50%;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                img {
-                    width: 88%;
-                    height: auto;
-                }
-            }
-        }
+      }
     }
-    @media only screen and (max-width: 450px){
-        .containerMain {
-            width: 100vw;
-            height: auto;
-            margin: auto;
-            .header {
-                width: 100%;
-                height: auto;
-                margin: 10% auto 5% auto;
-                p {
-                    font-size: 2rem;
-                }
-            }
-    
-            .container {
-                display: flex;
-                flex-direction: column-reverse;
-                align-items: center;
-                justify-content: space-between;
-                .left {
-                    width: 100vw;
-                    height: auto;
-                    .email {
-                        width: 80vw;
-                        margin-bottom: 20px;    
-                        .label {
-                            font-size: 1.1rem;
-                            margin-bottom: 10px;
-                        }
-                        .input{
-                            .inputEmail{
-                                input{
-                                    width: 60vw;
-                                }
-                            }
-                        }
-                    }
-    
-                    .password {
-                        width: 80vw;
-                        .label {
-                            margin-bottom: 10px;
-                            .pass {
-                                font-size: 1.1rem;
-                            }
-    
-                            .forgot {
-                                font-size: .8rem;
-                                font-weight: 500;
-                            }
-                        }
-    
-                        .input {
-                            .icon {
-                                width: 16vw;
-                                height: 60%;
-                            }
-    
-                            .inputPassword {
-                                input {
-                                    width: 48vw;
-                                }
-                            }
-                            .passicon{
-                                width: 15vw;
-                            }
-                        }
-                    }
-    
-                    .buttons {
-                        width: 50vw;
-                        height: auto;
-                        flex-direction: column;
-                        margin-top: 5%;
-                        .signin {
-                            width: 40vw;
-                            height: 5vh;
-                            border-radius: 5px;
-                            p {
-                                font-size: 1rem;
-                            }
-                        }
-    
-                        .signup {
-                            width: 50vw;
-                            margin-top: 3%;
-                        }
-                    }
-                }
-    
-                .right {
-                    width: 75vw;
-                    height: 75vw;
-                    border: 2px solid #d9d9ff;
-                    margin: 0;
-                    img {
-                        width: 56vw;
-                        height: 56vw;
-                        border-radius: 50%;
-                        background-image: linear-gradient(to bottom,rgb(234, 243, 255), rgb(255, 255, 255));
-                    }
-                }
-            }
-        }
+  }
+  @media only screen and (max-width: 380px) {
+    .containerMain {
+      height: 65vh;
     }
+  }
 }
