@@ -20,10 +20,13 @@ import { AuthContext } from "../../components/data_fetch/authProvider";
 import { RxCross2 } from "react-icons/rx";
 import { database } from "../../firebase";
 import { set, get, ref as dbRef, push } from "firebase/database";
-import { Spinner } from "@chakra-ui/react";
+import { Center, Spinner } from "@chakra-ui/react";
+import { IoMdArrowDropdown } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
   const { user } = useContext(AuthContext);
+  const Navigate = useNavigate();
   const [thumbnail, setThumbnail] = useState(null);
   const [Exercise_Name, setTitle] = useState("");
   const [Preparation, setDescription] = useState("");
@@ -34,6 +37,12 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [selectedPeriod, setSelectedPeriod] = useState("Monday");
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const client = urlParams.get("client");
+
   const handleVideoChange = (e) => {
     const file = e.target.files[0];
     setVideo(file);
@@ -99,6 +108,7 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
           thumbnailURL,
           duration,
           reps,
+          assignedDay: selectedPeriod,
           assignedOn: Timestamp.now(),
           physioId: user?.uid,
         }
@@ -110,6 +120,7 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
           Target,
           duration,
           reps,
+          assignedDay: selectedPeriod,
           assignedOn: Timestamp.now(),
           physioId: user?.uid,
         };
@@ -159,6 +170,7 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
         //function to add exercise assigned to client in realtime database//
         const ex = {
           Exercise_Name: selectedExercise.Exercise_Name,
+          assignedDay: selectedPeriod,
           id: docRef.id,
         };
         try {
@@ -224,7 +236,8 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
 
   const handleSuccess = () => {
     setSuccess(false);
-    clientId && window.location.replace("/Clients?client=" + clientId);
+    // clientId && window.location.replace("/Clients?client=" + clientId);
+    Navigate(`/Clients/${clientId}/assignedExercise`);
   };
 
   return (
@@ -300,6 +313,29 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
 
           <div className={classes.bottom}>
             <div className={classes.left}>
+              {client && (
+                <div className={classes.selectContainer}>
+                  <div className={classes.fieldName}>
+                    <p>Select a day</p>
+                  </div>
+                  <div className={classes.headerSelector}>
+                    <select
+                      className={classes.selector}
+                      id="daySelector"
+                      value={selectedPeriod}
+                      onChange={(e) => setSelectedPeriod(e.target.value)}
+                    >
+                      <option value="Monday">Monday</option>
+                      <option value="Tuesday">Tuesday</option>
+                      <option value="Wednesday">Wednesday</option>
+                      <option value="Thursday">Thursday</option>
+                      <option value="Friday">Friday</option>
+                      <option value="Saturday">Saturday</option>
+                      <option value="Sunday">Sunday</option>
+                    </select>
+                  </div>
+                </div>
+              )}
               <div className={classes.formElementsBottom}>
                 <div className={classes.fieldName}>
                   <p>Repetitions</p>

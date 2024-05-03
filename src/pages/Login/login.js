@@ -70,17 +70,15 @@ function Login() {
                 <MdEmail className={classes.emailIcon} />
               </Center>
 
-              <div className={classes.inputEmail}>
-                <input
-                  type="email"
-                  onChange={(event) =>
-                    setValues((prev) => ({
-                      ...prev,
-                      email: event.target.value,
-                    }))
-                  }
-                />
-              </div>
+              <input
+                type="email"
+                onChange={(event) =>
+                  setValues((prev) => ({
+                    ...prev,
+                    email: event.target.value,
+                  }))
+                }
+              />
             </div>
           </div>
 
@@ -92,21 +90,19 @@ function Login() {
               </Center>
             </div>
             <div className={classes.input}>
-              <div className={classes.icon}>
+              <Center className={classes.icon}>
                 <RiLockPasswordFill className={classes.passwordIcon} />
-              </div>
+              </Center>
 
-              <div className={classes.inputPassword}>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  onChange={(event) =>
-                    setValues((prev) => ({
-                      ...prev,
-                      pass: event.target.value,
-                    }))
-                  }
-                />
-              </div>
+              <input
+                type={showPassword ? "text" : "password"}
+                onChange={(event) =>
+                  setValues((prev) => ({
+                    ...prev,
+                    pass: event.target.value,
+                  }))
+                }
+              />
               <Center className={classes.passicon}>
                 {showPassword ? (
                   <IoEyeOutline
@@ -140,7 +136,7 @@ function Login() {
               >
                 <Text>Log In</Text>
                 <Center id="arrow">
-                  <FaArrowRightLong color="white" size={10} />
+                  <FaArrowRightLong color="white" />
                 </Center>
               </Flex>
             </motion.div>

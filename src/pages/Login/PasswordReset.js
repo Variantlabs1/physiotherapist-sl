@@ -67,12 +67,10 @@ const PasswordReset = () => {
               <div className={classes.input}>
                 <MdEmail className={classes.emailIcon} />
 
-                <div className={classes.inputEmail}>
-                  <input
-                    type="email"
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                </div>
+                <input
+                  type="email"
+                  onChange={(event) => setEmail(event.target.value)}
+                />
               </div>
             </div>
 
@@ -87,7 +85,7 @@ const PasswordReset = () => {
                 <Flex justifyContent="center" color="white" gap={3}>
                   <Text>Send Link</Text>
                   <Center id="arrow">
-                    <FaArrowRightLong color="white" size={10} />
+                    <FaArrowRightLong color="white" />
                   </Center>
                 </Flex>
               </motion.div>

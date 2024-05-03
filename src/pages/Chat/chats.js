@@ -8,14 +8,13 @@ import {
   onSnapshot,
   serverTimestamp,
   where,
-  getDoc,
   getDocs,
 } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { LuImagePlus } from "react-icons/lu";
 import { db, storage } from "../../firebase";
 import classes from "./Chats.module.scss";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { isSameDay } from "date-fns";
 import { Center, Text } from "@chakra-ui/react";
 import useDate from "../../components/useDate";
@@ -23,6 +22,7 @@ import { IoIosSend } from "react-icons/io";
 import { AiOutlinePaperClip } from "react-icons/ai";
 import { useAuth } from "../../components/data_fetch/authProvider";
 import { MdClose } from "react-icons/md";
+import ImageComponent from "./components/ImageConponent";
 
 const Chats = () => {
   const date = useDate();
@@ -35,10 +35,8 @@ const Chats = () => {
   const [newMessage, setNewMessage] = useState("");
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
-
   // const chatId = client.userId + user?.uid;
   const messagesEndRef = useRef(null);
-  // console.log(client);
   useEffect(() => {
     const getClients = async () => {
       try {
@@ -86,7 +84,7 @@ const Chats = () => {
       return;
     }
     if (file) {
-      const filename = "messageFiles/" + user.user.uid + "@" + file.name;
+      const filename = "/messageFiles/" + user.user.uid + "@" + file.name;
       const storageRef = ref(storage, filename);
       const uploadTask = await uploadBytes(storageRef, file);
       getDownloadURL(uploadTask.ref)
@@ -95,15 +93,23 @@ const Chats = () => {
             await addDoc(collection(db, "messages", user.user.uid, userId), {
               fromId: user.user.uid,
               toId: userId,
+              text: filename,
+              isImage: true,
+              timestamp: serverTimestamp(),
+            });
+            await addDoc(collection(db, "messages", user.user.uid, userId), {
+              fromId: user.user.uid,
+              toId: userId,
               text: newMessage,
-              file: downloadURL,
+              isImage: false,
               timestamp: serverTimestamp(),
             });
           } else {
             await addDoc(collection(db, "messages", user.user.uid, userId), {
               fromId: user.user.uid,
               toId: userId,
-              file: downloadURL,
+              text: filename,
+              isImage: true,
               timestamp: serverTimestamp(),
             });
           }
@@ -114,15 +120,13 @@ const Chats = () => {
         fromId: user.user.uid,
         toId: userId,
         text: newMessage,
+        isImage: false,
         timestamp: serverTimestamp(),
       });
     }
 
     setNewMessage("");
     setFile(null);
-    //    const res= await getDocs(collection(db,"messages","SbqsWHtft11OOndsDQpK","chatMessages"))
-    //    const message = res.docs.map(d=>d.data())
-    //    console.log(message)
   };
 
   const scrollToBottom = () => {
@@ -214,7 +218,6 @@ const Chats = () => {
 
               // Update currentDate to the current message date
               currentDate = messageDate;
-
               return (
                 <div key={index}>
                   {showDateHeader && (
@@ -237,22 +240,9 @@ const Chats = () => {
                         className={classes.img}
                       />
                     )}
-                    {message.text && message.file ? (
+                    {message.isImage ? (
                       <div className={classes.msg}>
-                        <img src={message.file} alt="" />
-                        <p>{message.text}</p>
-                        <span>
-                          {messageDate &&
-                            messageDate.toLocaleTimeString([], {
-                              hour: "numeric",
-                              minute: "2-digit",
-                              hour12: true,
-                            })}
-                        </span>
-                      </div>
-                    ) : message.text ? (
-                      <div className={classes.msg}>
-                        <p>{message.text}</p>
+                        <ImageComponent imagePath={message.text} />
                         <span>
                           {messageDate &&
                             messageDate.toLocaleTimeString([], {
@@ -264,7 +254,7 @@ const Chats = () => {
                       </div>
                     ) : (
                       <div className={classes.msg}>
-                        <img src={message.file} alt="" />
+                        <p>{message.text}</p>
                         <span>
                           {messageDate &&
                             messageDate.toLocaleTimeString([], {
@@ -275,17 +265,6 @@ const Chats = () => {
                         </span>
                       </div>
                     )}
-                    {/* <div className={classes.msg}>
-                      <p>{message.text}</p>
-                      <span>
-                        {messageDate &&
-                          messageDate.toLocaleTimeString([], {
-                            hour: "numeric",
-                            minute: "2-digit",
-                            hour12: true,
-                          })}
-                      </span>
-                    </div> */}
                   </div>
                 </div>
               );
@@ -307,13 +286,14 @@ const Chats = () => {
         <div className={classes.chatInput}>
           <div className={classes.inputContainer}>
             <Center>
-              <AiOutlinePaperClip
+              <LuImagePlus
                 className={classes.icon}
                 onClick={handleButtonClick}
               />
             </Center>
             <input
               type="file"
+              accept="image/jpeg, image/png"
               ref={fileInputRef}
               style={{ display: "none" }}
               onChange={(e) => setFile(e.target.files[0])}

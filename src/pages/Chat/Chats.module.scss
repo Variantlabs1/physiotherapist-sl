@@ -19,24 +19,25 @@
     height: 84vh;
     border-radius: 20px;
     border: 3px solid #4370cb3c;
+    display: flex;
+    flex-direction: column;
     .header {
       width: 100%;
-      height: 11vh;
       background-color: #d3d3d340;
       margin: auto;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      padding: 0 3%;
+      padding: 1%;
       .headerContainer {
         display: flex;
         width: max-content;
         gap: 20px;
 
         .userImage {
-          width: 3.5vw;
-          height: 3.5vw;
+          width: 2.8vw;
+          height: 2.8vw;
           img {
             border: 1px solid #4370cb;
             width: 100%;
@@ -52,7 +53,7 @@
           justify-content: center;
           p {
             font-weight: 500;
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             color: #0d1dac;
           }
         }
@@ -62,14 +63,14 @@
         display: flex;
         justify-content: space-between;
         .buttons {
-          padding: 3px 20px;
+          padding: 2px 18px;
           border-radius: 10px;
           border: 1px solid #0d30ac;
           color: #0d30ac;
           .button {
             background-color: transparent;
             border: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 500;
           }
         }
@@ -78,33 +79,12 @@
         }
       }
     }
-    .imageContainer {
-      height: 63vh;
-      width: 50%;
-      margin: auto;
-      // background-color: rgba(128, 128, 128, 0.47);
-      .icon {
-        width: 3vw;
-        height: 3vw;
-        border-radius: 50%;
-        cursor: pointer;
-        &:hover {
-          background-color: rgba(211, 211, 211, 0.562);
-        }
-      }
-      .img {
-        img {
-          border-radius: 10px;
-          max-height: 100%;
-        }
-      }
-    }
     .chatMessages {
       flex-grow: 1;
+      width: 100%;
       margin: auto;
       overflow-y: scroll;
       padding: 1% 3%;
-      height: 63vh;
       //   margin: 2% auto;
       &::-webkit-scrollbar {
         width: 0;
@@ -124,7 +104,7 @@
           }
           .msg {
             // background: #e4edff;
-            padding: 4px 60px 4px 10px;
+            padding: 0.5% 0.5% 1.5% 0.5%;
             box-shadow: 0px 0.8px 3px 1px #c8ced8;
             display: flex;
             align-items: center;
@@ -138,7 +118,7 @@
             img {
               width: 18vw;
               height: 34vh;
-              margin: 3% 0;
+              margin: 1% 0;
               border-radius: 8px;
             }
             p {
@@ -148,8 +128,8 @@
             }
             span {
               position: absolute;
-              bottom: 0;
-              right: 8%;
+              bottom: 2px;
+              right: 8px;
               font-size: 0.7rem !important;
             }
           }
@@ -163,7 +143,7 @@
           .msg {
             background: #e4edff;
             box-shadow: 0px 0.8px 2px 1px #c9cbce;
-            padding: 4px 60px 4px 10px;
+            padding: 0.5% 0.5% 1.5% 0.5%;
             font-size: 1rem;
             font-weight: 500;
             border-radius: 5px;
@@ -176,7 +156,7 @@
             img {
               width: 18vw;
               height: 34vh;
-              margin: 3% 0;
+              margin: 1% 0;
               border-radius: 8px;
             }
             p {
@@ -219,8 +199,101 @@
 
         .icon {
           cursor: pointer;
-          font-size: 2rem;
-          font-weight: 600;
+          font-size: 1.8rem;
+          font-weight: 500;
+          color: rgb(88, 88, 88);
+        }
+      }
+    }
+  }
+  @media only screen and (min-height: 1200px) {
+    .outerContainer {
+      height: 90vh;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    .outerContainer {
+      .header {
+        height: auto;
+        padding: 2%;
+        .headerContainer {
+          .userImage {
+            width: 5vw;
+            height: 5vw;
+          }
+        }
+
+        .headerButtons {
+          .buttons {
+            padding: 5px 20px;
+            .button {
+              font-size: 1.2rem;
+            }
+          }
+        }
+      }
+      .chatMessages {
+        flex-grow: 1;
+        width: 100%;
+        .message {
+          &.received {
+            margin-bottom: 2%;
+            .img {
+              width: 4vw;
+              height: 4vw;
+            }
+            .msg {
+              padding: 1% 1% 3% 1%;
+              font-size: 1rem;
+              min-height: 5vh;
+              min-width: 10vw;
+
+              img {
+                width: 30vw;
+                height: 30vw;
+              }
+              p {
+                min-height: 2vh;
+                max-width: 30vw;
+              }
+            }
+          }
+
+          &.sent {
+            display: flex;
+            justify-content: flex-end;
+            max-width: 100%;
+            margin-bottom: 15px;
+            .msg {
+              padding: 1% 1% 3% 1%;
+              font-size: 1rem;
+              min-height: 3vh;
+              min-width: 10vw;
+              img {
+                width: 30vw;
+                height: 30vw;
+              }
+              p {
+                min-height: 2vh;
+                max-width: 30vw;
+              }
+            }
+          }
+        }
+      }
+      .chatInput {
+        .inputContainer {
+          height: 5vh;
+          input {
+            font-size: 1.5rem;
+          }
+
+          .icon {
+            cursor: pointer;
+            font-size: 2rem;
+            font-weight: 500;
+            color: rgb(88, 88, 88);
+          }
         }
       }
     }
@@ -235,7 +308,7 @@
       }
     }
     .outerContainer {
-      height: 73vh;
+      height: 80vh;
       .header {
         height: 9vh;
         .headerContainer {
@@ -260,8 +333,6 @@
         }
       }
       .chatMessages {
-        width: 96%;
-        height: 57vh;
         .message {
           &.received {
             .img {
@@ -270,27 +341,42 @@
               margin-right: 2%;
             }
             .msg {
-              font-size: 1.2rem;
-              padding: 4px 60px 4px 10px;
+              font-size: 1rem;
+              min-height: 3vh;
+              padding: 1% 1% 3% 1%;
               p {
-                min-height: 3vh;
-                max-width: 70vw;
+                min-height: 2vh;
+                max-width: 90%;
               }
               span {
-                right: 6%;
+                right: 4%;
+                bottom: 1%;
+                font-size: 0.5rem !important;
+              }
+              img {
+                height: 30vw;
+                width: 30vw;
               }
             }
           }
 
           &.sent {
             .msg {
-              font-size: 1.2rem;
-              padding: 4px 60px 4px 10px;
+              min-height: 3vh;
+              font-size: 1rem;
+              padding: 1% 1% 3% 1%;
               p {
-                max-width: 60vw;
+                min-height: 2vh;
+                max-width: 90%;
               }
               span {
-                right: 6%;
+                right: 4%;
+                bottom: 1%;
+                font-size: 0.5rem !important;
+              }
+              img {
+                height: 30vw;
+                width: 30vw;
               }
             }
           }

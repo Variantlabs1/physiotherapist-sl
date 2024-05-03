@@ -43,7 +43,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    border: 3px solid #4370cb3c;
+    // border: 3px solid #4370cb3c;
     border-radius: 15px;
     padding: 3% 0;
     .left {
@@ -318,54 +318,52 @@
   }
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 1024px) {
   .exerciseDetailsContainer {
-    width: 92%;
+    width: 95%;
     margin: auto;
     .header {
       margin-bottom: 5%;
-      width: 98%;
+      width: 100%;
+      height: 4.5vh;
       .exerciseTitle {
-        font-size: 1.4rem;
-        height: 4vw;
+        font-size: 2rem;
+        height: 100%;
       }
 
       .buttons {
-        background-color: #6c9fff;
-        height: fit-content;
+        border: 2px solid #0d30ac;
+        background-color: transparent;
+        color: #0d30ac;
+        font-weight: 600;
         border-radius: 15px;
-        .button {
-          width: 18vw;
-          height: 4vh;
-          font-size: 1.2rem;
-          border-radius: 80px;
-        }
+        width: 24vw;
+        height: 100%;
+        font-size: 1.3rem;
       }
     }
     .videosContainerMobile {
       display: block;
       margin-top: 4%;
-      width: 90%;
+      width: 100%;
       .videosTitle {
         p {
           font-weight: 700;
-          font-size: 1.2rem;
+          font-size: 1.8rem;
           color: #614d8f;
         }
       }
 
       .videoItem {
-        margin-top: 2%;
-        height: auto;
-        width: auto;
+        margin: 2% 0;
         border-radius: 10px;
         display: flex;
         gap: 5px;
         align-items: center;
         justify-content: space-between;
         video {
-          width: 48vw;
-          height: 17vh;
+          width: 100%;
+          height: 24vh;
           border-radius: 10px;
           overflow: hidden;
           object-fit: cover;
@@ -382,11 +380,11 @@
         margin-top: 3%;
         display: flex;
         flex-direction: row;
-        width: 70%;
+        width: 60%;
         min-height: 8vh;
         justify-content: space-between;
         .items {
-          width: 16vw;
+          width: 12vw;
           height: auto;
           background-color: #e7f3ffbf;
           border-radius: 10px;
@@ -405,8 +403,8 @@
             justify-content: center;
             margin-top: 2%;
             .icons {
-              height: 6vw;
-              width: 6vw;
+              height: 4vw;
+              width: 4vw;
             }
           }
           input {
@@ -427,7 +425,7 @@
             margin-top: 0.2vw;
             text-align: center;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 1rem;
             color: #614d8f;
             padding: 0 2vw;
           }
@@ -437,7 +435,7 @@
         height: auto;
         p {
           font-weight: 700;
-          font-size: 1.2rem;
+          font-size: 1.8rem;
           color: #614d8f;
         }
       }
@@ -445,14 +443,15 @@
 
     .container {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-between;
+      padding: 0;
       .left {
-        width: 40%;
+        width: 100%;
         .thumbnailContainer {
           .thumbnailImage {
             height: 50vw;
-            width: 50vw;
+            width: 100%;
             border-radius: 10px;
           }
         }
@@ -462,29 +461,27 @@
       }
 
       .right {
-        padding-left: 2vw;
-        padding-right: 2vw;
-        width: 56%;
+        margin: 3% 0;
+        width: 100%;
         .descriptionContainer {
           padding-bottom: 2vw;
           .descriptionTitle {
             align-items: center;
             p {
-              font-size: 1.1rem;
+              font-size: 1.8rem;
             }
 
             div {
-              height: 6vw;
-              width: 6vw;
+              height: 4vw;
+              width: 4vw;
             }
           }
 
           .descriptionContent {
-            font-size: 1rem;
+            font-size: 1.2rem !important;
             p {
-              line-height: 1rem;
+              line-height: 1.2rem;
               font-weight: 500;
-              font-size: 0.9rem;
               max-height: 15vh;
               height: auto;
               overflow-y: scroll;
@@ -497,7 +494,7 @@
               textarea {
                 width: 100%;
                 height: 15vh;
-                font-size: 0.9rem;
+                font-size: 1.2rem;
                 padding: 0;
                 line-height: 1rem;
                 font-weight: 500;
@@ -508,12 +505,12 @@
                   width: 15vw;
                   height: 3vh;
                   color: #ffffff;
-                  font-size: 0.8rem;
+                  font-size: 1rem;
                 }
                 .button1 {
                   width: 15vw;
                   height: 3vh;
-                  font-size: 0.8rem;
+                  font-size: 1rem;
                 }
               }
             }
@@ -527,7 +524,7 @@
           .musclesInvolvedTitle {
             height: auto;
             p {
-              font-size: 0.8rem;
+              font-size: 1.8rem;
             }
           }
 
@@ -536,7 +533,7 @@
             .musclesInvolved {
               margin-top: 3%;
               p {
-                font-size: 0.7rem;
+                font-size: 1.2rem;
               }
             }
           }
@@ -548,33 +545,157 @@
     }
   }
   .label {
-    cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     padding: 3px 5px;
     width: 100%;
-    align-self: center;
-    text-align: center;
+    height: 5vh;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     border-radius: 8px;
     border: 1px solid #614d8f;
-    flex-direction: column;
     background: #fff;
     box-shadow: 0px 2px 8px 0px rgba(231, 243, 255, 0.15),
       0px 2px 6px 0px rgba(231, 243, 255, 0.25);
+  }
+  .label1 {
+    height: auto !important;
     & > span {
       border-radius: 50%;
       background: #e7f3ff;
       display: flex;
-      width: 4vw;
-      height: 4vw;
+      width: 8vw;
+      height: 8vw;
       justify-content: center;
       align-items: center;
       cursor: pointer;
     }
     & > label {
       width: 100%;
+    }
+  }
+}
+@media only screen and (max-width: 450px) {
+  .exerciseDetailsContainer {
+    .header {
+      width: 100%;
+      height: 4vh;
+      .exerciseTitle {
+        font-size: 1.5rem;
+      }
+
+      .buttons {
+        border-radius: 10px;
+        width: 24vw;
+        font-size: 1rem;
+      }
+    }
+    .videosContainerMobile {
+      .videosTitle {
+        p {
+          font-size: 1.5rem;
+        }
+      }
+      .videoItem {
+        video {
+          height: 22vh;
+        }
+      }
+    }
+    .aboutContainerMobile {
+      .info {
+        width: 75%;
+        min-height: 8vh;
+        .items {
+          width: 20vw;
+          .logo {
+            margin-top: 2%;
+            .icons {
+              height: 6vw;
+              width: 6vw;
+            }
+          }
+          input {
+            font-size: 1rem;
+            width: 7vw;
+          }
+        }
+      }
+      .aboutTitle {
+        p {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    .container {
+      .right {
+        margin: 3% 0;
+        width: 100%;
+        .descriptionContainer {
+          padding-bottom: 2vw;
+          .descriptionTitle {
+            p {
+              font-size: 1.5rem;
+            }
+
+            div {
+              height: 6vw;
+              width: 6vw;
+            }
+          }
+
+          .descriptionContent {
+            font-size: 1rem !important;
+
+            .editDesc {
+              textarea {
+                font-size: 1rem;
+              }
+              .buttons {
+                display: flex;
+                align-items: center;
+                .button {
+                  width: 20vw;
+                  height: 4vh;
+                }
+                .button1 {
+                  width: 20vw;
+                  height: 4vh;
+                }
+              }
+            }
+          }
+        }
+
+        .musclesInvolvedContainer {
+          .musclesInvolvedTitle {
+            p {
+              font-size: 1.5rem;
+            }
+          }
+
+          .musclesList {
+            .musclesInvolved {
+              p {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .label {
+    font-size: 1rem;
+    height: 4vh;
+  }
+  .label1 {
+    height: 3vh;
+    & > span {
+      width: 8vw;
+      height: 8vw;
     }
   }
 }

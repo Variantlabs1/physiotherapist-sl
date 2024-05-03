@@ -207,9 +207,7 @@ const ExercisesPage = ({
   };
 
   const backHandler = () => {
-    clientId
-      ? window.location.replace("/Clients?client=" + clientId)
-      : navigate(-1);
+    navigate(-1);
   };
   return (
     <div className={styles.rootExercises}>
@@ -393,9 +391,9 @@ const ExercisesPage = ({
                   </div>
                   {/* <p>{exercise.description?exercise.description:exercise.Preparation}</p> */}
                   {isMobile ? (
-                    <p>{exercise.Preparation.substring(0, 80)}...</p>
+                    <p>{exercise.Preparation.substring(0, 60)}...</p>
                   ) : (
-                    <p>{exercise.Preparation.substring(0, 180)}...</p>
+                    <p>{exercise.Preparation.substring(0, 140)}...</p>
                   )}
                 </div>
               </div>

@@ -13,16 +13,18 @@ import "./App.css";
 import PasswordReset from "./pages/Login/PasswordReset";
 import { useEffect, useContext } from "react";
 import { AuthContext } from "./components/data_fetch/authProvider";
-import ForgotPassword from "./pages/Login/NewLogin";
 import Dashboard from "./components/dashboard";
 import ClientsRequest from "./pages/ClientsRequest/clientsRequest";
 import Settings from "./pages/Settings/settings";
 import MainChats from "./pages/Chat/mainChats";
 import Billing from "./pages/payment/Billing";
 import MainExercises from "./pages/Exercises/mainExercises";
-import MainClients from "./pages/Clients/mainClients";
 import Login from "./pages/Login/login";
 import Chats from "./pages/Chat/chats";
+import AssignExercises from "./pages/Clients/assignExercises";
+import ClientsPage from "./pages/Clients/clientsPage";
+import ClientDetails from "./pages/Clients/clientDetails";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID);
 
@@ -36,9 +38,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={user ? <Home /> : <Navigate to="/login" />}>
+        <Route path="/" element={user ? <Home /> : <Navigate to="/home" />}>
           <Route path="Dashboard" element={<Dashboard />} />
-          <Route path="Clients" element={<MainClients />} />
+          <Route path="Clients" element={<ClientsPage />} />
+          <Route path="Clients/:id" element={<ClientDetails />} />
+          <Route
+            path="/Clients/:id/assignedExercise"
+            element={<AssignExercises />}
+          />
           <Route path="Exercises" element={<MainExercises />} />
           <Route path="/Chat" element={<MainChats />} />
           <Route path="/Chat/:id" element={<Chats />} />
@@ -46,6 +53,7 @@ function App() {
           <Route path="Requests" element={<ClientsRequest />} />
           <Route path="Profile" element={<Settings />} />
         </Route>
+        <Route path="home" element={<LandingPage />} />
         <Route
           path="login"
           element={!user ? <Login /> : <Navigate to="/Dashboard" />}

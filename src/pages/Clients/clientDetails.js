@@ -6,62 +6,65 @@ import {
   getDocs,
   doc,
   addDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import classes from "./ClientDetails.module.scss";
-import { IoMdAddCircle } from "react-icons/io";
 import { MdClose } from "react-icons/md";
 import HealthDataComponent from "./healthData";
 import FormCheck from "./formCheck";
 import Chart from "../../components/chart";
 import { AuthContext } from "../../components/data_fetch/authProvider";
-import Measurement from "./Measurement";
-import { Link } from "react-router-dom";
-import { Button } from "@chakra-ui/react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useDate from "../../components/useDate";
 import { Center } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import DeleteAssignedExercise from "./DeleteAssignedExercise";
 import BodyMeasurement from "./BodyMeasurement";
+import HeartbeatGraph from "./HeartbeatGraph";
 
-const ClientDetails = ({ clientDocId, client, onBackToList }) => {
+const ClientDetails = () => {
   const date = useDate();
+  const Navigate = useNavigate();
+  const params = useParams();
+  const userId = params.id;
+  const [docId, setDocId] = useState("constant");
+  const { user } = useContext(AuthContext);
+  const [client, setClient] = useState();
   const [weeklyExercises, setWeeklyExercises] = useState(null);
   const [showFormCheck, setShowFormCheck] = useState(false);
-  const { user } = useContext(AuthContext);
-  const [assignedExercises, setAssignedExercises] = useState([]);
   const [showNutrition, setShowNutrition] = useState(false);
-  const [displayExercises, setDisplayExercises] = useState(false);
-  const [openDeleteExerciseId, setOpenDeleteExerciseId] = useState(null);
+  const [showGraph, setShowGraph] = useState(false);
   const [nutritionData, setNutritionData] = useState({
     calories: "",
     fats: "",
     proteins: "",
     carbohydrates: "",
   });
-  const [docId, setDocId] = useState("constant");
-  const userIdToFind = client.userId; // Actual userID
-  const toggleDeleteModal = (e, exerciseId) => {
-    e.stopPropagation();
-    setOpenDeleteExerciseId(
-      exerciseId === openDeleteExerciseId ? null : exerciseId
-    );
+  const handleToggleGraph = () => {
+    setShowGraph(!showGraph);
   };
   const toggleNutritionOverlay = () => {
     setShowNutrition(true);
   };
-
   useEffect(() => {
-    if (clientDocId) {
-      setDisplayExercises(true);
-    }
-  }, [clientDocId]);
+    const getClients = async () => {
+      try {
+        const q = query(collection(db, "Users"), where("userId", "==", userId));
+        const ref = await getDocs(q);
+        const docref = ref.docs[0];
+        setClient(docref.data());
+      } catch (e) {
+        console.error("Error fetching document:", e);
+      }
+    };
+    getClients();
+  }, []);
 
   useEffect(() => {
     async function fetchDocId() {
       try {
         const usersRef = collection(db, "Users");
-        const q = query(usersRef, where("userId", "==", userIdToFind));
+        const q = query(usersRef, where("userId", "==", userId));
         const querySnapshot = await getDocs(q);
 
         if (!querySnapshot.empty) {
@@ -77,7 +80,7 @@ const ClientDetails = ({ clientDocId, client, onBackToList }) => {
     }
 
     fetchDocId();
-  }, [userIdToFind, docId]);
+  }, [userId, docId]);
 
   useEffect(() => {
     async function fetchClientNutritionData() {
@@ -112,19 +115,23 @@ const ClientDetails = ({ clientDocId, client, onBackToList }) => {
       !nutritionData.proteins ||
       !nutritionData.carbohydrates
     ) {
-      // You can add error handling here to display a message to the user.
       console.error("Please fill in all nutrition fields.");
       setShowNutrition(!showNutrition);
     } else {
       try {
         const getUserRef = doc(db, "Users", docId);
-        const caloriesCollectionRef = collection(getUserRef, "nutrition");
+        const nutritionCollectionRef = collection(getUserRef, "nutrition");
+        const querySnapshot = await getDocs(nutritionCollectionRef);
 
-        await addDoc(
-          caloriesCollectionRef,
-          nutritionData
-          // assignedOn:Timestamp.now()
-        );
+        if (!querySnapshot.empty) {
+          // If documents exist, update the first document found
+          const docSnapshot = querySnapshot.docs[0]; // Assuming only one document exists
+          await updateDoc(docSnapshot.ref, nutritionData);
+        } else {
+          // If no documents exist, add a new one
+          await addDoc(nutritionCollectionRef, nutritionData);
+        }
+
         setShowNutrition(!showNutrition);
       } catch (error) {
         console.error("Error assigning nutrition data:", error);
@@ -149,9 +156,6 @@ const ClientDetails = ({ clientDocId, client, onBackToList }) => {
           ...doc.data(),
         }));
 
-        console.log(data);
-        setAssignedExercises(data);
-
         const today = new Date();
         const sun = new Date(
           new Date().setDate(today.getDate() - today.getDay())
@@ -175,13 +179,6 @@ const ClientDetails = ({ clientDocId, client, onBackToList }) => {
     };
     fetchAssignedExercises();
   }, [client, user]);
-
-  //Show All exercises
-  const [showAllExercises, setShowAllExercises] = useState(false);
-  const allExercisesHandler = () => {
-    setShowAllExercises(!showAllExercises);
-  };
-
   return (
     <>
       {showFormCheck ? (
@@ -197,220 +194,173 @@ const ClientDetails = ({ clientDocId, client, onBackToList }) => {
             onBackClick={() => setShowFormCheck(null)}
           />
         )
-      ) : displayExercises ? (
-        <div className={classes.assignedExercises}>
-          <div className={classes.container}>
-            <div className={classes.heading}>
-              <p>Assigned Exercises</p>
-            </div>
-
-            <div className={classes.cards}>
-              {assignedExercises.map((exercise) => (
-                <div className={classes.exercise} key={exercise?.id}>
-                  <div className={classes.exerciseName}>
-                    <p>
-                      {exercise?.title
-                        ? exercise.title
-                        : exercise.Exercise_Name}
-                    </p>
-                  </div>
-
-                  <div className={classes.delete}>
-                    <DeleteAssignedExercise
-                      className={classes.icon}
-                      id={exercise.id}
-                      exerciseName={
-                        exercise?.title
-                          ? exercise.title
-                          : exercise.Exercise_Name
-                      }
-                      clientId={client.userId}
-                      isOpenDelete={exercise.id === openDeleteExerciseId}
-                      toggleDeleteModal={(e) =>
-                        toggleDeleteModal(e, exercise.id)
-                      }
-                      setAssignedExercises={setAssignedExercises}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className={classes.footer}>
-              <Button
-                bgColor="#8db2f9"
-                color="white"
-                _hover={{ bgColor: "#8db2d2" }}
-                onClick={() => {
-                  setDisplayExercises(false);
-                }}
-              >
-                Back
-              </Button>
-              <div className={classes.buttons} onClick={allExercisesHandler}>
-                <Link to={`/Exercises/?client=${client.userId}`}>
-                  <IoMdAddCircle className={classes.icon} />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
       ) : (
-        <div className={classes.rootClientDetails}>
-          <div className={classes.headeing}>
-            <div className={classes.title}>
-              <p>Activity Reports</p>
+        client && (
+          <div className={classes.rootClientDetails}>
+            <div className={classes.headeing}>
+              <div className={classes.title}>
+                <p>Activity Reports</p>
+              </div>
+              <Center fontWeight="500">{date}</Center>
             </div>
-            <Center fontWeight="500">{date}</Center>
-          </div>
-          <div className={classes.outerContainer}>
-            <div className={classes.header}>
-              <div className={classes.headerContainer}>
-                <div className={classes.userImage}>
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTte_W3r44Rc7MYnXPQZLP-z3pfAJCKJuz1GA&usqp=CAU"
-                    alt={client.userName}
-                  />
-                </div>
+            {!showGraph ? (
+              <div className={classes.outerContainer}>
+                <div className={classes.header}>
+                  <div className={classes.headerContainer}>
+                    <div className={classes.userImage}>
+                      <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTte_W3r44Rc7MYnXPQZLP-z3pfAJCKJuz1GA&usqp=CAU"
+                        alt={client.userName}
+                      />
+                    </div>
 
-                <div className={classes.userName}>
-                  <p>{client.userName}</p>
-                </div>
-              </div>
-
-              <div className={classes.headerButtons}>
-                <div className={classes.button} onClick={onBackToList}>
-                  <Link to="/Clients">Back</Link>
-                </div>
-                <div className={classes.buttonChat}>
-                  <Link to={`/Chat/${client.userId}`}>Chat</Link>
-                </div>
-              </div>
-            </div>
-
-            <div className={classes.dashboard}>
-              <div className={classes.healthInfo}>
-                <HealthDataComponent clientId={client.userId} />
-              </div>
-              <div className={classes.bottomContainer}>
-                <div className={classes.graph}>
-                  <div className={classes.top}>
-                    <p>Exercise Graph</p>
-                    {/* <p onClick={() => setShowFormCheck("Form Check")}>
-                      Form Check
-                    </p> */}
+                    <div className={classes.userName}>
+                      <p>{client.userName}</p>
+                    </div>
                   </div>
-                  <div className={classes.chart}>
-                    <Chart clientWeeklyExercises={weeklyExercises} />
+
+                  <div className={classes.headerButtons}>
+                    <div
+                      className={classes.button}
+                      onClick={() => {
+                        Navigate(-1);
+                      }}
+                    >
+                      Back
+                    </div>
+                    <div className={classes.buttonChat}>
+                      <Link to={`/Chat/${client.userId}`}>Chat</Link>
+                    </div>
                   </div>
                 </div>
 
-                <div className={classes.buttons}>
-                  <div
-                    className={classes.assign}
-                    onClick={() => setShowFormCheck("Form Check")}
-                  >
-                    <p>Form Check</p>
-                  </div>
-                  <div
-                    className={classes.assign}
-                    onClick={toggleNutritionOverlay}
-                  >
-                    <p>Assign Nutrition</p>
-                  </div>
-                  <div
-                    className={classes.assign}
-                    // onClick={assignExerciseHandler}
-                    onClick={() => setDisplayExercises(true)}
-                  >
-                    <p>Assign Exercises</p>
-                  </div>
-                  <div
-                    className={classes.assign}
-                    onClick={() => setShowFormCheck("Measurement")}
-                  >
-                    <p>Body Measurements</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* ///////////////////////////////////////////////////////////////? */}
-            {/* Nutrition Input Overlay */}
-            {showNutrition && (
-              <div className={classes.overlay}>
-                <motion.div
-                  initial={{ opacity: 0, y: -100 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -100 }}
-                  transition={{ ease: "easeOut", duration: 0.2 }}
-                  className={classes.overlayContent}
-                >
-                  <div
-                    className={classes.closeicon}
-                    onClick={() => setShowNutrition(false)}
-                  >
-                    <MdClose size={35} />
-                  </div>
-                  <div className={classes.inputBox}>
-                    <label>Calories</label>
-                    <input
-                      type="text"
-                      value={nutritionData.calories}
-                      onChange={(e) =>
-                        setNutritionData({
-                          ...nutritionData,
-                          calories: e.target.value,
-                        })
-                      }
+                <div className={classes.dashboard}>
+                  <div className={classes.healthInfo}>
+                    <HealthDataComponent
+                      clientId={client.userId}
+                      toggleGraph={handleToggleGraph}
                     />
                   </div>
-                  <div className={classes.inputBox}>
-                    <label>Fats</label>
-                    <input
-                      type="text"
-                      value={nutritionData.fats}
-                      onChange={(e) =>
-                        setNutritionData({
-                          ...nutritionData,
-                          fats: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                  <div className={classes.inputBox}>
-                    <label>Proteins</label>
-                    <input
-                      type="text"
-                      value={nutritionData.proteins}
-                      onChange={(e) =>
-                        setNutritionData({
-                          ...nutritionData,
-                          proteins: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                  <div className={classes.inputBox}>
-                    <label>Carbohydrates</label>
-                    <input
-                      type="text"
-                      value={nutritionData.carbohydrates}
-                      onChange={(e) =>
-                        setNutritionData({
-                          ...nutritionData,
-                          carbohydrates: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
+                  <div className={classes.bottomContainer}>
+                    <div className={classes.graph}>
+                      <div className={classes.top}>
+                        <p>Exercise Graph</p>
+                      </div>
+                      <div className={classes.chart}>
+                        <Chart clientWeeklyExercises={weeklyExercises} />
+                      </div>
+                    </div>
 
-                  <button onClick={assignNutritionData}>Done</button>
-                </motion.div>
+                    <div className={classes.buttons}>
+                      <div
+                        className={classes.assign}
+                        onClick={() => setShowFormCheck("Form Check")}
+                      >
+                        <p>Form Check</p>
+                      </div>
+                      <div
+                        className={classes.assign}
+                        onClick={toggleNutritionOverlay}
+                      >
+                        <p>Assign Nutrition</p>
+                      </div>
+                      <div
+                        className={classes.assign}
+                        // onClick={assignExerciseHandler}
+                        onClick={() => {
+                          Navigate(`assignedExercise`);
+                        }}
+                      >
+                        <p>Assign Exercises</p>
+                      </div>
+                      <div
+                        className={classes.assign}
+                        onClick={() => setShowFormCheck("Measurement")}
+                      >
+                        <p>Body Measurements</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Nutrition Input Overlay */}
+                {showNutrition && (
+                  <div className={classes.overlay}>
+                    <motion.div
+                      initial={{ opacity: 0, y: -100 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -100 }}
+                      transition={{ ease: "easeOut", duration: 0.2 }}
+                      className={classes.overlayContent}
+                    >
+                      <div
+                        className={classes.closeicon}
+                        onClick={() => setShowNutrition(false)}
+                      >
+                        <MdClose size={35} />
+                      </div>
+                      <div className={classes.inputBox}>
+                        <label>Calories</label>
+                        <input
+                          type="text"
+                          value={nutritionData.calories}
+                          onChange={(e) =>
+                            setNutritionData({
+                              ...nutritionData,
+                              calories: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div className={classes.inputBox}>
+                        <label>Fats</label>
+                        <input
+                          type="text"
+                          value={nutritionData.fats}
+                          onChange={(e) =>
+                            setNutritionData({
+                              ...nutritionData,
+                              fats: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div className={classes.inputBox}>
+                        <label>Proteins</label>
+                        <input
+                          type="text"
+                          value={nutritionData.proteins}
+                          onChange={(e) =>
+                            setNutritionData({
+                              ...nutritionData,
+                              proteins: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div className={classes.inputBox}>
+                        <label>Carbohydrates</label>
+                        <input
+                          type="text"
+                          value={nutritionData.carbohydrates}
+                          onChange={(e) =>
+                            setNutritionData({
+                              ...nutritionData,
+                              carbohydrates: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+
+                      <button onClick={assignNutritionData}>Done</button>
+                    </motion.div>
+                  </div>
+                )}
               </div>
+            ) : (
+              <HeartbeatGraph client={client} toggleGraph={handleToggleGraph} />
             )}
           </div>
-        </div>
+        )
       )}
     </>
   );

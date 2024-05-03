@@ -30,6 +30,7 @@
 
       .headerContainer {
         display: flex;
+        align-items: center;
         width: max-content;
         gap: 20px;
 
@@ -111,6 +112,127 @@
 
             text-align: left;
           }
+        }
+      }
+    }
+  }
+}
+@media only screen and (min-height: 1200px) {
+  .rootClients {
+    .outerContainer {
+      min-height: 90vh;
+    }
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .rootClients {
+    .header {
+      .title {
+        font-size: 1.6rem !important;
+      }
+    }
+    .outerContainer {
+      .heading {
+        .headerContainer {
+          .userImage {
+            width: 5vw;
+            height: 5vw;
+          }
+          .userName {
+            p {
+              font-size: 1.8rem;
+            }
+          }
+        }
+
+        .headerButtons {
+          width: 18vw;
+        }
+      }
+      .container {
+        .card {
+          height: 6vh;
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 820px) {
+  .rootClients {
+    .header {
+      .title {
+        font-size: 1.5rem !important;
+      }
+    }
+    .outerContainer {
+      .heading {
+        .headerContainer {
+          .userImage {
+            width: 5vw;
+            height: 5vw;
+          }
+          .userName {
+            p {
+              font-size: 1.6rem;
+            }
+          }
+        }
+
+        .headerButtons {
+          width: 23vw;
+          .button {
+            padding: 2px 18px;
+          }
+          .buttonChat {
+            padding: 2px 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .rootClients {
+    .header {
+      font-size: 0.9rem;
+      .title {
+        font-size: 1.3rem !important;
+      }
+    }
+    .outerContainer {
+      min-height: 80vw;
+      .heading {
+        .headerContainer {
+          .userImage {
+            width: 8vw;
+            height: 8vw;
+          }
+          .userName {
+            p {
+              font-size: 1.4rem;
+            }
+          }
+        }
+
+        .headerButtons {
+          width: 33vw;
+          font-size: 0.9rem;
+          .button {
+            padding: 2px 14px;
+          }
+          .buttonChat {
+            padding: 2px 14px;
+          }
+        }
+      }
+      .container {
+        .card {
+          height: 6vh;
+          font-size: 1.2rem;
+          margin-bottom: 4%;
         }
       }
     }

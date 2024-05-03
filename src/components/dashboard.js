@@ -55,7 +55,7 @@ const Dashboard = (props) => {
 
         <div className={classes.graphs}>
           <div className={classes.leftGraph}>
-            <LeftChart clients={clients} />
+            {clients && <LeftChart clients={clients} />}
           </div>
 
           <div className={classes.rightGraph}>

@@ -1,95 +1,30 @@
 .rootHeader {
-    height: 10vh; /* Use viewport height for responsive height */
-    width: 100vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #b3c4ea;
-    align-items: center;
-    padding: 1.5vw; /* Use viewport width for responsive padding */
-    position: relative;
-    .icon{
-        display: none;
-    }
-    .dropdown{
-        display: none;
+  height: 10vh; /* Use viewport height for responsive height */
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  background-color: #b3c4ea;
+  align-items: center;
+  padding: 2%; /* Use viewport width for responsive padding */
+  color: #0d30ac;
+  .icon {
+    font-size: 3rem;
+  }
+  .greet {
+    width: 40vw;
+    font-weight: 500;
+    font-size: 1.6rem;
+    text-align: right;
+  }
+  @media only screen and (max-width: 450px) {
+    padding: 2% 3%;
+    height: 8vh;
+    .icon {
+      font-size: 1.8rem;
     }
     .greet {
-        width: 16vw;
-        
-        .greeting {
-            font-weight: 600;
-            font-size: 2vw;
-            color: #0d30ac;
-        }
-
-        .time {
-            display: flex;
-            flex-direction: row;
-            width: 80%;
-            padding-right: 1vw;
-            justify-content: space-between;
-
-            span {
-                color: #0d30ac;
-                font-weight: 500;
-                font-size: 1vw;
-            }
-        }
+      width: 40vw;
+      font-size: 1.2rem;
     }
-
-    /* Media query for smaller screens (adjust the max-width as needed) */
-    @media (max-width: 768px) {
-        height: 8vh;
-        .greet {
-            width: 40vw; /* Full width for smaller screens */
-            
-            .greeting {
-                font-size: 4vw; /* Adjust font size for smaller screens */
-            }
-
-            .time {
-                width: 23vw; /* Full width for smaller screens */
-                span {
-                    font-size: 2vw; /* Adjust font size for smaller screens */
-                }
-            }
-        }
-        @media only screen and (max-width: 450px){
-            padding-right: 4%;
-            padding-left: 4%;
-            .icon{
-                display: block;
-                font-size: 2rem;
-                margin-right: 2%;
-                color: #0d30ac;
-            }
-            .dropdown{
-                display: block;
-                position: absolute;
-                top: 70%;
-                right: 5%;
-                width: 38vw;
-                color: #0d30ac;
-                background-color: white;
-                border-radius: 5px;
-                outline: 2px solid #7792f3;
-                margin: 2% auto;
-                z-index: 10;
-                .menu{
-                    padding: 4px 8px;
-                    .menuicon{
-                        width: 5vw;
-                        height: 5vw;
-                        font-size: 2rem;
-                        margin-right: 5%;
-                    }
-                    p{
-                        font-size: 1.2rem;
-                        font-weight: 600;
-                    }
-                }
-            }
-        }
-    }
+  }
 }

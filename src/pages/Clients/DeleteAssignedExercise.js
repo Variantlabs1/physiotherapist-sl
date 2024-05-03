@@ -22,6 +22,7 @@ import {
 import { database } from "../../firebase";
 import { get, ref as dbRef, child, remove, equalTo } from "firebase/database";
 import { AuthContext } from "../../components/data_fetch/authProvider";
+import { Center } from "@chakra-ui/react";
 
 export default function DeleteAssignedExercise({
   id,
@@ -109,19 +110,6 @@ export default function DeleteAssignedExercise({
         }
         console.log("exist", id);
       }
-      //update the state of assigned exercises
-      const getClientDoc = await getDocs(
-        query(collection(db, "Users"), where("userId", "==", clientId))
-      );
-      const clientDocRef = getClientDoc.docs[0].ref;
-      const exercisesRef1 = collection(clientDocRef, "exercises");
-      const q = query(exercisesRef1, where("physioId", "==", user.uid));
-      const querySnapshot = await getDocs(q);
-
-      const data = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
 
       const exRef = doc(db, "exercises", id);
       const exerciseSnapshot = await getDoc(exRef);
@@ -143,7 +131,7 @@ export default function DeleteAssignedExercise({
         console.log("Exercise does not exist.");
       }
 
-      setAssignedExercises(data);
+      setAssignedExercises();
       // fetchAssignedExercises();
     } catch (error) {
       console.error("Error unassigning exercise:", error);
@@ -151,11 +139,13 @@ export default function DeleteAssignedExercise({
   };
   return (
     <div>
-      <RiDeleteBin6Line
-        htmlColor="#362f69"
-        className={styles.dot}
-        onClick={toggleDeleteModal}
-      />
+      <Center className={styles.button}>
+        <RiDeleteBin6Line
+          color="#0d30ac"
+          className={styles.dot}
+          onClick={toggleDeleteModal}
+        />
+      </Center>
       {isOpenDelete && (
         <div className={styles.recheckDelete}>
           <div>
@@ -169,7 +159,11 @@ export default function DeleteAssignedExercise({
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 whileHover={{ scale: 1.05 }}
-                style={{ backgroundColor: "#F4F4F4" }}
+                style={{
+                  borderColor: "#0d30ac",
+                  color: "#0d30ac",
+                  borderWidth: "1px",
+                }}
                 onClick={toggleDeleteModal}
               >
                 Cancel
@@ -177,7 +171,7 @@ export default function DeleteAssignedExercise({
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 whileHover={{ scale: 1.05 }}
-                style={{ backgroundColor: "red", color: "white" }}
+                style={{ backgroundColor: "#0d30ac", color: "white" }}
                 onClick={handleUnassignExercise}
               >
                 Delete

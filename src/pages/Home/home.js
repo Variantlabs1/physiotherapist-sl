@@ -17,18 +17,14 @@ import { VStack } from "@chakra-ui/react";
 function Home(props) {
   //For signout option
   const navigate = useNavigate();
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 430);
-  const [userData, setUserData] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 820);
   const { user } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
+  const [show, setShow] = useState(true);
 
-  var show = true;
-  // if(userData.age){
-  //     console.log(userData.age);
-  // };
-  console.log(userData);
-  if (userData) {
-    show = userData.accountStatus;
-  }
+  const toggleDrawer = () => {
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     if (user) {
@@ -41,7 +37,7 @@ function Home(props) {
           );
           const res = await getDocs(q);
 
-          setUserData(res.docs[0].data());
+          setShow(res.docs[0].data().accountStatus);
         } catch (error) {
           console.error("Error fetching user data:", error);
           // Handle the error here or show an error message to the user
@@ -53,7 +49,7 @@ function Home(props) {
   }, [user]);
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 430);
+      setIsMobile(window.innerWidth <= 820);
     };
 
     // Add event listener for window resize
@@ -69,7 +65,7 @@ function Home(props) {
     signOut(auth)
       .then(() => {
         // Logout successful, navigate to the login page
-        navigate("/login"); // Assuming your login page route is '/login'
+        navigate("/home"); // Assuming your login page route is '/login'
       })
       .catch((error) => {
         // Handle any errors that occurred during logout
@@ -78,77 +74,60 @@ function Home(props) {
   };
 
   return (
-    <div className="App">
-      {!isMobile ? (
-        <div className={classes.root}>
-          <div className={classes.left}>
-            <div className={classes.profile}>
-              <AuthProvider>
-                <Profile />
-              </AuthProvider>
-            </div>
-
-            <div className={classes.sideBar}>
-              <SideBar />
-            </div>
-
-            <div className={classes.logout}>
-              <div className={classes.button} onClick={handleLogout}>
-                <div className={classes.icon}>
-                  <MdLogout size={35} color="#0D30AC" />
-                </div>
-                <div className={classes.option}>Log Out</div>
-              </div>
-            </div>
+    <div>
+      {/* {!isMobile ? ( */}
+      <div className={classes.root}>
+        {isOpen && (
+          <div className={classes.overlay} onClick={toggleDrawer}></div>
+        )}
+        <div
+          className={`${classes.left} ${isMobile && classes.drawer} ${
+            isOpen ? classes.open : ""
+          }`}
+        >
+          <div className={classes.profile}>
+            <AuthProvider>
+              <Profile />
+            </AuthProvider>
           </div>
 
-          <div className={classes.right}>
-            <Outlet />
+          <div className={classes.sideBar}>
+            <SideBar toggleDrawer={() => setIsOpen(false)} />
+          </div>
+
+          <div className={classes.logout}>
+            <div className={classes.button} onClick={handleLogout}>
+              <div className={classes.icon}>
+                <MdLogout color="#0D30AC" />
+              </div>
+              <div className={classes.option}>Log Out</div>
+            </div>
           </div>
         </div>
-      ) : (
-        <div>
-          <VStack>
-            <Header />
-            <Outlet />
-            <SideBar />
-            {!show && (
-              <div className={classes.warningpopup}>
-                <div className={classes.content}>
-                  <h1>Access Denied</h1>
-                  <div className={classes.logout}>
-                    <div className={classes.button} onClick={handleLogout}>
-                      <div className={classes.icon}>
-                        <MdLogout size={35} color="white" />
-                      </div>
-                      <div className={classes.option}>
-                        <span>Log Out</span>
-                      </div>
-                    </div>
+
+        <div className={`${classes.right} ${isMobile ? classes.right1 : ""}`}>
+          {isMobile && <Header toggleDrawer={toggleDrawer} />}
+          <Outlet />
+        </div>
+
+        {!show && (
+          <div className={classes.warningpopup}>
+            <div className={classes.content}>
+              <h1>Access Denied</h1>
+              <div className={classes.logout}>
+                <div className={classes.button} onClick={handleLogout}>
+                  <div className={classes.icon}>
+                    <MdLogout size={35} />
+                  </div>
+                  <div className={classes.option}>
+                    <span>Log Out</span>
                   </div>
                 </div>
               </div>
-            )}
-          </VStack>
-        </div>
-      )}
-      {!show && (
-        <div className={classes.warningpopup}>
-          <div className={classes.content}>
-            <h1>Access Denied</h1>
-            <div className={classes.logout}>
-              <div className={classes.button} onClick={handleLogout}>
-                <div className={classes.icon}>
-                  <MdLogout size={35} color="white" />
-                </div>
-                <div className={classes.option}>
-                  <span>Log Out</span>
-                </div>
-              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

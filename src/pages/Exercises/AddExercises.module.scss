@@ -157,6 +157,46 @@
             }
           }
         }
+        .selectContainer {
+          display: flex;
+          align-items: center;
+          font-size: 1.3rem;
+          // color: #0d30ac;
+          font-weight: 600;
+          margin-bottom: 20px;
+          // padding: 10px;
+          // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
+          .fieldName {
+            width: 50%;
+            p {
+              color: #0d30ac;
+              font-size: 22px;
+              font-weight: 600;
+            }
+          }
+
+          .headerSelector {
+            display: flex;
+            border-radius: 20px;
+            background: rgba(179, 196, 235, 0.4);
+            box-shadow: 0px 1px 3px 0.5px lightgray;
+            border: 1px solid rgb(201, 201, 201);
+            padding: 0 3%;
+            width: 250px;
+            .selector {
+              color: #333;
+              flex: 1;
+              padding: 0 3%;
+              height: 49px;
+              border: none;
+              background-color: transparent;
+              outline: none;
+              font-weight: 500;
+              position: relative;
+              cursor: pointer;
+            }
+          }
+        }
       }
 
       .right {
@@ -268,6 +308,26 @@
     }
   }
 }
+/* Style options */
+option {
+  background: rgba(179, 196, 235, 0.4);
+  color: #333; /* dark text color */
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  padding: 8px;
+  outline: none;
+  border: none;
+}
+
+option:hover {
+  background-color: #b2dfdb; /* lighter blue shade on hover */
+}
+
+option:checked {
+  background: rgba(179, 196, 235, 0.954);
+  color: #fff; /* white text color */
+}
 input,
 textarea {
   background-color: transparent;
@@ -292,6 +352,168 @@ textarea {
     width: 5vw;
     height: 5vw;
     color: #f3f3f3;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .addExercises {
+    width: 100%;
+    margin: auto;
+    .header {
+      p {
+        font-size: 2rem;
+      }
+    }
+
+    .form {
+      margin: 0;
+      margin-top: 3%;
+      .formElements {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 7px;
+        .fieldName {
+          width: auto;
+          p {
+            font-size: 1.2rem;
+            margin-bottom: 2%;
+          }
+        }
+        .inputField {
+          width: 70%;
+          height: 4vh;
+          border-radius: 20px;
+        }
+
+        .inputFieldSmall {
+          width: 40%;
+          height: 4vh;
+          border-radius: 20px;
+        }
+      }
+
+      .formElementsBig {
+        display: flex;
+        flex-direction: column;
+        margin-top: 7px;
+        margin-bottom: 7px;
+        .fieldName {
+          width: auto;
+          p {
+            font-size: 1.2rem;
+            margin-bottom: 2%;
+          }
+        }
+
+        .inputFieldBig {
+          width: 100%;
+          height: 12vh;
+          border-radius: 20px;
+        }
+      }
+      .bottom {
+        width: 100%;
+        flex-direction: column;
+        .left {
+          width: 100%;
+          .formElementsBottom {
+            align-items: flex-start;
+            flex-direction: column;
+            margin-bottom: 7px;
+            .fieldName {
+              width: 100%;
+              // background-color: red;
+              p {
+                font-size: 1.2rem;
+                margin-bottom: 2%;
+              }
+            }
+
+            .inputFieldSmall {
+              width: 50%;
+              height: 4vh;
+              border-radius: 20px;
+              input {
+                font-size: 1.2rem;
+              }
+            }
+          }
+          .footer {
+            display: flex;
+            justify-content: space-between;
+            width: 46vw;
+            margin: auto;
+            .button {
+              width: 20vw;
+              height: 5vh;
+              border-radius: 5px;
+              margin: 10% auto;
+              span {
+                font-size: 1.2rem;
+              }
+            }
+          }
+        }
+
+        .right {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          .video,
+          .image {
+            width: 100%;
+            .field {
+              margin-bottom: 5px;
+              p {
+                font-size: 1.2rem;
+              }
+            }
+            .imageContainer,
+            .videoContainer {
+              border: 2px solid #0d30ac;
+              width: 30vw;
+              height: 10vh;
+            }
+          }
+        }
+      }
+    }
+    .errorpopup {
+      width: 50vw;
+      height: 7vh;
+      padding: 10px 15px;
+      top: 0;
+      right: 2px;
+    }
+  }
+  input,
+  textarea {
+    padding: 0;
+    font-size: 1.2rem;
+    width: 90%;
+    height: 80%;
+  }
+  .successMsg {
+    .text {
+      width: 80vw;
+      height: 15vh;
+      border-radius: 15px;
+      p {
+        font-size: 1.3rem;
+      }
+
+      .button {
+        width: 26vw;
+        height: 5vh;
+        border-radius: 20px;
+        margin-top: 10px;
+      }
+    }
+  }
+  .spinner {
+    .spin {
+      width: 15vw;
+      height: 15vw;
+    }
   }
 }
 @media only screen and (max-width: 450px) {

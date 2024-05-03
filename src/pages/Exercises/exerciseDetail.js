@@ -258,7 +258,7 @@ const ExerciseDetails = ({ exercise, onClose }) => {
 
               {isEditing && (
                 <label
-                  className={classes.label}
+                  className={`${classes.label} ${classes.label1}`}
                   style={{ border: "none", cursor: "none", width: "35%" }}
                   htmlFor="video"
                 >

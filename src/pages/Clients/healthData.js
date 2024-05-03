@@ -18,7 +18,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const HealthDataComponent = ({ clientId }) => {
+const HealthDataComponent = ({ clientId, toggleGraph }) => {
   const [latestHeartRate, setLatestHeartRate] = useState(null);
   const [latestUserWeight, setLatestUserWeight] = useState(null);
   const [latestSuprior, setLatestSuprior] = useState(null);
@@ -94,15 +94,16 @@ const HealthDataComponent = ({ clientId }) => {
           </div>
           <Center
             className={classes.pieChart}
+            _hover={{ cursor: "pointer" }}
             bgGradient="linear(to-br, #7fa5ed, #2a49b6)"
           >
             <CircularProgress
               value={latestHeartRate ? latestHeartRate : null}
               color="#88A8ED"
-              size={["5.5rem", "6rem", "13rem", "15rem"]}
+              className={classes.progress}
               thickness="6px"
             >
-              <CircularProgressLabel>
+              <CircularProgressLabel onClick={toggleGraph}>
                 <Text className={classes.data1}>
                   {latestHeartRate ? latestHeartRate : "N/A"}
                 </Text>
@@ -120,7 +121,7 @@ const HealthDataComponent = ({ clientId }) => {
             <CircularProgress
               value={latestUserWeight ? latestUserWeight : null}
               color="#88A8ED"
-              size={["5.5rem", "6rem", "13rem", "15rem"]}
+              className={classes.progress}
               thickness="6px"
             >
               <CircularProgressLabel>
@@ -145,7 +146,7 @@ const HealthDataComponent = ({ clientId }) => {
             <CircularProgress
               value={latestSuprior ? latestSuprior : null}
               color="#88A8ED"
-              size={["5.5rem", "6rem", "13rem", "15rem"]}
+              className={classes.progress}
               thickness="6px"
             >
               <CircularProgressLabel>

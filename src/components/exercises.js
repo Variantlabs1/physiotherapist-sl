@@ -40,7 +40,7 @@ const Exercises = () => {
                   </div>
 
                   <div className={classes.title}>
-                    <span>{Exercise.Exercise_Name}</span>
+                    <span>{Exercise.Exercise_Name.substring(0, 18)}.</span>
                   </div>
                 </div>
               );

@@ -5,8 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  // background-image: url("../../assets/loginbackground1.jpeg");
-  // background-size: cover;
   .bgImage {
     position: absolute;
     top: 0;
@@ -27,36 +25,35 @@
   }
   .containerMain {
     width: 30vw;
-    height: 70vh;
+    height: 65vh;
     background-color: #f8f8f8;
     margin: auto;
     position: absolute;
     z-index: 2;
     border-radius: 3%;
+    padding: 3%;
     .header {
       display: flex;
       justify-content: center;
       height: auto;
-      margin-top: 5%;
       p {
         font-weight: 600;
-        font-size: 4rem;
+        font-size: 3.5rem;
         color: #0d30ac;
       }
     }
 
     .container {
-      width: 80%;
+      width: 100%;
       margin: auto;
       height: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin-top: 2%;
       .email {
         width: 100%;
-        margin-bottom: 40px;
+        margin-bottom: 3%;
         .label {
           font-weight: 600;
           font-size: 1.2rem;
@@ -72,28 +69,26 @@
           display: flex;
           align-items: center;
           .icon {
-            width: 15%;
-            height: 60%;
+            width: 4vw;
+            height: 100%;
             .emailIcon {
-              width: 100%;
-              height: 80%;
+              width: 1.8vw;
+              height: 1.8vw;
               color: #0d30ac;
             }
           }
 
-          .inputEmail {
-            input {
-              width: 20vw;
-              height: 5vh;
+          input {
+            flex-grow: 1;
+            height: 100%;
+            outline: none;
+            border: none;
+            background-color: #eeeeee;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #0d30ac;
+            &:focus {
               outline: none;
-              border: none;
-              background-color: #eeeeee;
-              font-size: 1rem;
-              font-weight: 500;
-              color: #0d30ac;
-              &:focus {
-                outline: none;
-              }
             }
           }
         }
@@ -132,38 +127,34 @@
           align-items: center;
           justify-content: space-between;
           .icon {
-            width: 15%;
-            height: 60%;
-            display: flex;
-            align-items: center;
+            width: 4vw;
+            height: 100%;
             .passwordIcon {
-              width: 100%;
-              height: 80%;
+              width: 1.8vw;
+              height: 1.8vw;
               color: #0d30ac;
             }
           }
 
-          .inputPassword {
+          input {
             flex-grow: 1;
-            input {
-              width: 100%;
-              height: 5vh;
-              outline: none;
-              border: none;
-              background-color: #eeeeee;
-              font-size: 1rem;
-              font-weight: 500;
-              color: #0d30ac;
+            height: 100%;
+            outline: none;
+            border: none;
+            background-color: #eeeeee;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #0d30ac;
 
-              &:focus {
-                outline: none;
-              }
+            &:focus {
+              outline: none;
             }
           }
           .passicon {
-            width: 5vw;
+            width: 4vw;
+            height: 100%;
             .EyeIcon {
-              font-size: 1.2rem;
+              font-size: 1.4rem;
               color: gray;
             }
           }
@@ -171,8 +162,9 @@
       }
 
       .buttons {
+        margin-top: 10%;
         width: 100%;
-        height: 8rem;
+        height: auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -225,7 +217,142 @@
   .errorpopup p {
     color: white;
   }
+  @media only screen and (max-width: 1024px) {
+    .errorpopup {
+      width: 40vw;
+      height: 8vh;
+    }
+    .containerMain {
+      width: 70vw;
+      height: 52vh;
+      padding: 5%;
+      margin: auto;
+      .header {
+        width: 100%;
+        height: auto;
+        margin-bottom: 3%;
+        p {
+          font-size: 4rem;
+        }
+      }
+      .container {
+        width: 100%;
+        .email {
+          width: 100%;
+          margin-bottom: 5%;
+          .label {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+          }
+          .input {
+            height: 5vh;
+            .icon {
+              width: 10vw;
+              height: 100%;
+              .emailIcon {
+                width: 4vw;
+                height: 4vw;
+                color: #0d30ac;
+              }
+            }
+          }
+        }
+
+        .password {
+          width: 100%;
+          .label {
+            margin-bottom: 10px;
+            .pass {
+              font-size: 1.4rem;
+            }
+            .forgot {
+              font-size: 1.1rem;
+              font-weight: 600;
+            }
+          }
+
+          .input {
+            height: 5vh;
+            .icon {
+              width: 10vw;
+              height: 100%;
+              .passwordIcon {
+                width: 4vw;
+                height: 4vw;
+                color: #0d30ac;
+              }
+            }
+
+            .passicon {
+              width: 10vw;
+              height: 100%;
+              .EyeIcon {
+                font-size: 2rem;
+                color: gray;
+              }
+            }
+          }
+        }
+
+        .buttons {
+          width: 30vw;
+          height: auto;
+          flex-direction: column;
+          margin-top: 10%;
+          .signin {
+            width: 80%;
+            height: 5vh;
+            border-radius: 5px;
+            p {
+              font-size: 1.4rem;
+            }
+          }
+
+          .signup {
+            font-size: 1.3rem;
+            width: 90%;
+            margin-top: 2%;
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 820px) {
+    .containerMain {
+      width: 70vw;
+      height: 52vh;
+      .header {
+        margin-bottom: 3%;
+        p {
+          font-size: 3rem;
+        }
+      }
+      .container {
+        .buttons {
+          width: 35vw;
+          .signup {
+            p,
+            .link {
+              font-size: 1rem;
+            }
+          }
+        }
+        .password {
+          .input {
+            .passicon {
+              .EyeIcon {
+                font-size: 1.5rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   @media only screen and (max-width: 450px) {
+    .errorpopup {
+      width: 70vw;
+    }
     .containerMain {
       width: 90vw;
       height: 55vh;
@@ -233,24 +360,30 @@
       .header {
         width: 100%;
         height: auto;
-        margin: 10% auto 5% auto;
+        margin-bottom: 5%;
         p {
           font-size: 2rem;
         }
       }
 
       .container {
+        width: 90%;
         .email {
-          width: 80vw;
+          width: 100%;
           margin-bottom: 8%;
           .label {
             font-size: 1.1rem;
             margin-bottom: 10px;
           }
           .input {
-            .inputEmail {
-              input {
-                width: 60vw;
+            height: 5vh;
+            .icon {
+              width: 16vw;
+              height: 100%;
+              .emailIcon {
+                width: 5vw;
+                height: 5vw;
+                color: #0d30ac;
               }
             }
           }
@@ -270,18 +403,24 @@
           }
 
           .input {
+            height: 5vh;
             .icon {
-              width: 16vw;
-              height: 60%;
-            }
-
-            .inputPassword {
-              input {
-                width: 48vw;
+              width: 20vw;
+              height: 100%;
+              .passwordIcon {
+                width: 5vw;
+                height: 5vw;
+                color: #0d30ac;
               }
             }
+
             .passicon {
-              width: 15vw;
+              width: 20vw;
+              height: 100%;
+              .EyeIcon {
+                font-size: 1.4rem;
+                color: gray;
+              }
             }
           }
         }
@@ -290,7 +429,7 @@
           width: 50vw;
           height: auto;
           flex-direction: column;
-          margin-top: 10%;
+          margin-top: 15%;
           .signin {
             width: 50vw;
             height: 5vh;

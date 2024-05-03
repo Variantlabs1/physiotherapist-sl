@@ -55,11 +55,36 @@
     }
   }
 }
+@media only screen and (max-width: 1024px) {
+  .recheckDelete {
+    width: 40vw;
+    .buttonDelete {
+      .bottoncover {
+        width: 26vw;
+        display: flex;
+        justify-content: space-between;
+      }
 
+      button {
+        height: 3vh;
+        width: 12vw;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 820px) {
+  .recheckDelete {
+    width: 45vw;
+    p {
+      font-size: 1.1rem !important;
+    }
+  }
+}
 @media only screen and (max-width: 450px) {
   .recheckDelete {
     width: 60vw;
-    height: 20vh;
+    // height: 20vh;
 
     h3 {
       padding: 3%;
@@ -68,7 +93,9 @@
     }
     p {
       padding: 3%;
+      font-size: 0.9rem !important;
       font-weight: 500;
+      text-align: left !important;
     }
 
     .buttonDelete {
@@ -79,8 +106,9 @@
       }
 
       button {
-        height: 4vh;
+        height: 3.5vh;
         width: 15vw;
+        font-size: 0.9rem;
       }
     }
   }

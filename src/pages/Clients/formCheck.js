@@ -47,19 +47,19 @@ const FormCheck = ({ clientId, onBackClick }) => {
     getFormCheckData();
   }, [clientId]);
 
-  const loadVideo = () => {
+  const loadVideo = (url) => {
     // Assuming the video file is in the 'videos' directory
 
     // Create a new tab with the video
-    const newTab = window.open("", "_blank");
+    window.open(url, "_blank");
+    // const newTab = window.open(url, "_blank");
 
     // Write the video element to the new tab
-    newTab.document.write(`
-                <video width="100%" height="100%" controls>
-                    <source src="${video}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            `);
+    // newTab.document.write(`
+    //             <video width="100%" height="100%" controls>
+    //                 <source src="${url}" type="video/mp4">
+    //                 Your browser does not support the video tag.
+    //             </video>`);
   };
 
   const handleSearchInputChange = (event) => {
@@ -207,7 +207,13 @@ const FormCheck = ({ clientId, onBackClick }) => {
                 </div>
               </div>
               <div className={classes.playButton}>
-                <div onClick={loadVideo} target="_blank" rel="noreferrer">
+                <div
+                  onClick={() => {
+                    loadVideo(data.URL);
+                  }}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <PiPlayCircleLight className={classes.icon} />
                   <p>Play</p>
                 </div>

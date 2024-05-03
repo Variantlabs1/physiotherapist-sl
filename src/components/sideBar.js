@@ -5,93 +5,49 @@ import { BiRun, BiMessageAdd } from "react-icons/bi";
 import { FaUserGroup } from "react-icons/fa6";
 import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
-import Profile from "./profile";
+// import { useEffect, useState } from "react";
+// import Profile from "./profile";
 
-const SideBar = ({ handleOptionClick }) => {
+const SideBar = ({ handleOptionClick, toggleDrawer }) => {
   const location = useLocation();
   const segments = location.pathname.split("/");
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 430);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 430);
-    };
-
-    // Add event listener for window resize
-    window.addEventListener("resize", handleResize);
-
-    // Remove event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   //Array of items
   const sidebarItems = [
     {
       icon: (
         <MdSpaceDashboard
-          size={25}
-          color={segments[1] === "Dashboard" || isMobile ? "#0D30AC" : "white"}
+          // color={segments[1] === "Dashboard" || isMobile ? "#0D30AC" : "white"}
+          color={segments[1] === "Dashboard" || "white"}
         />
       ),
       text: "Dashboard",
     },
     {
-      icon: (
-        <FaUserGroup
-          size={25}
-          color={segments[1] === "Clients" || isMobile ? "#0D30AC" : "white"}
-        />
-      ),
+      icon: <FaUserGroup color={segments[1] === "Clients" || "white"} />,
       text: "Clients",
     },
     {
-      icon: (
-        <BiRun
-          size={25}
-          color={segments[1] === "Exercises" || isMobile ? "#0D30AC" : "white"}
-        />
-      ),
+      icon: <BiRun color={segments[1] === "Exercises" || "white"} />,
       text: "Exercises",
     },
     {
-      icon: (
-        <MdChatBubble
-          size={25}
-          color={segments[1] === "Chat" || isMobile ? "#0D30AC" : "white"}
-        />
-      ),
+      icon: <MdChatBubble color={segments[1] === "Chat" || "white"} />,
       text: "Chat",
     },
     {
-      icon: (
-        <BiMessageAdd
-          size={25}
-          color={segments[1] === "Requests" || isMobile ? "#0D30AC" : "white"}
-        />
-      ),
+      icon: <BiMessageAdd color={segments[1] === "Requests" || "white"} />,
       text: "Requests",
     },
     {
       icon: (
         <RequestQuoteOutlinedIcon
-          size={25}
-          htmlColor={
-            segments[1] === "Billing" || isMobile ? "#0D30AC" : "white"
-          }
+          htmlColor={segments[1] === "Billing" || "white"}
         />
       ),
       text: "Billing",
     },
     {
-      icon: (
-        <IoMdSettings
-          size={25}
-          color={segments[1] === "Profile" || isMobile ? "#0D30AC" : "white"}
-        />
-      ),
+      icon: <IoMdSettings color={segments[1] === "Profile" || "white"} />,
       text: "Profile",
     },
   ];
@@ -99,31 +55,19 @@ const SideBar = ({ handleOptionClick }) => {
   return (
     <div className={classes.rootSidebar}>
       <div className={classes.sidebar}>
-        {sidebarItems
-          .filter(
-            (item) =>
-              !isMobile || (item.text !== "Requests" && item.text !== "Billing")
-          )
-          .map((item, index) => (
-            <Link
-              to={`/${item.text}`}
-              key={index}
-              className={
-                segments[1] === item.text ? classes.selectedOption : ""
-              }
-            >
-              {isMobile && item.text === "Profile" ? (
-                <Profile />
-              ) : (
-                <div className={classes.icon}>{item.icon}</div>
-              )}
-              {!isMobile && (
-                <div className={classes.option}>
-                  <span>{item.text}</span>
-                </div>
-              )}
-            </Link>
-          ))}
+        {sidebarItems.map((item, index) => (
+          <Link
+            to={`/${item.text}`}
+            onClick={toggleDrawer}
+            key={index}
+            className={segments[1] === item.text ? classes.selectedOption : ""}
+          >
+            <div className={classes.icon}>{item.icon}</div>
+            <div className={classes.option}>
+              <span>{item.text}</span>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );

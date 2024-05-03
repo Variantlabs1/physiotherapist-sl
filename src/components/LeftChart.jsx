@@ -24,126 +24,6 @@ const LeftChart = ({ clients }) => {
   const [totalClients, setTotalClients] = useState(0);
   const [percentage, setPercentage] = useState(0);
   const [decreasePercentage, setDecreasePercentage] = useState(0);
-  // const [clients, setClients] = useState([]);
-  // useEffect(() => {
-  // const  calculatePercentageChange = async (startDate, endDate) => {
-  //   const today = new Date();
-  //   const sun = new Date(
-  //     new Date(today).setDate(today.getDate() - today.getDay())
-  //   );
-  //   // console.log(sun)
-  //   const q = query(
-  //     collection(db, "physiotherapist"),
-  //     where("physiotherapistId", "==", user?.uid)
-  //   );
-  //   const getPhysio = await getDocs(q);
-  //   const physioData = getPhysio.docs[0].data();
-  //   if (physioData.clientsList) {
-  //     setTotalClients(physioData.clientsList?.length);
-  //     const lastWeekClients = physioData.clientsList?.filter(
-  //       (c) => c.clientAcceptedOn?.toDate() >= sun
-  //     );
-  //     const newClientsPercent =
-  //       (lastWeekClients?.length / physioData.clientsList.length) * 100;
-  //       const decreasePercent = 100 - newClientsPercent;
-  //     setDecreasePercentage(decreasePercent);
-  //     setPercentage(newClientsPercent);
-
-  //   }
-  // };
-  //   const calculatePercentageChange = async (startDate, endDate) => {
-  //     // Count the number of clients added within the selected period
-
-  //     if (physioData.clientsList) {
-  //       setTotalClients(physioData.clientsList?.length);
-  //       const currentDate = new Date();
-  //       const endOfWeek = new Date(
-  //         currentDate.getFullYear(),
-  //         currentDate.getMonth(),
-  //         currentDate.getDate() - currentDate.getDay()
-  //       );
-  //       const startOfWeek = new Date(
-  //         endOfWeek.getFullYear(),
-  //         endOfWeek.getMonth(),
-  //         endOfWeek.getDate() - 6
-  //       );
-
-  //       // Filter client data for the last week
-  //       const clientsLastWeek = physioData.clientsList.filter((client) => {
-  //         const clientDate = client.clientAcceptedOn.toDate();
-  //         return clientDate >= startOfWeek && clientDate <= endOfWeek;
-  //       });
-
-  //       // Count the number of clients for the last week
-  //       const numClientsLastWeek = clientsLastWeek.length;
-
-  //       // Calculate the start and end dates of the week before last week
-  //       const endOfPreviousWeek = new Date(
-  //         startOfWeek.getFullYear(),
-  //         startOfWeek.getMonth(),
-  //         startOfWeek.getDate() - 1
-  //       );
-  //       const startOfPreviousWeek = new Date(
-  //         endOfPreviousWeek.getFullYear(),
-  //         endOfPreviousWeek.getMonth(),
-  //         endOfPreviousWeek.getDate() - 6
-  //       );
-
-  //       // Filter client data for the week before last week
-  //       const clientsPreviousWeek = physioData.clientsList.filter((client) => {
-  //         const clientDate = client.clientAcceptedOn.toDate();
-  //         return (
-  //           clientDate >= startOfPreviousWeek && clientDate <= endOfPreviousWeek
-  //         );
-  //       });
-
-  //       // Count the number of clients for the week before last week
-  //       const numClientsPreviousWeek = clientsPreviousWeek.length;
-
-  //       // Calculate the percentage increase and decrease
-  //       const percentageIncrease =
-  //         numClientsPreviousWeek !== 0
-  //           ? ((numClientsLastWeek - numClientsPreviousWeek) /
-  //               numClientsPreviousWeek) *
-  //             100
-  //           : 0;
-  //       const percentageDecrease =
-  //         numClientsPreviousWeek !== 0
-  //           ? ((numClientsPreviousWeek - numClientsLastWeek) /
-  //               numClientsPreviousWeek) *
-  //             100
-  //           : 0;
-
-  //       // setDecreasePercentage(percentageDecrease);
-  //       // setPercentage(percentageIncrease);
-  //     }
-  //   };
-  //   const endDate = moment();
-  //   let startDate;
-  //   switch (selectedPeriod) {
-  //     case "lastWeek":
-  //       startDate = moment().subtract(7, "days");
-  //       setPercentage(0);
-  //       setDecreasePercentage(0);
-  //       break;
-  //     case "lastMonth":
-  //       startDate = moment().subtract(1, "months");
-  //       setPercentage(25);
-  //       setDecreasePercentage(0);
-  //       break;
-  //     case "lastYear":
-  //       startDate = moment().subtract(1, "years");
-  //       setPercentage(65);
-  //       setDecreasePercentage(20);
-  //       break;
-  //     case "fiveYears":
-  //       startDate = moment().subtract(5, "years");
-  //       break;
-  //     default:
-  //       startDate = moment().subtract(7, "days");
-  //   }
-  //   user?.uid && calculatePercentageChange(startDate, endDate);
-  // }, [selectedPeriod, user]);
   const calculateStatistics = () => {
     // Calculate start and end dates for the selected period
     const endDate = new Date();
@@ -169,7 +49,7 @@ const LeftChart = ({ clients }) => {
       return clientAssignedOn < startDate;
     }).length;
 
-    console.log(previousPeriodClients);
+    console.log(clients);
     // Calculate percentage increase/decrease
     const percentageIncrease = (totalClients / clients.length) * 100;
     const percentageDecrease =
@@ -182,7 +62,7 @@ const LeftChart = ({ clients }) => {
 
   useEffect(() => {
     calculateStatistics();
-  }, [selectedPeriod]);
+  }, [selectedPeriod, clients]);
 
   return (
     <>
@@ -207,13 +87,13 @@ const LeftChart = ({ clients }) => {
         <Center>
           <IoTrendingUpSharp size={40} color="#04FC04" />{" "}
         </Center>
-        <h1>{totalClients}</h1>
+        <h1>{totalClients && totalClients}</h1>
         <div className={classes.percentage}>
           <Flex>
-            <Center>
+            <span>
               <FaCaretUp color="#04FC04" />
-            </Center>
-            <span>{percentage}%</span>
+            </span>
+            <span>{percentage && percentage}%</span>
           </Flex>
           <p>New patients</p>
         </div>
@@ -223,13 +103,13 @@ const LeftChart = ({ clients }) => {
           <IoTrendingUpSharp size={40} color="red" />{" "}
         </Center>
 
-        <h1>{totalClients}</h1>
+        <h1>{totalClients && totalClients}</h1>
         <div className={classes.percentage}>
           <Flex>
-            <Center>
+            <span>
               <FaCaretDown color="#04FC04" />
-            </Center>
-            <span>{decreasePercentage}%</span>
+            </span>
+            <span>{decreasePercentage && decreasePercentage}%</span>
           </Flex>
           <p>Old patients</p>
         </div>

@@ -10,7 +10,7 @@ import {
   updatePassword,
   EmailAuthProvider,
 } from "firebase/auth";
-import { Center } from "@chakra-ui/react";
+import { Center, Flex } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 const ResetPassword = ({ onSubmit }) => {
@@ -60,9 +60,9 @@ const ResetPassword = ({ onSubmit }) => {
       transition={{ ease: "easeOut", duration: 0.2 }}
       className="container"
     >
-      <Center>
+      <Flex className="cancelIconDiv">
         <RxCross1 className="cancelIcon" onClick={onSubmit} />
-      </Center>
+      </Flex>
       <div>
         <h1>Reset Password</h1>
       </div>

@@ -45,7 +45,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
+  .progress {
+    svg {
+      width: 15vw;
+      height: 15vw;
+    }
+  }
   .data {
     font-weight: 600;
     font-size: 40px;
@@ -70,13 +75,11 @@
     color: white;
   }
 }
-
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 1024px) {
   .rootHealthData {
     .heading {
-      //   margin-left: 5%;
       p {
-        font-size: 20px;
+        font-size: 1.5rem;
       }
     }
 
@@ -84,6 +87,84 @@
       width: 100%;
       margin-left: 0;
       justify-content: space-between;
+      .heartBeat {
+        .head {
+          p {
+            font-size: 1.2rem;
+          }
+        }
+      }
+
+      .weight {
+        .head {
+          p {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+  .pieChart {
+    margin: auto;
+    width: 21vw;
+    height: 21vw;
+    .progress {
+      svg {
+        width: 19vw;
+        height: 19vw;
+      }
+    }
+    .data {
+      font-size: 1.8rem;
+    }
+    .data1 {
+      font-size: 1.8rem;
+    }
+
+    .tag {
+      font-size: 1.2rem;
+      line-height: 15px;
+    }
+    .tag1 {
+      font-size: 1.2rem;
+      line-height: 15px;
+    }
+  }
+}
+@media only screen and (max-width: 820px) {
+  .pieChart {
+    width: 24vw;
+    height: 24vw;
+    .progress {
+      svg {
+        width: 21vw;
+        height: 21vw;
+      }
+    }
+    .data {
+      font-size: 1.5rem;
+    }
+    .data1 {
+      font-size: 1.5rem;
+    }
+
+    .tag {
+      font-size: 1.1rem;
+    }
+    .tag1 {
+      font-size: 1.1rem;
+    }
+  }
+}
+@media only screen and (max-width: 450px) {
+  .rootHealthData {
+    .heading {
+      p {
+        font-size: 1.1rem;
+      }
+    }
+
+    .graphs {
       .heartBeat {
         .head {
           p {
@@ -102,10 +183,14 @@
     }
   }
   .pieChart {
-    margin: auto;
-    width: 26vw;
-    height: 26vw;
-
+    width: 24vw;
+    height: 24vw;
+    .progress {
+      svg {
+        width: 21vw;
+        height: 21vw;
+      }
+    }
     .data {
       font-size: 1rem;
     }
@@ -115,11 +200,9 @@
 
     .tag {
       font-size: 12px;
-      line-height: 15px;
     }
     .tag1 {
       font-size: 12px;
-      line-height: 15px;
     }
   }
 }

@@ -6,9 +6,11 @@ import { db } from "../../firebase";
 import useDate from "../../components/useDate";
 import { FaSearch } from "react-icons/fa";
 import { Box, Button, Center, Flex, Text, VStack } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
-const ClientsPage = ({ clientDocId, onSelectClient }) => {
+const ClientsPage = () => {
   const date = useDate();
+  const Navigate = useNavigate();
   const [clients, setClients] = useState([]);
   const [filteredClients, setFilteredClients] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -22,15 +24,15 @@ const ClientsPage = ({ clientDocId, onSelectClient }) => {
     setClients(fetchedClients);
     setFilteredClients(fetchedClients);
   };
-  useEffect(() => {
-    if (clientDocId) {
-      const getClient = async () => {
-        const client = await getDoc(doc(db, "Users", clientDocId));
-        client.exists() && onSelectClient(client.data());
-      };
-      getClient();
-    }
-  }, [clientDocId]);
+  // useEffect(() => {
+  //   if (clientDocId) {
+  //     const getClient = async () => {
+  //       const client = await getDoc(doc(db, "Users", clientDocId));
+  //       client.exists() && onSelectClient(client.data());
+  //     };
+  //     getClient();
+  //   }
+  // }, [clientDocId]);
 
   const parseDate = (dateString) => {
     // Convert date string to JavaScript Date object
@@ -221,7 +223,8 @@ const ClientsPage = ({ clientDocId, onSelectClient }) => {
 
                   <div
                     className={styles.buttons}
-                    onClick={() => onSelectClient(client)}
+                    onClick={() => Navigate(`${client.userId}`)}
+                    // onClick={() => onSelectClient(client)}
                   >
                     <p>View</p>
                   </div>

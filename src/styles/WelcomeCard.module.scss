@@ -27,28 +27,37 @@
       color: #4371cb;
     }
   }
-
-  @media only screen and (max-width: 450px) {
-    width: 100%;
+  @media only screen and (max-width: 820px) {
     .left {
+      flex-grow: 1;
       .header {
         display: flex;
         justify-content: space-between;
+        .date {
+          display: flex;
+          align-items: center;
+          color: #0d30ac;
+          font-size: 1.2rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 450px) {
+    .left {
+      .header {
         .heading {
           font-size: 1.4rem;
           font-weight: 600;
         }
         .date {
-          display: flex;
-          align-items: center;
-          color: #0d30ac;
           font-size: 0.8rem;
-          font-weight: 500;
         }
       }
       .subText {
         font-weight: 500;
-        font-size: 0.95rem;
+        font-size: 0.85rem;
+        text-align: justify;
       }
     }
     .right {
