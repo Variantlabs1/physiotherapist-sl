@@ -30,7 +30,7 @@ const AssignExercises = () => {
   const [dayValue, setDayValue] = useState("Monday");
   const [assignedExcercise, setAssignedExercises] = useState();
   const [openDeleteExerciseId, setOpenDeleteExerciseId] = useState(null);
-
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 450);
   useEffect(() => {
     const getClients = async () => {
       try {
@@ -43,6 +43,20 @@ const AssignExercises = () => {
       }
     };
     getClients();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 450);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Remove event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const fetchAssignedExercises = async () => {
@@ -128,7 +142,7 @@ const AssignExercises = () => {
                 setDayValue(day);
               }}
             >
-              {day.slice(0, 3)}
+              {!isMobile ? day.slice(0, 3) : day.slice(0, 1)}
             </Button>
           ))}
         </HStack>

@@ -303,19 +303,26 @@
         }
       }
       .outerContainer {
-        min-height: 72vh;
+        flex-grow: 1;
         .searchBarNotificationContainer {
+          margin-bottom: 0;
           .searchBarContainer {
-            height: 4.3vh;
-
+            height: 4vh;
+            border-radius: 8px;
             .searchInput {
               padding: 0 4px;
+            }
+            .searchIconContainer {
+              svg {
+                font-size: 0.9rem;
+              }
             }
           }
 
           .notificationIconContainer {
             width: 15vw;
             height: 4vh;
+            font-size: 0.9rem;
             .dropDown {
               padding: 5% 2%;
               width: 50vw;
@@ -354,10 +361,11 @@
           width: 100%;
           display: flex;
           flex-direction: column;
-          margin-top: 5%;
+          margin-top: 3%;
+          gap: 0;
           .card {
             width: 100%;
-            margin-bottom: 1em;
+            margin-bottom: 3%;
             padding: 1rem 1.2rem;
             justify-content: space-between;
             border-radius: 10px;
@@ -376,17 +384,63 @@
               width: 80%;
               .username {
                 p {
-                  font-size: 1.33rem;
+                  font-size: 1.3rem;
                 }
               }
 
               .buttons {
                 margin-right: 2vw;
                 width: 16vw;
-                height: 7vw;
+                height: 8vw;
+                font-size: 0.9rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 380px) {
+    .container {
+      .header {
+        .title {
+          font-size: 1.5rem !important;
+        }
+      }
+      .outerContainer {
+        .searchBarNotificationContainer {
+          .searchBarContainer {
+            border-radius: 6px;
+            .searchInput {
+              font-size: 0.9rem;
+            }
+          }
+
+          .notificationIconContainer {
+            width: 18vw;
+            font-size: 0.8rem;
+            .dropDown {
+              width: 53vw;
+              .dropDownContent {
+                font-size: 0.9rem;
+              }
+              .button {
+                font-size: 0.8rem;
+              }
+            }
+          }
+        }
+        .cardsContainer {
+          .card {
+            .textContainer {
+              .username {
                 p {
-                  font-size: 1rem;
+                  font-size: 1.2rem;
                 }
+              }
+              .buttons {
+                height: 6vw;
+                font-size: 0.8rem;
               }
             }
           }

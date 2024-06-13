@@ -182,7 +182,9 @@ const Chats = () => {
         <div className={classes.title}>
           <p>Chatbox</p>
         </div>
-        <Center fontWeight="500">{date}</Center>
+        <Center fontWeight="500" className={classes.date}>
+          {date}
+        </Center>
       </div>
       <div className={classes.outerContainer}>
         <div className={classes.header}>

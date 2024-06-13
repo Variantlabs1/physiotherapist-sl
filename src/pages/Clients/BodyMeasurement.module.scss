@@ -206,33 +206,41 @@
       min-height: 80vw;
       .heading {
         .headerContainer {
+          gap: 20px;
           .userImage {
-            width: 8vw;
-            height: 8vw;
+            width: 12vw;
+            height: 12vw;
           }
           .userName {
             p {
-              font-size: 1.4rem;
+              font-size: 1.3rem;
             }
           }
         }
-
         .headerButtons {
-          width: 33vw;
+          width: 36vw;
           font-size: 0.9rem;
           .button {
-            padding: 2px 14px;
+            padding: 2px 12px;
           }
           .buttonChat {
-            padding: 2px 14px;
+            padding: 2px 12px;
           }
         }
       }
       .container {
         .card {
-          height: 6vh;
-          font-size: 1.2rem;
+          height: 16vw;
+          font-size: 1rem;
           margin-bottom: 4%;
+          div {
+            p {
+              width: 40vw;
+            }
+            span {
+              width: 40vw;
+            }
+          }
         }
       }
     }

@@ -316,12 +316,12 @@
       }
       .headerButtons {
         width: 36vw;
-        font-size: 1rem;
+        font-size: 0.9rem;
         .button {
-          padding: 1% 11%;
+          padding: 2px 12px;
         }
         .buttonChat {
-          padding: 1% 11%;
+          padding: 2px 12px;
         }
       }
     }
@@ -331,6 +331,7 @@
           width: 30vw;
           .selector {
             height: 7vw;
+            width: 20vw;
           }
         }
       }
@@ -342,7 +343,7 @@
         }
         .values {
           width: 90%;
-          gap: 40px;
+          gap: 20px;
           .valueCard {
             .head {
               font-size: 1rem;

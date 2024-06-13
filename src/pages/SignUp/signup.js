@@ -9,7 +9,7 @@ import { auth, db } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import { motion, useAnimate } from "framer-motion";
-import { Center, Flex, Text } from "@chakra-ui/react";
+import { Center, Flex, Spinner, Text } from "@chakra-ui/react";
 import { RxCross2 } from "react-icons/rx";
 
 const Login = () => {
@@ -22,7 +22,7 @@ const Login = () => {
   const [bio, setBio] = useState("");
   const [experience, setExperience] = useState("");
   const [errorMsg, setErrorMsg] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   //For authentication purpose
   const [email, setEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
@@ -160,7 +160,7 @@ const Login = () => {
     // Check error state variables to determine if the form is valid
     if (!errorMsg) {
       // Form is valid, proceed with submission
-
+      setLoading(true);
       try {
         await createUserWithEmailAndPassword(auth, email, currentPassword);
 
@@ -201,6 +201,7 @@ const Login = () => {
 
         console.log(code);
         navigate("/");
+        setLoading(false);
       } catch (err) {
         // Capture and display the Firebase error message
         setErrorMsg(err.message);
@@ -217,6 +218,9 @@ const Login = () => {
 
   return (
     <Center className={classes.rootSignup}>
+      {loading && (
+        <Spinner color="#0d30ac" size="xl" position="absolute" zIndex={15} />
+      )}
       <div className={classes.overlay}></div>
       <div className={classes.bgImage}></div>
       <div className={classes.container}>
@@ -374,7 +378,7 @@ const Login = () => {
                 <Flex justifyContent="center" color="white" gap={3}>
                   <Text>Submit</Text>
                   <Center id="arrow">
-                    <FaArrowRightLong color="white" size={10} />
+                    <FaArrowRightLong color="white" />
                   </Center>
                 </Flex>
               </motion.div>

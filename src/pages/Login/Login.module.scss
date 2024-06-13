@@ -176,6 +176,9 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
+          svg {
+            font-size: 1rem;
+          }
           &:hover {
             cursor: pointer;
           }
@@ -355,7 +358,7 @@
     }
     .containerMain {
       width: 90vw;
-      height: 55vh;
+      height: 50vh;
       margin: auto;
       .header {
         width: 100%;
@@ -390,7 +393,7 @@
         }
 
         .password {
-          width: 80vw;
+          width: 100%;
           .label {
             margin-bottom: 10px;
             .pass {
@@ -449,7 +452,7 @@
   }
   @media only screen and (max-width: 380px) {
     .containerMain {
-      height: 65vh;
+      height: 62vh;
     }
   }
 }

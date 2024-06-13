@@ -1,100 +1,6 @@
 .rootDiv {
   background-color: black;
   padding-bottom: 3%;
-  .navbar {
-    justify-content: space-between;
-    padding: 1% 4%;
-    .navImage {
-      .logo {
-        width: 3vw;
-      }
-      .text {
-        font-size: 0.7rem;
-        font-weight: 600;
-        color: white;
-        line-height: 0;
-      }
-    }
-    .navButtons {
-      width: 13vw;
-      align-items: center;
-      justify-content: space-between;
-      .signUp {
-        color: white;
-        background-color: transparent;
-        outline: none;
-        border: none;
-        cursor: pointer;
-      }
-      .signIn {
-        background-color: transparent;
-        border: 1px solid white;
-        border-radius: 8px;
-        color: white;
-      }
-    }
-  }
-  .mobileNavbar {
-    padding: 10px 20px;
-    color: white;
-    .top {
-      .leftIcon {
-        svg {
-          font-size: 3rem;
-          color: rgb(160, 160, 160);
-        }
-        cursor: pointer;
-      }
-
-      .navContainer {
-        width: 100%;
-        justify-content: center;
-        .navImage {
-          .logo {
-            width: 10vw;
-          }
-          .text {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: white;
-            line-height: 0;
-          }
-        }
-      }
-    }
-    .dropdownContainer {
-      flex-direction: column;
-      justify-content: space-between;
-      .dropdown {
-        background-color: black;
-        height: 84vh;
-        padding: 10px;
-        border-radius: 5px;
-        button {
-          display: block;
-          padding: 4px 0;
-          margin-bottom: 5px;
-          background-color: transparent;
-          border: none;
-          color: rgb(207, 207, 207);
-          cursor: pointer;
-          font-weight: 600;
-          &:hover {
-            background-color: #444;
-          }
-        }
-      }
-      .dropdownButton {
-        text-align: center;
-        button {
-          border: 1px solid white;
-          font-weight: 600;
-          background: transparent;
-          color: white;
-        }
-      }
-    }
-  }
   .header {
     margin-top: 3%;
     // margin-bottom: 2%;
@@ -411,6 +317,62 @@
       );
     }
   }
+  .footer {
+    color: white;
+    width: 80vw;
+    margin: auto;
+
+    div {
+      margin-top: 3%;
+      p {
+        margin-top: 2%;
+        font-size: 1.3rem;
+      }
+      .headers {
+        font-size: 1.5rem;
+        font-weight: 700;
+        border-left: 4px solid rgb(25, 62, 212);
+        padding-left: 2%;
+      }
+      .smallText {
+        font-size: 1.1rem;
+      }
+      .inputContainer {
+        background-color: white;
+        border-radius: 10px;
+        height: 3.5vw;
+        input {
+          padding: 2%;
+          outline: none;
+          color: black;
+          border: none;
+          box-shadow: none;
+          font-weight: 600;
+          height: 100%;
+        }
+        button {
+          height: 100%;
+          width: 30vw;
+          padding: 2% 2%;
+          font-weight: 600;
+          background-color: rgb(73, 70, 198);
+          color: white;
+          border-radius: 10px;
+        }
+      }
+    }
+    .last {
+      margin-top: 3%;
+      p {
+        text-align: center;
+      }
+      .copy {
+        color: rgb(176, 176, 176);
+        font-size: 1.1rem;
+        margin-top: 0.5%;
+      }
+    }
+  }
   button {
     width: 12vw;
     height: 7vh;
@@ -427,11 +389,6 @@
       font-weight: 700;
       border-radius: 30px;
       background: transparent;
-    }
-    .navbar {
-      .navButtons {
-        width: 20vw;
-      }
     }
     .formContainer {
       .form {
@@ -460,22 +417,6 @@
     button {
       width: 30vw;
       height: 5vh;
-    }
-    .mobileNavbar {
-      .top {
-        .leftIcon {
-          svg {
-            font-size: 3rem;
-          }
-        }
-      }
-      .dropdownContainer {
-        .dropdown {
-          button {
-            font-size: 1.3rem;
-          }
-        }
-      }
     }
     .header {
       .headerContainer {
@@ -709,7 +650,7 @@
       margin: auto;
 
       div {
-        margin-top: 10%;
+        margin-top: 5%;
         p {
           margin-top: 3%;
           font-size: 1.3rem;
@@ -725,7 +666,8 @@
         }
         .inputContainer {
           background-color: white;
-          border-radius: 10px;
+          border-radius: 8px;
+          height: 5vw;
           input {
             padding: 3%;
             height: 100%;
@@ -736,11 +678,11 @@
           }
           button {
             width: 50vw;
-            padding: 4% 7%;
+            // padding: 4% 7%;
             font-weight: 600;
             background-color: rgb(73, 70, 198);
             color: white;
-            border-radius: 10px;
+            border-radius: 8px;
           }
         }
       }
@@ -763,25 +705,15 @@
     button {
       width: 48vw;
       height: 6vh;
-    }
-    .mobileNavbar {
-      .top {
-        .leftIcon {
-          svg {
-            font-size: 2rem;
-          }
-        }
-      }
-      .dropdownContainer {
-        .dropdown {
-          button {
-            font-size: 1.1rem;
-          }
-        }
+      &:focus {
+        outline: none !important;
+        box-shadow: none !important;
       }
     }
     .header {
       .headerContainer {
+        width: 95vw;
+        margin: auto;
         .content {
           .texts {
             .text {
@@ -910,9 +842,9 @@
     .footer {
       width: 80vw;
       div {
-        margin-top: 14%;
+        margin-top: 4%;
         p {
-          margin-top: 5%;
+          margin-top: 3%;
           font-size: 1rem;
         }
         .headers {
@@ -921,11 +853,154 @@
         .smallText {
           font-size: 0.8rem;
         }
+        .inputContainer {
+          height: 8vw;
+          input {
+            font-size: 0.9rem;
+          }
+          button {
+            font-size: 0.9rem;
+          }
+        }
       }
       .last {
-        margin-top: 20%;
+        margin-top: 5%;
         .copy {
           font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 400px) {
+  .rootDiv {
+    button {
+      width: 40vw;
+      height: 5.5vh;
+      font-size: 0.9rem;
+    }
+    .formContainer {
+      .formButton {
+        button {
+          font-size: 0.8rem;
+        }
+      }
+    }
+    .header {
+      .headerContainer {
+        width: 95vw;
+        margin: auto;
+        .content {
+          .texts {
+            .text {
+              font-size: 1.6rem;
+            }
+            .text2 {
+              font-size: 0.8rem;
+            }
+          }
+        }
+        .description {
+          font-size: 1.3rem;
+        }
+      }
+    }
+    .banner2 {
+      .bannerButton {
+        button {
+          font-size: 0.8rem;
+        }
+      }
+    }
+    .intro {
+      .content {
+        .texts {
+          .label {
+            font-size: 1.1rem;
+          }
+          .text {
+            font-size: 0.8rem;
+            line-height: 25px;
+          }
+        }
+      }
+    }
+    .cardComponent {
+      .cardHeader {
+        font-size: 1.7rem;
+      }
+      .cards {
+        .cardItem {
+          img {
+            width: 15vw;
+          }
+          .label {
+            font-size: 1rem;
+          }
+          .text {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+    .banner {
+      .bannerHeader {
+        font-size: 1.7rem;
+      }
+      .bannerText {
+        font-size: 0.9rem;
+      }
+    }
+
+    .followContainer {
+      .first {
+        .firstLabel {
+          font-size: 1.5rem;
+        }
+        .firstText {
+          font-size: 0.8rem;
+          line-height: 25px;
+        }
+      }
+    }
+    .formContainer {
+      .form {
+        .formHeader {
+          font-size: 2rem;
+        }
+        form {
+          label {
+            font-size: 1rem;
+          }
+          p {
+            font-size: 0.8rem;
+            line-height: 25px;
+          }
+        }
+      }
+    }
+    .bottomContainer {
+      .bottomTexts {
+        .bottomText {
+          font-size: 0.8rem;
+        }
+      }
+    }
+    .footer {
+      div {
+        p {
+          font-size: 0.8rem;
+        }
+        .headers {
+          font-size: 1rem;
+        }
+        .smallText {
+          font-size: 0.7rem;
+        }
+      }
+      .last {
+        .copy {
+          font-size: 0.7rem;
         }
       }
     }

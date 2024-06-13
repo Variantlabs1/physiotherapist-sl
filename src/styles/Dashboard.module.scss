@@ -186,6 +186,7 @@
       }
       .searchBarNotificationContainer {
         .searchBarContainer {
+          height: 10vw;
           .searchInput {
             font-size: 1rem;
           }
@@ -195,18 +196,23 @@
           margin-left: 3%;
           width: 10vw;
           height: 10vw;
+          svg {
+            font-size: 1rem;
+          }
         }
       }
       .Activitytitle {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
       .graphs {
         flex-direction: column;
         .leftGraph {
           width: 100%;
+          padding: 2% 4%;
         }
         .rightGraph {
           width: 100%;
+          padding: 2% 4%;
         }
       }
       .clientList {

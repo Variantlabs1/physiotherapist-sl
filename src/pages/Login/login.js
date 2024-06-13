@@ -8,7 +8,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import { Center, Flex, Text } from "@chakra-ui/react";
+import { Center, Flex, Spinner, Text } from "@chakra-ui/react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 
@@ -23,6 +23,7 @@ function Login() {
   const [errorMsg, setErrorMsg] = useState(null);
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmission = () => {
     if (!values.email || !values.pass) {
@@ -30,12 +31,13 @@ function Login() {
       return;
     }
     setErrorMsg("");
-
+    setLoading(true);
     setSubmitButtonDisabled(true);
     signInWithEmailAndPassword(auth, values.email, values.pass)
       .then(async (res) => {
         setSubmitButtonDisabled(false);
         navigate("/Dashboard");
+        setLoading(false);
       })
       .catch((err) => {
         setSubmitButtonDisabled(false);
@@ -45,7 +47,7 @@ function Login() {
   };
 
   const handleAnimation = async () => {
-    animate("#arrow", { x: 10, scale: 1.4 });
+    animate("#arrow", { x: 10, scale: 1.1 });
   };
   const handleAnimationClose = async () => {
     animate("#arrow", { x: 0, scale: 1 });
@@ -53,6 +55,9 @@ function Login() {
 
   return (
     <div className={classes.rootLogin}>
+      {loading && (
+        <Spinner color="#0d30ac" size="xl" position="absolute" zIndex={15} />
+      )}
       <div className={classes.overlay}></div>
       <div className={classes.bgImage}></div>
       <div className={classes.containerMain}>
@@ -129,7 +134,7 @@ function Login() {
               disabled={submitButtonDisabled}
             >
               <Flex
-                w={["35%", "40%", "50%", "50%"]}
+                w={["40%", "40%", "50%", "50%"]}
                 m="auto"
                 justifyContent="space-between"
                 color="white"

@@ -61,14 +61,14 @@
   }
   .exercisesButton {
     font-size: 16px;
-    padding: 5px 10px;
+    padding: 5px 0;
   }
 
   .exercisesTop {
-    padding-left: 5px;
-    padding: 0 5px;
+    /* padding-left: 5px; */
+    padding: 0;
     span {
-      font-size: 22px;
+      font-size: 1.1rem;
       font-weight: 600;
     }
   }

@@ -201,7 +201,6 @@ const ClientDetails = () => {
               <div className={classes.title}>
                 <p>Activity Reports</p>
               </div>
-              <Center fontWeight="500">{date}</Center>
             </div>
             {!showGraph ? (
               <div className={classes.outerContainer}>

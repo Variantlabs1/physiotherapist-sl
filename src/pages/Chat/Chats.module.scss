@@ -93,7 +93,7 @@
       .message {
         &.received {
           display: flex;
-          max-width: 100%;
+          // max-width: 100%;
           margin-bottom: 15px;
           .img {
             width: 2vw;
@@ -122,9 +122,10 @@
               border-radius: 8px;
             }
             p {
+              min-width: 10vw !important;
               min-height: 3vh;
               max-width: 30vw;
-              text-align: justify;
+              text-align: left;
             }
             span {
               position: absolute;
@@ -138,7 +139,7 @@
         &.sent {
           display: flex;
           justify-content: flex-end;
-          max-width: 100%;
+          // max-width: 100%;
           margin-bottom: 15px;
           .msg {
             background: #e4edff;
@@ -152,7 +153,6 @@
             align-items: center;
             flex-direction: column;
             min-height: 5vh;
-
             img {
               width: 18vw;
               height: 34vh;
@@ -160,9 +160,10 @@
               border-radius: 8px;
             }
             p {
+              min-width: 20vw !important;
               min-height: 3vh;
               max-width: 30vw;
-              text-align: justify;
+              text-align: left;
             }
             span {
               position: absolute;
@@ -302,15 +303,20 @@
     .heading {
       font-size: 0.9rem;
       .title {
-        font-size: 1.6rem !important;
+        font-size: 1.5rem !important;
         font-weight: 600;
         letter-spacing: 0em;
       }
+      .date {
+        display: none;
+      }
     }
     .outerContainer {
-      height: 80vh;
+      border: 2px solid #4370cb3c;
+      // height: 80vh;
       .header {
-        height: 9vh;
+        height: 15vw;
+        padding: 3%;
         .headerContainer {
           gap: 20px;
           .userImage {
@@ -325,9 +331,9 @@
         }
         .headerButtons {
           .buttons {
-            padding: 6px 16px;
+            padding: 5px 16px;
             .button {
-              font-size: 0.9rem;
+              font-size: 0.8rem;
             }
           }
         }
@@ -345,8 +351,9 @@
               min-height: 3vh;
               padding: 1% 1% 3% 1%;
               p {
-                min-height: 2vh;
-                max-width: 90%;
+                min-height: 5vw;
+                max-width: 70vw;
+                line-height: 20px;
               }
               span {
                 right: 4%;
@@ -363,11 +370,14 @@
           &.sent {
             .msg {
               min-height: 3vh;
+              // max-width: 70%;
               font-size: 1rem;
               padding: 1% 1% 3% 1%;
               p {
-                min-height: 2vh;
-                max-width: 90%;
+                min-height: 5vw;
+                max-width: 70vw;
+                // max-width: 70%;
+                line-height: 20px;
               }
               span {
                 right: 4%;
@@ -384,14 +394,71 @@
       }
 
       .chatInput {
-        margin: 0 4% 2% 4%;
+        margin: 0 4% 3% 4%;
         .inputContainer {
           width: 100%;
           height: 5vh;
           padding: 0 10px;
+          input {
+            font-size: 1rem;
+            padding: 3%;
+          }
           .icon {
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 380px) {
+    .heading {
+      .title {
+        font-size: 1.3rem !important;
+      }
+    }
+    .outerContainer {
+      .header {
+        .headerContainer {
+          gap: 15px;
+          .userName {
+            p {
+              font-size: 1.1rem;
+            }
+          }
+        }
+        .headerButtons {
+          .buttons {
+            padding: 4px 14px;
+            .button {
+              font-size: 0.7rem;
+            }
+          }
+        }
+      }
+      .chatMessages {
+        .message {
+          &.received {
+            .msg {
+              font-size: 0.9rem;
+            }
+          }
+
+          &.sent {
+            .msg {
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+
+      .chatInput {
+        .inputContainer {
+          input {
+            font-size: 0.9rem;
+          }
+          .icon {
+            font-size: 1.2rem;
           }
         }
       }

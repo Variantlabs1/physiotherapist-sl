@@ -25,6 +25,9 @@ import AssignExercises from "./pages/Clients/assignExercises";
 import ClientsPage from "./pages/Clients/clientsPage";
 import ClientDetails from "./pages/Clients/clientDetails";
 import LandingPage from "./pages/LandingPage/LandingPage";
+import About from "./pages/LandingPage/About";
+import Terms from "./pages/LandingPage/Terms";
+import Privacy from "./pages/LandingPage/Privacy";
 
 ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID);
 
@@ -54,6 +57,9 @@ function App() {
           <Route path="Profile" element={<Settings />} />
         </Route>
         <Route path="home" element={<LandingPage />} />
+        <Route path="about" element={<About />} />
+        <Route path="privacy" element={<Privacy />} />
+        <Route path="terms" element={<Terms />} />
         <Route
           path="login"
           element={!user ? <Login /> : <Navigate to="/Dashboard" />}

@@ -1,0 +1,183 @@
+.rootDiv {
+  .navbar {
+    justify-content: space-between;
+    padding: 2% 4%;
+    .navImage {
+      .logo {
+        width: 3vw;
+      }
+      .text {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: white;
+        line-height: 0;
+      }
+    }
+    .navButtons {
+      width: 15vw;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      .signUp {
+        height: 6vh;
+        color: white;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+      .signIn {
+        height: 6vh;
+        background-color: transparent;
+        border: 1px solid white;
+        border-radius: 8px;
+        color: white;
+      }
+    }
+  }
+  .mobileNavbar {
+    padding: 15px 20px;
+    color: white;
+    display: none;
+    .top {
+      position: relative;
+      .leftIcon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        svg {
+          font-size: 3rem;
+          color: rgb(160, 160, 160);
+        }
+        cursor: pointer;
+      }
+
+      .navContainer {
+        width: 100%;
+        justify-content: center;
+        .navImage {
+          .logo {
+            width: 10vw;
+          }
+          .text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            line-height: 0;
+          }
+        }
+      }
+    }
+    .dropdownContainer {
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3%;
+      .dropdown {
+        background-color: black;
+        height: 70vh;
+        padding: 10px;
+        border-radius: 5px;
+        button {
+          display: block;
+          padding: 4px 0;
+          margin-bottom: 5px;
+          background-color: transparent;
+          border: none;
+          color: rgb(207, 207, 207);
+          cursor: pointer;
+          font-weight: 600;
+          &:hover {
+            background-color: #444;
+          }
+        }
+      }
+      .dropdownButton {
+        text-align: center;
+        button {
+          border: 1px solid white;
+          font-weight: 600;
+          background: transparent;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .rootDiv {
+    .navbar {
+      .navButtons {
+        width: 20vw;
+        .signUp {
+          height: 4vw;
+        }
+        .signIn {
+          height: 4vw;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 820px) {
+  .rootDiv {
+    .navbar {
+      display: none;
+    }
+    .mobileNavbar {
+      display: block;
+      .top {
+        .leftIcon {
+          svg {
+            font-size: 3.5rem;
+          }
+        }
+      }
+      .dropdownContainer {
+        .dropdown {
+          button {
+            font-size: 1.3rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .rootDiv {
+    .mobileNavbar {
+      .top {
+        .leftIcon {
+          svg {
+            font-size: 2rem;
+          }
+        }
+      }
+      .dropdownContainer {
+        .dropdown {
+          button {
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  .rootDiv {
+    .mobileNavbar {
+      .dropdownContainer {
+        .dropdown {
+          button {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+}

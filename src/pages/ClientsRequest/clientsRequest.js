@@ -172,7 +172,9 @@ const ClientsRequest = () => {
         <div className={styles.title}>
           <p>Client's Requests</p>
         </div>
-        <Center fontWeight="500">{date}</Center>
+        <Center fontWeight="500" className={styles.date}>
+          {date}
+        </Center>
       </div>
 
       <div className={styles.container}>
@@ -248,17 +250,13 @@ const ClientsRequest = () => {
                       alt={client.userName}
                     />
 
-                    <div className={styles.info}>
-                      <Center>
-                        <p>{client.userName}</p>
-                      </Center>
+                    <div className={styles.infoDiv}>
+                      <Flex className={styles.info}>
+                        <p className={styles.name}>{client.userName}</p>
+                        <p>{client.userEmail}</p>
+                      </Flex>
                       <div className={styles.info1}>
-                        <Center>
-                          <p>{client.userEmail}</p>
-                        </Center>
-                        <Center>
-                          <p>{client.accCreated}</p>
-                        </Center>
+                        <p>{client.accCreated}</p>
                       </div>
                     </div>
                   </div>

@@ -284,36 +284,41 @@
       .headerButtons {
         width: 28vw;
         .back {
-          height: 4vh;
+          font-size: 0.9rem;
+          height: 10vw;
+          width: 15vw;
         }
         .add {
-          height: 9vw;
-          width: 9vw;
+          height: 10vw;
+          width: 10vw;
         }
       }
     }
     .outerContainer {
-      min-height: 78vh;
+      min-height: 75vh;
       .buttonsContainer {
+        width: 100%;
         button {
+          padding: 0;
           font-size: 0.8rem;
-          height: 3vh;
-          width: 10vw;
+          height: 7vw;
+          width: 3vw;
         }
       }
       .container {
         .head {
           margin: 4% 0;
           p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
           }
         }
         .cards {
           .exercise {
+            margin-bottom: 3%;
             min-height: 5vh;
             .exerciseName {
               p {
-                font-size: 1rem;
+                font-size: 0.9rem;
               }
             }
           }

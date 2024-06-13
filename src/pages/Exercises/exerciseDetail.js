@@ -200,13 +200,15 @@ const ExerciseDetails = ({ exercise, onClose }) => {
                   />
 
                   <div className={classes.buttons}>
-                    <div
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(handleEdit);
-                      }}
-                    >
-                      <p>Save</p>
+                    <div>
+                      <Button
+                        className={classes.button}
+                        onClick={() => {
+                          handleClick(handleEdit);
+                        }}
+                      >
+                        Save
+                      </Button>
                     </div>
                     <div>
                       <Button
