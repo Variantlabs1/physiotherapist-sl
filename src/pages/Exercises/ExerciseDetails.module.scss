@@ -582,7 +582,7 @@
       width: 100%;
       height: 4vh;
       .exerciseTitle {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
 
       .buttons {
@@ -594,7 +594,7 @@
     .videosContainerMobile {
       .videosTitle {
         p {
-          font-size: 1.5rem;
+          font-size: 1.3rem;
         }
       }
       .videoItem {
@@ -624,7 +624,7 @@
       }
       .aboutTitle {
         p {
-          font-size: 1.5rem;
+          font-size: 1.3rem;
         }
       }
     }
@@ -637,7 +637,7 @@
           padding-bottom: 2vw;
           .descriptionTitle {
             p {
-              font-size: 1.5rem;
+              font-size: 1.3rem;
             }
 
             div {
@@ -672,7 +672,7 @@
         .musclesInvolvedContainer {
           .musclesInvolvedTitle {
             p {
-              font-size: 1.5rem;
+              font-size: 1.3rem;
             }
           }
 
@@ -697,5 +697,96 @@
       width: 8vw;
       height: 8vw;
     }
+  }
+}
+@media only screen and (max-width: 380px) {
+  .exerciseDetailsContainer {
+    .header {
+      .exerciseTitle {
+        font-size: 1.2rem;
+      }
+
+      .buttons {
+        border-radius: 8px;
+        width: 22vw;
+        height: 8vw;
+        border-width: 1px;
+        font-size: 0.9rem;
+      }
+    }
+    .videosContainerMobile {
+      .videosTitle {
+        p {
+          font-size: 1.2rem;
+        }
+      }
+    }
+    .aboutContainerMobile {
+      .info {
+        width: 75%;
+        min-height: 8vh;
+        .items {
+          input {
+            font-size: 0.9rem;
+          }
+        }
+      }
+      .aboutTitle {
+        p {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .container {
+      .right {
+        .descriptionContainer {
+          .descriptionTitle {
+            p {
+              font-size: 1.2rem;
+            }
+          }
+
+          .descriptionContent {
+            font-size: 0.9rem !important;
+
+            .editDesc {
+              textarea {
+                font-size: 0.9rem;
+              }
+              .buttons {
+                gap: 10px;
+                .button {
+                  font-size: 0.8rem;
+                }
+                .button1 {
+                  font-size: 0.8rem;
+                }
+              }
+            }
+          }
+        }
+
+        .musclesInvolvedContainer {
+          .musclesInvolvedTitle {
+            p {
+              font-size: 1.2rem;
+            }
+          }
+
+          .musclesList {
+            .musclesInvolved {
+              p {
+                font-size: 0.9rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .label {
+    font-size: 0.9rem;
+    height: 4vh;
   }
 }

@@ -86,4 +86,4 @@ const Exercises = () => {
 
 export default Exercises;
 
-const data = [1, 23, 4, 6];
+const data = [1, 23, 4];

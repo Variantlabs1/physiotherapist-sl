@@ -9,7 +9,6 @@ import { FaSearch } from "react-icons/fa";
 import { Link, useNavigation } from "react-router-dom";
 
 const MainChats = () => {
-  const date = useDate();
   const user = useAuth();
   // const Navigation = useNavigation();
   const [selectedClient, setSelectedClient] = useState(null);
@@ -132,7 +131,6 @@ const MainChats = () => {
             <div className={styles.title}>
               <p>Clients List</p>
             </div>
-            <Center fontWeight="500">{date}</Center>
           </div>
           <div className={styles.outerContainer}>
             <div className={styles.searchBarNotificationContainer}>

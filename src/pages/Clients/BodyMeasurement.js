@@ -35,7 +35,6 @@ const BodyMeasurement = ({ client, onBackClick }) => {
         <div className={styles.title}>
           <p>Body Measurement</p>
         </div>
-        <Center fontWeight="500">{date}</Center>
       </div>
 
       <div className={styles.outerContainer}>

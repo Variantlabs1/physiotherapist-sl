@@ -19,7 +19,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import DeletePhysio from "./DeletePhysio";
+import DeleteExercise from "./DeleteExercise";
 import useDate from "../../components/useDate";
 import { FaSearch } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa6";
@@ -215,7 +215,9 @@ const ExercisesPage = ({
         <div className={styles.title}>
           <p>All Exercises</p>
         </div>
-        <Center fontWeight="500">{date}</Center>
+        <Center fontWeight="500" className={styles.date}>
+          {date}
+        </Center>
       </div>
       <div className={styles.outerContainer}>
         <div className={styles.searchBarNotificationContainer}>
@@ -377,7 +379,7 @@ const ExercisesPage = ({
                     </h3>
                     {!clientId && (
                       <div className={styles.icon}>
-                        <DeletePhysio
+                        <DeleteExercise
                           id={exercise.id}
                           isOpenDelete={exercise.id === openDeleteExerciseId}
                           toggleDeleteModal={(e) =>

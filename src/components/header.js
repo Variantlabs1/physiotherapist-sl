@@ -2,10 +2,13 @@ import classes from "../styles/Header.module.scss";
 import { useState, useEffect } from "react";
 import { Center } from "@chakra-ui/react";
 import { HiBars3BottomLeft } from "react-icons/hi2";
+import useDate from "./useDate";
 
 const Header = ({ toggleDrawer }) => {
+  const date = useDate();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [greeting, setGreeting] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 450);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,6 +36,20 @@ const Header = ({ toggleDrawer }) => {
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 820);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Remove event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className={classes.rootHeader}>
       <Center onClick={toggleDrawer}>
@@ -40,6 +57,7 @@ const Header = ({ toggleDrawer }) => {
       </Center>
       <div className={classes.greet}>
         <p>{greeting}</p>
+        <p className={classes.date}>{isMobile && date}</p>
       </div>
     </div>
   );

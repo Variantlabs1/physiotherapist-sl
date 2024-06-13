@@ -11,11 +11,9 @@ import {
   Input,
   Text,
   Textarea,
-  VStack,
   useToast,
 } from "@chakra-ui/react";
-import { AnimatePresence, motion } from "framer-motion";
-import logo from "../../assets/logo.png";
+import { motion } from "framer-motion";
 import fitgirlImage from "../../assets/fitgirl.png";
 import introImage from "../../assets/introImage.png";
 import cardPrecision from "../../assets/cardPrecision.png";
@@ -27,10 +25,10 @@ import cardBodyComposition from "../../assets/cardBodyComposition.png";
 import cardPosture from "../../assets/cardPosture.png";
 import bottomImage from "../../assets/bottonImage.png";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { HiBars3BottomLeft } from "react-icons/hi2";
+import { Link, useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase";
+import Navbar from "./Navbar";
 
 const cards1 = [
   {
@@ -85,11 +83,7 @@ export default function LandingPage() {
   const Navigate = useNavigate();
   const toast = useToast();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 820);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -149,84 +143,7 @@ export default function LandingPage() {
   };
   return (
     <div className={classes.rootDiv}>
-      {!isMobile ? (
-        <Flex className={classes.navbar}>
-          <VStack className={classes.navImage}>
-            <Image className={classes.logo} src={logo} />
-            <Text className={classes.text}>vigour</Text>
-          </VStack>
-          <Flex className={classes.navButtons}>
-            <Button
-              className={classes.signUp}
-              onClick={() => {
-                Navigate("/signup");
-              }}
-            >
-              Sign Up
-            </Button>
-            <Button
-              className={classes.signIn}
-              onClick={() => {
-                Navigate("/login");
-              }}
-            >
-              Sign In
-            </Button>
-          </Flex>
-        </Flex>
-      ) : (
-        <div className={classes.mobileNavbar}>
-          <Flex className={classes.top}>
-            <Center className={classes.leftIcon} onClick={toggleDropdown}>
-              <HiBars3BottomLeft />
-            </Center>
-            <HStack className={classes.navContainer}>
-              <VStack className={classes.navImage}>
-                <Image className={classes.logo} src={logo} />
-                <Text className={classes.text}>vigour</Text>
-              </VStack>
-            </HStack>
-          </Flex>
-          <AnimatePresence>
-            {isDropdownOpen && (
-              <Flex className={classes.dropdownContainer}>
-                <motion.div
-                  initial={{ opacity: 0, y: 0 }}
-                  animate={{ opacity: 1, y: 10 }}
-                  exit={{ opacity: 0, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className={classes.dropdown}
-                >
-                  <button
-                    onClick={() => {
-                      Navigate("/home");
-                    }}
-                  >
-                    Home
-                  </button>
-                  <button
-                    onClick={() => {
-                      Navigate("/login");
-                    }}
-                  >
-                    Sign Up
-                  </button>
-                  <button
-                    onClick={() => {
-                      Navigate("/signup");
-                    }}
-                  >
-                    Sign In
-                  </button>
-                </motion.div>
-                <Box className={classes.dropdownButton}>
-                  <Button>Buy now</Button>
-                </Box>
-              </Flex>
-            )}
-          </AnimatePresence>
-        </div>
-      )}
+      <Navbar />
       <Center className={classes.header}>
         <Box className={classes.headerContainer}>
           <motion.div
@@ -239,7 +156,7 @@ export default function LandingPage() {
               <Text className={classes.text}>
                 Start your fitness journey with new-gen technology.
               </Text>
-              <Button>Get Started</Button>
+              <Button onClick={() => Navigate("/signup")}>Get Started</Button>
               <Text className={classes.text2}>
                 Do you already have an account?{" "}
                 <span
@@ -288,7 +205,7 @@ export default function LandingPage() {
               accurately capture 86 measurements to create a detailed digital
               body model.
             </Text>
-            <Button>Get Started</Button>
+            <Button onClick={() => Navigate("/signup")}>Get Started</Button>
           </motion.div>
         </HStack>
       </Center>
@@ -359,7 +276,7 @@ export default function LandingPage() {
           <Text className={classes.firstText}>
             Sign up to receive newsletters, tips, and updates from us.
           </Text>
-          <Button variant="solid">Newsletters</Button>
+          {/* <Button variant="solid">Newsletters</Button> */}
         </Box>
         <Box className={classes.first}>
           <Text className={classes.firstLabel}>Follow us on social media:</Text>
@@ -441,41 +358,52 @@ export default function LandingPage() {
         </Flex>
         <Image src={bottomImage} />
       </motion.div>
-      {isMobile && (
-        <Box className={classes.footer}>
-          <Box>
-            <Heading>Vigour</Heading>
-            <Text>Mindleap AI LLC</Text>
-            <Text>
-              Empower Your Fitness Journey with Precisionand Personalization
-            </Text>
-          </Box>
-          <Box>
-            <Text className={classes.headers}>Contact Us</Text>
-            <Text>202 Helga Springs Rd, Crawford, TN 28554</Text>
-            <Text>
-              Call Us: <strong>630003660</strong>
-            </Text>
-            <Text>info@vigour.com</Text>
-          </Box>
-          <Box>
-            <Text className={classes.headers}>Sign Up for Email Updates</Text>
-            <Flex className={classes.inputContainer}>
-              <Input placeholder="Your e-mail address" />
-              <Button>Subscribe</Button>
-            </Flex>
-            <Text className={classes.smallText}>
-              Sign up with your email address to receive news and updates
-            </Text>
-          </Box>
-          <Box className={classes.last}>
-            <Text>Home</Text>
-            <Text className={classes.copy}>
-              Copyright c2024 vigour. All rights reserved
-            </Text>
-          </Box>
+      {/* {isMobile && ( */}
+      <Box className={classes.footer}>
+        <Box>
+          <Heading>Vigour</Heading>
+          <Text>Mindleap AI LLC</Text>
+          <Text>
+            Empower Your Fitness Journey with Precisionand Personalization
+          </Text>
         </Box>
-      )}
+        <Box>
+          <Text className={classes.headers}>About Us</Text>
+          <Text>
+            <Link to="/about">About Us</Link>
+          </Text>
+        </Box>
+        <Box>
+          <Text className={classes.headers}>Contact Us</Text>
+          <Text>202 Helga Springs Rd, Crawford, TN 28554</Text>
+          <Text>
+            Call Us: <strong>630003660</strong>
+          </Text>
+          <Text>info@vigour.com</Text>
+        </Box>
+        <Box>
+          <Text className={classes.headers}>Sign Up for Email Updates</Text>
+          <Flex className={classes.inputContainer}>
+            <Input placeholder="Your e-mail address" />
+            <Button>Subscribe</Button>
+          </Flex>
+          <Text className={classes.smallText}>
+            Sign up with your email address to receive news and updates
+          </Text>
+        </Box>
+        <Box className={classes.last}>
+          <Text>Home</Text>
+          <Text className={classes.copy}>
+            <Link to="/privacy">Privacy policy </Link>
+            {"  "}
+            <Link to="/terms">Terms of use</Link>
+          </Text>
+          <Text className={classes.copy}>
+            Copyright ©2024 vigour. All rights reserved
+          </Text>
+        </Box>
+      </Box>
+      {/* )} */}
     </div>
   );
 }

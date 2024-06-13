@@ -18,13 +18,16 @@
   }
   @media only screen and (max-width: 450px) {
     padding: 2% 3%;
-    height: 8vh;
+    height: 20vw;
     .icon {
       font-size: 1.8rem;
     }
     .greet {
-      width: 40vw;
+      width: 100%;
       font-size: 1.2rem;
+      .date {
+        font-size: 0.7rem;
+      }
     }
   }
 }

@@ -127,7 +127,6 @@ const FormCheck = ({ clientId, onBackClick }) => {
         <div className={classes.title}>
           <p>Form Check</p>
         </div>
-        <Center fontWeight="500">{date}</Center>
       </div>
       <div className={classes.outerContainer}>
         <div className={classes.searchBarNotificationContainer}>

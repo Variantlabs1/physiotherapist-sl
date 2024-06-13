@@ -470,6 +470,9 @@
       .title {
         font-size: 1.6rem !important;
       }
+      .date {
+        display: none;
+      }
     }
     .outerContainer {
       min-height: 70vh;
@@ -477,40 +480,45 @@
       .searchBarNotificationContainer {
         flex-direction: column;
         width: 90%;
-        margin: 2% auto;
+        margin-bottom: 0;
         .searchBarContainer {
-          height: 7vw;
+          height: 8vw;
           width: 100%;
 
           .searchInput {
             font-size: 0.8rem;
           }
+          .searchIconContainer {
+            svg {
+              font-size: 0.9rem;
+            }
+          }
         }
         .buttons {
           width: 80%;
-          margin-top: 2%;
+          margin-top: 3%;
           display: flex;
           flex-direction: row;
           justify-content: space-between;
           align-items: center;
           .backButton {
-            height: 6vw;
+            height: 8vw;
             width: 18vw;
           }
           .addExercise {
-            height: 6vw;
+            height: 8vw;
             width: 18vw;
             font-size: 1em;
           }
 
           .toggle {
-            height: 6vw;
+            height: 8vw;
             width: 6vw;
           }
           .notificationIconContainer {
             font-size: 1em;
             width: 18vw;
-            height: 6vw;
+            height: 8vw;
             .dropDown {
               padding: 5% 2%;
               width: 50vw;
@@ -562,8 +570,11 @@
         }
         .listContainer {
           flex-direction: column;
+          gap: 10px;
+          margin: 2% 0;
           .card {
             gap: 2;
+            margin-bottom: 0;
             .imageContainer {
               width: 22vw;
               height: 12vh;
@@ -611,6 +622,52 @@
                 font-size: 0.8rem;
                 line-height: 1rem;
               }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 380px) {
+  .rootExercises {
+    .header {
+      .title {
+        font-size: 1.3rem !important;
+      }
+    }
+    .outerContainer {
+      .searchBarNotificationContainer {
+        .buttons {
+          font-size: 0.9rem;
+          .backButton {
+            font-size: 0.9rem;
+          }
+          .addExercise {
+            font-size: 0.9em;
+          }
+
+          .notificationIconContainer {
+            font-size: 0.9em;
+            .dropDown {
+              .button {
+                font-size: 0.9rem;
+              }
+            }
+          }
+        }
+      }
+
+      .container {
+        flex-direction: column-reverse;
+        width: 90%;
+        margin: auto;
+        .arrow {
+          .pagination {
+            width: 40vw;
+            button {
+              width: 10vw;
+              height: 10vw;
             }
           }
         }

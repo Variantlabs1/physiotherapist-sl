@@ -321,10 +321,17 @@
           height: 4.3vh;
           .searchInput {
             padding: 0 4px;
+            font-size: 0.9rem;
+          }
+          .searchIconContainer {
+            svg {
+              font-size: 0.9rem;
+            }
           }
         }
 
         .notificationIconContainer {
+          font-size: 0.9rem;
           .dropDown {
             width: 50vw;
             left: -280%;
@@ -345,6 +352,7 @@
           gap: 0;
           .card {
             width: 100%;
+            margin-bottom: 3%;
           }
           .card {
             .imageContainer {
@@ -357,14 +365,14 @@
             .textContainer {
               .username {
                 p {
-                  font-size: 1.43rem;
+                  font-size: 1.3rem;
                 }
               }
               .buttons {
                 width: 18vw;
-                height: 3.5vh;
+                height: 8vw;
                 p {
-                  font-size: 1.1rem;
+                  font-size: 0.9rem;
                 }
               }
             }

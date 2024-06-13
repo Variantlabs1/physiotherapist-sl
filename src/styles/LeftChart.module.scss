@@ -84,8 +84,9 @@
 }
 @media only screen and (max-width: 450px) {
   .top {
+    margin-top: 10px;
     p {
-      font-size: 22px;
+      font-size: 1.1rem;
       font-weight: 600;
     }
     div {
