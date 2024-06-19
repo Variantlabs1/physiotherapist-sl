@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Privacy&Terms.module.scss";
 import {
   Box,
@@ -17,6 +17,9 @@ import {
 import { BsDot } from "react-icons/bs";
 
 export default function Privacy() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Box className={classes.rootDiv}>
       <Box className={classes.headingContainer}>

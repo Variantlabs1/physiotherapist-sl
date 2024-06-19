@@ -363,6 +363,7 @@
     }
     .last {
       margin-top: 3%;
+      // justify-content: space-between;
       p {
         text-align: center;
       }
@@ -996,6 +997,9 @@
         }
         .smallText {
           font-size: 0.7rem;
+        }
+        .inputContainer {
+          height: 10vw;
         }
       }
       .last {

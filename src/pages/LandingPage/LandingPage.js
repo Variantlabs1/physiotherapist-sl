@@ -366,20 +366,13 @@ export default function LandingPage() {
           <Text>
             Empower Your Fitness Journey with Precisionand Personalization
           </Text>
-        </Box>
-        <Box>
-          <Text className={classes.headers}>About Us</Text>
           <Text>
             <Link to="/about">About Us</Link>
           </Text>
         </Box>
         <Box>
           <Text className={classes.headers}>Contact Us</Text>
-          <Text>202 Helga Springs Rd, Crawford, TN 28554</Text>
-          <Text>
-            Call Us: <strong>630003660</strong>
-          </Text>
-          <Text>info@vigour.com</Text>
+          <Text>info@mindleap-ai.com</Text>
         </Box>
         <Box>
           <Text className={classes.headers}>Sign Up for Email Updates</Text>
@@ -392,7 +385,7 @@ export default function LandingPage() {
           </Text>
         </Box>
         <Box className={classes.last}>
-          <Text>Home</Text>
+          <Text>Mindleap AI LLC</Text>
           <Text className={classes.copy}>
             <Link to="/privacy">Privacy policy </Link>
             {"  "}
@@ -403,7 +396,6 @@ export default function LandingPage() {
           </Text>
         </Box>
       </Box>
-      {/* )} */}
     </div>
   );
 }

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Privacy&Terms.module.scss";
 import { Box, Heading, List, ListIcon, ListItem, Text } from "@chakra-ui/react";
 import { BsDot } from "react-icons/bs";
 
 export default function Terms() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Box className={classes.rootDiv}>
       <Box className={classes.headingContainer}>
