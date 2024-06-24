@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SiSpringsecurity } from "react-icons/si";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { RxCross1 } from "react-icons/rx";
+import { RxCross1, RxCross2 } from "react-icons/rx";
 import "./ResetPassword.scss";
 
 import {
@@ -10,7 +10,7 @@ import {
   updatePassword,
   EmailAuthProvider,
 } from "firebase/auth";
-import { Center, Flex } from "@chakra-ui/react";
+import { Center, Flex, Spinner, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 const ResetPassword = ({ onSubmit }) => {
@@ -22,10 +22,20 @@ const ResetPassword = ({ onSubmit }) => {
   const [showReenteredPassword, setShowReenteredPassword] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleResetPassword = async () => {
     const auth = getAuth();
     const user = auth.currentUser;
+
+    if (
+      currentPassword === "" ||
+      newPassword === "" ||
+      reenteredPassword === ""
+    ) {
+      setErrorMessage("Error!Some fields are empty.");
+      return;
+    }
 
     if (newPassword !== reenteredPassword) {
       setErrorMessage("New passwords do not match.");
@@ -33,6 +43,7 @@ const ResetPassword = ({ onSubmit }) => {
     }
 
     try {
+      setLoading(true);
       const credentials = EmailAuthProvider.credential(
         user.email,
         currentPassword
@@ -42,6 +53,7 @@ const ResetPassword = ({ onSubmit }) => {
       setSuccessMessage("Password updated successfully.");
       setErrorMessage("");
     } catch (error) {
+      setLoading(false);
       if (error.code === "auth/wrong-password") {
         setErrorMessage("Current password is incorrect.");
       } else {
@@ -103,12 +115,12 @@ const ResetPassword = ({ onSubmit }) => {
           {showNewPassword ? (
             <IoEyeOutline
               className="EyeIcon"
-              onClick={() => setShowCurrentPassword(!showNewPassword)}
+              onClick={() => setShowNewPassword(!showNewPassword)}
             />
           ) : (
             <IoEyeOffOutline
               className="EyeIcon"
-              onClick={() => setShowCurrentPassword(!showNewPassword)}
+              onClick={() => setShowNewPassword(!showNewPassword)}
             />
           )}
         </div>
@@ -125,19 +137,23 @@ const ResetPassword = ({ onSubmit }) => {
           {showReenteredPassword ? (
             <IoEyeOutline
               className="EyeIcon"
-              onClick={() => setShowCurrentPassword(!showReenteredPassword)}
+              onClick={() => setShowReenteredPassword(!showReenteredPassword)}
             />
           ) : (
             <IoEyeOffOutline
               className="EyeIcon"
-              onClick={() => setShowCurrentPassword(!showReenteredPassword)}
+              onClick={() => setShowReenteredPassword(!showReenteredPassword)}
             />
           )}
         </div>
       </div>
-      <div className="submitBtn">
-        <button onClick={handleResetPassword}> SUBMIT</button>
-      </div>
+      <Center className="submitBtn">
+        {loading ? (
+          <Spinner color="white" />
+        ) : (
+          <button onClick={handleResetPassword}>SUBMIT</button>
+        )}
+      </Center>
       {/* <div className="submitBtn">
                 <button onClick={handleSubmit}> Done</button>
             </div> */}
@@ -145,8 +161,42 @@ const ResetPassword = ({ onSubmit }) => {
         <a href="/password-recovery">Forgot Password</a>
       </div>
 
-      {successMessage && <p>{successMessage}</p>}
-      {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, x: [90, 0], scale: 1 }}
+          transition={{ type: "spring", duration: 0.6 }}
+          className="Popup Epopup"
+        >
+          <p>{errorMessage}</p>
+          <div>
+            <RxCross2
+              color="white"
+              onClick={() => {
+                setErrorMessage(null);
+              }}
+            />
+          </div>
+        </motion.div>
+      )}
+      {successMessage && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, x: [90, 0], scale: 1 }}
+          transition={{ type: "spring", duration: 0.6 }}
+          className="Popup Spopup"
+        >
+          <p>{successMessage}</p>
+          <div>
+            <RxCross2
+              color="white"
+              onClick={() => {
+                setErrorMessage(null);
+              }}
+            />
+          </div>
+        </motion.div>
+      )}
     </motion.div>
   );
 };

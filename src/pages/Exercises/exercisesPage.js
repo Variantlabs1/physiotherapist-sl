@@ -24,7 +24,15 @@ import useDate from "../../components/useDate";
 import { FaSearch } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
-import { Box, Button, Center, Flex, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Spinner,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 
 const ExercisesPage = ({
   clientId,
@@ -41,7 +49,7 @@ const ExercisesPage = ({
   const [lastDocument, setLastDocument] = useState(null);
   const [firstDocument, setFirstDocument] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 430);
-
+  const [loading, setLoading] = useState(true);
   const [openDeleteExerciseId, setOpenDeleteExerciseId] = useState(null);
   const [filteredExercises, setFilteredExercises] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -74,6 +82,7 @@ const ExercisesPage = ({
 
   useEffect(() => {
     const getDefaultExercises = async () => {
+      setLoading(true);
       try {
         //     const clientData = await getDocs(query(collection(db,"Users"),where("userId","==",clientId)))
         //    !clientData.empty && setClient(clientData.docs[0].data())
@@ -111,10 +120,12 @@ const ExercisesPage = ({
           setFilteredExercises(res.docs.map((doc) => doc.data()));
           setLastDocument(res.docs[res.docs.length - 1]);
           setFirstDocument(res.docs[0]);
+          setLoading(false);
           // console.log(res.docs[res.docs.length - 1].data().Exercise_Name);
         }
       } catch (e) {
         console.log(e);
+        setLoading(false);
       }
     };
 
@@ -124,6 +135,7 @@ const ExercisesPage = ({
   const handleExercisesFetched = (fetchedExercises) => {
     setExercises(fetchedExercises);
     setFilteredExercises(fetchedExercises);
+    setLoading(false);
   };
 
   const sortData = () => {
@@ -314,6 +326,17 @@ const ExercisesPage = ({
           {/* Render the ExerciseFetcher component to fetch data */}
           {!clientId && (
             <ExerciseFetcher onExercisesFetched={handleExercisesFetched} />
+          )}
+          {loading && (
+            <Center>
+              <Spinner
+                color="#0d30ac"
+                size="xl"
+                position="absolute"
+                top="50%"
+                zIndex={15}
+              />
+            </Center>
           )}
 
           {/* Render the exercises */}

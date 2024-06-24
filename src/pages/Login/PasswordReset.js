@@ -3,7 +3,7 @@ import classes from "./PasswordReset.module.scss";
 import { auth } from "../../firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { Center, Flex, Text } from "@chakra-ui/react";
+import { Center, Flex, Spinner, Text } from "@chakra-ui/react";
 import { MdEmail } from "react-icons/md";
 import { motion, useAnimate } from "framer-motion";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -15,20 +15,23 @@ const PasswordReset = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [email, setEmail] = useState("");
   const [resetEmailSent, setResetEmailSent] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (email == "") {
       setErrorMessage("Email cannot be empty");
       return;
     }
     try {
       await sendPasswordResetEmail(auth, email);
-
+      setLoading(false);
       setResetEmailSent(true);
     } catch (error) {
       console.error("Error sending reset email:", error.message);
+      setLoading(false);
       setErrorMessage("Error! Inavlid Email");
     }
   };
@@ -76,17 +79,21 @@ const PasswordReset = () => {
 
             <div className={classes.buttons} ref={scope}>
               <motion.div
-                onHoverStart={handleAnimation}
-                onHoverEnd={handleAnimationClose}
+                onHoverStart={!loading && handleAnimation}
+                onHoverEnd={!loading && handleAnimationClose}
                 whileTap={{ scale: 0.9 }}
                 className={classes.signin}
                 onClick={handleResetPassword}
               >
                 <Flex justifyContent="center" color="white" gap={3}>
                   <Text>Send Link</Text>
-                  <Center id="arrow">
-                    <FaArrowRightLong color="white" />
-                  </Center>
+                  {loading ? (
+                    <Spinner color="white" />
+                  ) : (
+                    <Center id="arrow">
+                      <FaArrowRightLong color="white" />
+                    </Center>
+                  )}
                 </Flex>
               </motion.div>
             </div>

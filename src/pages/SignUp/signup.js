@@ -22,14 +22,13 @@ const Login = () => {
   const [bio, setBio] = useState("");
   const [experience, setExperience] = useState("");
   const [errorMsg, setErrorMsg] = useState(null);
-  const [loading, setLoading] = useState(false);
   //For authentication purpose
   const [email, setEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [reenteredPassword, setReenteredPassword] = useState("");
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showReenteredPassword, setShowReenteredPassword] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   // State variables for error messages
   const [showErrorPopup, setShowErrorPopup] = useState(false);
 
@@ -204,6 +203,7 @@ const Login = () => {
         setLoading(false);
       } catch (err) {
         // Capture and display the Firebase error message
+        setLoading(false);
         setErrorMsg(err.message);
         setShowErrorPopup(true);
       }
@@ -218,9 +218,6 @@ const Login = () => {
 
   return (
     <Center className={classes.rootSignup}>
-      {loading && (
-        <Spinner color="#0d30ac" size="xl" position="absolute" zIndex={15} />
-      )}
       <div className={classes.overlay}></div>
       <div className={classes.bgImage}></div>
       <div className={classes.container}>
@@ -369,17 +366,21 @@ const Login = () => {
             </div>
             <div className={classes.footer} ref={scope}>
               <motion.div
-                onHoverStart={handleAnimation}
-                onHoverEnd={handleAnimationClose}
+                onHoverStart={!loading && handleAnimation}
+                onHoverEnd={!loading && handleAnimationClose}
                 whileTap={{ scale: 0.9 }}
                 className={classes.signup}
                 onClick={handleSubmit}
               >
                 <Flex justifyContent="center" color="white" gap={3}>
                   <Text>Submit</Text>
-                  <Center id="arrow">
-                    <FaArrowRightLong color="white" />
-                  </Center>
+                  {loading ? (
+                    <Spinner color="white" />
+                  ) : (
+                    <Center id="arrow">
+                      <FaArrowRightLong color="white" />
+                    </Center>
+                  )}
                 </Flex>
               </motion.div>
               <p style={{ color: "#181818" }} onClick={handleLoginClick}>

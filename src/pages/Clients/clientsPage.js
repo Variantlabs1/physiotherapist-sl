@@ -5,7 +5,15 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import useDate from "../../components/useDate";
 import { FaSearch } from "react-icons/fa";
-import { Box, Button, Center, Flex, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Spinner,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const ClientsPage = () => {
@@ -20,7 +28,10 @@ const ClientsPage = () => {
     age: false,
     alphabetical: false,
   });
+  const [loading, setLoading] = useState(true);
+
   const handleClientsFetched = (fetchedClients) => {
+    setLoading(false);
     setClients(fetchedClients);
     setFilteredClients(fetchedClients);
   };
@@ -203,7 +214,17 @@ const ClientsPage = () => {
         <div className={styles.container}>
           {/* Render the ClientFetcher component to fetch data */}
           <ClientFetcher onClientsFetched={handleClientsFetched} />
-
+          {loading && (
+            <Center>
+              <Spinner
+                color="#0d30ac"
+                size="xl"
+                position="absolute"
+                top="50%"
+                zIndex={15}
+              />
+            </Center>
+          )}
           {/* Render the clients */}
           <div className={styles.listContainer}>
             {filteredClients.map((client) => (

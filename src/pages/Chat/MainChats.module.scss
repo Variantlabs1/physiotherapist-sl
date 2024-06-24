@@ -140,6 +140,7 @@
                 font-weight: 600;
                 font-size: 1.53rem;
                 color: #0d1dac;
+                line-height: 26px;
               }
             }
 
@@ -239,6 +240,11 @@
               }
             }
             .textContainer {
+              .username {
+                p {
+                  line-height: auto;
+                }
+              }
               .buttons {
                 width: 8vw;
                 height: 2.4vh;
