@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./About.module.scss";
 import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import Navbar from "./Navbar";
 
 export default function About() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Box className={classes.rootDiv}>

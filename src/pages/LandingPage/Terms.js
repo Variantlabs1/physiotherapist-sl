@@ -17,7 +17,7 @@ export default function Terms() {
       </Box>
       <Box className={classes.container}>
         <Heading className={classes.header}>Terms of Use</Heading>
-        <Heading color="greenyellow" fontSize="1.5rem">
+        <Heading className={classes.header}>
           AGREEMENT TO OUR LEGAL TERMS{" "}
         </Heading>
         <Text className={classes.textinfo}>
