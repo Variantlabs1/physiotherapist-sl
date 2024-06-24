@@ -136,7 +136,8 @@
     .container {
       padding: 2% 3%;
       .banner {
-        height: 35vw;
+        margin: 4% auto;
+        height: 50vw;
         .bannerText {
           font-size: 1.3rem;
         }
@@ -144,7 +145,7 @@
       .about {
         width: 100%;
         .aboutHeading {
-          font-size: 1.3rem;
+          font-size: 1.4rem;
         }
         .aboutText {
           font-size: 0.9rem;
@@ -181,11 +182,9 @@
           .Image {
             border-radius: 10px;
           }
-          // .visionHead2 {
-          //   color: greenyellow;
-          //   text-align: center;
-          //   font-size: 1.3rem;
-          // }
+          .visionHead2 {
+            font-size: 1.4rem;
+          }
         }
       }
     }
