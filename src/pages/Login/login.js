@@ -8,7 +8,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import { Center, Flex, Spinner, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, Spinner, Text } from "@chakra-ui/react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 
@@ -42,6 +42,7 @@ function Login() {
       .catch((err) => {
         setSubmitButtonDisabled(false);
         setErrorMsg("Invalid Email or Password");
+        setLoading(false);
         console.log(err);
       });
   };
@@ -55,9 +56,6 @@ function Login() {
 
   return (
     <div className={classes.rootLogin}>
-      {loading && (
-        <Spinner color="#0d30ac" size="xl" position="absolute" zIndex={15} />
-      )}
       <div className={classes.overlay}></div>
       <div className={classes.bgImage}></div>
       <div className={classes.containerMain}>
@@ -126,23 +124,22 @@ function Login() {
 
           <div className={classes.buttons} ref={scope}>
             <motion.div
-              onHoverStart={handleAnimation}
-              onHoverEnd={handleAnimationClose}
+              onHoverStart={!loading && handleAnimation}
+              onHoverEnd={!loading && handleAnimationClose}
               whileTap={{ scale: 0.9 }}
               className={classes.signin}
               onClick={handleSubmission}
               disabled={submitButtonDisabled}
             >
-              <Flex
-                w={["40%", "40%", "50%", "50%"]}
-                m="auto"
-                justifyContent="space-between"
-                color="white"
-              >
+              <Flex gap="10px" color="white">
                 <Text>Log In</Text>
-                <Center id="arrow">
-                  <FaArrowRightLong color="white" />
-                </Center>
+                {loading ? (
+                  <Spinner color="white" />
+                ) : (
+                  <Center id="arrow">
+                    <FaArrowRightLong color="white" />
+                  </Center>
+                )}
               </Flex>
             </motion.div>
             <div className={classes.signup}>

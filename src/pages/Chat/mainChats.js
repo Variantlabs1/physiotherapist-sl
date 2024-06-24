@@ -4,7 +4,15 @@ import Chats from "./chats";
 import { useAuth } from "../../components/data_fetch/authProvider";
 import styles from "./MainChats.module.scss";
 import useDate from "../../components/useDate";
-import { Box, Button, Center, Flex, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Spinner,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import { Link, useNavigation } from "react-router-dom";
 
@@ -22,9 +30,11 @@ const MainChats = () => {
     age: false,
     alphabetical: false,
   });
+  const [loading, setLoading] = useState(true);
   const handleClientsFetched = (fetchedClients) => {
     setClients(fetchedClients);
     setFilteredClients(fetchedClients);
+    setLoading(false);
   };
 
   // console.log(user.uID);
@@ -207,6 +217,17 @@ const MainChats = () => {
                 )}
               </Center>
             </div>
+            {loading && (
+              <Center>
+                <Spinner
+                  color="#0d30ac"
+                  size="xl"
+                  position="absolute"
+                  top="50%"
+                  zIndex={15}
+                />
+              </Center>
+            )}
             <div className={styles.cardsContainer}>
               {filteredClients.map((client, index) => (
                 <div key={index} className={styles.card}>

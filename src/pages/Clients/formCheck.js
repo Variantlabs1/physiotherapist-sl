@@ -189,36 +189,42 @@ const FormCheck = ({ clientId, onBackClick }) => {
         </div>
 
         <div className={classes.container}>
-          {filteredResultData.map((data, index) => (
-            <Flex key={index} className={classes.card}>
-              <div className={classes.tag}>
-                <p className={classes.exerciseName}>{data.exercise}</p>
+          {filteredResultData.map(
+            (data, index) =>
+              !data.error && (
+                <Flex key={index} className={classes.card}>
+                  <div className={classes.tag}>
+                    <p className={classes.exerciseName}>{data.exercise}</p>
 
-                <div className={classes.title}>Muscles Involved</div>
-                <div className={classes.musclesInvolved}>
-                  {data["Muscles Involved"]
-                    .split(",")
-                    .map((muscle, muscleIndex) => (
-                      <Text key={muscleIndex} className={classes.musclesName}>
-                        {muscle.trim()}
-                      </Text>
-                    ))}
-                </div>
-              </div>
-              <div className={classes.playButton}>
-                <div
-                  onClick={() => {
-                    loadVideo(data.URL);
-                  }}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <PiPlayCircleLight className={classes.icon} />
-                  <p>Play</p>
-                </div>
-              </div>
-            </Flex>
-          ))}
+                    <div className={classes.title}>Muscles Involved</div>
+                    <div className={classes.musclesInvolved}>
+                      {data["Muscles Involved"]
+                        .split(",")
+                        .map((muscle, muscleIndex) => (
+                          <Text
+                            key={muscleIndex}
+                            className={classes.musclesName}
+                          >
+                            {muscle.trim()}
+                          </Text>
+                        ))}
+                    </div>
+                  </div>
+                  <div className={classes.playButton}>
+                    <div
+                      onClick={() => {
+                        loadVideo(data.URL);
+                      }}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <PiPlayCircleLight className={classes.icon} />
+                      <p>Play</p>
+                    </div>
+                  </div>
+                </Flex>
+              )
+          )}
         </div>
       </div>
     </div>

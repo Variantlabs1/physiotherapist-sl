@@ -16,7 +16,15 @@ import {
 import { auth, db } from "../../firebase";
 import { AuthContext } from "../../components/data_fetch/authProvider";
 import styled from "styled-components";
-import { Box, Button, Center, Flex, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Spinner,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import useDate from "../../components/useDate";
 import { FaSearch } from "react-icons/fa";
 
@@ -31,7 +39,10 @@ const ClientsRequest = () => {
     newlyAdded: false,
     newlyAddedLast: false,
   });
+  const [loading, setLoading] = useState(true);
+
   const handleClientsFetched = (fetchedClients) => {
+    setLoading(false);
     setClients(fetchedClients);
     setFilteredClients(fetchedClients);
   };
@@ -239,47 +250,56 @@ const ClientsRequest = () => {
               )}
             </Center>
           </div>
+          {loading && (
+            <Center>
+              <Spinner
+                color="#0d30ac"
+                size="xl"
+                position="absolute"
+                top="50%"
+                zIndex={15}
+              />
+            </Center>
+          )}
           <div className={styles.listContainer}>
-            {filteredClients.length > 0 ? (
-              filteredClients.map((client) => (
-                <div className={styles.card} key={client.userID}>
-                  <div className={styles.imageContainer}>
-                    <img
-                      className={styles.profilePicture}
-                      src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=8"
-                      alt={client.userName}
-                    />
+            {filteredClients.length > 0
+              ? filteredClients.map((client) => (
+                  <div className={styles.card} key={client.userID}>
+                    <div className={styles.imageContainer}>
+                      <img
+                        className={styles.profilePicture}
+                        src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=8"
+                        alt={client.userName}
+                      />
 
-                    <div className={styles.infoDiv}>
-                      <Flex className={styles.info}>
-                        <p className={styles.name}>{client.userName}</p>
-                        <p>{client.userEmail}</p>
-                      </Flex>
-                      <div className={styles.info1}>
-                        <p>{client.accCreated}</p>
+                      <div className={styles.infoDiv}>
+                        <Flex className={styles.info}>
+                          <p className={styles.name}>{client.userName}</p>
+                          <p>{client.userEmail}</p>
+                        </Flex>
+                        <div className={styles.info1}>
+                          <p>{client.accCreated}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className={styles.buttons}>
+                      <div
+                        className={styles.accept}
+                        onClick={() => handleAcceptClient(client.userId)}
+                      >
+                        Accept
+                      </div>
+                      <div
+                        className={styles.decline}
+                        onClick={() => handleDeclineClient(client.userId)}
+                      >
+                        Decline
                       </div>
                     </div>
                   </div>
-
-                  <div className={styles.buttons}>
-                    <div
-                      className={styles.accept}
-                      onClick={() => handleAcceptClient(client.userId)}
-                    >
-                      Accept
-                    </div>
-                    <div
-                      className={styles.decline}
-                      onClick={() => handleDeclineClient(client.userId)}
-                    >
-                      Decline
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <Title>No Requests! </Title>
-            )}
+                ))
+              : !loading && <Title>No Requests! </Title>}
           </div>
         </div>
       </div>
