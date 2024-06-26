@@ -12,7 +12,6 @@ import {
   AuthProvider,
 } from "../../components/data_fetch/authProvider";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { VStack } from "@chakra-ui/react";
 
 function Home(props) {
   //For signout option

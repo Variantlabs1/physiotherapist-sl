@@ -27,6 +27,8 @@ import {
 } from "@chakra-ui/react";
 import useDate from "../../components/useDate";
 import { FaSearch } from "react-icons/fa";
+import { useQueryClient } from "@tanstack/react-query";
+import ImageComponent from "../Chat/components/ImageConponent";
 
 const ClientsRequest = () => {
   const date = useDate();
@@ -40,6 +42,7 @@ const ClientsRequest = () => {
     newlyAddedLast: false,
   });
   const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient();
 
   const handleClientsFetched = (fetchedClients) => {
     setLoading(false);
@@ -89,6 +92,7 @@ const ClientsRequest = () => {
         await updateDoc(userDocRef, { verified: true });
         //  update the clients list field in  the physiotherapist document
         console.log("Client accepted successfully!");
+        queryClient.invalidateQueries(["clientrequests"]);
         setRefreshKey((prevKey) => prevKey + 1);
       } catch (error) {
         console.error("Error accepting client:", error);
@@ -105,6 +109,7 @@ const ClientsRequest = () => {
         const userDocRef = doc(db, "Users", documentId);
         await updateDoc(userDocRef, { referralCode: "" });
         console.log("Client declined successfully!");
+        queryClient.invalidateQueries(["clientrequests"]);
         setRefreshKey((prevKey) => prevKey + 1);
       } catch (error) {
         console.error("Error declining client:", error);
@@ -266,11 +271,14 @@ const ClientsRequest = () => {
               ? filteredClients.map((client) => (
                   <div className={styles.card} key={client.userID}>
                     <div className={styles.imageContainer}>
-                      <img
-                        className={styles.profilePicture}
-                        src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=8"
-                        alt={client.userName}
-                      />
+                      {client.userProfilePhoto ? (
+                        <ImageComponent imagePath={client.userProfilePhoto} />
+                      ) : (
+                        <img
+                          src={require("../../assets/vectorProfile.png")}
+                          alt={client.userName}
+                        />
+                      )}
 
                       <div className={styles.infoDiv}>
                         <Flex className={styles.info}>

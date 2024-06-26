@@ -1,45 +1,47 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db, auth } from "../../firebase";
+import { db } from "../../firebase";
 import { AuthContext } from "./authProvider";
+import { useQuery } from "@tanstack/react-query";
 
 const ExerciseFetcher = ({ onExercisesFetched }) => {
-    const [exercises, setExercises] = useState([]);
-    const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
+  const fetchExercises = async () => {
+    try {
+      // Define the query to retrieve exercises for a specific user
+      const q = query(
+        collection(db, "exercises"),
+        where("physioId", "==", user?.uid)
+      );
 
-    useEffect(() => {
-        // Define the query to retrieve exercises for a specific user
+      // Fetch the documents that match the query
+      const querySnapshot = await getDocs(q);
 
-        // Fetch the documents that match the query
-        const fetchExercises = async () => {
-            try {
-                const q = query(
-                    collection(db, "exercises"),
-                    where("physioId", "==", user?.uid)
-                );
+      // Extract the data from the query snapshot
+      const exerciseData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-                const querySnapshot = await getDocs(q);
+      return exerciseData;
+    } catch (error) {
+      console.error("Error fetching exercises: ", error);
+    }
+  };
 
-                // Extract the data from the query snapshot
-                const exerciseData = querySnapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
+  const { data: exercises } = useQuery({
+    queryKey: ["exercises"],
+    queryFn: fetchExercises,
+  });
 
-                // Set the exercises state with the retrieved data
-                setExercises(exerciseData);
-                onExercisesFetched(exerciseData); // Pass the fetched data to the parent component
-            } catch (error) {
-                console.error("Error fetching exercises: ", error);
-            }
-        };
+  useEffect(() => {
+    if (exercises) {
+      onExercisesFetched(exercises);
+    }
+  }, [exercises]);
 
-        // Call the fetchExercises function to retrieve data
-        fetchExercises();
-    }, [user]);
-
-    return null;
+  return null;
 };
 
 export default ExerciseFetcher;

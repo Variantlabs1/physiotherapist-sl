@@ -5,47 +5,47 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { doc, collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import { PiPlayCircleLight } from "react-icons/pi";
-
-import { Box, Center, Flex, Text, Button, VStack } from "@chakra-ui/react";
-import video from "../../assets/push_up.mp4";
+import { Center, Flex, Text, Button, VStack } from "@chakra-ui/react";
 import useDate from "../../components/useDate";
 import { FaSearch } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
 
 const FormCheck = ({ clientId, onBackClick }) => {
   const date = useDate();
-  const [resultData, setResultsData] = useState([]);
   const [filteredResultData, setFilteredResultsData] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [sortOptions, setSortOptions] = useState({
     newlyAdded: false,
     newlyAddedLast: false,
   });
+  const getFormCheckData = async () => {
+    // const q = query(collection(db,"Form Check Tool"),where('userId',"==",clientId))
+    try {
+      const userDocRef = doc(db, "Form Check Tool", clientId);
+      // Reference to the 'results' subcollection for the specified user
+      const resultsCollectionRef = collection(userDocRef, "results");
+      // Get all documents in the 'results' subcollection for the specified user
+      const resultsQuerySnapshot = await getDocs(resultsCollectionRef);
+
+      const resultsDataArray = resultsQuerySnapshot.docs.map((resultDoc) =>
+        resultDoc.data()
+      );
+      return resultsDataArray;
+    } catch (error) {
+      console.error("Error getting documents:", error);
+    }
+  };
+
+  const { data: resultData } = useQuery({
+    queryKey: ["formcheck", clientId],
+    queryFn: getFormCheckData,
+  });
+
   useEffect(() => {
-    const getFormCheckData = async () => {
-      // const q = query(collection(db,"Form Check Tool"),where('userId',"==",clientId))
-      try {
-        const userDocRef = doc(db, "Form Check Tool", clientId);
-
-        // Reference to the 'results' subcollection for the specified user
-        const resultsCollectionRef = collection(userDocRef, "results");
-
-        // Get all documents in the 'results' subcollection for the specified user
-        const resultsQuerySnapshot = await getDocs(resultsCollectionRef);
-
-        const resultsDataArray = resultsQuerySnapshot.docs.map((resultDoc) =>
-          resultDoc.data()
-        );
-        console.log(resultsDataArray);
-        setResultsData(resultsDataArray);
-        setFilteredResultsData(resultsDataArray);
-      } catch (error) {
-        console.error("Error getting documents:", error);
-      }
-    };
-
-    // Cleanup function to unsubscribe when the component is unmounted or clientId changes
-    getFormCheckData();
-  }, [clientId]);
+    if (resultData) {
+      setFilteredResultsData(resultData);
+    }
+  }, [clientId, resultData]);
 
   const loadVideo = (url) => {
     // Assuming the video file is in the 'videos' directory
@@ -189,7 +189,7 @@ const FormCheck = ({ clientId, onBackClick }) => {
         </div>
 
         <div className={classes.container}>
-          {filteredResultData.map(
+          {filteredResultData?.map(
             (data, index) =>
               !data.error && (
                 <Flex key={index} className={classes.card}>

@@ -11,17 +11,16 @@ import {
   arrayUnion,
   doc,
 } from "firebase/firestore";
-import { db, auth } from "../../firebase";
+import { db } from "../../firebase";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useDropzone } from "react-dropzone";
 import { motion } from "framer-motion";
 import classes from "./AddExercises.module.scss";
 import { AuthContext } from "../../components/data_fetch/authProvider";
 import { RxCross2 } from "react-icons/rx";
 import { database } from "../../firebase";
 import { set, get, ref as dbRef, push } from "firebase/database";
-import { Center, Spinner } from "@chakra-ui/react";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { Spinner } from "@chakra-ui/react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
@@ -38,10 +37,10 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
   const [error, setError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [selectedPeriod, setSelectedPeriod] = useState("Monday");
-
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const client = urlParams.get("client");
+  const queryClient = useQueryClient();
 
   const handleVideoChange = (e) => {
     const file = e.target.files[0];
@@ -220,9 +219,10 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
       setMusclesInvolved("");
       setDuration("");
       setReps("");
-
       setSuccess(true);
       setSubmitting(false);
+      queryClient.invalidateQueries(["exercises"]);
+      queryClient.invalidateQueries(["graphexercise"]);
     } catch (error) {
       setError(error);
       // console.error("Error adding exercise: ", error);

@@ -7,6 +7,8 @@ import { AuthContext } from "./data_fetch/authProvider";
 import { Select } from "@chakra-ui/react";
 import { FaCaretDown } from "react-icons/fa";
 import { css } from "@emotion/react";
+import { useQuery } from "@tanstack/react-query";
+
 const customStyles = css`
   outline: none;
   border: none;
@@ -33,231 +35,229 @@ const Chart = () => {
     },
   ];
 
+  const getPhysio = async () => {
+    const q = query(
+      collection(db, "physiotherapist"),
+      where("physiotherapistId", "==", user.uid)
+    );
+    const res = await getDocs(q);
+    return res.docs[0].data();
+  };
+
+  const { data: physioData } = useQuery({
+    queryKey: ["graphexercise"],
+    queryFn: getPhysio,
+  });
+
   useEffect(() => {
-    const getExercises = async () => {
-      try {
-        const q = query(
-          collection(db, "physiotherapist"),
-          where("physiotherapistId", "==", user.uid)
-        );
-        const res = await getDocs(q);
-        const physioData = res.docs[0].data();
-        const weeklyExercises = [];
-        const today = new Date();
-        const mondayThisWeek = new Date(today);
-        mondayThisWeek.setDate(today.getDate() - ((today.getDay() + 6) % 7));
-        const firstDayThisMonth = new Date(
-          today.getFullYear(),
-          today.getMonth(),
-          1
-        );
-        let monthCount, month;
-        switch (selectedPeriod) {
-          case "thisWeek":
-            for (let i = 0; i < 7; i++) {
-              const dailyExercises = physioData.assignedOn.filter(
-                (d) =>
-                  new Date(d.toDate()).toLocaleDateString() ===
-                  new Date(
-                    new Date(mondayThisWeek).setDate(
-                      mondayThisWeek.getDate() + i
-                    )
-                  ).toLocaleDateString()
-              );
-              weeklyExercises.push(dailyExercises.length);
-            }
-            setData(weeklyExercises);
-            setOptions((prevOptions) => ({
-              ...prevOptions,
-              xaxis: {
-                ...prevOptions.xaxis,
-                categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-              },
-            }));
-            break;
-          case "lastWeek":
-            const mondayLastWeek = new Date(mondayThisWeek);
-            mondayLastWeek.setDate(mondayThisWeek.getDate() - 7);
-            for (let i = 0; i < 7; i++) {
-              const dailyExercises = physioData.assignedOn.filter(
-                (d) =>
-                  new Date(d.toDate()).toLocaleDateString() ===
-                  new Date(
-                    new Date(mondayLastWeek).setDate(
-                      mondayLastWeek.getDate() + i
-                    )
-                  ).toLocaleDateString()
-              );
-              weeklyExercises.push(dailyExercises.length);
-            }
-            setData(weeklyExercises);
-            setOptions((prevOptions) => ({
-              ...prevOptions,
-              xaxis: {
-                ...prevOptions.xaxis,
-                categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-              },
-            }));
-            break;
-          case "thisMonth":
-            month = today.getMonth();
-            if ([0, 2, 4, 6, 7, 9, 11].includes(month)) {
-              monthCount = 31; // January, March, May, July, August, October, December
-            } else if (month === 1) {
-              // February
-              if (
-                today.getFullYear() % 400 === 0 ||
-                (today.getFullYear() % 4 === 0 &&
-                  today.getFullYear() % 100 !== 0)
-              ) {
-                monthCount = 29; // Leap year
-              } else {
-                monthCount = 28; // Non-leap year
-              }
+    const getExercises = () => {
+      const weeklyExercises = [];
+      const today = new Date();
+      const mondayThisWeek = new Date(today);
+      mondayThisWeek.setDate(today.getDate() - ((today.getDay() + 6) % 7));
+      const firstDayThisMonth = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        1
+      );
+      let monthCount, month;
+      switch (selectedPeriod) {
+        case "thisWeek":
+          for (let i = 0; i < 7; i++) {
+            const dailyExercises = physioData.assignedOn.filter(
+              (d) =>
+                new Date(d.toDate()).toLocaleDateString() ===
+                new Date(
+                  new Date(mondayThisWeek).setDate(mondayThisWeek.getDate() + i)
+                ).toLocaleDateString()
+            );
+            weeklyExercises.push(dailyExercises.length);
+          }
+          setData(weeklyExercises);
+          setOptions((prevOptions) => ({
+            ...prevOptions,
+            xaxis: {
+              ...prevOptions.xaxis,
+              categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            },
+          }));
+          break;
+        case "lastWeek":
+          const mondayLastWeek = new Date(mondayThisWeek);
+          mondayLastWeek.setDate(mondayThisWeek.getDate() - 7);
+          for (let i = 0; i < 7; i++) {
+            const dailyExercises = physioData.assignedOn.filter(
+              (d) =>
+                new Date(d.toDate()).toLocaleDateString() ===
+                new Date(
+                  new Date(mondayLastWeek).setDate(mondayLastWeek.getDate() + i)
+                ).toLocaleDateString()
+            );
+            weeklyExercises.push(dailyExercises.length);
+          }
+          setData(weeklyExercises);
+          setOptions((prevOptions) => ({
+            ...prevOptions,
+            xaxis: {
+              ...prevOptions.xaxis,
+              categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            },
+          }));
+          break;
+        case "thisMonth":
+          month = today.getMonth();
+          if ([0, 2, 4, 6, 7, 9, 11].includes(month)) {
+            monthCount = 31; // January, March, May, July, August, October, December
+          } else if (month === 1) {
+            // February
+            if (
+              today.getFullYear() % 400 === 0 ||
+              (today.getFullYear() % 4 === 0 && today.getFullYear() % 100 !== 0)
+            ) {
+              monthCount = 29; // Leap year
             } else {
-              monthCount = 30; // April, June, September, November
+              monthCount = 28; // Non-leap year
             }
-            for (let i = 0; i < monthCount; i++) {
-              const dailyExercises = physioData.assignedOn.filter(
-                (d) =>
-                  new Date(d.toDate()).toLocaleDateString() ===
-                  new Date(
-                    new Date(firstDayThisMonth).setDate(
-                      firstDayThisMonth.getDate() + i
-                    )
-                  ).toLocaleDateString()
-              );
-              weeklyExercises.push(dailyExercises.length);
-            }
-            setData(weeklyExercises);
-            setOptions((prevOptions) => ({
-              ...prevOptions,
-              xaxis: {
-                ...prevOptions.xaxis,
-                categories: Array.from(
-                  { length: monthCount },
-                  (_, i) => i + 1
-                ).map((day) => `${day}`),
-              },
-            }));
-            break;
-          case "lastMonth":
-            const firstDayLastMonth = new Date(firstDayThisMonth); // First day of last month
-            firstDayLastMonth.setMonth(firstDayThisMonth.getMonth() - 1);
+          } else {
+            monthCount = 30; // April, June, September, November
+          }
+          for (let i = 0; i < monthCount; i++) {
+            const dailyExercises = physioData.assignedOn.filter(
+              (d) =>
+                new Date(d.toDate()).toLocaleDateString() ===
+                new Date(
+                  new Date(firstDayThisMonth).setDate(
+                    firstDayThisMonth.getDate() + i
+                  )
+                ).toLocaleDateString()
+            );
+            weeklyExercises.push(dailyExercises.length);
+          }
+          setData(weeklyExercises);
+          setOptions((prevOptions) => ({
+            ...prevOptions,
+            xaxis: {
+              ...prevOptions.xaxis,
+              categories: Array.from(
+                { length: monthCount },
+                (_, i) => i + 1
+              ).map((day) => `${day}`),
+            },
+          }));
+          break;
+        case "lastMonth":
+          const firstDayLastMonth = new Date(firstDayThisMonth); // First day of last month
+          firstDayLastMonth.setMonth(firstDayThisMonth.getMonth() - 1);
 
-            month = today.getMonth();
-            if ([0, 2, 4, 6, 7, 9, 11].includes(month)) {
-              monthCount = 31; // January, March, May, July, August, October, December
-            } else if (month === 1) {
-              // February
-              if (
-                today.getFullYear() % 400 === 0 ||
-                (today.getFullYear() % 4 === 0 &&
-                  today.getFullYear() % 100 !== 0)
-              ) {
-                monthCount = 29; // Leap year
-              } else {
-                monthCount = 28; // Non-leap year
-              }
+          month = today.getMonth();
+          if ([0, 2, 4, 6, 7, 9, 11].includes(month)) {
+            monthCount = 31; // January, March, May, July, August, October, December
+          } else if (month === 1) {
+            // February
+            if (
+              today.getFullYear() % 400 === 0 ||
+              (today.getFullYear() % 4 === 0 && today.getFullYear() % 100 !== 0)
+            ) {
+              monthCount = 29; // Leap year
             } else {
-              monthCount = 30; // April, June, September, November
+              monthCount = 28; // Non-leap year
             }
-            for (let i = 0; i < monthCount; i++) {
-              const dailyExercises = physioData.assignedOn.filter(
-                (d) =>
-                  new Date(d.toDate()).toLocaleDateString() ===
-                  new Date(
-                    new Date(firstDayLastMonth).setDate(
-                      firstDayLastMonth.getDate() + i
-                    )
-                  ).toLocaleDateString()
-              );
-              weeklyExercises.push(dailyExercises.length);
+          } else {
+            monthCount = 30; // April, June, September, November
+          }
+          for (let i = 0; i < monthCount; i++) {
+            const dailyExercises = physioData.assignedOn.filter(
+              (d) =>
+                new Date(d.toDate()).toLocaleDateString() ===
+                new Date(
+                  new Date(firstDayLastMonth).setDate(
+                    firstDayLastMonth.getDate() + i
+                  )
+                ).toLocaleDateString()
+            );
+            weeklyExercises.push(dailyExercises.length);
+          }
+          setData(weeklyExercises);
+          setOptions((prevOptions) => ({
+            ...prevOptions,
+            xaxis: {
+              ...prevOptions.xaxis,
+              categories: Array.from(
+                { length: monthCount },
+                (_, i) => i + 1
+              ).map((day) => `${day}`),
+            },
+          }));
+          break;
+        case "thisYear":
+          const exerciseCounts = new Array(12).fill(0);
+          physioData.assignedOn.forEach((exercise) => {
+            const exerciseDate = exercise.toDate();
+            if (exerciseDate.getFullYear() === today.getFullYear()) {
+              const month = exerciseDate.getMonth();
+              exerciseCounts[month]++;
             }
-            setData(weeklyExercises);
-            setOptions((prevOptions) => ({
-              ...prevOptions,
-              xaxis: {
-                ...prevOptions.xaxis,
-                categories: Array.from(
-                  { length: monthCount },
-                  (_, i) => i + 1
-                ).map((day) => `${day}`),
-              },
-            }));
-            break;
-          case "thisYear":
-            const exerciseCounts = new Array(12).fill(0);
-            physioData.assignedOn.forEach((exercise) => {
-              const exerciseDate = exercise.toDate();
-              if (exerciseDate.getFullYear() === today.getFullYear()) {
-                const month = exerciseDate.getMonth();
-                exerciseCounts[month]++;
-              }
-            });
-            setData(exerciseCounts);
-            setOptions((prevOptions) => ({
-              ...prevOptions,
-              xaxis: {
-                ...prevOptions.xaxis,
-                categories: [
-                  "Jan",
-                  "Feb",
-                  "Mar",
-                  "Apr",
-                  "May",
-                  "June",
-                  "July",
-                  "Aug",
-                  "Sept",
-                  "Oct",
-                  "Nov",
-                  "Dec",
-                ],
-              },
-            }));
-            break;
-          case "lastYear":
-            const lastYear = today.getFullYear() - 1;
-            const exerciseCount = new Array(12).fill(0);
+          });
+          setData(exerciseCounts);
+          setOptions((prevOptions) => ({
+            ...prevOptions,
+            xaxis: {
+              ...prevOptions.xaxis,
+              categories: [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "June",
+                "July",
+                "Aug",
+                "Sept",
+                "Oct",
+                "Nov",
+                "Dec",
+              ],
+            },
+          }));
+          break;
+        case "lastYear":
+          const lastYear = today.getFullYear() - 1;
+          const exerciseCount = new Array(12).fill(0);
 
-            physioData.assignedOn.forEach((exercise) => {
-              const exerciseDate = exercise.toDate();
-              if (exerciseDate.getFullYear() === lastYear) {
-                const month = exerciseDate.getMonth();
-                exerciseCount[month]++;
-              }
-            });
-            setData(exerciseCount);
-            setOptions((prevOptions) => ({
-              ...prevOptions,
-              xaxis: {
-                ...prevOptions.xaxis,
-                categories: [
-                  "Jan",
-                  "Feb",
-                  "Mar",
-                  "Apr",
-                  "May",
-                  "June",
-                  "July",
-                  "Aug",
-                  "Sept",
-                  "Oct",
-                  "Nov",
-                  "Dec",
-                ],
-              },
-            }));
-            break;
-          default:
-        }
-      } catch (e) {
-        console.log(e);
+          physioData.assignedOn.forEach((exercise) => {
+            const exerciseDate = exercise.toDate();
+            if (exerciseDate.getFullYear() === lastYear) {
+              const month = exerciseDate.getMonth();
+              exerciseCount[month]++;
+            }
+          });
+          setData(exerciseCount);
+          setOptions((prevOptions) => ({
+            ...prevOptions,
+            xaxis: {
+              ...prevOptions.xaxis,
+              categories: [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "June",
+                "July",
+                "Aug",
+                "Sept",
+                "Oct",
+                "Nov",
+                "Dec",
+              ],
+            },
+          }));
+          break;
+        default:
       }
     };
-    user && getExercises();
-  }, [user, selectedPeriod]);
+    user && physioData && getExercises();
+  }, [user, selectedPeriod, physioData]);
 
   function getInitialOptions() {
     return {

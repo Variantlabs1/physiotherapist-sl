@@ -9,8 +9,7 @@ import { auth, db } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import { motion, useAnimate } from "framer-motion";
-import { Center, Flex, Spinner, Text } from "@chakra-ui/react";
-import { RxCross2 } from "react-icons/rx";
+import { Center, Flex, Spinner, Text, useToast } from "@chakra-ui/react";
 
 const Login = () => {
   const [scope, animate] = useAnimate();
@@ -22,6 +21,7 @@ const Login = () => {
   const [bio, setBio] = useState("");
   const [experience, setExperience] = useState("");
   const [errorMsg, setErrorMsg] = useState(null);
+  const toast = useToast();
   //For authentication purpose
   const [email, setEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
@@ -29,8 +29,6 @@ const Login = () => {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showReenteredPassword, setShowReenteredPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  // State variables for error messages
-  const [showErrorPopup, setShowErrorPopup] = useState(false);
 
   const handleAnimation = async () => {
     animate("#arrow", { x: 10, scale: 1.1 });
@@ -153,7 +151,11 @@ const Login = () => {
       !currentPassword ||
       !reenteredPassword
     ) {
-      setErrorMsg("Error!, some fiels are empty");
+      toast({
+        title: "Error!, some fiels are empty",
+        status: "error",
+        isClosable: true,
+      });
       return;
     }
     // Check error state variables to determine if the form is valid
@@ -204,8 +206,11 @@ const Login = () => {
       } catch (err) {
         // Capture and display the Firebase error message
         setLoading(false);
-        setErrorMsg(err.message);
-        setShowErrorPopup(true);
+        toast({
+          title: `${err.message}`,
+          status: "error",
+          isClosable: true,
+        });
       }
     }
   };
@@ -390,26 +395,6 @@ const Login = () => {
           </form>
         </div>
       </div>
-
-      {/* Error pop-up */}
-      {errorMsg && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, x: [90, 0], scale: 1 }}
-          transition={{ type: "spring", duration: 0.6 }}
-          className={classes.errorpopup}
-        >
-          <p>{errorMsg}</p>
-          <div>
-            <RxCross2
-              color="white"
-              onClick={() => {
-                setErrorMsg(null);
-              }}
-            />
-          </div>
-        </motion.div>
-      )}
     </Center>
   );
 };
