@@ -11,6 +11,7 @@ import {
 import { AuthContext, useAuth } from "../components/data_fetch/authProvider"; // Import the AuthProvider
 import { db } from "../firebase";
 import classes from "../styles/Profile.module.scss";
+import defaultImg from "../assets/vectorProfile.png";
 
 const Profile = () => {
   // const user = useAuth(); // Use the authentication state from the context
@@ -32,14 +33,11 @@ const Profile = () => {
     }
   }, [user]);
 
-  const defaultImage =
-    "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=";
-
   return (
     <div className={classes.rootProfile}>
       <div className={classes.userPicture}>
         <img
-          src={userData ? userData.profileImageURL : defaultImage}
+          src={userData ? userData.profileImageURL : defaultImg}
           alt="profile"
         ></img>
       </div>

@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./ClientsPage.module.scss";
 import ClientFetcher from "../../components/data_fetch/clientFetcher"; // Adjust the path
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase";
 import useDate from "../../components/useDate";
 import { FaSearch } from "react-icons/fa";
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Spinner,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, Center, Flex, Spinner, Text, VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import ImageComponent from "../Chat/components/ImageConponent";
 
 const ClientsPage = () => {
   const date = useDate();
@@ -230,11 +221,14 @@ const ClientsPage = () => {
             {filteredClients.map((client) => (
               <div className={styles.card} key={client.userId}>
                 <div className={styles.imageContainer}>
-                  <img
-                    className={styles.profilePicture}
-                    src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=8"
-                    alt={client.userName}
-                  />
+                  {client.userProfilePhoto ? (
+                    <ImageComponent imagePath={client.userProfilePhoto} />
+                  ) : (
+                    <img
+                      src={require("../../assets/vectorProfile.png")}
+                      alt={client.userName}
+                    />
+                  )}
                 </div>
 
                 <div className={styles.textContainer}>

@@ -1,16 +1,15 @@
-import { Center, Heading } from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
 import classes from "../styles/Dashboard.module.scss";
 import LeftChart from "./LeftChart";
 import Chart from "./chart";
 import ClientList from "./clientList";
-// import ExerciseFetcher from "./data_fetch/exerciseFetcher";
 import Exercises from "./exercises";
 import WelcomeCard from "./welcomeCard";
 import { FaBell, FaSearch } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import useDate from "./useDate";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db, auth } from "../firebase";
+import { db } from "../firebase";
 import { AuthContext } from "./data_fetch/authProvider";
 
 const Dashboard = (props) => {

@@ -17,10 +17,10 @@ import Chart from "../../components/chart";
 import { AuthContext } from "../../components/data_fetch/authProvider";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useDate from "../../components/useDate";
-import { Center } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import BodyMeasurement from "./BodyMeasurement";
 import HeartbeatGraph from "./HeartbeatGraph";
+import ImageComponent from "../Chat/components/ImageConponent";
 
 const ClientDetails = () => {
   const date = useDate();
@@ -207,10 +207,14 @@ const ClientDetails = () => {
                 <div className={classes.header}>
                   <div className={classes.headerContainer}>
                     <div className={classes.userImage}>
-                      <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTte_W3r44Rc7MYnXPQZLP-z3pfAJCKJuz1GA&usqp=CAU"
-                        alt={client.userName}
-                      />
+                      {client && client.userProfilePhoto ? (
+                        <ImageComponent imagePath={client.userProfilePhoto} />
+                      ) : (
+                        <img
+                          src={require("../../assets/vectorProfile.png")}
+                          alt={client.userName}
+                        />
+                      )}
                     </div>
 
                     <div className={classes.userName}>

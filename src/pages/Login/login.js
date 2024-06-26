@@ -8,9 +8,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import { Box, Center, Flex, Spinner, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, Spinner, Text, useToast } from "@chakra-ui/react";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { RxCross2 } from "react-icons/rx";
 
 function Login() {
   const [scope, animate] = useAnimate();
@@ -20,17 +19,19 @@ function Login() {
     email: "",
     pass: "",
   });
-  const [errorMsg, setErrorMsg] = useState(null);
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const toast = useToast();
   const handleSubmission = () => {
     if (!values.email || !values.pass) {
-      setErrorMsg("Email or Password cannot be empty!");
+      toast({
+        title: "Email or Password cannot be empty!",
+        status: "error",
+        isClosable: true,
+      });
       return;
     }
-    setErrorMsg("");
     setLoading(true);
     setSubmitButtonDisabled(true);
     signInWithEmailAndPassword(auth, values.email, values.pass)
@@ -41,9 +42,12 @@ function Login() {
       })
       .catch((err) => {
         setSubmitButtonDisabled(false);
-        setErrorMsg("Invalid Email or Password");
+        toast({
+          title: "Invalid Email or Password",
+          status: "error",
+          isClosable: true,
+        });
         setLoading(false);
-        console.log(err);
       });
   };
 
@@ -151,24 +155,6 @@ function Login() {
           </div>
         </div>
       </div>
-      {errorMsg && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, x: [90, 0], scale: 1 }}
-          transition={{ type: "spring", duration: 0.6 }}
-          className={classes.errorpopup}
-        >
-          <p>{errorMsg}</p>
-          <div>
-            <RxCross2
-              color="white"
-              onClick={() => {
-                setErrorMsg(null);
-              }}
-            />
-          </div>
-        </motion.div>
-      )}
     </div>
   );
 }

@@ -1,13 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { db, database } from "../../firebase"; // Import your Firebase Firestore configuration
-import {
-  collection,
-  doc,
-  getDocs,
-  query,
-  limit,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import PropTypes from "prop-types";
 import classes from "./HealthData.module.scss";
 import { get, ref } from "firebase/database";
@@ -17,66 +10,66 @@ import {
   CircularProgressLabel,
   Text,
 } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 
 const HealthDataComponent = ({ clientId, toggleGraph }) => {
-  const [latestHeartRate, setLatestHeartRate] = useState(null);
-  const [latestUserWeight, setLatestUserWeight] = useState(null);
-  const [latestSuprior, setLatestSuprior] = useState(null);
-
-  useEffect(() => {
-    async function fetchLatestData() {
-      try {
-        //    const getHeartRate = await getDocs(query(collection(db,"Users",userDocId,"HeartRateTracker"),limit(1)))
-        //    !getHeartRate.empty&&setLatestHeartRate(getHeartRate.docs[0].data().avgHeartRate)
-        //    const getSuprior = await getDocs(query(collection(db,"Users",userDocId,"VO2Tracker"),limit(1)))
-        //    !getSuprior.empty&&setLatestSuprior(getSuprior.docs[0].data().suprior)
-
-        const heartbeatRef = ref(database, "HeartBeat Tracker/" + clientId);
-        const VO2Ref = ref(database, "VO2 Tracker/" + clientId);
-        const snapshot = await get(heartbeatRef);
-        const snapshot1 = await get(VO2Ref);
-
-        const Heartdata = snapshot.val();
-        const VO2data = snapshot1.val();
-        // Extract the keys of the nested objects
-        const HeartnestedObjectKeys = Object.keys(Heartdata);
-        const VO2nestedObjectKeys = Object.keys(VO2data);
-        // Get the first object key
-        const firstObjectKey = HeartnestedObjectKeys[0];
-        const firstObjectKeyVO2 = VO2nestedObjectKeys[0];
-        // Access the data inside the first nested object
-        if (firstObjectKey) {
-          const firstObjectData = Heartdata[firstObjectKey];
-          setLatestHeartRate(firstObjectData.heartbeat);
-        } else {
-          console.log("No data found.");
-        }
-        if (firstObjectKeyVO2) {
-          const firstObjectData = VO2data[firstObjectKeyVO2];
-          setLatestSuprior(firstObjectData.oxygenlevel);
-        } else {
-          console.log("No data found.");
-        }
-
-        const q = query(
-          collection(db, "Users"),
-          where("userId", "==", clientId)
-        );
-        const res = await getDocs(q);
-        const userDocId = res.docs[0].ref.id;
-        const getWeight = await getDocs(
-          query(collection(db, "Users", userDocId, "WeightTracker"))
-        );
-        const value = getWeight.docs[0].data().userWeight.slice(0, -3);
-        !getWeight.empty && setLatestUserWeight(value);
-      } catch (e) {
-        console.log(e);
-      }
+  //fetch the heartbeat value from the realtime database
+  const getHeartBeat = async () => {
+    const heartbeatRef = ref(database, "HeartBeat Tracker/" + clientId);
+    const snapshot = await get(heartbeatRef);
+    const Heartdata = snapshot.val();
+    // Extract the keys of the nested objects
+    const HeartnestedObjectKeys = Object.keys(Heartdata);
+    // Get the first object key
+    const ObjectKey = HeartnestedObjectKeys[0];
+    // Access the data inside the first nested object
+    if (ObjectKey) {
+      const firstObjectData = Heartdata[ObjectKey];
+      return firstObjectData.heartbeat;
     }
+  };
+  //fetch the VO2 value from the realtime database
+  const getVO2 = async () => {
+    const VO2Ref = ref(database, "VO2 Tracker/" + clientId);
+    const snapshot1 = await get(VO2Ref);
+    const VO2data = snapshot1.val();
+    // Extract the keys of the nested objects
+    const VO2nestedObjectKeys = Object.keys(VO2data);
+    // Get the first object key
+    const firstObjectKeyVO2 = VO2nestedObjectKeys[0];
+    // Access the data inside the first nested object
+    if (firstObjectKeyVO2) {
+      const firstObjectData = VO2data[firstObjectKeyVO2];
+      return firstObjectData.oxygenlevel;
+    }
+  };
 
-    fetchLatestData();
-  }, [clientId]);
+  //fetch the weight value
+  const getWeight = async () => {
+    const q = query(collection(db, "Users"), where("userId", "==", clientId));
+    const res = await getDocs(q);
+    const userDocId = res.docs[0].ref.id;
+    const getWeight = await getDocs(
+      query(collection(db, "Users", userDocId, "WeightTracker"))
+    );
+    const value = getWeight.docs[0].data().userWeight.slice(0, -3);
+    if (!getWeight.empty) return value;
+  };
 
+  const { data: latestHeartRate } = useQuery({
+    queryKey: ["heart"],
+    queryFn: getHeartBeat,
+  });
+
+  const { data: latestUserWeight } = useQuery({
+    queryKey: ["weight"],
+    queryFn: getWeight,
+  });
+
+  const { data: latestSuprior } = useQuery({
+    queryKey: ["VO2"],
+    queryFn: getVO2,
+  });
   // const sortData = (data) => {
   //     return data.sort(
   //         (a, b) => new Date(b.dateSubmitted) - new Date(a.dateSubmit))

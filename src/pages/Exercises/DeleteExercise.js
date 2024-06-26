@@ -1,25 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import styles from "./DeleteExercise.module.scss";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { useQueryClient } from "@tanstack/react-query";
+import { useToast } from "@chakra-ui/react";
 
-export default function DeletePhysio({
-  id,
-  exercises,
-  setExercises,
-  isOpenDelete,
-  toggleDeleteModal,
-}) {
+export default function DeletePhysio({ id, isOpenDelete, toggleDeleteModal }) {
+  const queryClient = useQueryClient();
+  const toast = useToast();
   const handleDelete = async (e) => {
     e.stopPropagation();
     try {
       await deleteDoc(doc(db, "exercises", id));
-      setExercises(exercises.filter((e) => e.id !== id));
     } catch (e) {
-      console.log(e);
+      toast({
+        title: "Something went wrong!",
+        status: "error",
+        isClosable: true,
+      });
     }
+    queryClient.invalidateQueries(["exercises"]);
+    toast({
+      title: `Exercise deleted successfully`,
+      status: "success",
+      isClosable: true,
+    });
     toggleDeleteModal(e);
   };
   return (

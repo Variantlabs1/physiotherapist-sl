@@ -10,19 +10,13 @@ import {
   getDocs,
   getDoc,
   updateDoc,
-  arrayUnion,
   doc,
-  setDoc,
-  serverTimestamp,
-  addDoc,
-  onSnapshot,
-  Timestamp,
   deleteDoc,
 } from "firebase/firestore";
 import { database } from "../../firebase";
 import { get, ref as dbRef, child, remove, equalTo } from "firebase/database";
 import { AuthContext } from "../../components/data_fetch/authProvider";
-import { Center } from "@chakra-ui/react";
+import { Center, Spinner, useToast } from "@chakra-ui/react";
 
 export default function DeleteAssignedExercise({
   id,
@@ -33,9 +27,11 @@ export default function DeleteAssignedExercise({
   toggleDeleteModal,
 }) {
   const { user } = useContext(AuthContext);
-
+  const toast = useToast();
+  const [loading, setLoading] = useState(false);
   //To Unassign an exercise
   const handleUnassignExercise = async () => {
+    setLoading(true);
     try {
       //code to delete document from exercises subcollection
       let clientRef = null;
@@ -133,8 +129,19 @@ export default function DeleteAssignedExercise({
 
       setAssignedExercises();
       // fetchAssignedExercises();
+      setLoading(false);
+      toast({
+        title: "Exercise deleted successfully",
+        status: "success",
+        isClosable: true,
+      });
     } catch (error) {
-      console.error("Error unassigning exercise:", error);
+      setLoading(false);
+      toast({
+        title: "Error unassigning exercise!",
+        status: "error",
+        isClosable: true,
+      });
     }
   };
   return (
@@ -164,18 +171,29 @@ export default function DeleteAssignedExercise({
                   color: "#0d30ac",
                   borderWidth: "1px",
                 }}
+                className={styles.button1}
                 onClick={toggleDeleteModal}
               >
                 Cancel
               </motion.button>
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                whileHover={{ scale: 1.05 }}
-                style={{ backgroundColor: "#0d30ac", color: "white" }}
-                onClick={handleUnassignExercise}
-              >
-                Delete
-              </motion.button>
+              {loading ? (
+                <Center
+                  style={{ backgroundColor: "#0d30ac" }}
+                  className={styles.button1}
+                >
+                  <Spinner color="white" />
+                </Center>
+              ) : (
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.05 }}
+                  className={styles.button1}
+                  style={{ backgroundColor: "#0d30ac", color: "white" }}
+                  onClick={handleUnassignExercise}
+                >
+                  Delete
+                </motion.button>
+              )}
             </div>
           </div>
         </div>

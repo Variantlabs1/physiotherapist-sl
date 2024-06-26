@@ -47,7 +47,7 @@
       justify-content: space-between;
     }
 
-    button {
+    .button1 {
       width: 6vw;
       height: clamp(3vh, 4.5vh, 4vh);
       border-radius: 5px;
@@ -64,7 +64,7 @@
     min-height: auto;
     width: 30vw;
     .buttonDelete {
-      button {
+      .button {
         width: 8vw;
         height: 3vh;
         font-size: 1rem;
@@ -76,7 +76,7 @@
   .recheckDelete {
     width: 35vw;
     .buttonDelete {
-      button {
+      .button1 {
         width: 10vw;
         height: 3vh;
         font-size: 1rem;
@@ -105,7 +105,7 @@
       font-size: 0.9rem;
     }
     .buttonDelete {
-      button {
+      .button1 {
         width: 16vw;
         font-size: 0.9rem;
       }

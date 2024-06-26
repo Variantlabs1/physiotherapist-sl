@@ -4,13 +4,10 @@ import { ImLoop } from "react-icons/im";
 import { AiOutlineFire } from "react-icons/ai";
 import { BiSolidPencil } from "react-icons/bi";
 import { useEffect, useState } from "react";
-import EditIcon from "@mui/icons-material/Edit";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import styled from "styled-components";
 import { uploadVideo, uploadThumbnail, uploadAll } from "./upload";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { Modal } from "@mui/material";
 import { Button } from "@chakra-ui/react";
 
 const ExerciseDetails = ({ exercise, onClose }) => {
@@ -54,9 +51,9 @@ const ExerciseDetails = ({ exercise, onClose }) => {
     setIsEditing(true);
   };
 
-  const handleDescriptionChange = (e) => {
-    setEditedDescription(e.target.value);
-  };
+  // const handleDescriptionChange = (e) => {
+  //   setEditedDescription(e.target.value);
+  // };
   const handleEdit = () => {
     setIsEditing((prev) => !prev);
   };
@@ -66,14 +63,6 @@ const ExerciseDetails = ({ exercise, onClose }) => {
   };
 
   return (
-    // clicked?
-    // <Modal open={clicked} >
-    //     <Container>
-    //         <h1>Please wait...</h1>
-    //     </Container>
-    // </Modal>
-    // :
-
     <div className={classes.exerciseDetailsContainer}>
       <div className={classes.header}>
         <div className={classes.exerciseTitle}>

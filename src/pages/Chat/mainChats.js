@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import { Link, useNavigation } from "react-router-dom";
+import ImageComponent from "./components/ImageConponent";
 
 const MainChats = () => {
   const user = useAuth();
@@ -232,11 +233,17 @@ const MainChats = () => {
               {filteredClients.map((client, index) => (
                 <div key={index} className={styles.card}>
                   <div className={styles.imageContainer}>
-                    <img
-                      className={styles.profilePicture}
-                      src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=8"
-                      alt={client.userName}
-                    />
+                    {client.userProfilePhoto ? (
+                      <ImageComponent
+                        imagePath={client.userProfilePhoto}
+                        className={styles.profilePicture}
+                      />
+                    ) : (
+                      <img
+                        src={require("../../assets/vectorProfile.png")}
+                        alt={client.userName}
+                      />
+                    )}
                   </div>
 
                   <div className={styles.textContainer}>

@@ -4,9 +4,6 @@ import { HiOutlineViewGrid, HiOutlineViewList } from "react-icons/hi";
 import ExerciseFetcher from "../../components/data_fetch/exerciseFetcher";
 import {
   collection,
-  deleteDoc,
-  doc,
-  endAt,
   endBefore,
   getDocs,
   limit,
@@ -14,8 +11,6 @@ import {
   orderBy,
   query,
   startAfter,
-  startAt,
-  where,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
@@ -24,15 +19,7 @@ import useDate from "../../components/useDate";
 import { FaSearch } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Spinner,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, Center, Flex, Spinner, Text, VStack } from "@chakra-ui/react";
 
 const ExercisesPage = ({
   clientId,
@@ -408,8 +395,6 @@ const ExercisesPage = ({
                           toggleDeleteModal={(e) =>
                             toggleDeleteModal(e, exercise.id)
                           }
-                          exercises={exercises}
-                          setExercises={handleExercisesFetched}
                         />
                       </div>
                     )}

@@ -19,10 +19,10 @@ import { isSameDay } from "date-fns";
 import { Center, Text } from "@chakra-ui/react";
 import useDate from "../../components/useDate";
 import { IoIosSend } from "react-icons/io";
-import { AiOutlinePaperClip } from "react-icons/ai";
 import { useAuth } from "../../components/data_fetch/authProvider";
 import { MdClose } from "react-icons/md";
 import ImageComponent from "./components/ImageConponent";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const Chats = () => {
   const date = useDate();
@@ -30,54 +30,59 @@ const Chats = () => {
   const params = useParams();
   const userId = params.id;
   const Navigate = useNavigate();
-  const [messages, setMessages] = useState([]);
-  const [client, setClient] = useState([]);
+  // const [messages, setMessages] = useState([]);
+  // const [client, setClient] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
   // const chatId = client.userId + user?.uid;
   const messagesEndRef = useRef(null);
-  useEffect(() => {
-    const getClients = async () => {
-      try {
-        const q = query(collection(db, "Users"), where("userId", "==", userId));
-        const ref = await getDocs(q);
-        const docref = ref.docs[0];
-        setClient(docref.data());
-      } catch (e) {
-        console.error("Error fetching document:", e);
-      }
-    };
-    getClients();
-  }, []);
-  useEffect(() => {
-    let unSub;
-    const getMessages = async () => {
-      try {
-        const q = query(
-          collection(db, "messages", user.user.uid, userId),
-          orderBy("timestamp", "asc")
+  const queryClient = useQueryClient();
+
+  const getClient = async () => {
+    try {
+      const q = query(collection(db, "Users"), where("userId", "==", userId));
+      const ref = await getDocs(q);
+      const docref = ref.docs[0];
+      console.log("calleddd");
+      return docref.data();
+    } catch (e) {
+      console.error("Error fetching document:", e);
+    }
+  };
+
+  const { data: client } = useQuery({
+    queryKey: ["client", userId],
+    queryFn: getClient,
+  });
+
+  const getMessages = async () => {
+    try {
+      const q = query(
+        collection(db, "messages", user.user.uid, userId),
+        orderBy("timestamp", "asc")
+      );
+      console.log("called");
+      return new Promise((resolve, reject) => {
+        onSnapshot(
+          q,
+          (snapshot) => {
+            const message = snapshot.docs.map((doc) => doc.data());
+            resolve(message);
+          },
+          reject
         );
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-        unSub = onSnapshot(q, (snapshot) => {
-          const messagesData = snapshot.docs.map((doc) => doc.data());
-          setMessages(messagesData);
-        });
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getMessages(); // Start listening to messages
-    return () => {
-      if (unSub) {
-        unSub(); // Unsubscribe from the real-time listener when the component unmounts
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    scrollToBottom(); // Scroll to the latest message on initial render
-  }, [messages]);
+  const { data: messages } = useQuery({
+    queryKey: ["message", userId],
+    queryFn: getMessages,
+    // staleTime: Infinity, // 5 minutes
+  });
 
   const sendMessage = async () => {
     if (!newMessage && !file) {
@@ -124,14 +129,15 @@ const Chats = () => {
         timestamp: serverTimestamp(),
       });
     }
-
+    queryClient.invalidateQueries({ queryKey: ["message"] });
     setNewMessage("");
     setFile(null);
   };
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  useEffect(() => {
+    // Scroll to the bottom when the component mounts
+    messagesEndRef.current.scrollTo(0, messagesEndRef.current.scrollHeight);
+  }, [messages]);
 
   let currentDate = null;
   const formatDate = (date) => {
@@ -190,10 +196,14 @@ const Chats = () => {
         <div className={classes.header}>
           <div className={classes.headerContainer}>
             <div className={classes.userImage}>
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTte_W3r44Rc7MYnXPQZLP-z3pfAJCKJuz1GA&usqp=CAU"
-                alt={client && client.userName}
-              />
+              {client && client.userProfilePhoto ? (
+                <ImageComponent imagePath={client.userProfilePhoto} />
+              ) : (
+                <img
+                  src={require("../../assets/vectorProfile.png")}
+                  alt={client && client.userName}
+                />
+              )}
             </div>
 
             <div className={classes.userName}>
@@ -208,8 +218,8 @@ const Chats = () => {
           </div>
         </div>
         {!file ? (
-          <div className={classes.chatMessages}>
-            {messages.map((message, index) => {
+          <div className={classes.chatMessages} ref={messagesEndRef}>
+            {messages?.map((message, index) => {
               const messageDate = message.timestamp
                 ? message.timestamp.toDate()
                 : null;
@@ -271,7 +281,6 @@ const Chats = () => {
                 </div>
               );
             })}
-            <div ref={messagesEndRef} />{" "}
           </div>
         ) : (
           <div className={classes.imageContainer}>

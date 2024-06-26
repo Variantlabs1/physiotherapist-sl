@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "../styles/LeftChart.module.scss";
-import { AuthContext } from "./data_fetch/authProvider";
 import { IoTrendingUpSharp } from "react-icons/io5";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { Center, Flex, Select } from "@chakra-ui/react";
-import moment from "moment";
 import { css } from "@emotion/react";
 
 const customStyles = css`
