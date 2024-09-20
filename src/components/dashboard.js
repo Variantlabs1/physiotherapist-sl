@@ -14,21 +14,34 @@ import { AuthContext } from "./data_fetch/authProvider";
 
 const Dashboard = (props) => {
   const formattedDate = useDate();
-  const [clients, setClients] = useState([]);
+  const [clients, setClients] = useState([]); // Initialize clients as an empty array
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const func = async () => {
-      const q = query(
-        collection(db, "physiotherapist"),
-        where("physiotherapistId", "==", user?.uid)
-      );
-      const getPhysio = await getDocs(q);
-      const physioData = getPhysio.docs[0].data();
-      setClients(physioData.clientsList);
+      try {
+        if (user?.uid) {
+          const q = query(
+            collection(db, "physiotherapist"),
+            where("physiotherapistId", "==", user?.uid)
+          );
+          const getPhysio = await getDocs(q);
+          if (!getPhysio.empty) {
+            const physioData = getPhysio.docs[0]?.data();
+            // Ensure physioData.clientsList is an array
+            setClients(physioData?.clientsList || []); 
+          } else {
+            setClients([]); // Fallback if no clients
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching clients:", error);
+        setClients([]); // Fallback in case of error
+      }
     };
     func();
-  }, []);
+  }, [user]);
+
   return (
     <div className={classes.rootMain}>
       <div className={classes.left}>
@@ -54,7 +67,11 @@ const Dashboard = (props) => {
 
         <div className={classes.graphs}>
           <div className={classes.leftGraph}>
-            {clients && <LeftChart clients={clients} />}
+            {clients.length > 0 ? (
+              <LeftChart clients={clients} />
+            ) : (
+              <p>Loading clients...</p>
+            )}
           </div>
 
           <div className={classes.rightGraph}>

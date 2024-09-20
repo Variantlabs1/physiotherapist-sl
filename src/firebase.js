@@ -8,15 +8,16 @@ import { getAnalytics,logEvent } from "firebase/analytics";
 
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_API_KEY,
-    authDomain: process.env.REACT_APP_ADMIN_DOMAIN,
-    databaseURL: process.env.REACT_APP_DATABASE_URL,
-    projectId: process.env.REACT_APP_PRODUCT_ID,
-    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_APP_ID,
-    measurementId: process.env.REACT_APP_MEASUREMENT_ID
-};
+    apiKey: "AIzaSyBI37OFPHWswmAhKKLY1IUk-ZYerGh71j4",
+    authDomain: "physiotherapy-eb4bb.firebaseapp.com",
+    databaseURL: "https://physiotherapy-eb4bb.firebaseio.com", // Add this if your app needs the database URL
+    projectId: "physiotherapy-eb4bb",
+    storageBucket: "physiotherapy-eb4bb.appspot.com",
+    messagingSenderId: "337785625667",
+    appId: "1:337785625667:web:cc2807e7b129b30f2488f6",
+    measurementId: "G-2DD6LR514D"
+  };
+  
 
 export const app = initializeApp(firebaseConfig);
 

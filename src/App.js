@@ -29,7 +29,7 @@ import About from "./pages/LandingPage/About";
 import Terms from "./pages/LandingPage/Terms";
 import Privacy from "./pages/LandingPage/Privacy";
 
-ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID);
+ReactGA.initialize("UA-400757671");
 
 function App() {
   useEffect(() => {

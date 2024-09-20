@@ -25,7 +25,7 @@ import cardBodyComposition from "../../assets/cardBodyComposition.png";
 import cardPosture from "../../assets/cardPosture.png";
 import bottomImage from "../../assets/bottonImage.png";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Removed 'Link' as it's not used
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase";
 import Navbar from "./Navbar";
@@ -52,6 +52,7 @@ const cards1 = [
     text: "When you work toward your fitness and health goals, keep track of your progress and acknowledge your successes. Our app will encourage and uplift you during the process by displaying the changes to your body.",
   },
 ];
+
 const cards2 = [
   {
     img: card3dBody,
@@ -79,6 +80,7 @@ const cards2 = [
     text: "Get customized exercise and dietary advice based on your body type and objectives.",
   },
 ];
+
 export default function LandingPage() {
   const Navigate = useNavigate();
   const toast = useToast();
@@ -89,6 +91,7 @@ export default function LandingPage() {
     email: "",
     comment: "",
   });
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 820);
@@ -141,6 +144,7 @@ export default function LandingPage() {
       });
     }
   };
+
   return (
     <div className={classes.rootDiv}>
       <Navbar />
@@ -212,8 +216,8 @@ export default function LandingPage() {
       <Box className={classes.cardComponent}>
         <Text className={classes.cardHeader}>Why Vigour?</Text>
         <Flex className={classes.cards}>
-          {cards1.map((data) => (
-            <Box className={classes.cardItem}>
+          {cards1.map((data, index) => (
+            <Box key={index} className={classes.cardItem}>
               <Image src={data.img} />
               <Text className={classes.label}>{data.label}:</Text>
               <Text className={classes.text}>{data.text}</Text>
@@ -241,8 +245,8 @@ export default function LandingPage() {
       </motion.div>
       <Box className={`${classes.cardComponent2} ${classes.cardComponent}`}>
         <Flex className={classes.cards}>
-          {cards2.map((data) => (
-            <Box className={classes.cardItem}>
+          {cards2.map((data, index) => (
+            <Box key={index} className={classes.cardItem}>
               <Image src={data.img} />
               <Text className={classes.label}>{data.label}</Text>
               <Text className={classes.text}>{data.text}</Text>
@@ -254,146 +258,67 @@ export default function LandingPage() {
         initial={{ opacity: 0 }}
         whileInView={{
           opacity: 1,
-          transition: { duration: 3 },
+          transition: { duration: 1 },
         }}
         viewport={{ once: true }}
-        className={`${classes.banner} ${classes.banner2}`}
+        className={classes.banner2}
       >
-        <Box className={classes.bannerContainer}>
-          <Text className={classes.bannerHeader}>Get Started Today:</Text>
+        <Box>
+          <Text className={classes.bannerHeader}>
+            You Only Have One Body, Use it Well.
+          </Text>
           <Text className={classes.bannerText}>
-            Ready to use Vigour ? Take the first step toward a happier,
-            healthier you by downloading our app now!
+            Let's bring your ideal body and way of life to life with our
+            innovative technology.
           </Text>
+          <Button
+            onClick={() => Navigate("/signup")}
+            className={classes.bannerBtn}
+          >
+            Get Started
+          </Button>
         </Box>
-        <Flex className={classes.bannerButton}>
-          <Button>Download now</Button>
-        </Flex>
       </motion.div>
-      <Flex className={classes.followContainer}>
-        <Box className={classes.first}>
-          <Text className={classes.firstLabel}>Join our community:</Text>
-          <Text className={classes.firstText}>
-            Sign up to receive newsletters, tips, and updates from us.
-          </Text>
-          {/* <Button variant="solid">Newsletters</Button> */}
-        </Box>
-        <Box className={classes.first}>
-          <Text className={classes.firstLabel}>Follow us on social media:</Text>
-          <Text className={classes.firstText}>
-            Get connected with people who share your interests, document your
-            progress, and maintain motivation as you pursue wellness. Follow us
-            on social media and join the conversation today!
-          </Text>
-          <Flex className={classes.firstIcons}>
-            <FaFacebook className={classes.icon} />
-            <FaInstagram className={classes.icon} />
-            <FaTwitter className={classes.icon} />
-            <FaLinkedin className={classes.icon} />
-          </Flex>
-        </Box>
-      </Flex>
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{
-          opacity: 1,
-          transition: { duration: 2 },
-        }}
-        viewport={{ once: true }}
-        className={classes.formContainer}
-      >
-        <Box className={classes.form}>
-          <Heading className={classes.formHeader}>Get Started Today:</Heading>
+      <Box className={classes.contactForm}>
+        <Center className={classes.heading}>Contact Us</Center>
+        <Box className={classes.formBox}>
           <form onSubmit={submitHandler}>
-            <label>Your name</label>
             <Input
               type="text"
+              placeholder="Name"
               value={formData.name}
-              onChange={(e) => {
-                setFormData({ ...formData, name: e.target.value });
-              }}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
             />
-            <label>Your email</label>
             <Input
               type="email"
+              placeholder="Email"
               value={formData.email}
-              onChange={(e) => {
-                setFormData({ ...formData, email: e.target.value });
-              }}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
             />
-            <label>Your comment</label>
             <Textarea
+              placeholder="Write Your Comment Here"
               value={formData.comment}
-              onChange={(e) => {
-                setFormData({ ...formData, comment: e.target.value });
-              }}
+              onChange={(e) =>
+                setFormData({ ...formData, comment: e.target.value })
+              }
             />
             <Button type="submit">Submit</Button>
-            <Text>
-              Ready to use Vigour ? Take the first step toward a happier,
-              healthier you by downloading our app now!
-            </Text>
           </form>
         </Box>
-        <Flex className={classes.formButton}>
-          <Button>Download now</Button>
-        </Flex>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{
-          opacity: 1,
-          transition: { duration: 2 },
-        }}
-        viewport={{ once: true }}
-        className={classes.bottomContainer}
-      >
-        <Flex className={classes.bottomTexts}>
-          <Heading className={classes.bottomHeader}>Have questions?</Heading>
-          <Text className={classes.bottomText}>
-            We have a committed support staff available to help you at every
-            stage. Please contact us with any questions or comments; we would be
-            delighted to hear from you!
-          </Text>
-        </Flex>
-        <Image src={bottomImage} />
-      </motion.div>
-      {/* {isMobile && ( */}
+      </Box>
+      <Center className={classes.bottomImage}>
+        <img src={bottomImage} alt="bottom" />
+      </Center>
       <Box className={classes.footer}>
-        <Box>
-          <Heading>Vigour</Heading>
-          <Text>Mindleap AI LLC</Text>
-          <Text>
-            Empower Your Fitness Journey with Precisionand Personalization
-          </Text>
-          <Text>
-            <Link to="/about">About Us</Link>
-          </Text>
-        </Box>
-        <Box>
-          <Text className={classes.headers}>Contact Us</Text>
-          <Text>info@mindleap-ai.com</Text>
-        </Box>
-        <Box>
-          <Text className={classes.headers}>Sign Up for Email Updates</Text>
-          <Flex className={classes.inputContainer}>
-            <Input placeholder="Your e-mail address" />
-            <Button>Subscribe</Button>
-          </Flex>
-          <Text className={classes.smallText}>
-            Sign up with your email address to receive news and updates
-          </Text>
-        </Box>
-        <Box className={classes.last}>
-          <Text>Mindleap AI LLC</Text>
-          <Text className={classes.copy}>
-            <Link to="/privacy">Privacy policy </Link>
-            {"  "}
-            <Link to="/terms">Terms of use</Link>
-          </Text>
-          <Text className={classes.copy}>
-            Copyright ©2024 vigour. All rights reserved
-          </Text>
+        <Box className={classes.socials}>
+          <FaFacebook />
+          <FaInstagram />
+          <FaTwitter />
+          <FaLinkedin />
         </Box>
       </Box>
     </div>
