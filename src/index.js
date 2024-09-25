@@ -8,7 +8,7 @@ import ReactGA from "react-ga";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ChakraProvider } from "@chakra-ui/react";
 
-ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENT_ID);
+ReactGA.initialize("G-3GRXXMSKR3");
 
 const queryClient = new QueryClient();
 

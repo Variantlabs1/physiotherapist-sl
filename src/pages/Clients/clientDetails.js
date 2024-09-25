@@ -369,4 +369,4 @@ const ClientDetails = () => {
   );
 };
 
-export default ClientDetails;
+export default ClientDetails;  

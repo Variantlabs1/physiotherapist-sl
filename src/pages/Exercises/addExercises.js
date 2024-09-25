@@ -9,7 +9,7 @@ import {
   where,
   updateDoc,
   arrayUnion,
-  doc,
+  doc
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -18,7 +18,7 @@ import classes from "./AddExercises.module.scss";
 import { AuthContext } from "../../components/data_fetch/authProvider";
 import { RxCross2 } from "react-icons/rx";
 import { database } from "../../firebase";
-import { set, get, ref as dbRef, push } from "firebase/database";
+import { set, ref as dbRef } from "firebase/database";
 import { Spinner } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
@@ -55,163 +55,111 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    if (clientId) {
-      let clientRef;
-      const res = await getDocs(
-        query(collection(db, "Users"), where("userId", "==", clientId))
-      );
-      clientRef = res.docs[0].ref;
-      const exercisename = Exercise_Name
-        ? Exercise_Name
-        : selectedExercise.Exercise_Name;
-      const collectionRef = await getDocs(
-        query(
-          collection(clientRef, "exercises"),
-          where("Exercise_Name", "==", exercisename)
-        )
-      );
-      if (!collectionRef.empty) {
-        setError("Exercise already assigned!");
+  
+    try {
+      // Step 1: Validation
+      const exerciseName = Exercise_Name || selectedExercise?.Exercise_Name;
+      const preparationText = Preparation || selectedExercise?.Preparation;
+      const targetText = Target || selectedExercise?.Target;
+  
+      if (!video || !thumbnail || !exerciseName || !preparationText || !targetText) {
+        setError("All fields, including video, image, name, preparation, and target, must be filled.");
         setSubmitting(false);
         return;
       }
-    }
-    // Step 1: Upload video to Firebase Storage
-    const storage = getStorage();
-    if (!video) {
-      setError("Video cannot be empty");
-      setSubmitting(false);
-      return;
-    }
-    const videoRef = ref(storage, `exercise/${video.name}`);
-    await uploadBytes(videoRef, video);
-
-    if (!thumbnail) {
-      setError("image cannot be empty");
-      setSubmitting(false);
-      return;
-    }
-    // Step 2: Upload thumbnail to Firebase Storage
-    const thumbnailRef = ref(storage, `exercise/thumbnails/${thumbnail.name}`);
-    await uploadBytes(thumbnailRef, thumbnail);
-
-    // Step 3: Get the download URLs of the uploaded video and thumbnail
-    const videoURL = await getDownloadURL(videoRef);
-    const thumbnailURL = await getDownloadURL(thumbnailRef);
-
-    // Step 4: Save exercise data to Firebase Firestore
-    const exerciseData = selectedExercise
-      ? {
-          ...selectedExercise,
-          videoURL,
-          thumbnailURL,
-          duration,
-          reps,
-          assignedDay: selectedPeriod,
-          assignedOn: Timestamp.now(),
-          physioId: user?.uid,
-        }
-      : {
-          videoURL,
-          thumbnailURL,
-          Exercise_Name,
-          Preparation,
-          Target,
-          duration,
-          reps,
-          assignedDay: selectedPeriod,
-          assignedOn: Timestamp.now(),
-          physioId: user?.uid,
-        };
-
-    const exerciseData1 = selectedExercise
-      ? {
-          ...selectedExercise,
-          videoURL,
-          thumbnailURL,
-          Target: selectedExercise.Target ?? Target,
-          assignedTo: [clientId],
-          assignedOn: Timestamp.now(),
-          physioId: user?.uid,
-        }
-      : {
-          videoURL,
-          thumbnailURL,
-          Exercise_Name,
-          Preparation,
-          Target,
-          assignedTo: clientId ? [clientId] : [],
-          assignedOn: Timestamp.now(),
-          physioId: user?.uid,
-        };
-    try {
-      let clientRef = null;
-      let docRef;
+  
+      // Check if exercise already exists for the client
       if (clientId) {
         const res = await getDocs(
           query(collection(db, "Users"), where("userId", "==", clientId))
         );
-        clientRef = res.docs[0].ref;
-
-        docRef = await addDoc(collection(clientRef, "exercises"), exerciseData);
-
-        const getPhysios = await getDocs(
+        const clientRef = res.docs[0].ref;
+  
+        const existingExercise = await getDocs(
           query(
-            collection(db, "physiotherapist"),
-            where("physiotherapistId", "==", user.uid)
+            collection(clientRef, "exercises"),
+            where("Exercise_Name", "==", exerciseName)
           )
+        );
+  
+        if (!existingExercise.empty) {
+          setError("Exercise already assigned!");
+          setSubmitting(false);
+          return;
+        }
+      }
+  
+      const storage = getStorage();
+  
+      // Step 2: Upload video and thumbnail to Firebase Storage in parallel
+      const videoRef = ref(storage, `exercise/${video.name}`);
+      const thumbnailRef = ref(storage, `exercise/thumbnails/${thumbnail.name}`);
+  
+      const [videoUploadTask, thumbnailUploadTask] = await Promise.all([
+        uploadBytes(videoRef, video),
+        uploadBytes(thumbnailRef, thumbnail),
+      ]);
+  
+      const videoURL = await getDownloadURL(videoRef);
+      const thumbnailURL = await getDownloadURL(thumbnailRef);
+  
+      // Step 3: Create the exercise data
+      const exerciseData = selectedExercise
+        ? {
+            ...selectedExercise,
+            videoURL,
+            thumbnailURL,
+            duration: duration || selectedExercise.duration,
+            reps: reps || selectedExercise.reps,
+            assignedDay: selectedPeriod,
+            assignedOn: Timestamp.now(),
+            physioId: user?.uid,
+          }
+        : {
+            videoURL,
+            thumbnailURL,
+            Exercise_Name: exerciseName,
+            Preparation: preparationText,
+            Target: targetText,
+            duration,
+            reps,
+            assignedDay: selectedPeriod,
+            assignedOn: Timestamp.now(),
+            physioId: user?.uid,
+          };
+  
+      // Step 4: Upload exercise data to Firestore and retrieve the exerciseId
+      let exerciseId;
+      if (clientId) {
+        const res = await getDocs(
+          query(collection(db, "Users"), where("userId", "==", clientId))
+        );
+        const clientRef = res.docs[0].ref;
+  
+        const docRef = await addDoc(collection(clientRef, "exercises"), exerciseData);
+        exerciseId = docRef.id; // Unique ID of the exercise document
+  
+        // Step 5: Update physio's assigned exercises
+        const getPhysios = await getDocs(
+          query(collection(db, "physiotherapist"), where("physiotherapistId", "==", user.uid))
         );
         const physioDocId = getPhysios.docs[0].ref.id;
         await updateDoc(doc(db, "physiotherapist", physioDocId), {
           assignedOn: arrayUnion(Timestamp.now()),
         });
-
-        //function to add exercise assigned to client in realtime database//
-        const ex = {
-          Exercise_Name: selectedExercise.Exercise_Name,
+  
+        // Step 6: Upload exercise summary to Realtime Database
+        const exerciseSummary = {
+          Exercise_Name: exerciseData.Exercise_Name,
           assignedDay: selectedPeriod,
-          id: docRef.id,
+          id: exerciseId, // Use the exerciseId here
         };
-        try {
-          const exercisesRef = dbRef(database, "assignedExcercise/" + clientId);
-          const snapshot = await get(exercisesRef);
-          if (!snapshot.exists()) {
-            await set(exercisesRef, { exercises: [] });
-          }
-          const exercisesRef1 = dbRef(
-            database,
-            `assignedExcercise/${clientId}/exercises`
-          );
-          const newExerciseRef = await push(exercisesRef1);
-          //   const newExerciseId = newExerciseRef.key;
-
-          //   await set(newExerciseRef,{exerciseData, id: docRef.id});
-          await set(newExerciseRef, ex);
-        } catch (error) {
-          setError("Error assigning exercise on realtime database:", error);
-        }
+  
+        const exercisesRef = dbRef(database, `Users/${clientId}/exercises/${exerciseId}`);
+        await set(exercisesRef, exerciseSummary);
       }
-      const response = await getDocs(
-        query(
-          collection(db, "exercises"),
-          where("Exercise_Name", "in", [exerciseData1.Exercise_Name])
-        )
-      );
-      if (response.empty) {
-        await addDoc(collection(db, "exercises"), exerciseData1);
-      } else {
-        if (clientId) {
-          const docid = response.docs[0].ref.id;
-          await updateDoc(doc(db, "exercises", docid), {
-            assignedTo: arrayUnion(clientId),
-          });
-        } else {
-          setError("Exercise already exist!");
-          setSubmitting(false);
-          return;
-        }
-      }
-      // Reset the form fields after successful upload
+  
+      // Reset form fields
       setVideo(null);
       setThumbnail(null);
       setTitle("");
@@ -219,24 +167,26 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
       setMusclesInvolved("");
       setDuration("");
       setReps("");
+  
       setSuccess(true);
+      console.log("clientId:", clientId);
+      console.log("exerciseData:", exerciseData);
+    } catch (error) {
+      setError(`Error adding exercise: ${error.message}`);
+    } finally {
       setSubmitting(false);
       queryClient.invalidateQueries(["exercises"]);
-      queryClient.invalidateQueries(["graphexercise"]);
-    } catch (error) {
-      setError(error);
-      // console.error("Error adding exercise: ", error);
     }
   };
+  
 
-  //Handle Back Click
+  // Handle Back Click
   const handleBackClick = () => {
     onBackClick();
   };
 
   const handleSuccess = () => {
     setSuccess(false);
-    // clientId && window.location.replace("/Clients?client=" + clientId);
     Navigate(`/Clients/${clientId}/assignedExercise`);
   };
 
@@ -260,7 +210,6 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
                     : Exercise_Name
                 }
                 type="text"
-                // value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
@@ -291,7 +240,6 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
                     ? `Preparation: ${selectedExercise.Preparation} \n \nExecution: ${selectedExercise.Execution}`
                     : Preparation
                 }
-                // value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
             </div>
@@ -304,7 +252,6 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
             <div className={classes.inputField}>
               <input
                 type="text"
-                // value={musclesInvolved}
                 value={selectedExercise ? selectedExercise.Target : Target}
                 onChange={(e) => setMusclesInvolved(e.target.value)}
               />
@@ -442,7 +389,6 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
         <div className={classes.successMsg}>
           <div className={classes.text}>
             <p>Exercise {clientId ? "Assigned" : "Added"} successfully</p>
-
             <div className={classes.button} onClick={handleSuccess}>
               <span>Done</span>
             </div>

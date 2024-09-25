@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import classes from "../styles/LeftChart.module.scss";
 import { IoTrendingUpSharp } from "react-icons/io5";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
@@ -22,7 +22,9 @@ const LeftChart = ({ clients }) => {
   const [totalClients, setTotalClients] = useState(0);
   const [percentage, setPercentage] = useState(0);
   const [decreasePercentage, setDecreasePercentage] = useState(0);
-  const calculateStatistics = () => {
+
+  // Wrap the calculateStatistics function in useCallback to memoize it
+  const calculateStatistics = useCallback(() => {
     // Calculate start and end dates for the selected period
     const endDate = new Date();
     let startDate;
@@ -33,6 +35,7 @@ const LeftChart = ({ clients }) => {
     } else if (selectedPeriod === "lastYear") {
       startDate = new Date(endDate.getTime() - 365 * 24 * 60 * 60 * 1000);
     }
+
     // Filter clientList based on selected period
     const filteredClients = clients.filter((client) => {
       const clientAssignedOn = client.clientAcceptedOn.toDate();
@@ -47,7 +50,6 @@ const LeftChart = ({ clients }) => {
       return clientAssignedOn < startDate;
     }).length;
 
-    console.log(clients);
     // Calculate percentage increase/decrease
     const percentageIncrease = (totalClients / clients.length) * 100;
     const percentageDecrease =
@@ -56,11 +58,11 @@ const LeftChart = ({ clients }) => {
     setTotalClients(totalClients);
     setPercentage(Math.abs(percentageIncrease.toFixed(2)));
     setDecreasePercentage(Math.abs(percentageDecrease.toFixed(2)));
-  };
+  }, [selectedPeriod, clients]); // Add dependencies here
 
   useEffect(() => {
     calculateStatistics();
-  }, [selectedPeriod, clients]);
+  }, [calculateStatistics]); // Now useEffect depends on the memoized version of the function
 
   return (
     <>
