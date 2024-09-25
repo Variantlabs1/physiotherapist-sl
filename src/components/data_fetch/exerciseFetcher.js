@@ -11,7 +11,7 @@ const ExerciseFetcher = ({ onExercisesFetched }) => {
     try {
       // Define the query to retrieve exercises for a specific user
       const q = query(
-        collection(db, "Default exercises"),
+        collection(db, "exercises"),
         where("physioId", "==", user?.uid)
       );
 

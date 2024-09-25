@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import ExercisesPage from "./exercisesPage";
 import AddExercises from "./addExercises";
-
-import ExerciseDetails from "./exerciseDetail"; // Import the ExerciseDetails component
+import ExerciseDetails from "./exerciseDetail";
 import { useLocation } from "react-router-dom";
 
 const MainExercises = () => {
@@ -13,25 +12,25 @@ const MainExercises = () => {
 
   const handleAddExercisesClick = () => {
     setShowAddExercises(true);
+    setSelectedExercise(null); // Optional: reset selectedExercise when adding new
   };
 
   const handleExerciseCardClick = (exercise) => {
-    setSelectedExercise(exercise);
+    setSelectedExercise(exercise); // Set selected exercise
+    setShowAddExercises(true); // Navigate to AddExercises view
   };
 
   const handleBackClick = () => {
     setShowAddExercises(false);
-    setSelectedExercise(null); // Reset selected exercise when going back to ExercisesPage
+    setSelectedExercise(null);
   };
 
   return (
     <div style={{ width: "100%", padding: "2% 3%", position: "relative" }}>
       {showAddExercises ? (
-        <AddExercises onBackClick={handleBackClick} />
-      ) : selectedExercise && clientId ? (
         <AddExercises
           clientId={clientId}
-          selectedExercise={selectedExercise}
+          selectedExercise={selectedExercise} // Pass the selected exercise details
           onBackClick={handleBackClick}
         />
       ) : selectedExercise ? (
@@ -49,5 +48,6 @@ const MainExercises = () => {
     </div>
   );
 };
+
 
 export default MainExercises;

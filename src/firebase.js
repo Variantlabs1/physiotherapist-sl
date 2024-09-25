@@ -10,7 +10,7 @@ import { getAnalytics,logEvent } from "firebase/analytics";
 const firebaseConfig = {
     apiKey: "AIzaSyBI37OFPHWswmAhKKLY1IUk-ZYerGh71j4",
     authDomain: "physiotherapy-eb4bb.firebaseapp.com",
-    databaseURL: "https://physiotherapy-eb4bb.firebaseio.com", // Add this if your app needs the database URL
+    databaseURL: "https://physiotherapy-eb4bb-default-rtdb.firebaseio.com",
     projectId: "physiotherapy-eb4bb",
     storageBucket: "physiotherapy-eb4bb.appspot.com",
     messagingSenderId: "337785625667",
