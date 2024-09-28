@@ -1,8 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.2e736d62.css",
-    "main.js": "/static/js/main.7411e6a8.js",
-    "static/media/push_up.mp4": "/static/media/push_up.8659e06b48a8e124809e.mp4",
+    "main.css": "/static/css/main.79238cd0.css",
+    "main.js": "/static/js/main.6e9d4074.js",
     "static/media/body.jpg": "/static/media/body.816d337872e6106e4fde.jpg",
     "static/media/bottonImage.png": "/static/media/bottonImage.25849473d78fe6cf8484.png",
     "static/media/fitgirl.png": "/static/media/fitgirl.4d29febe88ef1d02d624.png",
@@ -10,13 +9,14 @@
     "static/media/login.png": "/static/media/login.6cb881aa463a738f86fb.png",
     "static/media/loginbackground.jpeg": "/static/media/loginbackground.5d2d5249168f9a4dfa6b.jpeg",
     "static/media/banner.jpg": "/static/media/banner.b3bd3d5de5de8f57e34d.jpg",
+    "static/media/vectorProfile.png": "/static/media/vectorProfile.4ec56cfe1acfee3327a7.png",
     "static/media/exercise.jpeg": "/static/media/exercise.d6c8ad3b4b78291ceafc.jpeg",
     "index.html": "/index.html",
-    "main.2e736d62.css.map": "/static/css/main.2e736d62.css.map",
-    "main.7411e6a8.js.map": "/static/js/main.7411e6a8.js.map"
+    "main.79238cd0.css.map": "/static/css/main.79238cd0.css.map",
+    "main.6e9d4074.js.map": "/static/js/main.6e9d4074.js.map"
   },
   "entrypoints": [
-    "static/css/main.2e736d62.css",
-    "static/js/main.7411e6a8.js"
+    "static/css/main.79238cd0.css",
+    "static/js/main.6e9d4074.js"
   ]
 }
