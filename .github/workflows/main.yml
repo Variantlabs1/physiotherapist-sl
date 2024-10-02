@@ -22,17 +22,17 @@ jobs:
     - name: Set up Google Cloud credentials
       run: |
         echo '{
-          "type": "service_account",
-          "project_id": "physiotherapistadmin",
-          "private_key_id": "0d37eae13ee06e06bd56be62bc454dd669b88725",
-          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQC+qBjbt0tCvPcW\nlY4zbBLwoCmY4gefh5NarG4F/u54R6C/AZnr9crKgTGMHwWtlWHxZggzuKDhmqES\n9OOMVUGcbpHVc/+dN4pPOlBHZU7yKpcUgJTgj+y5oR1uRc2rCaIIx9IgIyEdASOo\nNNCTs7KrNPuZf4hKjRZlh9M7bxQg9tbpPyB9rUJQXhJXeagymu3VfnXgd5dOD2Lk\nk8wlelvpzWz0LRNfa4aJRyfO4h2Ypc/IV/veooj3kFa7xTWHXOzdWFjVoK76kUJG\n7LY/rmzfoj82NARYuWEmaFFx53+943B+/UvEfQlqOOiv6BGe1ndyB/iqZ6q8yc7H\noEWKqzX1AgMBAAECgf92afEGhdE4oiTU4g5v4a/hw5gSXFBfxNTAfFfZYXy7N8Ge\n4F+5Le/F1nfvj1T3etBaHgT6GrHRbTidjXvGrS0S+5mX+XPJMbW1f4Jc1Y8y2UD8\net/8mWdt46Nj2fbjRBhfW7wmOatXWF3NGwBwvCs8KqwZqhv8MaS3aqTHRTY7Qf96\ncw4BLJ7NlV+zSPMiD2miqxPKy5mQI5dx0VSW3BbsFQpYXV04RA3iXaXWywdZJTxN\nCXP8vPQvi1bLf0dPsAVOVzfrXa32LjOcQ6Q9oHXy2MmuppJCMuK/x94tm/gc7M/G\nehv8gf0/PZV44ChQeHeqI5iw1PxT5ZUfMN+wBgECgYEA+4fVvwmHIlpnazTIuXzy\neSpv7EZ2v2IXIpxtrv2yBH5gcQTzCBzkyOOzaCwg/Cfe0oz+eavDa6ERcwE1rdk9\ncFtKMaZas58+pPmvOTZ+AFbDBfu1FrfgiChuKAEwX6sOYOo1H23jFZXLz+2ofhjr\nV2OA/AgSdGcS7zb5iFhw4IECgYEAwgtbpFhovciNtsd3iJpFXQHesrjMsLQJtnyf\nOxdgNFlwQ7MAjLvgdo/4U26FxXB/NN2G/IZJeTvuv8Lf6jPQDwi3+a8jNMqkdv81\nCExhNN21yUhHxyIFsm839fwFx/ehqQUFipYCpVTcdprd9W5dyoF5r6AIc0KVNN5M\nlSPnG3UCgYEAvKcat9frlOZ9XrkOO6DtM9eSboJDGjP16i2tTmxVEm2+48W0ikcx\niULPErjWXImC5CR/0L31Kkp6DenAWw3uuNCfizGcIdC0aYQj2iN2ycZJK7moDswH\nCdhZFoQdxgNEG4hOI66FfXEGloNHtpv2F2s4GM/tF4UffG+dJJhAwQECgYB0DMzr\nFkDWOAqhJNxVY0ZWoJaqtqEckSA59oBYm9tak57zriuG/5n37pSqeTAh6+z4FgD0\nJ+/rRK++GfNGo2QsiZ9WAauBmCwSSwFRjDSapHpi/gqHis5zb9a9E9P1SyFw72Lo\nBl1gucb8XBShAzeutA6tvX0wScLokoakr4s5PQKBgAuHCuJcS+KeEJHS7X0QGDXt\niNWNGxlNSwfSxBsuNQxLmXSJ9ekk+E93os2iBl/utNY2SBqY7+d16SnM9tgS1uAY\nwL2dl7zYKKIu/dWxpdi/AclU/mUfHV0WcaXFc7Xd7mp3gXBYvZQYicGLU59pKqij\nB9YiNy5z8NpR9De9l1GQ\n-----END PRIVATE KEY-----\n",
-          "client_email": "physiotherapistadmin@appspot.gserviceaccount.com",
-          "client_id": "106507321155864436890",
-          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-          "token_uri": "https://oauth2.googleapis.com/token",
-          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/physiotherapistadmin%40appspot.gserviceaccount.com",
-          "universe_domain": "googleapis.com"
+            "type": "service_account",
+            "project_id": "physiotherapistadmin",
+            "private_key_id": "46949ae1e1356c7ba6189844bd65ceb7017193f3",
+            "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDCi4c+qP2xJx/L\niQPEpwx9med9aMQ6zuAjYi54JKnSKwWHwPSWlQY44mH3ZN00/0D7rHvqayeyJlYW\n7YWYcQ9VmLw2sXxdZUb9w7PjGHXx6roBA+61tMwZ8grCDqsWbkVGG+R+7yubJtpu\ndXLFbGFX6MeOZSpHH2v2MDhex+CAOMqJAmMZZcXLy6IhNKRP5dQqkJtYRiMYAnoy\nZIukEBQ8AqJjsS+HAhKMnxdaPSdENHgWaHUvgXYh6JFCzehyNBs7z66Hzp9vxeXj\ncMTDAZgSI2dzmU9H9b92J7wFSu/i/5CBQLmtrKpHHSof5Wp4Xm58wnyTsylMeoEF\nIGO1ngeXAgMBAAECggEAAIHysWQpfUvX1mUeIGY7Lxy2sOoUEP83MIByFJgr5UN9\neTQ0ryvmX0Gf9dBKj3fXCJETpbHv4ZQeB2NJRPOOka+bVh0ycN/xxnm7P21x6Vau\nc5A6EDlPiwXJp2X4Zk+VWLB78STYnUgFq+IckY1N17fgxWtYJ+VaF8NackzdNhhu\nqymDsSUsHs2lF0oaSAh1v5sxRBf4PvQIAOfLtJAvPg4Pz8otTN1fK0rdpBCKj7WH\nODr7Hy0W7LLSIPAN9SyBD2Hr6954lKSigZVFCIVGCVwo/9Nzu6zxY5bmJBl5JVNE\nJKU/PhZDL90CpRPDBG8WIIVQZhN6HZt47XvhlFnBeQKBgQDJgUg5Zdu/pF2mw0MD\npsQk9fBRmRFGIN8CB0TgAbzxCAPWFFXYqI225V7sr++hceSMTMJXLjQpEji44sTb\noSgqaWrM4203nmIkzIkqOgOuGjca+GO4AXw9g3VJeoEt3S42AGQIPG8IZEEd6ko/\nJLg9l6pih9evwyTnPN6nkFiOpQKBgQD3KGONBJWaZqiGsX1/hZbIjooF80BU2Mg2\nZFAo2eGmlljShUS/mhR+lrsG1vFDk00Il/Hw248FhNcHJWAJewWaKUB/Jgnm5ga2\nSKTPPyz8e18JIjTBAJjZen/zSv3Jz05oG/lOIqMGAIF2XupfbnD0GlQa9ZZSfHo6\nCOrPQrYEiwKBgDdgw1Oa7bCWYHKDOTiYrVEnEfuq4HdwczlgfApAEAgB1uQPxKP9\ndqzsDpFnrKim31O7iLFi7kzXSCVvlQBzItG9FO/oFMzzRy+r0op7VSWU6M4Ns4IP\nTnCtXx9pfnT3U0reAp/M1ArvWoH5MJx33/Z1ZwsbICiardqq/Nn6LoxNAoGAA8KM\niSepsvie1bW7iAYbPh/U/7QspV3K5fDuu0BdS3B8F2/JlPSeHTLj033Pm8yQ3nGZ\nT6W3bkkQEF7EMEC73BWGkqice/PB5GIEh9aZM5oY3wWzMcB1ktFnQudAJyLNOY47\nY7HpMv0s+wUEocEHXN9Nqj9UMxsLrPhXwiFsrXMCgYEAqVHQDXxc4rBAZBc4Yhhn\nivf6KM+OO79aCYLjIO9MTZxw2U55rAh8Vo7aeJLvFG4dY1HRLmQFNL1RJiZXnLZ/\nzIb0tPS79VrAtxSAazD5X90U6m5BoSlp6KCTY+652S1ts/WpdKZnvilnoWKmf4Vq\nYLBrl/9hGMye6kBbhcOz/7M=\n-----END PRIVATE KEY-----\n",
+            "client_email": "physiotherapistadmin@appspot.gserviceaccount.com",
+            "client_id": "106507321155864436890",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://oauth2.googleapis.com/token",
+            "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+            "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/physiotherapistadmin%40appspot.gserviceaccount.com",
+            "universe_domain": "googleapis.com"
         }' > gcloud-service-key.json
 
     - name: Authenticate to Google Cloud
