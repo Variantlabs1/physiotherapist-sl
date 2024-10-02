@@ -22,17 +22,17 @@ jobs:
     - name: Set up Google Cloud credentials
       run: |
         echo '{
-          "type": "service_account",
-          "project_id": "physiotherapistadmin",
-          "private_key_id": "92ee8724bd8bb4bf01982724bf3827951ef05bfa",
-          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDCOA05Sa9d3MPW\ne6bhwQZkzaQZvqOe+4yfC1cZUndh60J4abGD+Io3JtCbFdammt0+vdXrnMhIX7Hv\nGbsi443bx6TRkB+osy1pv4OPlqEWDsgEZ2FAe9je3cTEtMEEVP3Vl1WKQeMpJgyS\nlkm5N2jLN7wh3vo3Q3CsAuCCc/QWIziIfMA/Sji+yBr15QdkxwTr6K26tgzMsDh9\nEBdzr/udxPYevl4V0Iit8ULT3e7tzZl4FAig1iGLTJQ9Vk86/6NGTg3Je5/JYiH9\nilIeBl1FSCrjzNJKY2p0pTbH0k0HMZOFkz++Dvisd+4pRdY4U7NjhX4nD8YYYYSI\npSuab9hJAgMBAAECggEAG35u1MzLEAkICi1f/vZhztRTpjdYF1H54qvqzRFhCBIT\nS1N/BzUgb9VFU6cAR36F0nNyPJPpwGEXocbtOG+pLdMx0F7MNIgE5kLvv1xt+l7m\nTsVJvaSqm0YerFAAQPo9Isb1G4jfPPx/bCLtVdRzt8zwi4Tyu+8GnLsdiCodBCMC\nE2xFr4uJuBGNWnCELDFyzIdeTTHy1O2nF1AlUUpXixngrGjmVhwmjwk4Z+m1327f\nBq42fHYNQFalDxRl/FhpMPeoeNmCRjy3tH0AnArgUI6Vf7lZI1M5iSD3yjLMYveH\nm+9vAVv4nGO33Y7pTC00NHgOZUiWyVWce57U9ZWueQKBgQDpfiFDRtWVKA0rYILv\nhc8ec7Uak+vt/EtK6uHsPbrM6g546NLv26VJhZY+SCn+cTuMoNtoytQFP11JLfTV\nW77akgvg+y0STI0b3f8lo0O0Gl1DgXXScxxGy+eZ6ZaAKTCLsFOpnVANXXPiAF/J\n/ggVK8suylixRqhTbwbQGGXWJQKBgQDU8MS6MSsNpFqfV2lVXxURJMuJpM2Dfipm\nv9rmwLG07s6LDgDgug1RFp5xxX6bV6vL0JsdgaO/iyseefLWahfjo44BB0K5sxvp\n4B0rQ6DyAL5WrLHzqteVAQpMOJmvbmdjGZU2DXVegI0Vk0rEvnSAVDmMSxjX+jTC\n22nw7glmVQKBgHaD5/xPCwAvmSeoUC2lvLCXSJiZ9ooQomL/f/c6igOS1g+3FcJb\nubTs0osAdBhLf09tIpE5So7zT7ViV0Co1eH5eYAT3hfItWMstmJzUV0seKRYJObS\nOMsSmpb8AsFApvxwXrbcO5LdGYHgcL6Fa7LbTMGOQaCR3cSjuVCM4bvlAoGAQthW\nGVDn//9RB2YsRcV0Wo5fapUWgqmva9PcRsXEw1SX9+Tsd59QIN1l3bcumFs8Ld4N\nY4TXv4BTh9ymU5K4bxhfsojx9FN6dr+IyJURSAbduV26+w/tXvQVpHm8HOsef2h/\ng5lT99eI8nXrabmT3tkRu62zXdFIkMbKCfzfbIUCgYAgP4SzOIhci2SEBo8zeH9R\neu+DLprfl7cC6+U5NPQ7+v52mv9GT/NXE4r/LBhiiUOX5XofynF1FmbDFdizKWn8\nJB7wbHrCP4S1po45u89fipQ1Icp+3Uiulm+jnCIM1JriVvfw+gFO+RRToEd9xpcH\n6J9c/0ICaJ14QXcR7iOlmQ==\n-----END PRIVATE KEY-----\n",
-          "client_email": "githubdeployer@physiotherapistadmin.iam.gserviceaccount.com",
-          "client_id": "113959082562972000780",
-          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-          "token_uri": "https://oauth2.googleapis.com/token",
-          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/githubdeployer%40physiotherapistadmin.iam.gserviceaccount.com",
-          "universe_domain": "googleapis.com"
+            "type": "service_account",
+            "project_id": "physiotherapistadmin",
+            "private_key_id": "e44dae74f55349c8306f7073e0c047cf0845ea49",
+            "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCvi/JTC+VGcjyN\n1+d0Dt3h9+nEYCqYR81MG+kgj0UxS6Ow305Kdk/iURtd4vlbbAk/Hr36H9ohE+FJ\nYfjMoVcqM+oLny7br+zpz1/wq2JzXQQ4P3VYNEy29VOfi95R1ZykCdCT7Ohk3a6r\n8g4ai6HVWUkcvF89FLwU22yZ8mBzurJL78sv+3YFqPLJRi51CYgDguiNtdkfL7Tz\nwHCi0YbuFFOZDpYTYGm8M/wBI6VHp2jjpmu6gRMb8eyRP9VrJXBhET2jrWmw981S\nCBASpyi/h57d56MeEglDG490T1NcK83T30PPX6TW6HuOKOZEFn1AMbQaC5olLiuM\nC2tUVT0DAgMBAAECggEAPNJFjr1v3iUFUvXLpPvjp3+gOGBDUciK2kRPVO8ev5If\n8E+mTglI6zZDv5c84w5+86Ygl1FC37QGGck+jROXYjFjdUxdTVNaR7YIXRfcP/Ep\n3Z0q+HkCXV+Jbh1lVUAoCfO2lxH9gLkH5F40wcDAPO229aRUcRLGiYluyrXd8ipY\nn4Ab099ISTVJIREaGrjUYHFqWcbHnDG2AO0rTDwFpNLgF7PQg7ZmTOD1bNXL+KgM\nyKXWestqM8kr2/GLKvMeNpbXzMVFT6V1tGszyLtwYCSI+frFlT907WEJp5VmWUrX\nv2wwZRP5iN7cjN2y02mxbjbp4bDN22lVq8Np3mg2cQKBgQDx4aC33FtHLIXZylPG\nLlAAz9PHHDFaWv4ZXSauIXlFIZ8T+qVnqlK7eRk9ynMpvemQu34V1g6tt81/p8P9\ndXUOjE3/PTt+bP7zu5LHQXqgBFh8b73DcxOSikwZdfS2dYjDA3gw8KEhN9Xj1lJp\nXfp8dk7YNSgAj5ollZjzRzsrMQKBgQC5yxifXuMzidU0jr4PDav+AeeeAtSiXBJr\nujEQZofl4Yj8MSK+HMLdQYR7NnePj86SCiwTwAsW8qxoqQvsHNSFJUFDd3lafjwQ\nOuI26Jl1p3XyclxGV8LQqK1g2OT7suFJh7CRPDFXd6Fx0pbGTfq2Oh+mIDII5KA3\nLIX9Kcy2cwKBgEpJobLWWrJhWjqpiVE0qB2XttNQNVgq2h+wHFEetsAks1bPhD1y\ncjZh2v6/Tt9jFHj/HJpYQ+nWqaarP+Z4TJtLPClIBR2vHB5/XXUVBzReIU8WgpGk\npj47e2PWdnITZw1940wkm1g4bdir2mPCGUxgiZadvMtvT0h7yZ3uIp4BAoGAI1FS\nKul0sxVebBE+W8oziaN/DfBnzz1FWykXrpBvAOnwilAk1JLPEBQmRO3DqIyjres1\nGcQF16Tl1TddRtLsKys7zsFlVihs7oDjA6EPmufsadwHYm/IXrXRz3krfhUw8jNT\nAyi4EHJzRBnOA4BLSlyeK4wvNrWPJy3Vgpxxh7UCgYBgyFZcUkzHDXmQ2+ghT9pp\n3SWn0siKA+SAZXrAwpVcWpJ0yuLhEbQNn/OrbVT5QAns7NElFfa9vgm91XXqt0Iz\nTXzCkOJ6lGwVVzNC+l3pjRHZ5x1IS70bgGNA7DGK59IdG25xTpOOtdySnkyWylCo\nlMK/qVWUnhYdP09k1jwFSg==\n-----END PRIVATE KEY-----\n",
+            "client_email": "339275710298-compute@developer.gserviceaccount.com",
+            "client_id": "114011657347847616888",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://oauth2.googleapis.com/token",
+            "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+            "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/339275710298-compute%40developer.gserviceaccount.com",
+            "universe_domain": "googleapis.com"
         }' > gcloud-service-key.json
 
     - name: Authenticate to Google Cloud
@@ -41,5 +41,5 @@ jobs:
 
     - name: Deploy to Google App Engine
       run: |
-        gcloud config set project physiotherapistadmin  # Use the correct project ID
-        gcloud app deploy --quiet  # Remove invalid text
+        gcloud config set project admin-422213
+        gcloud app deploy --quiet
