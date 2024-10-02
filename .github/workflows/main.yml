@@ -1,0 +1,45 @@
+name: Deploy to GCP
+
+on:
+  push:
+    branches:
+      - main  # Change this to your deployment branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Google Cloud SDK
+      run: |
+        echo "Installing Google Cloud SDK..."
+        curl -sSL https://sdk.cloud.google.com | bash
+        exec -l $SHELL
+
+    - name: Set up Google Cloud credentials
+      run: |
+        echo '{
+          "type": "service_account",
+          "project_id": "physiotherapistadmin",
+          "private_key_id": "0d37eae13ee06e06bd56be62bc454dd669b88725",
+          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQC+qBjbt0tCvPcW\nlY4zbBLwoCmY4gefh5NarG4F/u54R6C/AZnr9crKgTGMHwWtlWHxZggzuKDhmqES\n9OOMVUGcbpHVc/+dN4pPOlBHZU7yKpcUgJTgj+y5oR1uRc2rCaIIx9IgIyEdASOo\nNNCTs7KrNPuZf4hKjRZlh9M7bxQg9tbpPyB9rUJQXhJXeagymu3VfnXgd5dOD2Lk\nk8wlelvpzWz0LRNfa4aJRyfO4h2Ypc/IV/veooj3kFa7xTWHXOzdWFjVoK76kUJG\n7LY/rmzfoj82NARYuWEmaFFx53+943B+/UvEfQlqOOiv6BGe1ndyB/iqZ6q8yc7H\noEWKqzX1AgMBAAECgf92afEGhdE4oiTU4g5v4a/hw5gSXFBfxNTAfFfZYXy7N8Ge\n4F+5Le/F1nfvj1T3etBaHgT6GrHRbTidjXvGrS0S+5mX+XPJMbW1f4Jc1Y8y2UD8\net/8mWdt46Nj2fbjRBhfW7wmOatXWF3NGwBwvCs8KqwZqhv8MaS3aqTHRTY7Qf96\ncw4BLJ7NlV+zSPMiD2miqxPKy5mQI5dx0VSW3BbsFQpYXV04RA3iXaXWywdZJTxN\nCXP8vPQvi1bLf0dPsAVOVzfrXa32LjOcQ6Q9oHXy2MmuppJCMuK/x94tm/gc7M/G\nehv8gf0/PZV44ChQeHeqI5iw1PxT5ZUfMN+wBgECgYEA+4fVvwmHIlpnazTIuXzy\neSpv7EZ2v2IXIpxtrv2yBH5gcQTzCBzkyOOzaCwg/Cfe0oz+eavDa6ERcwE1rdk9\ncFtKMaZas58+pPmvOTZ+AFbDBfu1FrfgiChuKAEwX6sOYOo1H23jFZXLz+2ofhjr\nV2OA/AgSdGcS7zb5iFhw4IECgYEAwgtbpFhovciNtsd3iJpFXQHesrjMsLQJtnyf\nOxdgNFlwQ7MAjLvgdo/4U26FxXB/NN2G/IZJeTvuv8Lf6jPQDwi3+a8jNMqkdv81\nCExhNN21yUhHxyIFsm839fwFx/ehqQUFipYCpVTcdprd9W5dyoF5r6AIc0KVNN5M\nlSPnG3UCgYEAvKcat9frlOZ9XrkOO6DtM9eSboJDGjP16i2tTmxVEm2+48W0ikcx\niULPErjWXImC5CR/0L31Kkp6DenAWw3uuNCfizGcIdC0aYQj2iN2ycZJK7moDswH\nCdhZFoQdxgNEG4hOI66FfXEGloNHtpv2F2s4GM/tF4UffG+dJJhAwQECgYB0DMzr\nFkDWOAqhJNxVY0ZWoJaqtqEckSA59oBYm9tak57zriuG/5n37pSqeTAh6+z4FgD0\nJ+/rRK++GfNGo2QsiZ9WAauBmCwSSwFRjDSapHpi/gqHis5zb9a9E9P1SyFw72Lo\nBl1gucb8XBShAzeutA6tvX0wScLokoakr4s5PQKBgAuHCuJcS+KeEJHS7X0QGDXt\niNWNGxlNSwfSxBsuNQxLmXSJ9ekk+E93os2iBl/utNY2SBqY7+d16SnM9tgS1uAY\nwL2dl7zYKKIu/dWxpdi/AclU/mUfHV0WcaXFc7Xd7mp3gXBYvZQYicGLU59pKqij\nB9YiNy5z8NpR9De9l1GQ\n-----END PRIVATE KEY-----\n",
+          "client_email": "physiotherapistadmin@appspot.gserviceaccount.com",
+          "client_id": "106507321155864436890",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/physiotherapistadmin%40appspot.gserviceaccount.com",
+          "universe_domain": "googleapis.com"
+        }' > gcloud-service-key.json
+
+    - name: Authenticate to Google Cloud
+      run: |
+        gcloud auth activate-service-account --key-file=gcloud-service-key.json
+
+    - name: Deploy to Google App Engine
+      run: |
+        gcloud config set project physiotherapistadmin
+        gcloud app deploy --quiet
