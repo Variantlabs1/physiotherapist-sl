@@ -124,7 +124,7 @@ const ClientsPage = () => {
     <div className={styles.rootClients}>
       <div className={styles.header}>
         <div className={styles.title}>
-          <p>Clients List</p>
+          <p>Clients Listing</p>
         </div>
         <Center fontWeight="500">{date}</Center>
       </div>
