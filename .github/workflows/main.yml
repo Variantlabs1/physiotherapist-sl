@@ -3,31 +3,33 @@ name: Deploy to Google App Engine
 on:
   push:
     branches:
-      - master  # Change to your deployment branch if different
+      - main  # Triggers on push to main branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+    # Step 1: Checkout the code from the repository
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Cloud SDK
+    # Step 2: Set up Google Cloud SDK
+    - name: Set up Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
       with:
-        version: 'latest'
+        export_default_credentials: true
 
+    # Step 3: Authenticate to GCP
     - name: Authenticate to GCP
       uses: google-github-actions/auth@v1
       with:
         credentials_json: '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}'
 
-    - name: Configure Google Cloud
-      run: |
-        gcloud config set project physiotherapistadmin
-        gcloud config set compute/region us-central1  # Set your preferred region
+    # Step 4: Set GCP project (optional if project is set in the service account key)
+    - name: Set GCP Project
+      run: gcloud config set project physiotherapistadmin
 
+    # Step 5: Deploy to App Engine
     - name: Deploy to App Engine
-      run: |
-        gcloud app deploy --quiet
+      run: gcloud app deploy --quiet
