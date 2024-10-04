@@ -1,9 +1,9 @@
-name: Deploy to GCP
+name: Deploy to Google App Engine
 
 on:
   push:
     branches:
-      - master  # Change this to your deployment branch
+      - master  # Change to your deployment branch if different
 
 jobs:
   deploy:
@@ -11,35 +11,23 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    - name: Install Google Cloud SDK
-      run: |
-        echo "Installing Google Cloud SDK..."
-        curl -sSL https://sdk.cloud.google.com | bash
-        exec -l $SHELL
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        version: 'latest'
 
-    - name: Set up Google Cloud credentials
-      run: |
-        echo '{
-            "type": "service_account",
-            "project_id": "physiotherapistadmin",
-            "private_key_id": "e44dae74f55349c8306f7073e0c047cf0845ea49",
-            "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCvi/JTC+VGcjyN\n1+d0Dt3h9+nEYCqYR81MG+kgj0UxS6Ow305Kdk/iURtd4vlbbAk/Hr36H9ohE+FJ\nYfjMoVcqM+oLny7br+zpz1/wq2JzXQQ4P3VYNEy29VOfi95R1ZykCdCT7Ohk3a6r\n8g4ai6HVWUkcvF89FLwU22yZ8mBzurJL78sv+3YFqPLJRi51CYgDguiNtdkfL7Tz\nwHCi0YbuFFOZDpYTYGm8M/wBI6VHp2jjpmu6gRMb8eyRP9VrJXBhET2jrWmw981S\nCBASpyi/h57d56MeEglDG490T1NcK83T30PPX6TW6HuOKOZEFn1AMbQaC5olLiuM\nC2tUVT0DAgMBAAECggEAPNJFjr1v3iUFUvXLpPvjp3+gOGBDUciK2kRPVO8ev5If\n8E+mTglI6zZDv5c84w5+86Ygl1FC37QGGck+jROXYjFjdUxdTVNaR7YIXRfcP/Ep\n3Z0q+HkCXV+Jbh1lVUAoCfO2lxH9gLkH5F40wcDAPO229aRUcRLGiYluyrXd8ipY\nn4Ab099ISTVJIREaGrjUYHFqWcbHnDG2AO0rTDwFpNLgF7PQg7ZmTOD1bNXL+KgM\nyKXWestqM8kr2/GLKvMeNpbXzMVFT6V1tGszyLtwYCSI+frFlT907WEJp5VmWUrX\nv2wwZRP5iN7cjN2y02mxbjbp4bDN22lVq8Np3mg2cQKBgQDx4aC33FtHLIXZylPG\nLlAAz9PHHDFaWv4ZXSauIXlFIZ8T+qVnqlK7eRk9ynMpvemQu34V1g6tt81/p8P9\ndXUOjE3/PTt+bP7zu5LHQXqgBFh8b73DcxOSikwZdfS2dYjDA3gw8KEhN9Xj1lJp\nXfp8dk7YNSgAj5ollZjzRzsrMQKBgQC5yxifXuMzidU0jr4PDav+AeeeAtSiXBJr\nujEQZofl4Yj8MSK+HMLdQYR7NnePj86SCiwTwAsW8qxoqQvsHNSFJUFDd3lafjwQ\nOuI26Jl1p3XyclxGV8LQqK1g2OT7suFJh7CRPDFXd6Fx0pbGTfq2Oh+mIDII5KA3\nLIX9Kcy2cwKBgEpJobLWWrJhWjqpiVE0qB2XttNQNVgq2h+wHFEetsAks1bPhD1y\ncjZh2v6/Tt9jFHj/HJpYQ+nWqaarP+Z4TJtLPClIBR2vHB5/XXUVBzReIU8WgpGk\npj47e2PWdnITZw1940wkm1g4bdir2mPCGUxgiZadvMtvT0h7yZ3uIp4BAoGAI1FS\nKul0sxVebBE+W8oziaN/DfBnzz1FWykXrpBvAOnwilAk1JLPEBQmRO3DqIyjres1\nGcQF16Tl1TddRtLsKys7zsFlVihs7oDjA6EPmufsadwHYm/IXrXRz3krfhUw8jNT\nAyi4EHJzRBnOA4BLSlyeK4wvNrWPJy3Vgpxxh7UCgYBgyFZcUkzHDXmQ2+ghT9pp\n3SWn0siKA+SAZXrAwpVcWpJ0yuLhEbQNn/OrbVT5QAns7NElFfa9vgm91XXqt0Iz\nTXzCkOJ6lGwVVzNC+l3pjRHZ5x1IS70bgGNA7DGK59IdG25xTpOOtdySnkyWylCo\nlMK/qVWUnhYdP09k1jwFSg==\n-----END PRIVATE KEY-----\n",
-            "client_email": "339275710298-compute@developer.gserviceaccount.com",
-            "client_id": "114011657347847616888",
-            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-            "token_uri": "https://oauth2.googleapis.com/token",
-            "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-            "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/339275710298-compute%40developer.gserviceaccount.com",
-            "universe_domain": "googleapis.com"
-        }' > gcloud-service-key.json
+    - name: Authenticate to GCP
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}'
 
-    - name: Authenticate to Google Cloud
+    - name: Configure Google Cloud
       run: |
-        gcloud auth activate-service-account --key-file=gcloud-service-key.json
+        gcloud config set project physiotherapistadmin
+        gcloud config set compute/region us-central1  # Set your preferred region
 
-    - name: Deploy to Google App Engine
+    - name: Deploy to App Engine
       run: |
-        gcloud config set project admin-422213
         gcloud app deploy --quiet
