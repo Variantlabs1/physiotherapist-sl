@@ -78,6 +78,9 @@ const Dashboard = (props) => {
             <Chart />
           </div>
         </div>
+        <div>
+          
+        </div>
         <div className={classes.clientList}>
           <ClientList />
         </div>

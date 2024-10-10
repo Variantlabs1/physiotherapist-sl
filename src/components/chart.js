@@ -22,9 +22,8 @@ const customStyles = css`
     height: 5vh;
   }
 `;
-
 const Chart = () => {
-  const [data, setData] = useState([]); // Initialize data to an empty array
+  const [data, setData] = useState([]);
   const { user } = useContext(AuthContext);
   const [selectedPeriod, setSelectedPeriod] = useState("thisWeek");
   const [options, setOptions] = useState(getInitialOptions());
@@ -32,18 +31,17 @@ const Chart = () => {
   const series = [
     {
       name: "Exercises",
-      data: data.length > 0 ? data : [0], // Ensure there's data to display
+      data: data,
     },
   ];
 
   const getPhysio = async () => {
-    if (!user) return null;
     const q = query(
       collection(db, "physiotherapist"),
       where("physiotherapistId", "==", user.uid)
     );
     const res = await getDocs(q);
-    return res.docs.length > 0 ? res.docs[0].data() : null;
+    return res.docs[0].data();
   };
 
   const { data: physioData } = useQuery({
@@ -53,21 +51,25 @@ const Chart = () => {
 
   useEffect(() => {
     const getExercises = () => {
-      if (!physioData || !physioData.assignedOn) return; // Ensure data is available
-
       const weeklyExercises = [];
       const today = new Date();
       const mondayThisWeek = new Date(today);
       mondayThisWeek.setDate(today.getDate() - ((today.getDay() + 6) % 7));
-      const firstDayThisMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+      const firstDayThisMonth = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        1
+      );
       let monthCount, month;
-
       switch (selectedPeriod) {
         case "thisWeek":
           for (let i = 0; i < 7; i++) {
-            const dailyExercises = physioData.assignedOn.filter((d) =>
-              new Date(d.toDate()).toLocaleDateString() ===
-              new Date(new Date(mondayThisWeek).setDate(mondayThisWeek.getDate() + i)).toLocaleDateString()
+            const dailyExercises = physioData.assignedOn.filter(
+              (d) =>
+                new Date(d.toDate()).toLocaleDateString() ===
+                new Date(
+                  new Date(mondayThisWeek).setDate(mondayThisWeek.getDate() + i)
+                ).toLocaleDateString()
             );
             weeklyExercises.push(dailyExercises.length);
           }
@@ -80,14 +82,16 @@ const Chart = () => {
             },
           }));
           break;
-
         case "lastWeek":
           const mondayLastWeek = new Date(mondayThisWeek);
           mondayLastWeek.setDate(mondayThisWeek.getDate() - 7);
           for (let i = 0; i < 7; i++) {
-            const dailyExercises = physioData.assignedOn.filter((d) =>
-              new Date(d.toDate()).toLocaleDateString() ===
-              new Date(new Date(mondayLastWeek).setDate(mondayLastWeek.getDate() + i)).toLocaleDateString()
+            const dailyExercises = physioData.assignedOn.filter(
+              (d) =>
+                new Date(d.toDate()).toLocaleDateString() ===
+                new Date(
+                  new Date(mondayLastWeek).setDate(mondayLastWeek.getDate() + i)
+                ).toLocaleDateString()
             );
             weeklyExercises.push(dailyExercises.length);
           }
@@ -100,15 +104,32 @@ const Chart = () => {
             },
           }));
           break;
-
         case "thisMonth":
           month = today.getMonth();
-          monthCount = getDaysInMonth(month, today.getFullYear());
-
+          if ([0, 2, 4, 6, 7, 9, 11].includes(month)) {
+            monthCount = 31; // January, March, May, July, August, October, December
+          } else if (month === 1) {
+            // February
+            if (
+              today.getFullYear() % 400 === 0 ||
+              (today.getFullYear() % 4 === 0 && today.getFullYear() % 100 !== 0)
+            ) {
+              monthCount = 29; // Leap year
+            } else {
+              monthCount = 28; // Non-leap year
+            }
+          } else {
+            monthCount = 30; // April, June, September, November
+          }
           for (let i = 0; i < monthCount; i++) {
-            const dailyExercises = physioData.assignedOn.filter((d) =>
-              new Date(d.toDate()).toLocaleDateString() ===
-              new Date(new Date(firstDayThisMonth).setDate(firstDayThisMonth.getDate() + i)).toLocaleDateString()
+            const dailyExercises = physioData.assignedOn.filter(
+              (d) =>
+                new Date(d.toDate()).toLocaleDateString() ===
+                new Date(
+                  new Date(firstDayThisMonth).setDate(
+                    firstDayThisMonth.getDate() + i
+                  )
+                ).toLocaleDateString()
             );
             weeklyExercises.push(dailyExercises.length);
           }
@@ -117,19 +138,124 @@ const Chart = () => {
             ...prevOptions,
             xaxis: {
               ...prevOptions.xaxis,
-              categories: Array.from({ length: monthCount }, (_, i) => i + 1).map((day) => `${day}`),
+              categories: Array.from(
+                { length: monthCount },
+                (_, i) => i + 1
+              ).map((day) => `${day}`),
             },
           }));
           break;
+        case "lastMonth":
+          const firstDayLastMonth = new Date(firstDayThisMonth); // First day of last month
+          firstDayLastMonth.setMonth(firstDayThisMonth.getMonth() - 1);
 
-        // (Rest of the cases)
-        
-        default:
+          month = today.getMonth();
+          if ([0, 2, 4, 6, 7, 9, 11].includes(month)) {
+            monthCount = 31; // January, March, May, July, August, October, December
+          } else if (month === 1) {
+            // February
+            if (
+              today.getFullYear() % 400 === 0 ||
+              (today.getFullYear() % 4 === 0 && today.getFullYear() % 100 !== 0)
+            ) {
+              monthCount = 29; // Leap year
+            } else {
+              monthCount = 28; // Non-leap year
+            }
+          } else {
+            monthCount = 30; // April, June, September, November
+          }
+          for (let i = 0; i < monthCount; i++) {
+            const dailyExercises = physioData.assignedOn.filter(
+              (d) =>
+                new Date(d.toDate()).toLocaleDateString() ===
+                new Date(
+                  new Date(firstDayLastMonth).setDate(
+                    firstDayLastMonth.getDate() + i
+                  )
+                ).toLocaleDateString()
+            );
+            weeklyExercises.push(dailyExercises.length);
+          }
+          setData(weeklyExercises);
+          setOptions((prevOptions) => ({
+            ...prevOptions,
+            xaxis: {
+              ...prevOptions.xaxis,
+              categories: Array.from(
+                { length: monthCount },
+                (_, i) => i + 1
+              ).map((day) => `${day}`),
+            },
+          }));
           break;
+        case "thisYear":
+          const exerciseCounts = new Array(12).fill(0);
+          physioData.assignedOn.forEach((exercise) => {
+            const exerciseDate = exercise.toDate();
+            if (exerciseDate.getFullYear() === today.getFullYear()) {
+              const month = exerciseDate.getMonth();
+              exerciseCounts[month]++;
+            }
+          });
+          setData(exerciseCounts);
+          setOptions((prevOptions) => ({
+            ...prevOptions,
+            xaxis: {
+              ...prevOptions.xaxis,
+              categories: [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "June",
+                "July",
+                "Aug",
+                "Sept",
+                "Oct",
+                "Nov",
+                "Dec",
+              ],
+            },
+          }));
+          break;
+        case "lastYear":
+          const lastYear = today.getFullYear() - 1;
+          const exerciseCount = new Array(12).fill(0);
+
+          physioData.assignedOn.forEach((exercise) => {
+            const exerciseDate = exercise.toDate();
+            if (exerciseDate.getFullYear() === lastYear) {
+              const month = exerciseDate.getMonth();
+              exerciseCount[month]++;
+            }
+          });
+          setData(exerciseCount);
+          setOptions((prevOptions) => ({
+            ...prevOptions,
+            xaxis: {
+              ...prevOptions.xaxis,
+              categories: [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "June",
+                "July",
+                "Aug",
+                "Sept",
+                "Oct",
+                "Nov",
+                "Dec",
+              ],
+            },
+          }));
+          break;
+        default:
       }
     };
-
-    // Fetch exercises only when user and physioData are available
     user && physioData && getExercises();
   }, [user, selectedPeriod, physioData]);
 
@@ -137,73 +263,111 @@ const Chart = () => {
     return {
       chart: {
         id: "chart",
-        toolbar: { show: false },
+        toolbar: {
+          show: false,
+        },
         height: "95%",
         width: "100%",
       },
       xaxis: {
         categories: [],
-        axisBorder: { show: false },
-        axisTicks: { show: false },
+        axisBorder: {
+          show: false, // Hide the x-axis line
+        },
+        axisTicks: {
+          show: false, // Hide the x-axis ticks
+        },
         labels: {
           offsetY: -1,
           style: {
-            colors: "#DDDDDD",
-            fontSize: "0.1rem",
+            colors: "#DDDDDD", // Change the color of x-axis labels
+            fontSize: "0.1 rem", // Set the font size of x-axis labels
           },
         },
         tickAmount: 8,
       },
-      stroke: { curve: "smooth", colors: "#DDDDDD", width: 3 },
+      stroke: {
+        curve: "smooth", // Set the curve to smooth
+        colors: "#DDDDDD",
+        width: 3,
+      },
       yaxis: {
         labels: {
-          offsetX: -18,
-          style: { colors: "#DDDDDD", fontSize: "0.1rem" },
+          offsetX: -18, // Move labels to the left
+          style: {
+            colors: "#DDDDDD", // Change the color of x-axis labels
+            fontSize: "0.1 rem", // Set the font size of y-axis labels
+          },
         },
       },
       grid: {
         show: true,
         borderColor: "#AEA8FF",
-        xaxis: { lines: { show: true } },
-        yaxis: { lines: { show: false } },
+        position: "back",
+        xaxis: {
+          lines: {
+            show: true,
+          },
+        },
+        yaxis: {
+          lines: {
+            show: false,
+          },
+        },
       },
-      markers: { size: 4, colors: ["#FFBAD0"], strokeColors: "#AEA8FF" },
-      fill: {
-        colors: ["#B1D0FF"],
-        type: "gradient",
-        gradient: {
-          shade: "dark",
-          type: "horizontal",
-          gradientToColors: ["#FFBAD0"],
-          stops: [0, 100],
+      markers: {
+        size: 4,
+        colors: ["#FFBAD0"],
+        strokeColors: "#FFBAD0",
+      },
+      tooltip: {
+        theme: "dark", // Change the tooltip theme to 'dark'
+        x: {
+          show: true,
+        },
+        y: {
+          formatter: (value) => `${value} units`,
+        },
+        marker: {
+          show: true,
+        },
+        style: {
+          background: "#FF0000", // Change the background color of the tooltip
+          color: "#FFFFFF", // Change the font color of the tooltip
         },
       },
     };
   }
 
-  const getDaysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
-
   return (
-    <div className="container">
-      <Select
-        onChange={(e) => setSelectedPeriod(e.target.value)}
-        icon={<FaCaretDown />}
-        defaultValue={"thisWeek"}
-        css={customStyles}
-      >
-        <option value="thisWeek">This week</option>
-        <option value="lastWeek">Last week</option>
-        <option value="thisMonth">This month</option>
-        <option value="lastMonth">Last month</option>
-        <option value="thisYear">This year</option>
-        <option value="lastYear">Last year</option>
-      </Select>
-      {/* Only render the chart when there's data */}
-      {data.length > 0 ? (
-        <ReactApexChart options={options} series={series} type="line" />
-      ) : (
-        <p>No data available for the selected period.</p>
-      )}
+    <div className="lineChart">
+      <div className="exercisesTop">
+        <span>Exercises</span>
+        <div className="exercisesButton">
+          <Select
+            css={customStyles}
+            icon={<FaCaretDown color="#0d30ac" />}
+            value={selectedPeriod}
+            onChange={(e) => setSelectedPeriod(e.target.value)}
+          >
+            <option value="thisWeek">This Week</option>
+            <option value="lastWeek">Last Week</option>
+            <option value="thisMonth">This Month</option>
+            <option value="lastMonth">Last Month</option>
+            <option value="thisYear">This Year</option>
+            <option value="lastYear">Last Year</option>
+          </Select>
+        </div>
+      </div>
+
+      <ReactApexChart
+        className="chart"
+        options={options}
+        series={series}
+        type="line"
+        height={options.chart.height}
+        width={options.chart.width}
+      />
     </div>
   );
 };

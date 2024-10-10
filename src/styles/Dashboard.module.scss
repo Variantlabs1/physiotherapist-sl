@@ -5,6 +5,7 @@
   padding: 3%;
   flex-direction: row;
   justify-content: space-around;
+  
   .left {
     width: 70%;
     height: 58vw;
@@ -71,6 +72,7 @@
       flex-grow: 1;
       overflow: hidden;
       margin: 2% auto;
+      
       .leftGraph {
         width: 40%;
         height: 100%;
@@ -90,6 +92,7 @@
       .rightGraph {
         width: 60%;
         height: 100%;
+    
         background: linear-gradient(
           123.33deg,
           #7fa5ed -88.05%,
@@ -101,6 +104,7 @@
       }
     }
     .clientList {
+      padding-top: 5%;
       height: 29vw;
     }
   }

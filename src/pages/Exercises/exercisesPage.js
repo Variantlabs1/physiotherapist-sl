@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext  } from "react";
 import styles from "./ExercisesPage.module.scss"; // Replace with your CSS/SCSS module for styling
 import { HiOutlineViewGrid, HiOutlineViewList } from "react-icons/hi";
 import ExerciseFetcher from "../../components/data_fetch/exerciseFetcher";
+import { AuthContext } from "../../components/data_fetch/authProvider";
 import {
   collection,
   endBefore,
@@ -45,6 +46,7 @@ const ExercisesPage = ({
     newlyAddedLast: false,
     alphabetical: false,
   });
+  const { user } = useContext(AuthContext); // Access the user object from AuthContext
 
   const toggleDeleteModal = (e, exerciseId) => {
     e.stopPropagation();
@@ -71,50 +73,80 @@ const ExercisesPage = ({
     const getDefaultExercises = async () => {
       setLoading(true);
       try {
-        //     const clientData = await getDocs(query(collection(db,"Users"),where("userId","==",clientId)))
-        //    !clientData.empty && setClient(clientData.docs[0].data())
-
-        if (pageNumber > 1 && lastDocument && firstDocument) {
-          const pointer =
-            direction === "next"
-              ? startAfter(lastDocument)
-              : endBefore(firstDocument);
-          const Limit = direction === "next" ? limit(4) : limitToLast(4);
-
-          const res = await getDocs(
-            query(
-              collection(db, "Default excercises"),
-              Limit,
-              orderBy("Exercise_Name"),
-              pointer
-            )
-          );
-
-          setExercises(res.docs.map((doc) => doc.data()));
-          setFilteredExercises(res.docs.map((doc) => doc.data()));
-          setLastDocument(res.docs[res.docs.length - 1]);
-          setFirstDocument(res.docs[0]);
-          // console.log(res.docs.map(doc=>(doc.data())));
-        } else {
-          const res = await getDocs(
-            query(
-              collection(db, "Default excercises"),
-              limit(4),
-              orderBy("Exercise_Name")
-            )
-          );
-          setExercises(res.docs.map((doc) => doc.data()));
-          setFilteredExercises(res.docs.map((doc) => doc.data()));
-          setLastDocument(res.docs[res.docs.length - 1]);
-          setFirstDocument(res.docs[0]);
+          // Check for pagination conditions
+          if (pageNumber > 1 && lastDocument && firstDocument) {
+              const pointer =
+                  direction === "next"
+                      ? startAfter(lastDocument)
+                      : endBefore(firstDocument);
+              const Limit = direction === "next" ? limit(4) : limitToLast(4);
+  
+              // Fetch default exercises with pagination
+              const res = await getDocs(
+                  query(
+                      collection(db, "Default excercises"),
+                      orderBy("Exercise_Name"),
+                      Limit,
+                      pointer
+                  )
+              );
+  
+              // Fetch user exercises
+              const userExercisesQuery = query(
+                  collection(db, `physiotherapist/${user?.uid}/exercises`),
+                  orderBy("Exercise_Name"),
+                  limit(4)
+              );
+  
+              const userRes = await getDocs(userExercisesQuery);
+  
+              // Combine both results
+              const combinedExercises = [
+                  ...res.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+                  ...userRes.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+              ];
+  
+              setExercises(combinedExercises);
+              setFilteredExercises(combinedExercises);
+              setLastDocument(res.docs[res.docs.length - 1]);
+              setFirstDocument(res.docs[0]);
+          } else {
+              // Initial fetch of default exercises
+              const res = await getDocs(
+                  query(
+                      collection(db, "Default excercises"),
+                      limit(4),
+                      orderBy("Exercise_Name")
+                  )
+              );
+  
+              // Fetch user exercises
+              const userExercisesQuery = query(
+                  collection(db, `physiotherapist/${user?.uid}/exercises`),
+                  orderBy("Exercise_Name"),
+                  limit(4)
+              );
+  
+              const userRes = await getDocs(userExercisesQuery);
+  
+              // Combine both results
+              const combinedExercises = [
+                  ...res.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+                  ...userRes.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+              ];
+  
+              setExercises(combinedExercises);
+              setFilteredExercises(combinedExercises);
+              setLastDocument(res.docs[res.docs.length - 1]);
+              setFirstDocument(res.docs[0]);
+          }
           setLoading(false);
-          // console.log(res.docs[res.docs.length - 1].data().Exercise_Name);
-        }
       } catch (e) {
-        console.log(e);
-        setLoading(false);
+          console.log(e);
+          setLoading(false);
       }
-    };
+  };
+  
 
     clientId && getDefaultExercises();
   }, [clientId, pageNumber, direction]);
