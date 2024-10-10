@@ -1,9 +1,10 @@
 .lineChart {
   background: linear-gradient(123.33deg, #7fa5ed -88.05%, #0d30ac 167.83%);
   display: flex;
-  padding: 10px;
+  padding: 5px;
   flex-direction: column;
 }
+
 
 .exercisesButton {
   display: flex;

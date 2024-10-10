@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from "react";
+import React, { useState, useCallback, useContext, useEffect } from "react";
 import { getStorage, uploadBytes, ref, getDownloadURL } from "firebase/storage";
 import {
   collection,
@@ -9,7 +9,8 @@ import {
   where,
   updateDoc,
   arrayUnion,
-  doc
+  doc,
+  setDoc
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -42,6 +43,17 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
   const client = urlParams.get("client");
   const queryClient = useQueryClient();
 
+  useEffect(() => {
+    if (selectedExercise) {
+      setTitle(selectedExercise.Exercise_Name || "");
+      setDescription(selectedExercise.Preparation || "");
+      setMusclesInvolved(selectedExercise.Target || "");
+      setDuration(selectedExercise.duration || "");
+      setReps(selectedExercise.reps || "");
+      setSelectedPeriod(selectedExercise.assignedDay || "Monday");
+    }
+  }, [selectedExercise]);
+
   const handleVideoChange = (e) => {
     const file = e.target.files[0];
     setVideo(file);
@@ -68,30 +80,8 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
         return;
       }
   
-      // Check if exercise already exists for the client
-      if (clientId) {
-        const res = await getDocs(
-          query(collection(db, "Users"), where("userId", "==", clientId))
-        );
-        const clientRef = res.docs[0].ref;
-  
-        const existingExercise = await getDocs(
-          query(
-            collection(clientRef, "exercises"),
-            where("Exercise_Name", "==", exerciseName)
-          )
-        );
-  
-        if (!existingExercise.empty) {
-          setError("Exercise already assigned!");
-          setSubmitting(false);
-          return;
-        }
-      }
-  
-      const storage = getStorage();
-  
       // Step 2: Upload video and thumbnail to Firebase Storage in parallel
+      const storage = getStorage();
       const videoRef = ref(storage, `exercise/${video.name}`);
       const thumbnailRef = ref(storage, `exercise/thumbnails/${thumbnail.name}`);
   
@@ -103,61 +93,45 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
       const videoURL = await getDownloadURL(videoRef);
       const thumbnailURL = await getDownloadURL(thumbnailRef);
   
-      // Step 3: Create the exercise data
-      const exerciseData = selectedExercise
-        ? {
-            ...selectedExercise,
-            videoURL,
-            thumbnailURL,
-            duration: duration || selectedExercise.duration,
-            reps: reps || selectedExercise.reps,
-            assignedDay: selectedPeriod,
-            assignedOn: Timestamp.now(),
-            physioId: user?.uid,
-          }
-        : {
-            videoURL,
-            thumbnailURL,
-            Exercise_Name: exerciseName,
-            Preparation: preparationText,
-            Target: targetText,
-            duration,
-            reps,
-            assignedDay: selectedPeriod,
-            assignedOn: Timestamp.now(),
-            physioId: user?.uid,
-          };
+      // Step 3: Create the new exercise data
+      const exerciseData = {
+        videoURL,
+        thumbnailURL,
+        Exercise_Name: exerciseName,
+        Preparation: preparationText,
+        Target: targetText,
+        duration,
+        reps,
+        assignedDay: selectedPeriod,
+        assignedOn: Timestamp.now(),
+        physioId: user?.uid,
+      };
   
-      // Step 4: Upload exercise data to Firestore and retrieve the exerciseId
-      let exerciseId;
+      // Step 4: Check for existing exercise for the client and create a new document
       if (clientId) {
         const res = await getDocs(
           query(collection(db, "Users"), where("userId", "==", clientId))
         );
         const clientRef = res.docs[0].ref;
   
+        // Create a new exercise document
         const docRef = await addDoc(collection(clientRef, "exercises"), exerciseData);
-        exerciseId = docRef.id; // Unique ID of the exercise document
   
-        // Step 5: Update physio's assigned exercises
-        const getPhysios = await getDocs(
-          query(collection(db, "physiotherapist"), where("physiotherapistId", "==", user.uid))
-        );
-        const physioDocId = getPhysios.docs[0].ref.id;
-        await updateDoc(doc(db, "physiotherapist", physioDocId), {
-          assignedOn: arrayUnion(Timestamp.now()),
-        });
-  
-        // Step 6: Upload exercise summary to Realtime Database
+        // Step 5: Upload exercise summary to Realtime Database
         const exerciseSummary = {
           Exercise_Name: exerciseData.Exercise_Name,
           assignedDay: selectedPeriod,
-          id: exerciseId, // Use the exerciseId here
+          id: docRef.id, // Use the newly created exerciseId here
         };
   
-        const exercisesRef = dbRef(database, `Users/${clientId}/exercises/${exerciseId}`);
+        const exercisesRef = dbRef(database, `Users/${clientId}/exercises/${docRef.id}`);
         await set(exercisesRef, exerciseSummary);
       }
+  
+      // Step 6: Add exercise to the physiotherapist's collection
+      const physioId = user?.uid;
+      const physioExercisesRef = doc(db, `physiotherapist/${physioId}/exercises/${exerciseData.Exercise_Name}`); // Using exercise name as ID; change as needed
+      await setDoc(physioExercisesRef, exerciseData);
   
       // Reset form fields
       setVideo(null);
@@ -169,8 +143,6 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
       setReps("");
   
       setSuccess(true);
-      console.log("clientId:", clientId);
-      console.log("exerciseData:", exerciseData);
     } catch (error) {
       setError(`Error adding exercise: ${error.message}`);
     } finally {
@@ -178,6 +150,7 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
       queryClient.invalidateQueries(["exercises"]);
     }
   };
+  
   
 
   // Handle Back Click
@@ -203,16 +176,13 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
               <p>Exercise Name</p>
             </div>
             <div className={classes.inputField}>
-              <input
-                value={
-                  selectedExercise
-                    ? selectedExercise.Exercise_Name
-                    : Exercise_Name
-                }
-                type="text"
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
+  <input
+    value={Exercise_Name} // Use Exercise_Name directly
+    type="text"
+    onChange={(e) => setTitle(e.target.value)}
+  />
+</div>
+
           </div>
 
           <div className={classes.formElements}>
