@@ -1,19 +1,17 @@
-import classes from "./Login.module.scss";
-import login from "../../assets/login.png";
-import { MdEmail } from "react-icons/md";
-import { RiLockPasswordFill } from "react-icons/ri";
-import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { motion, useAnimate } from "framer-motion";
 import React, { useState } from "react";
+import { motion, useAnimate } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Box, Center, Flex, Spinner, Text, useToast } from "@chakra-ui/react";
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { FaArrowRightLong } from "react-icons/fa6";
+import classes from "./Login.module.scss";
 
 function Login() {
   const [scope, animate] = useAnimate();
-  //for authentication
   const navigate = useNavigate();
   const [values, setValues] = useState({
     email: "",
@@ -23,6 +21,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const toast = useToast();
+
   const handleSubmission = () => {
     if (!values.email || !values.pass) {
       toast({
@@ -35,12 +34,12 @@ function Login() {
     setLoading(true);
     setSubmitButtonDisabled(true);
     signInWithEmailAndPassword(auth, values.email, values.pass)
-      .then(async (res) => {
+      .then(() => {
         setSubmitButtonDisabled(false);
         navigate("/Dashboard");
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setSubmitButtonDisabled(false);
         toast({
           title: "Invalid Email or Password",
@@ -52,10 +51,17 @@ function Login() {
   };
 
   const handleAnimation = async () => {
-    animate("#arrow", { x: 10, scale: 1.1 });
+    const arrowElement = document.getElementById("arrow");
+    if (arrowElement) {
+      await animate("#arrow", { x: 10, scale: 1.1 });
+    }
   };
+
   const handleAnimationClose = async () => {
-    animate("#arrow", { x: 0, scale: 1 });
+    const arrowElement = document.getElementById("arrow");
+    if (arrowElement) {
+      await animate("#arrow", { x: 0, scale: 1 });
+    }
   };
 
   return (

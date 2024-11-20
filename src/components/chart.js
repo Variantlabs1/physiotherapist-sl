@@ -51,16 +51,14 @@ const Chart = () => {
 
   useEffect(() => {
     const getExercises = () => {
+      if (!physioData || !physioData.assignedOn) return; // Ensure data exists
       const weeklyExercises = [];
       const today = new Date();
       const mondayThisWeek = new Date(today);
       mondayThisWeek.setDate(today.getDate() - ((today.getDay() + 6) % 7));
-      const firstDayThisMonth = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        1
-      );
+      const firstDayThisMonth = new Date(today.getFullYear(), today.getMonth(), 1);
       let monthCount, month;
+  
       switch (selectedPeriod) {
         case "thisWeek":
           for (let i = 0; i < 7; i++) {
@@ -82,6 +80,7 @@ const Chart = () => {
             },
           }));
           break;
+  
         case "lastWeek":
           const mondayLastWeek = new Date(mondayThisWeek);
           mondayLastWeek.setDate(mondayThisWeek.getDate() - 7);
@@ -104,23 +103,10 @@ const Chart = () => {
             },
           }));
           break;
+  
         case "thisMonth":
           month = today.getMonth();
-          if ([0, 2, 4, 6, 7, 9, 11].includes(month)) {
-            monthCount = 31; // January, March, May, July, August, October, December
-          } else if (month === 1) {
-            // February
-            if (
-              today.getFullYear() % 400 === 0 ||
-              (today.getFullYear() % 4 === 0 && today.getFullYear() % 100 !== 0)
-            ) {
-              monthCount = 29; // Leap year
-            } else {
-              monthCount = 28; // Non-leap year
-            }
-          } else {
-            monthCount = 30; // April, June, September, November
-          }
+          monthCount = new Date(today.getFullYear(), month + 1, 0).getDate(); // Get total days in the month
           for (let i = 0; i < monthCount; i++) {
             const dailyExercises = physioData.assignedOn.filter(
               (d) =>
@@ -145,26 +131,15 @@ const Chart = () => {
             },
           }));
           break;
+  
         case "lastMonth":
-          const firstDayLastMonth = new Date(firstDayThisMonth); // First day of last month
+          const firstDayLastMonth = new Date(firstDayThisMonth);
           firstDayLastMonth.setMonth(firstDayThisMonth.getMonth() - 1);
-
-          month = today.getMonth();
-          if ([0, 2, 4, 6, 7, 9, 11].includes(month)) {
-            monthCount = 31; // January, March, May, July, August, October, December
-          } else if (month === 1) {
-            // February
-            if (
-              today.getFullYear() % 400 === 0 ||
-              (today.getFullYear() % 4 === 0 && today.getFullYear() % 100 !== 0)
-            ) {
-              monthCount = 29; // Leap year
-            } else {
-              monthCount = 28; // Non-leap year
-            }
-          } else {
-            monthCount = 30; // April, June, September, November
-          }
+          monthCount = new Date(
+            firstDayLastMonth.getFullYear(),
+            firstDayLastMonth.getMonth() + 1,
+            0
+          ).getDate(); // Get total days in the last month
           for (let i = 0; i < monthCount; i++) {
             const dailyExercises = physioData.assignedOn.filter(
               (d) =>
@@ -189,16 +164,17 @@ const Chart = () => {
             },
           }));
           break;
+  
         case "thisYear":
-          const exerciseCounts = new Array(12).fill(0);
+          const exerciseCountsThisYear = new Array(12).fill(0);
           physioData.assignedOn.forEach((exercise) => {
             const exerciseDate = exercise.toDate();
             if (exerciseDate.getFullYear() === today.getFullYear()) {
               const month = exerciseDate.getMonth();
-              exerciseCounts[month]++;
+              exerciseCountsThisYear[month]++;
             }
           });
-          setData(exerciseCounts);
+          setData(exerciseCountsThisYear);
           setOptions((prevOptions) => ({
             ...prevOptions,
             xaxis: {
@@ -220,18 +196,18 @@ const Chart = () => {
             },
           }));
           break;
+  
         case "lastYear":
           const lastYear = today.getFullYear() - 1;
-          const exerciseCount = new Array(12).fill(0);
-
+          const exerciseCountsLastYear = new Array(12).fill(0);
           physioData.assignedOn.forEach((exercise) => {
             const exerciseDate = exercise.toDate();
             if (exerciseDate.getFullYear() === lastYear) {
               const month = exerciseDate.getMonth();
-              exerciseCount[month]++;
+              exerciseCountsLastYear[month]++;
             }
           });
-          setData(exerciseCount);
+          setData(exerciseCountsLastYear);
           setOptions((prevOptions) => ({
             ...prevOptions,
             xaxis: {
@@ -253,11 +229,13 @@ const Chart = () => {
             },
           }));
           break;
+  
         default:
       }
     };
-    user && physioData && getExercises();
+    if (user && physioData) getExercises();
   }, [user, selectedPeriod, physioData]);
+  
 
   function getInitialOptions() {
     return {
