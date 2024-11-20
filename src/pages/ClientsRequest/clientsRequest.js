@@ -46,9 +46,16 @@ const ClientsRequest = () => {
 
   const handleClientsFetched = (fetchedClients) => {
     setLoading(false);
-    setClients(fetchedClients);
-    setFilteredClients(fetchedClients);
+  
+    // Sort by time (recent to old)
+    const sortedClients = fetchedClients.sort(
+      (a, b) => new Date(b.accCreated) - new Date(a.accCreated)
+    );
+  
+    setClients(sortedClients);
+    setFilteredClients(sortedClients);
   };
+  
 
   const findDocumentId = async (userID) => {
     // console.log(userID);

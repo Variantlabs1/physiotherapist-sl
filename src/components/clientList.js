@@ -127,7 +127,7 @@ const ClientList = () => {
               })
             ) : (
               <td colSpan="6" style={{ textAlign: "center" }}>
-                  No Clients!
+                  No Clients right now!
                 </td>
             )}
           </tbody>
