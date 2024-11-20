@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.7da333bd.css",
-    "main.js": "/static/js/main.cdfb44f4.js",
+    "main.js": "/static/js/main.c845d95e.js",
     "static/media/body.jpg": "/static/media/body.816d337872e6106e4fde.jpg",
     "static/media/bottonImage.png": "/static/media/bottonImage.25849473d78fe6cf8484.png",
     "static/media/fitgirl.png": "/static/media/fitgirl.4d29febe88ef1d02d624.png",
@@ -12,10 +12,10 @@
     "static/media/exercise.jpeg": "/static/media/exercise.d6c8ad3b4b78291ceafc.jpeg",
     "index.html": "/index.html",
     "main.7da333bd.css.map": "/static/css/main.7da333bd.css.map",
-    "main.cdfb44f4.js.map": "/static/js/main.cdfb44f4.js.map"
+    "main.c845d95e.js.map": "/static/js/main.c845d95e.js.map"
   },
   "entrypoints": [
     "static/css/main.7da333bd.css",
-    "static/js/main.cdfb44f4.js"
+    "static/js/main.c845d95e.js"
   ]
 }
