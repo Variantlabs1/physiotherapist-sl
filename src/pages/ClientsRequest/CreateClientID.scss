@@ -1,0 +1,555 @@
+// Variables for consistent colors
+$primary-blue: #0d30ac;
+$secondary-blue: #4371cb;
+$light-blue: #7e9ddb;
+$border-blue: #4370cb3c;
+$background-light: #c0d5ff74;
+$text-gray: #7e7e7e;
+$white: #ffffff;
+$error-red: #e53e3e;
+$success-green: #38a169;
+
+.create-client-container {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  background-color: #f8fafc;
+
+  .main-wrapper {
+    padding: 2% 4%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    color: $primary-blue;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .date-display {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+
+  .form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .form-card {
+    width: 100%;
+    max-width: 900px;
+    background: $white;
+    border-radius: 14px;
+    border: 3px solid $border-blue;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  // Banner Section
+  .banner-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    gap: 1rem;
+  }
+
+  .profile-section {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1;
+  }
+
+  .profile-image-wrapper {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .image-upload-label {
+    cursor: pointer;
+    display: block;
+  }
+
+  .profile-image-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid $white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .camera-icon {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: $white;
+      border-radius: 50%;
+      padding: 4px;
+      font-size: 1.2rem;
+      color: $secondary-blue;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .file-input {
+    display: none;
+  }
+
+  .profile-text {
+    flex: 1;
+
+    .profile-title {
+      color: $primary-blue;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .profile-subtitle {
+      color: $secondary-blue;
+      font-size: 1rem;
+      font-weight: 400;
+      margin: 0;
+    }
+  }
+
+  .referral-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    .referral-code {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      min-width: 80px;
+      padding: 0 1rem;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: 1px solid $primary-blue;
+      color: $primary-blue;
+      background: $white;
+    }
+
+    .referral-label {
+      font-size: 0.9rem;
+      color: $secondary-blue;
+      font-weight: 500;
+    }
+  }
+
+  // Error Message
+  .error-message {
+    background: #fed7d7;
+    color: $error-red;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #fbb6b6;
+    font-weight: 500;
+  }
+
+  // Form Styles
+  .user-form {
+    width: 100%;
+  }
+
+  .form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 1.5rem;
+
+    &.single {
+      .form-field {
+        width: 100%;
+      }
+    }
+
+    &.double {
+      .form-field {
+        flex: 1;
+      }
+    }
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &.checkbox-field {
+      justify-content: flex-end;
+
+      .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        height: 45px;
+      }
+    }
+  }
+
+  .field-label {
+    color: $light-blue;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .form-input,
+  .form-select {
+    width: 100%;
+    height: 45px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: $text-gray;
+    background: $white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: 2px solid $light-blue;
+      box-shadow: 0 2px 8px rgba(126, 157, 219, 0.3);
+    }
+
+    &::placeholder {
+      color: #a0a0a0;
+    }
+  }
+
+  .form-select {
+    cursor: pointer;
+  }
+
+  .form-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: $secondary-blue;
+    cursor: pointer;
+  }
+
+  .checkbox-label {
+    font-size: 0.9rem;
+    color: $text-gray;
+    cursor: pointer;
+  }
+
+  // Form Actions
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .cancel-btn {
+    background: $white;
+    border: 1px solid $light-blue;
+    color: $light-blue;
+
+    &:hover:not(:disabled) {
+      background: #f7fafc;
+      border-color: $secondary-blue;
+      color: $secondary-blue;
+    }
+  }
+
+  .submit-btn {
+    background: $light-blue;
+    border: none;
+    color: $white;
+
+    &:hover:not(:disabled) {
+      background: $secondary-blue;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(126, 157, 219, 0.4);
+    }
+  }
+
+  .loading-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .loading-spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid transparent;
+      border-top: 2px solid $white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .create-client-container {
+    .main-wrapper {
+      padding: 2% 3%;
+    }
+
+    .page-header {
+      .date-display {
+        font-size: 0.9rem;
+      }
+    }
+
+    .form-card {
+      padding: 1.5rem;
+    }
+
+    .banner-section {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .profile-section {
+      width: 100%;
+    }
+
+    .referral-section {
+      align-self: flex-start;
+    }
+
+    .form-row.double {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .create-client-container {
+    .main-wrapper {
+      padding: 1rem;
+    }
+
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .form-card {
+      padding: 1rem;
+      border-radius: 12px;
+    }
+
+    .profile-section {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .profile-image-container {
+      width: 100px;
+      height: 100px;
+    }
+
+    .profile-text {
+      .profile-title {
+        font-size: 1.4rem;
+      }
+
+      .profile-subtitle {
+        font-size: 0.9rem;
+      }
+    }
+
+    .form-actions {
+      flex-direction: column;
+      gap: 1rem;
+
+      .cancel-btn,
+      .submit-btn {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .create-client-container {
+    .main-wrapper {
+      padding: 0.5rem;
+    }
+
+    .page-header {
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      .date-display {
+        display: none;
+      }
+    }
+
+    .form-card {
+      padding: 0.75rem;
+      border-radius: 10px;
+    }
+
+    .profile-image-container {
+      width: 80px;
+      height: 80px;
+
+      .camera-icon {
+        font-size: 1rem;
+        bottom: 4px;
+        right: 4px;
+      }
+    }
+
+    .profile-text {
+      .profile-title {
+        font-size: 1.2rem;
+      }
+
+      .profile-subtitle {
+        font-size: 0.8rem;
+      }
+    }
+
+    .referral-code {
+      height: 35px;
+      min-width: 70px;
+      font-size: 1rem;
+    }
+
+    .referral-label {
+      font-size: 0.8rem;
+    }
+
+    .field-label {
+      font-size: 0.9rem;
+    }
+
+    .form-input,
+    .form-select {
+      height: 40px;
+      font-size: 0.9rem;
+    }
+
+    .form-fields {
+      gap: 1rem;
+    }
+
+    .cancel-btn,
+    .submit-btn {
+      font-size: 0.9rem;
+      height: 40px;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .create-client-container {
+    .form-card {
+      margin: 0;
+      border-radius: 8px;
+    }
+
+    .profile-image-container {
+      width: 70px;
+      height: 70px;
+
+      .camera-icon {
+        font-size: 0.9rem;
+      }
+    }
+
+    .profile-text {
+      .profile-title {
+        font-size: 1.1rem;
+      }
+
+      .profile-subtitle {
+        font-size: 0.75rem;
+      }
+    }
+
+    .form-input,
+    .form-select {
+      height: 38px;
+      font-size: 0.85rem;
+      padding: 0 12px;
+    }
+
+    .cancel-btn,
+    .submit-btn {
+      font-size: 0.85rem;
+      height: 38px;
+      padding: 0 1rem;
+    }
+  }
+}

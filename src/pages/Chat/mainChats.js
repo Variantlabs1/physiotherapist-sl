@@ -32,7 +32,9 @@ const MainChats = () => {
     alphabetical: false,
   });
   const [loading, setLoading] = useState(true);
+  
   const handleClientsFetched = (fetchedClients) => {
+    console.log("Fetched clients in MainChats:", fetchedClients); // Debug log
     setClients(fetchedClients);
     setFilteredClients(fetchedClients);
     setLoading(false);
@@ -49,21 +51,25 @@ const MainChats = () => {
     setSelectedClient(null); // Clear the selectedClient to go back to the client list
     setShowChat(false);
   };
+  
   const parseDate = (dateString) => {
+    if (!dateString) return new Date("1970-01-01");
     // Convert date string to JavaScript Date object
     const parts = dateString.split("/");
+    if (parts.length !== 3) return new Date("1970-01-01");
     const day = parseInt(parts[0]);
     const month = parts[1];
     const year = parseInt(parts[2]);
     const date = new Date(`${month} ${day}, ${year}`); // Months are 0-indexed in JavaScript Date object
     return date;
   };
+  
   const sortData = () => {
     const sortOptionsKeys = Object.keys(sortOptions);
     const selectedSortOptions = sortOptionsKeys.filter(
       (option) => sortOptions[option]
     );
-    if (!selectedSortOptions) {
+    if (selectedSortOptions.length === 0) {
       setShowDropdown((prev) => !prev);
       return;
     }
@@ -87,7 +93,7 @@ const MainChats = () => {
           );
           break;
         case "alphabetical":
-          sortedData.sort((a, b) => a.userName.localeCompare(b.userName));
+          sortedData.sort((a, b) => a.userName?.localeCompare(b.userName));
           break;
         default:
           break;
@@ -122,7 +128,7 @@ const MainChats = () => {
       setFilteredClients(clients);
     } else {
       const filteredClients = clients.filter((client) =>
-        client.userName.toLowerCase().includes(event.target.value.toLowerCase())
+        client.userName?.toLowerCase().includes(event.target.value.toLowerCase())
       );
       setFilteredClients(filteredClients);
     }
@@ -230,33 +236,61 @@ const MainChats = () => {
               </Center>
             )}
             <div className={styles.cardsContainer}>
-              {filteredClients.map((client, index) => (
-                <div key={index} className={styles.card}>
-                  <div className={styles.imageContainer}>
-                    {client.userProfilePhoto ? (
-                      <ImageComponent
-                        imagePath={client.userProfilePhoto}
-                        className={styles.profilePicture}
-                      />
-                    ) : (
-                      <img
-                        src={require("../../assets/vectorProfile.png")}
-                        alt={client.userName}
-                      />
-                    )}
-                  </div>
-
-                  <div className={styles.textContainer}>
-                    <div className={styles.username}>
-                      <p>{client.userName}</p>
+              {filteredClients.map((client, index) => {
+                console.log("Rendering client in MainChats:", client); // Debug log
+                return (
+                  <div key={client.userId || index} className={styles.card}>
+                    <div className={styles.imageContainer}>
+                      {client.userProfilePhoto ? (
+                        <img
+                          src={client.userProfilePhoto}
+                          alt={client.userName || "Client"}
+                          className={styles.profilePicture}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            borderRadius: "50%",
+                            objectFit: "cover"
+                          }}
+                          onError={(e) => {
+                            console.log("Image failed to load in MainChats:", client.userProfilePhoto);
+                            e.target.src = require("../../assets/vectorProfile.png");
+                          }}
+                          onLoad={() => {
+                            console.log("Image loaded successfully in MainChats:", client.userProfilePhoto);
+                          }}
+                        />
+                        // Alternative: Use ImageComponent if direct img doesn't work
+                        // <ImageComponent
+                        //   imagePath={client.userProfilePhoto}
+                        //   className={styles.profilePicture}
+                        // />
+                      ) : (
+                        <img
+                          src={require("../../assets/vectorProfile.png")}
+                          alt={client.userName || "Client"}
+                          className={styles.profilePicture}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            borderRadius: "50%",
+                            objectFit: "cover"                          }}
+                        />
+                      )}
                     </div>
 
-                    <div className={styles.buttons}>
-                      <Link to={`/Chat/${client.userId}`}>Chat</Link>
+                    <div className={styles.textContainer}>
+                      <div className={styles.username}>
+                        <p>{client.userName || "Unnamed"}</p>
+                      </div>
+
+                      <div className={styles.buttons}>
+                        <Link to={`/Chat/${client.userId}`}>Chat</Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

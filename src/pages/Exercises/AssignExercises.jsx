@@ -42,12 +42,19 @@ const AssignExercises = () => {
 
     const handleClick = async () => {
         try {
-            await addDoc(collection(db, "Users", client.id, "assigned-exercises"), {
+            console.log("Storing in path: assignedExcercise/" + clientId + "/exercises");
+            
+            await addDoc(collection(db, "assignedExcercise", clientId, "exercises"), {
                 exercisesId: selected,
                 assignedOn: Timestamp.now(),
+                assignedBy: "Suvo",
+                userId: clientId,
             });
+            
+            setSelected([]);
+            console.log("Exercises assigned successfully to assignedExercise collection!");
         } catch (e) {
-            console.error(e);
+            console.error("Error assigning exercises:", e);
         }
     };
 

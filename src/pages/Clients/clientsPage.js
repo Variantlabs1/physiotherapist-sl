@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import styles from "./ClientsPage.module.scss";
-import ClientFetcher from "../../components/data_fetch/clientFetcher"; // Adjust the path
+import ClientFetcher from "../../components/data_fetch/clientFetcher";
 import useDate from "../../components/useDate";
 import { FaSearch } from "react-icons/fa";
-import { Button, Center, Flex, Spinner, Text, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Center,
+  Flex,
+  Spinner,
+  Text,
+  VStack,
+  Box,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import ImageComponent from "../Chat/components/ImageConponent";
 
@@ -22,40 +30,31 @@ const ClientsPage = () => {
   const [loading, setLoading] = useState(true);
 
   const handleClientsFetched = (fetchedClients) => {
+    console.log("Fetched clients in ClientsPage:", fetchedClients); // Debug log
     setLoading(false);
     setClients(fetchedClients);
     setFilteredClients(fetchedClients);
   };
-  // useEffect(() => {
-  //   if (clientDocId) {
-  //     const getClient = async () => {
-  //       const client = await getDoc(doc(db, "Users", clientDocId));
-  //       client.exists() && onSelectClient(client.data());
-  //     };
-  //     getClient();
-  //   }
-  // }, [clientDocId]);
 
   const parseDate = (dateString) => {
-    // Convert date string to JavaScript Date object
+    if (!dateString) return new Date("1970-01-01");
     const parts = dateString.split("/");
-    const day = parseInt(parts[0]);
-    const month = parts[1];
-    const year = parseInt(parts[2]);
-    const date = new Date(`${month} ${day}, ${year}`); // Months are 0-indexed in JavaScript Date object
-    return date;
+    if (parts.length !== 3) return new Date("1970-01-01");
+    const [day, month, year] = parts;
+    return new Date(`${month} ${day}, ${year}`);
   };
+
   const sortData = () => {
     const sortOptionsKeys = Object.keys(sortOptions);
     const selectedSortOptions = sortOptionsKeys.filter(
       (option) => sortOptions[option]
     );
-    console.log(selectedSortOptions);
-    if (!selectedSortOptions) {
+
+    if (selectedSortOptions.length === 0) {
       setShowDropdown((prev) => !prev);
       return;
     }
-    // Sort data based on selected options
+
     const sortedData = [...clients];
     selectedSortOptions.forEach((option) => {
       switch (option) {
@@ -75,51 +74,51 @@ const ClientsPage = () => {
           );
           break;
         case "alphabetical":
-          sortedData.sort((a, b) => a.userName.localeCompare(b.userName));
+          sortedData.sort((a, b) =>
+            a.userName?.localeCompare(b.userName)
+          );
           break;
         default:
           break;
       }
     });
-    // setClients(sortedData);
+
     setFilteredClients(sortedData);
   };
 
   const handleSortChange = (event) => {
     const { name, checked } = event.target;
     const updatedSortOptions = { ...sortOptions };
-    if (checked) {
-      // Set the selected checkbox to true
-      updatedSortOptions[name] = true;
 
-      // Deselect all other checkboxes
+    if (checked) {
+      updatedSortOptions[name] = true;
       Object.keys(updatedSortOptions).forEach((option) => {
-        if (option !== name) {
-          updatedSortOptions[option] = false;
-        }
+        if (option !== name) updatedSortOptions[option] = false;
       });
     } else {
-      // If the checkbox is being unchecked, set its state to false
       updatedSortOptions[name] = false;
     }
+
     setSortOptions(updatedSortOptions);
   };
 
   const handleSearchInputChange = (event) => {
-    if (!event.target.value) {
+    const searchValue = event.target.value.toLowerCase();
+    if (!searchValue) {
       setFilteredClients(clients);
     } else {
-      const filteredClients = clients.filter((client) =>
-        client.userName.toLowerCase().includes(event.target.value.toLowerCase())
+      const filtered = clients.filter((client) =>
+        client.userName?.toLowerCase().includes(searchValue)
       );
-      setFilteredClients(filteredClients);
+      setFilteredClients(filtered);
     }
   };
 
   const handleSortApply = () => {
     sortData();
-    setShowDropdown((prev) => !prev);
+    setShowDropdown(false);
   };
+
   return (
     <div className={styles.rootClients}>
       <div className={styles.header}>
@@ -128,6 +127,7 @@ const ClientsPage = () => {
         </div>
         <Center fontWeight="500">{date}</Center>
       </div>
+
       <div className={styles.outerContainer}>
         <div className={styles.searchBarNotificationContainer}>
           <div className={styles.searchBarContainer}>
@@ -144,9 +144,7 @@ const ClientsPage = () => {
           <Center className={styles.notificationIconContainer}>
             <Text
               color="white"
-              onClick={() => {
-                setShowDropdown((prev) => !prev);
-              }}
+              onClick={() => setShowDropdown((prev) => !prev)}
             >
               Sort
             </Text>
@@ -202,51 +200,87 @@ const ClientsPage = () => {
             )}
           </Center>
         </div>
+
         <div className={styles.container}>
-          {/* Render the ClientFetcher component to fetch data */}
           <ClientFetcher onClientsFetched={handleClientsFetched} />
-          {loading && (
-            <Center>
-              <Spinner
-                color="#0d30ac"
-                size="xl"
-                position="absolute"
-                top="50%"
-                zIndex={15}
-              />
-            </Center>
+          {loading ? (
+            <Box minH="60vh">
+              <Center>
+                <Spinner
+                  color="#0d30ac"
+                  size="xl"
+                  position="relative"
+                  zIndex={15}
+                />
+              </Center>
+            </Box>
+          ) : (
+            <div className={styles.listContainer}>
+              {filteredClients.length === 0 ? (
+                <Center w="100%" p={10}>
+                  <Text>No clients found.</Text>
+                </Center>
+              ) : (
+                filteredClients.map((client) => {
+                  console.log("Rendering client:", client); // Debug log
+                  return (
+                    <div
+                      className={styles.card}
+                      key={client.userId || Math.random()}
+                    >
+                      <div className={styles.imageContainer}>
+                        {client.userProfilePhoto ? (
+                          <img
+                            src={client.userProfilePhoto}
+                            alt={client.userName || "Client"}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "50%",
+                              objectFit: "cover"
+                            }}
+                            onError={(e) => {
+                              console.log("Image failed to load in ClientsPage:", client.userProfilePhoto);
+                              e.target.src = require("../../assets/vectorProfile.png");
+                            }}
+                            onLoad={() => {
+                              console.log("Image loaded successfully in ClientsPage:", client.userProfilePhoto);
+                            }}
+                          />
+                          // Alternative: Use ImageComponent if direct img doesn't work
+                          // <ImageComponent imagePath={client.userProfilePhoto} />
+                        ) : (
+                          <img
+                            src={require("../../assets/vectorProfile.png")}
+                            alt={client.userName || "Client"}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "50%",
+                              objectFit: "cover"
+                            }}
+                          />
+                        )}
+                      </div>
+
+                      <div className={styles.textContainer}>
+                        <div className={styles.username}>
+                          <p>{client.userName || "Unnamed"}</p>
+                        </div>
+
+                        <div
+                          className={styles.buttons}
+                          onClick={() => Navigate(`${client.userId || ""}`)}
+                        >
+                          <p>View</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
           )}
-          {/* Render the clients */}
-          <div className={styles.listContainer}>
-            {filteredClients.map((client) => (
-              <div className={styles.card} key={client.userId}>
-                <div className={styles.imageContainer}>
-                  {client.userProfilePhoto ? (
-                    <ImageComponent imagePath={client.userProfilePhoto} />
-                  ) : (
-                    <img
-                      src={require("../../assets/vectorProfile.png")}
-                      alt={client.userName}
-                    />
-                  )}
-                </div>
-
-                <div className={styles.textContainer}>
-                  <div className={styles.username}>
-                    <p>{client.userName}</p>
-                  </div>
-
-                  <div
-                    className={styles.buttons}
-                    onClick={() => Navigate(`${client.userId}`)}
-                    // onClick={() => onSelectClient(client)}
-                  >
-                    <p>View</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>

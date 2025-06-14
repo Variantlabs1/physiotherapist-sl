@@ -28,6 +28,7 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import About from "./pages/LandingPage/About";
 import Terms from "./pages/LandingPage/Terms";
 import Privacy from "./pages/LandingPage/Privacy";
+import CreateClient from "./pages/Clients/CreateClientID";
 
 ReactGA.initialize("UA-400757671");
 
@@ -53,7 +54,7 @@ function App() {
           <Route path="/Chat" element={<MainChats />} />
           <Route path="/Chat/:id" element={<Chats />} />
           <Route path="Billing" element={<Billing />} />
-          <Route path="Requests" element={<ClientsRequest />} />
+          <Route path="Create" element={<ClientsRequest />} />
           <Route path="Profile" element={<Settings />} />
         </Route>
         <Route path="home" element={<LandingPage />} />
@@ -69,6 +70,7 @@ function App() {
           element={!user ? <Signup /> : <Navigate to="/Dashboard" />}
         />
         <Route path="password-recovery" element={<PasswordReset />} />
+        <Route path="createClient" element={<CreateClient /> } />
       </Routes>
     </BrowserRouter>
   );

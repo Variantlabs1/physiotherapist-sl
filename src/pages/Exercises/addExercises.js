@@ -107,15 +107,13 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
         physioId: user?.uid,
       };
   
-      // Step 4: Check for existing exercise for the client and create a new document
+      // Step 4: Store exercise in the new assignedExercise structure
       if (clientId) {
-        const res = await getDocs(
-          query(collection(db, "Users"), where("userId", "==", clientId))
-        );
-        const clientRef = res.docs[0].ref;
-  
-        // Create a new exercise document
-        const docRef = await addDoc(collection(clientRef, "exercises"), exerciseData);
+        console.log("Storing exercise in: assignedExcercise/" + clientId + "/exercises");
+        
+        // Create a new exercise document in assignedExercise collection
+        const docRef = await addDoc(collection(db, "assignedExcercise", clientId, "exercises"), exerciseData);
+        console.log("Exercise stored successfully with ID:", docRef.id);
   
         // Step 5: Upload exercise summary to Realtime Database
         const exerciseSummary = {
@@ -124,8 +122,9 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
           id: docRef.id, // Use the newly created exerciseId here
         };
   
-        const exercisesRef = dbRef(database, `Users/${clientId}/exercises/${docRef.id}`);
+        const exercisesRef = dbRef(database, `assignedExcercise/${clientId}/exercises/${docRef.id}`);
         await set(exercisesRef, exerciseSummary);
+        console.log("Exercise summary stored in Realtime Database");
       }
   
       // Step 6: Add exercise to the physiotherapist's collection
@@ -160,7 +159,7 @@ const AddExercises = ({ selectedExercise, onBackClick, clientId }) => {
 
   const handleSuccess = () => {
     setSuccess(false);
-    Navigate(`/Clients/${clientId}/assignedExercise`);
+    Navigate(`/Clients`);
   };
 
   return (

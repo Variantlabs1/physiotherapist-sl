@@ -1,180 +1,230 @@
 .rootDiv {
+  // Common display classes for flex layouts
+  %flex-row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  %flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // Desktop navbar
   .navbar {
+    @extend %flex-row;
     justify-content: space-between;
-    padding: 2% 4%;
+    align-items: center;
+    padding: 1rem 2rem;
+    width: 100%;
+    
     .navImage {
+      @extend %flex-row;
+      align-items: center;
+      gap: 0.5rem;
+      
       .logo {
-        width: 3vw;
+        width: 40px;
+        height: auto;
+        max-width: 100%;
       }
+      
       .text {
-        font-size: 0.7rem;
+        font-size: clamp(0.7rem, 1vw, 0.9rem);
         font-weight: 600;
         color: white;
-        line-height: 0;
+        white-space: nowrap;
       }
     }
+    
     .navButtons {
-      width: 15vw;
-      gap: 10px;
+      @extend %flex-row;
+      gap: 1rem;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
+      
+      .signUp, .signIn {
+        padding: 0.5rem 1rem;
+        height: auto;
+        min-height: 40px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      
       .signUp {
-        height: 6vh;
         color: white;
         background-color: transparent;
         outline: none;
         border: none;
-        cursor: pointer;
+        
+        &:hover {
+          opacity: 0.8;
+        }
       }
+      
       .signIn {
-        height: 6vh;
         background-color: transparent;
         border: 1px solid white;
         border-radius: 8px;
         color: white;
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
       }
     }
+    
+    // Show on larger screens only
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
+
+  // Mobile navbar
   .mobileNavbar {
-    padding: 15px 20px;
+    padding: 1rem;
     color: white;
+    width: 100%;
+    
+    // Hide on larger screens, show on mobile
     display: none;
+    @media (max-width: 768px) {
+      display: block;
+    }
+    
     .top {
       position: relative;
+      width: 100%;
+      height: 50px;
+      @extend %flex-row;
+      align-items: center;
+      
       .leftIcon {
         position: absolute;
         top: 0;
         left: 0;
         height: 100%;
-        svg {
-          font-size: 3rem;
-          color: rgb(160, 160, 160);
-        }
+        display: flex;
+        align-items: center;
         cursor: pointer;
+        
+        svg {
+          font-size: 2rem;
+          color: rgb(160, 160, 160);
+          
+          &:hover {
+            color: white;
+          }
+        }
       }
 
       .navContainer {
+        @extend %flex-row;
         width: 100%;
         justify-content: center;
+        align-items: center;
+        
         .navImage {
+          @extend %flex-row;
+          align-items: center;
+          gap: 0.5rem;
+          
           .logo {
-            width: 10vw;
+            width: 36px;
+            height: auto;
+            max-width: 100%;
           }
+          
           .text {
             font-size: 0.8rem;
             font-weight: 600;
             color: white;
-            line-height: 0;
           }
         }
       }
     }
+    
     .dropdownContainer {
-      flex-direction: column;
+      @extend %flex-column;
+      width: 100%;
       justify-content: space-between;
       align-items: center;
-      margin-top: 3%;
+      margin-top: 1rem;
+      
       .dropdown {
         background-color: black;
-        height: 70vh;
-        padding: 10px;
+        width: 100%;
+        max-height: 70vh;
+        overflow-y: auto;
+        padding: 1rem;
         border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        
         button {
           display: block;
-          padding: 4px 0;
-          margin-bottom: 5px;
+          width: 100%;
+          padding: 0.8rem;
+          margin-bottom: 0.5rem;
           background-color: transparent;
           border: none;
           color: rgb(207, 207, 207);
           cursor: pointer;
           font-weight: 600;
+          text-align: left;
+          border-radius: 4px;
+          transition: background-color 0.2s ease;
+          
           &:hover {
             background-color: #444;
           }
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
         }
       }
+      
       .dropdownButton {
+        width: 100%;
+        margin-top: 1rem;
         text-align: center;
+        
         button {
+          width: 100%;
+          max-width: 300px;
+          padding: 0.8rem 1.5rem;
           border: 1px solid white;
+          border-radius: 8px;
           font-weight: 600;
           background: transparent;
           color: white;
-        }
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .rootDiv {
-    .navbar {
-      .navButtons {
-        width: 20vw;
-        .signUp {
-          height: 4vw;
-        }
-        .signIn {
-          height: 4vw;
-        }
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 820px) {
-  .rootDiv {
-    .navbar {
-      display: none;
-    }
-    .mobileNavbar {
-      display: block;
-      .top {
-        .leftIcon {
-          svg {
-            font-size: 3.5rem;
-          }
-        }
-      }
-      .dropdownContainer {
-        .dropdown {
-          button {
-            font-size: 1.3rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
           }
         }
       }
     }
   }
-}
-
-@media only screen and (max-width: 450px) {
-  .rootDiv {
+  
+  // Additional responsive adjustments
+  @media (max-width: 480px) {
     .mobileNavbar {
       .top {
-        .leftIcon {
-          svg {
-            font-size: 2rem;
-          }
+        .leftIcon svg {
+          font-size: 1.75rem;
         }
-      }
-      .dropdownContainer {
-        .dropdown {
-          button {
-            font-size: 1.1rem;
+        
+        .navContainer .navImage {
+          .logo {
+            width: 30px;
           }
-        }
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 380px) {
-  .rootDiv {
-    .mobileNavbar {
-      .dropdownContainer {
-        .dropdown {
-          button {
-            font-size: 0.9rem;
+          
+          .text {
+            font-size: 0.7rem;
           }
         }
       }

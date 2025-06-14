@@ -3,6 +3,7 @@ import ClientFetcher from "./data_fetch/clientFetcher";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ImageComponent from "../pages/Chat/components/ImageConponent";
+
 const defaultUrl =
   "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=8";
 
@@ -11,6 +12,7 @@ const ClientList = () => {
   const [clients, setClients] = useState([]);
 
   const handleClientsFetched = (fetchedClients) => {
+    console.log("Fetched clients:", fetchedClients); // Debug log
     setClients(fetchedClients);
   };
 
@@ -87,48 +89,77 @@ const ClientList = () => {
           <tbody>
             {clients?.length > 0 ? (
               clients.map((client, index) => {
+                console.log("Client data:", client); // Debug log
                 return (
-                  <tr key={index}>
+                  <tr key={client.userId || index}>
                     <td className={classes.profilePic}>
                       {client.userProfilePhoto ? (
                         <div
                           onClick={() => {
                             Navigate(`/Clients/${client.userId}`);
                           }}
+                          style={{ cursor: "pointer" }}
                         >
-                          <ImageComponent imagePath={client.userProfilePhoto} />
+                          {/* Try direct img tag first to test if URL works */}
+                          <img
+                            src={client.userProfilePhoto}
+                            alt={client.userName || "Client"}
+                            style={{
+                              width: "50px",
+                              height: "50px",
+                              borderRadius: "50%",
+                              objectFit: "cover"
+                            }}
+                            onError={(e) => {
+                              console.log("Image failed to load:", client.userProfilePhoto);
+                              e.target.src = require("../assets/vectorProfile.png");
+                            }}
+                            onLoad={() => {
+                              console.log("Image loaded successfully:", client.userProfilePhoto);
+                            }}
+                          />
+                          {/* Alternative: Use ImageComponent if direct img doesn't work */}
+                          {/* <ImageComponent imagePath={client.userProfilePhoto} /> */}
                         </div>
                       ) : (
                         <img
                           src={require("../assets/vectorProfile.png")}
-                          alt={client.userName}
+                          alt={client.userName || "Client"}
                           onClick={() => {
                             Navigate(`/Clients/${client.userId}`);
+                          }}
+                          style={{
+                            width: "50px",
+                            height: "50px",
+                            borderRadius: "50%",
+                            objectFit: "cover",
+                            cursor: "pointer"
                           }}
                         />
                       )}
                     </td>
-                    <td>{client.userName}</td>
+                    <td>{client.userName || "No name"}</td>
                     <td>
                       {client.userDOB
                         ? calculateAge(client.userDOB)
                         : "No data"}
                     </td>
-                    {/* <td>{client.userDOB?client.userDOB.split("/").slice(0,3).join("/"):"No data"}</td> */}
                     <td>
                       {client.userWeight
                         ? parseInt(client.userWeight)
                         : "No data"}
                     </td>
-                    <td>{client.userGender ? client.userGender : "No data"}</td>
-                    <td>{client.phone ? client.phone : "No data"}</td>
+                    <td>{client.userGender || "No data"}</td>
+                    <td>{client.userPhoneNumber || client.phone || "No data"}</td>
                   </tr>
                 );
               })
             ) : (
-              <td colSpan="6" style={{ textAlign: "center" }}>
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center" }}>
                   No Clients right now!
                 </td>
+              </tr>
             )}
           </tbody>
         </table>

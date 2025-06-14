@@ -101,6 +101,7 @@ const options = {
   },
   colors: ["#3a2be2", "rgba(138, 43, 226, 0.5)", "rgba(138, 43, 226, 0.5)"], // Set main curve color to violet
 };
+
 export default function HeartbeatGraph({ client, toggleGraph }) {
   //   const Navigate = useNavigate();
   const [selectedDay, setSelectedDay] = useState("Monday");
@@ -167,13 +168,17 @@ export default function HeartbeatGraph({ client, toggleGraph }) {
   useEffect(() => {
     if (heartbeatData) {
       const filteredHeartbeatValues = heartbeatData
-        .filter((item) => item.date.split(/[\s,]+/)[0] === selectedDay)
-        // .map((item) => parseInt(item.heartbeat));
+        .filter((item) => {
+          // Add null/undefined checks for item and item.date
+          return item && item.date && typeof item.date === 'string' && item.date.split(/[\s,]+/)[0] === selectedDay;
+        })
         .map((item) => ({
           x: parseDate(item.date).getTime(),
           y: parseInt(item.heartbeat),
         }));
+      
       setHeartbeatValues(filteredHeartbeatValues);
+      
       // Calculate max, min, and average heart rate
       const heartRates = filteredHeartbeatValues.map((item) => item.y);
       let maxHeartRate = Math.max(...heartRates);
@@ -242,7 +247,7 @@ export default function HeartbeatGraph({ client, toggleGraph }) {
             <Box className={classes.chart}>
               <ReactApexChart
                 options={options}
-                series={[{ data: heartbeatValues }]}
+                series={[{ data: heartbeatValues || [] }]}
                 type="line"
                 height={options.chart.height}
                 width={options.chart.width}
