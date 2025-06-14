@@ -3,7 +3,7 @@ name: Deploy to Google App Engine
 on:
   push:
     branches:
-      - master  # Triggers on push to main branch
+      - physiotherapist-sl-changes  # Triggers on push to main branch
 
 jobs:
   deploy:
