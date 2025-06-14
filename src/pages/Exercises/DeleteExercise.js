@@ -11,15 +11,18 @@ import { AuthContext } from "../../components/data_fetch/authProvider";
 export default function DeletePhysio({ id, isOpenDelete, toggleDeleteModal }) {
   const queryClient = useQueryClient();
   const toast = useToast();
-  const { user } = useContext(AuthContext); // Get the user context
+  const { user } = useContext(AuthContext);
 
   const handleDelete = async (e) => {
     e.stopPropagation();
     try {
-      // Construct the document reference using the user's ID
-      const exerciseRef = doc(db, `physiotherapist/${user?.uid}/exercises`, id); // id should be the Exercise_Name
+      // Fixed: Use 'assignedExcercise' instead of 'physiotherapist'
+      const exerciseRef = doc(db, `assignedExcercise/${user?.uid}/exercises`, id);
       await deleteDoc(exerciseRef);
+      
+      // Invalidate queries to refresh the UI
       queryClient.invalidateQueries(["exercises"]);
+      
       toast({
         title: `Exercise deleted successfully`,
         status: "success",

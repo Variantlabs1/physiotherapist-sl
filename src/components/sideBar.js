@@ -35,8 +35,8 @@ const SideBar = ({ handleOptionClick, toggleDrawer }) => {
       text: "Chat",
     },
     {
-      icon: <BiMessageAdd color={segments[1] === "Requests" || "white"} />,
-      text: "Requests",
+      icon: <BiMessageAdd color={segments[1] === "Create User" || "white"} />,
+      text: "Create",
     },
     {
       icon: (

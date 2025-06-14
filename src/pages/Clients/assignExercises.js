@@ -4,7 +4,7 @@ import classes from "./AssignExercises.module.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Center, HStack } from "@chakra-ui/react";
 import useDate from "../../components/useDate";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where, doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { AiOutlinePlus } from "react-icons/ai";
 import DeleteAssignedExercise from "./DeleteAssignedExercise";
@@ -52,42 +52,74 @@ const AssignExercises = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Fetch assigned exercises based on the selected day
+  // Fetch assigned exercises based on the selected day - FIXED VERSION
   const fetchAssignedExercises = async () => {
     setLoading(true);
     try {
-      const clientQuerySnapshot = await getDocs(
-        query(collection(db, "Users"), where("userId", "==", client.userId))
+      // Query the correct collection structure: assignedExcercise/userId/exercises
+      const userDocRef = doc(db, "assignedExcercise", userId);
+      const exercisesRef = collection(userDocRef, "exercises");
+      
+      const q = query(
+        exercisesRef,
+        where("physioId", "==", user.uid),
+        where("assignedDay", "==", dayValue)
       );
+      
+      const exercisesSnapshot = await getDocs(q);
+      const exercisesData = exercisesSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-      if (!clientQuerySnapshot.empty) {
-        const clientDocRef = clientQuerySnapshot.docs[0].ref;
-        const exercisesRef = collection(clientDocRef, "exercises");
-        const q = query(
-          exercisesRef,
-          where("physioId", "==", user.uid),
-          where("assignedDay", "==", dayValue)
-        );
-        const exercisesSnapshot = await getDocs(q);
-        const exercisesData = exercisesSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        setAssignedExercises(exercisesData);
-      }
+      console.log("Fetched exercises:", exercisesData); // Debug log
+      setAssignedExercises(exercisesData);
     } catch (error) {
       console.error("Error fetching assigned exercises:", error);
     }
     setLoading(false);
   };
 
-  // Fetch exercises whenever the client or dayValue changes
-  useEffect(() => {
-    if (client.userId) {
-      fetchAssignedExercises();
+  // Alternative version if your exercises don't have assignedDay field
+  const fetchAssignedExercisesAlternative = async () => {
+    setLoading(true);
+    try {
+      // Query without assignedDay filter if that field doesn't exist
+      const userDocRef = doc(db, "assignedExcercise", userId);
+      const exercisesRef = collection(userDocRef, "exercises");
+      
+      const q = query(
+        exercisesRef,
+        where("physioId", "==", user.uid)
+      );
+      
+      const exercisesSnapshot = await getDocs(q);
+      const exercisesData = exercisesSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      // Filter by day on the client side if needed
+      const filteredExercises = exercisesData.filter(exercise => 
+        exercise.assignedDay === dayValue || !exercise.assignedDay
+      );
+
+      console.log("All exercises:", exercisesData);
+      console.log("Filtered exercises:", filteredExercises);
+      setAssignedExercises(filteredExercises);
+    } catch (error) {
+      console.error("Error fetching assigned exercises:", error);
     }
-  }, [client, user, dayValue]);
+    setLoading(false);
+  };
+
+  // Fetch exercises whenever the user, userId, or dayValue changes
+  useEffect(() => {
+    if (user?.uid && userId) {
+      fetchAssignedExercises();
+      // Use fetchAssignedExercisesAlternative() if the above doesn't work
+    }
+  }, [user, userId, dayValue]);
 
   // Toggle delete modal for an exercise
   const toggleDeleteModal = (e, exerciseId) => {
@@ -127,7 +159,7 @@ const AssignExercises = () => {
             Back
           </Button>
           <Center className={classes.add}>
-            <Link to={`/Exercises/?client=${client.userId}`}>
+            <Link to={`/Exercises/?client=${userId}`}>
               <AiOutlinePlus className={classes.icon} />
             </Link>
           </Center>
@@ -167,7 +199,7 @@ const AssignExercises = () => {
                       className={classes.icon}
                       id={exercise.id}
                       exerciseName={exercise.title || exercise.Exercise_Name}
-                      clientId={client.userId}
+                      clientId={userId}
                       isOpenDelete={exercise.id === openDeleteExerciseId}
                       toggleDeleteModal={(e) => toggleDeleteModal(e, exercise.id)}
                       setAssignedExercises={fetchAssignedExercises}

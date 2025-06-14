@@ -1,58 +1,62 @@
 import { useContext, useEffect } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, or } from "firebase/firestore";
 import { db } from "../../firebase";
 import { AuthContext } from "./authProvider";
 import { useQuery } from "@tanstack/react-query";
 
 const ClientFetcher = ({ onClientsFetched }) => {
-  // const user = useAuth();
   const { user } = useContext(AuthContext);
 
   const fetchData = async () => {
     try {
-      const userId = user?.uid; // Get the currently signed-in user
+      const userId = user?.uid;
+      if (!userId) return [];
 
-      // Fetch the signed-in user's referral code from the physiotherapist collection
+      // Step 1: Get referral code from physiotherapist
       const physiotherapistRef = collection(db, "physiotherapist");
-      const q = query(
-        physiotherapistRef,
-        where("physiotherapistId", "==", userId)
-      );
+      const q = query(physiotherapistRef, where("physiotherapistId", "==", userId));
       const physiotherapistSnapshot = await getDocs(q);
 
-      //Get Data of the Physiotherapist
+      if (physiotherapistSnapshot.empty) {
+        console.warn("No physiotherapist data found for this user.");
+        return [];
+      }
+
       const physiotherapistData = physiotherapistSnapshot.docs[0].data();
-      // console.log(physiotherapistData);
+      const referralCode = physiotherapistData.referralCode;
 
-      // Fetch all users with the same referral code
+      // Step 2: Get all users with the same referral code and verified = true (boolean or string)
       const usersRef = collection(db, "Users");
-      const clientsQuery = query(
-        usersRef,
-        where("referralCode", "==", physiotherapistData.referralCode),
-        where("verified", "==", true)
-      );
+      const q1 = query(usersRef, where("referralCode", "==", referralCode), where("verified", "==", true));  // boolean
+      const querySnapshot = await getDocs(q1);
 
-      const querySnapshot = await getDocs(clientsQuery);
+      let userDataList = querySnapshot.docs.map((doc) => doc.data());
 
-      // Store the user data in the state of the parent component
-      const userDataList = querySnapshot.docs.map((doc) => doc.data());
+      // Fallback: if no boolean-verified users, try string "true"
+      if (userDataList.length === 0) {
+        const q2 = query(usersRef, where("referralCode", "==", referralCode), where("verified", "==", "true"));  // string
+        const fallbackSnapshot = await getDocs(q2);
+        userDataList = fallbackSnapshot.docs.map((doc) => doc.data());
+      }
 
       return userDataList;
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching client data:", error);
+      throw error;
     }
   };
 
   const { data: clients } = useQuery({
-    queryKey: ["clients"],
+    queryKey: ["clients", user?.uid],
     queryFn: fetchData,
+    enabled: !!user?.uid,
   });
 
   useEffect(() => {
     if (clients) {
-      onClientsFetched(clients); // Pass fetched data to parent component
+      onClientsFetched(clients);
     }
-  }, [clients]);
+  }, [clients, onClientsFetched]);
 
   return null;
 };

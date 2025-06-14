@@ -8,16 +8,15 @@ import { getAnalytics,logEvent } from "firebase/analytics";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBI37OFPHWswmAhKKLY1IUk-ZYerGh71j4",
-    authDomain: "physiotherapy-eb4bb.firebaseapp.com",
-    databaseURL: "https://physiotherapy-eb4bb-default-rtdb.firebaseio.com",
-    projectId: "physiotherapy-eb4bb",
-    storageBucket: "physiotherapy-eb4bb.appspot.com",
-    messagingSenderId: "337785625667",
-    appId: "1:337785625667:web:cc2807e7b129b30f2488f6",
-    measurementId: "G-2DD6LR514D"
-  };
-  
+    apiKey: "AIzaSyC-_1hSubhP79X4qfh_zISQMLb-nM1ArYI",
+    authDomain: "vigour-fit.firebaseapp.com",
+    databaseURL: "https://vigour-fit-default-rtdb.firebaseio.com",
+    projectId: "vigour-fit",
+    storageBucket: "vigour-fit.firebasestorage.app",
+    messagingSenderId: "314426909291",
+    appId: "1:314426909291:web:0ac971b3014eb97802072e",
+    measurementId: "G-SNCWMWCK13"
+};
 
 export const app = initializeApp(firebaseConfig);
 

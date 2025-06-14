@@ -1,81 +1,127 @@
 .rootDiv {
   background-color: black;
-  padding-bottom: 3%;
+  padding-bottom: 3rem;
+  
+  // Common button styles
+  button {
+    width: auto;
+    min-width: 150px;
+    padding: 0.8rem 1.5rem;
+    font-weight: 700;
+    border-radius: 30px;
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+
+  // Container styles for consistent spacing
+  %container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
   .header {
     margin-top: 3%;
-    // margin-bottom: 2%;
     border-bottom: 0.3px solid rgb(96, 96, 96);
+    
     .headerContainer {
-      width: 82vw;
-      margin: auto;
+      @extend %container;
       margin-bottom: 1%;
+      
       .content {
         display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2rem;
+        
         img {
-          width: 30vw;
+          width: 100%;
+          max-width: 450px;
         }
+        
         .texts {
-          margin-top: 8%;
-          width: 30vw;
+          flex: 1;
+          min-width: 280px;
+          
           .text {
-            font-size: 2.2rem;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
             font-weight: 500;
             color: white;
-            margin-bottom: 5%;
+            margin-bottom: 1.5rem;
           }
+          
           button {
             border: 1px solid white;
             color: white;
-            margin-bottom: 7%;
+            margin-bottom: 1.5rem;
+            
             &:hover {
               background: rgb(184, 255, 4);
               color: black;
               border: none;
             }
           }
+          
           .text2 {
             font-size: 1rem;
             color: gray;
           }
+          
           span {
             color: rgb(184, 255, 4);
             text-decoration: underline;
           }
         }
       }
+      
       .description {
         color: rgb(184, 255, 4);
         font-weight: 600;
-        font-size: 1.7rem;
+        font-size: clamp(1.2rem, 3vw, 1.7rem);
         text-align: center;
+        margin: 1.5rem 0;
       }
     }
   }
+
   .intro {
     .content {
-      width: 75vw;
+      @extend %container;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
       margin: 5% auto;
+      
       img {
-        width: 37vw;
+        width: 100%;
+        max-width: 500px;
       }
+      
       .texts {
-        width: 34vw;
+        flex: 1;
+        min-width: 280px;
+        
         .label {
           color: rgb(184, 255, 4);
-          font-size: 1.2rem;
+          font-size: clamp(1rem, 2vw, 1.2rem);
           font-weight: 700;
-          margin-bottom: 3%;
+          margin-bottom: 1rem;
         }
+        
         .text {
-          font-size: 1.1rem;
+          font-size: clamp(0.9rem, 1.5vw, 1.1rem);
           color: rgb(161, 161, 161);
-          margin-bottom: 10%;
-          line-height: 34px;
+          margin-bottom: 2rem;
+          line-height: 1.6;
         }
+        
         button {
           border: 1px solid white;
           color: white;
-          margin-bottom: 7%;
+          
           &:hover {
             background: rgb(184, 255, 4);
             color: black;
@@ -85,86 +131,119 @@
       }
     }
   }
+
   .cardComponent {
-    width: 76vw;
-    margin: auto;
+    @extend %container;
+    margin: 4rem auto;
+    
     .cardHeader {
       color: rgb(184, 255, 4);
-      font-size: 2.2rem;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
       font-weight: 700;
       text-align: center;
+      margin-bottom: 2rem;
     }
+    
     .cards {
-      justify-content: space-between;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      
       .cardItem {
-        width: 17vw;
-        margin: 6% auto;
+        flex: 1;
+        min-width: 250px;
+        max-width: 350px;
+        margin: 1rem 0;
         border-radius: 20px;
         background-color: rgb(37, 37, 37);
-        padding: 3.3%;
+        padding: 1.5rem;
+        
         img {
-          width: 5vw;
+          width: 80px;
+          height: auto;
         }
+        
         .label {
           color: white;
           font-size: 1.3rem;
           font-weight: 800;
-          margin: 10% auto;
+          margin: 1rem 0;
         }
+        
         .text {
           color: rgb(169, 169, 169);
           font-size: 1rem;
           font-weight: 500;
-          margin-bottom: 5%;
-          line-height: 28px;
+          margin-bottom: 1rem;
+          line-height: 1.5;
         }
       }
     }
   }
+
   .cardComponent2 {
+    @extend .cardComponent;
+    
     .cards {
       .cardItem {
-        width: 14vw;
-        margin: 0 auto 6% auto;
+        min-width: 220px;
+        max-width: 300px;
       }
     }
   }
+
   .banner {
-    width: 78vw;
-    margin: 5% auto;
-    padding: 5%;
+    @extend %container;
+    padding: 3rem;
     border-radius: 24px;
     background-color: rgb(184, 255, 4);
     color: black;
+    margin: 4rem auto;
+    
     .bannerHeader {
-      font-size: 3rem;
+      font-size: clamp(1.8rem, 5vw, 3rem);
       font-weight: 700;
       text-align: center;
-      margin-bottom: 3%;
+      margin-bottom: 1.5rem;
     }
+    
     .bannerText {
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 2vw, 1.2rem);
       font-weight: 500;
-      line-height: 40px;
+      line-height: 1.6;
     }
   }
+
   .banner2 {
+    @extend .banner;
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+    
     .bannerContainer {
-      width: 50vw;
+      flex: 2;
+      min-width: 280px;
+      
       .bannerHeader {
         text-align: left;
         font-weight: 800;
       }
     }
+    
     .bannerButton {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
       align-items: center;
       justify-content: flex-end;
-      flex-grow: 1;
+      
       button {
         cursor: pointer;
         color: rgb(184, 255, 4);
         background-color: black;
+        
         &:hover {
           background-color: white;
           color: black;
@@ -172,106 +251,144 @@
       }
     }
   }
+
   .followContainer {
-    padding: auto 2%;
-    width: 78vw;
-    margin: auto;
+    @extend %container;
+    margin: 4rem auto;
+    
     .first {
-      flex: 1;
+      display: flex;
+      flex-direction: column;
+      
       button {
         border-radius: 5px;
         background: rgb(81, 113, 211);
         color: white;
+        align-self: flex-start;
+        
         &:hover {
           background: rgba(81, 113, 211, 0.92);
         }
       }
+      
       .firstLabel {
         color: rgb(184, 255, 4);
-        font-size: 2.8rem;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
         font-weight: 800;
-        margin-bottom: 3%;
+        margin-bottom: 1rem;
       }
+      
       .firstText {
-        margin-bottom: 6%;
-        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        font-size: clamp(1rem, 1.5vw, 1.2rem);
         font-weight: 500;
-        line-height: 30px;
+        line-height: 1.6;
         color: rgb(143, 143, 143);
       }
+      
       .firstIcons {
-        justify-content: space-around;
-        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 2rem;
+        margin: 2rem 0;
+        
         .icon {
-          font-size: 3rem;
+          font-size: clamp(2rem, 4vw, 3rem);
           color: rgb(184, 255, 4);
         }
       }
     }
   }
+
   .formContainer {
-    width: 78vw;
-    margin: 5% auto;
-    padding: 5%;
+    @extend %container;
+    padding: 3rem;
     border-radius: 24px;
     background-color: rgb(184, 255, 4);
     color: black;
     display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 4rem auto;
+    
     .form {
-      width: 40vw;
+      flex: 3;
+      min-width: 280px;
+      
       .formHeader {
-        font-size: 2.8rem;
-        margin-bottom: 2%;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        margin-bottom: 1rem;
       }
+      
       form {
-        margin: 3% auto;
+        margin: 1.5rem 0;
+        
         label {
           font-weight: 500;
+          display: block;
+          margin-bottom: 0.5rem;
         }
+        
         input,
         textarea {
           width: 100%;
-          margin-bottom: 3%;
+          margin-bottom: 1rem;
           background-color: white;
           border-radius: 8px;
-          border-width: 1px;
-          padding: 3%;
-          &:hover {
-            box-shadow: 0px 0px 0.5px 0.5px rgb(56, 137, 230) !important;
+          border: 1px solid transparent;
+          padding: 0.8rem;
+          
+          &:hover, &:focus {
+            box-shadow: 0px 0px 3px 1px rgb(56, 137, 230) !important;
+            outline: none;
           }
         }
+        
         input {
-          height: 7vh;
+          height: 3rem;
         }
+        
         textarea {
-          height: 28vh;
+          height: 12rem;
+          resize: vertical;
         }
+        
         button {
-          width: 10vw;
-          height: 6vh;
+          width: auto;
+          min-width: 150px;
+          height: auto;
+          padding: 0.8rem 1.5rem;
           border-radius: 12px;
           background-color: rgb(58, 82, 221);
           color: white;
+          
           &:hover {
             background-color: black;
           }
         }
+        
         p {
-          line-height: 35px;
+          line-height: 1.6;
           font-weight: 500;
-          font-size: 1.2rem;
-          margin-top: 3%;
+          font-size: clamp(1rem, 1.5vw, 1.2rem);
+          margin-top: 1rem;
         }
       }
     }
+    
     .formButton {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
       align-items: center;
       justify-content: flex-end;
-      flex-grow: 1;
+      
       button {
         cursor: pointer;
         color: rgb(184, 255, 4);
         background-color: black;
+        
         &:hover {
           background-color: white;
           color: black;
@@ -279,29 +396,41 @@
       }
     }
   }
+
   .bottomContainer {
-    width: 78vw;
-    margin: auto;
+    @extend %container;
     display: flex;
-    justify-content: space-around;
-    position: relative;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 4rem auto;
+    
     .bottomTexts {
-      width: 26vw;
+      flex: 1;
+      min-width: 280px;
+      display: flex;
       flex-direction: column;
-      justify-content: center;
+      
       .bottomHeader {
         color: white;
-        margin-bottom: 4%;
+        font-size: clamp(1.3rem, 2.5vw, 2rem);
+        margin-bottom: 1rem;
       }
+      
       .bottomText {
-        line-height: 35px;
+        line-height: 1.6;
         color: rgb(169, 167, 167);
-        font-size: 1.1rem;
+        font-size: clamp(0.9rem, 1.5vw, 1.1rem);
         font-weight: 500;
       }
     }
+    
     img {
-      width: 40vw;
+      flex: 1;
+      max-width: 500px;
+      width: 100%;
+      height: auto;
       border-radius: 50%;
       -webkit-mask-image: radial-gradient(
         circle at center,
@@ -317,696 +446,376 @@
       );
     }
   }
-  .footer {
-    color: white;
-    width: 80vw;
-    margin: auto;
 
+  .footer {
+    @extend %container;
+    color: white;
+    margin: 4rem auto 1rem;
+    
     div {
-      margin-top: 3%;
+      margin-top: 2rem;
+      
       p {
-        margin-top: 2%;
-        font-size: 1.3rem;
+        margin-top: 1rem;
+        font-size: clamp(1rem, 1.5vw, 1.3rem);
       }
+      
       .headers {
-        font-size: 1.5rem;
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
         font-weight: 700;
         border-left: 4px solid rgb(25, 62, 212);
         padding-left: 2%;
       }
+      
       .smallText {
         font-size: 1.1rem;
       }
+      
       .inputContainer {
+        display: flex;
+        flex-wrap: wrap;
         background-color: white;
         border-radius: 10px;
-        height: 3.5vw;
+        margin-top: 1rem;
+        overflow: hidden;
+        
         input {
-          padding: 2%;
+          flex: 2;
+          min-width: 200px;
+          padding: 0.8rem;
           outline: none;
           color: black;
           border: none;
           box-shadow: none;
           font-weight: 600;
-          height: 100%;
         }
+        
         button {
-          height: 100%;
-          width: 30vw;
-          padding: 2% 2%;
+          flex: 1;
+          min-width: 150px;
+          border-radius: 0;
+          padding: 0.8rem;
           font-weight: 600;
           background-color: rgb(73, 70, 198);
           color: white;
-          border-radius: 10px;
+          
+          @media (min-width: 768px) {
+            border-radius: 0 10px 10px 0;
+          }
         }
       }
     }
+    
     .last {
-      margin-top: 3%;
-      // justify-content: space-between;
+      margin-top: 3rem;
+      text-align: center;
+      
       p {
         text-align: center;
       }
+      
       .copy {
         color: rgb(176, 176, 176);
         font-size: 1.1rem;
-        margin-top: 0.5%;
+        margin-top: 0.5rem;
       }
     }
   }
-  button {
-    width: 12vw;
-    height: 7vh;
+}
+
+// Variables for consistent styling
+$primary-color: #b8ff04; // Bright lime green
+$background-color: black;
+$text-color: white;
+$text-secondary: rgba(255, 255, 255, 0.8);
+$box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+$border-radius: 8px;
+$spacing-unit: 1rem;
+
+// Mixins for responsive design
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == "small" {
+    @media (max-width: 576px) { @content; }
+  } @else if $breakpoint == "medium" {
+    @media (max-width: 768px) { @content; }
+  } @else if $breakpoint == "large" {
+    @media (max-width: 992px) { @content; }
+  }
+}
+
+.contactForm {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: $spacing-unit * 3;
+  background-color: $background-color;
+  
+  @include respond-to("medium") {
+    padding: $spacing-unit * 2;
+  }
+  
+  @include respond-to("small") {
+    padding: $spacing-unit;
+  }
+  
+  .heading {
+    font-size: 2.5rem;
     font-weight: 700;
-    border-radius: 30px;
-    background: transparent;
-  }
-}
-@media only screen and (max-width: 1024px) {
-  .rootDiv {
-    button {
-      width: 18vw;
-      height: 4vh;
-      font-weight: 700;
-      border-radius: 30px;
-      background: transparent;
-    }
-    .formContainer {
-      .form {
-        width: 45vw;
-        form {
-          input {
-            height: 5vh;
-          }
-          textarea {
-            height: 20vh;
-          }
-          button {
-            width: 18vw;
-            height: 4vh;
-          }
-        }
-      }
+    color: $primary-color;
+    margin-bottom: $spacing-unit * 2;
+    text-align: center;
+    letter-spacing: 1px;
+    
+    @include respond-to("small") {
+      font-size: 2rem;
+      margin-bottom: $spacing-unit;
     }
   }
-}
-
-@media only screen and (max-width: 820px) {
-  .rootDiv {
-    padding-bottom: 5%;
-    border-bottom: 1px solid gray;
-    button {
-      width: 30vw;
-      height: 5vh;
+  
+  .formBox {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: $border-radius;
+    border: 1px solid rgba($primary-color, 0.3);
+    padding: $spacing-unit * 2;
+    
+    @include respond-to("small") {
+      padding: $spacing-unit;
     }
-    .header {
-      .headerContainer {
-        width: 100vw;
-        margin-bottom: 1%;
-        .content {
-          .texts {
-            margin-top: 18%;
-            width: 100%;
-            text-align: center;
-            .text {
-              font-size: 3rem;
-              padding: 0 5%;
-              margin-bottom: 10%;
-            }
-            button {
-              margin-bottom: 5%;
-            }
-            .text2 {
-              font-size: 1.2rem;
-              color: gray;
-            }
-            span {
-              color: rgb(184, 255, 4);
-              text-decoration: underline;
-            }
-          }
-        }
-        .description {
-          padding: 0 8%;
-          margin-top: 10%;
-          margin-bottom: 5%;
-        }
-      }
-    }
-    .intro {
-      .content {
-        width: 100vw;
-        flex-direction: column;
-        margin: 10% auto;
-        img {
-          width: 80vw;
-        }
-        .texts {
-          width: 80%;
-          margin: auto;
-          text-align: center;
-          .label {
-            font-size: 1.4rem;
-            margin-bottom: 3%;
-            margin-top: 6%;
-          }
-          .text {
-            font-size: 1.2rem;
-            margin-bottom: 10%;
-            line-height: 40px;
-          }
-        }
-      }
-    }
-    .cardComponent {
-      width: 80vw;
-      .cardHeader {
-        font-size: 2.5rem;
-      }
-      .cards {
-        margin: 10% auto;
-        flex-direction: column;
-        justify-content: space-between;
-        .cardItem {
-          width: 100%;
-          margin-bottom: 4%;
-          padding: 6%;
-          img {
-            width: 12vw;
-          }
-          .label {
-            font-size: 1.5rem;
-            margin: 4% auto;
-          }
-          .text {
-            font-size: 1.2rem;
-          }
-        }
-        .cardItem:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-    .cardComponent2 {
-      .cards {
-        .cardItem {
-          width: 100%;
-          margin: 0 auto 8% auto;
-        }
-        .cardItem:last-child {
-          margin: 0;
-        }
-      }
-    }
-    .banner {
-      width: 80vw;
-      margin: 12% auto;
-      padding: 8%;
-      .bannerHeader {
-        font-size: 2.5rem;
-        font-weight: 700;
-        line-height: 40px;
-        text-align: center;
-        margin-bottom: 8%;
-      }
-      .bannerText {
-        text-align: center;
-        font-size: 1.2rem;
-        line-height: 30px;
-      }
-    }
-    .banner2 {
+    
+    form {
+      display: flex;
       flex-direction: column;
-      .bannerContainer {
+      gap: $spacing-unit * 1.5;
+      
+      input, textarea {
         width: 100%;
-        .bannerHeader {
-          text-align: center;
-        }
-      }
-      .bannerButton {
-        align-items: center;
-        justify-content: center;
-        flex-grow: 1;
-        button {
-          margin-top: 10%;
-          font-size: 1.2rem;
-        }
-      }
-    }
-    .followContainer {
-      width: 70vw;
-      flex-direction: column;
-      .first {
-        flex: 1;
-        margin-bottom: 5%;
-        .firstLabel {
-          font-size: 2.5rem;
-          margin-bottom: 6%;
-          line-height: 40px;
-        }
-        .firstText {
-          font-size: 1.3rem;
-          margin-bottom: 8%;
-          line-height: 35px;
-        }
-        .firstIcons {
-          flex-direction: column;
-          align-items: center;
-          .icon {
-            margin-bottom: 8%;
-          }
-        }
-      }
-      .first:last-child {
-        margin: 0;
-      }
-    }
-    .formContainer {
-      width: 80vw;
-      margin: 6% auto;
-      padding: 5%;
-      flex-direction: column;
-      .form {
-        width: 100%;
-        .formHeader {
-          font-size: 2.5rem;
-          text-align: center;
-          margin-bottom: 8%;
-          line-height: 40px;
-        }
-        form {
-          font-size: 1.3rem;
-          label {
-            font-weight: 500;
-          }
-          input,
-          textarea {
-            width: 100%;
-            margin-bottom: 6%;
-            padding: 5%;
-          }
-          button {
-            width: 30vw;
-            height: 5vh;
-            margin: 3% auto;
-          }
-          p {
-            text-align: center;
-          }
-        }
-      }
-      .formButton {
-        align-items: center;
-        justify-content: center;
-        flex-grow: 1;
-        button {
-          margin-top: 5%;
-          font-size: 1.2rem;
-        }
-      }
-    }
-    .bottomContainer {
-      width: 80vw;
-      flex-direction: column-reverse;
-      margin-bottom: 14%;
-      .bottomTexts {
-        width: 95%;
-        margin: auto;
-        text-align: center;
-        .bottomHeader {
-          margin-bottom: 8%;
-        }
-        .bottomText {
-          font-size: 1.3rem;
-        }
-      }
-      img {
-        width: 90%;
-        margin: auto;
-      }
-    }
-    .footer {
-      color: white;
-      width: 75vw;
-      margin: auto;
-
-      div {
-        margin-top: 5%;
-        p {
-          margin-top: 3%;
-          font-size: 1.3rem;
-        }
-        .headers {
-          font-size: 1.5rem;
-          font-weight: 700;
-          border-left: 4px solid rgb(25, 62, 212);
-          padding-left: 5%;
-        }
-        .smallText {
-          font-size: 1.1rem;
-        }
-        .inputContainer {
-          background-color: white;
-          border-radius: 8px;
-          height: 5vw;
-          input {
-            padding: 3%;
-            height: 100%;
-            outline: none;
-            border: none;
-            box-shadow: none;
-            font-weight: 700;
-          }
-          button {
-            width: 50vw;
-            // padding: 4% 7%;
-            font-weight: 600;
-            background-color: rgb(73, 70, 198);
-            color: white;
-            border-radius: 8px;
-          }
-        }
-      }
-      .last {
-        margin-top: 10%;
-        p {
-          text-align: center;
-        }
-        .copy {
-          color: rgb(176, 176, 176);
-          font-size: 1.1rem;
-        }
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 450px) {
-  .rootDiv {
-    button {
-      width: 48vw;
-      height: 6vh;
-      &:focus {
-        outline: none !important;
-        box-shadow: none !important;
-      }
-    }
-    .header {
-      .headerContainer {
-        width: 95vw;
-        margin: auto;
-        .content {
-          .texts {
-            .text {
-              font-size: 2rem;
-            }
-            button {
-              margin-bottom: 5%;
-            }
-            .text2 {
-              font-size: 1rem;
-            }
-          }
-        }
-        .description {
-          margin-top: 15%;
-          font-size: 1.5rem;
-          margin-bottom: 3%;
-        }
-      }
-    }
-    .intro {
-      .content {
-        margin: 15% auto;
-        .texts {
-          .label {
-            font-size: 1.2rem;
-          }
-          .text {
-            font-size: 0.9rem;
-            line-height: 30px;
-          }
-          button {
-            margin-bottom: 5%;
-          }
-        }
-      }
-    }
-    .cardComponent {
-      width: 90vw;
-      .cardHeader {
-        font-size: 2rem;
-      }
-      .cards {
-        .cardItem {
-          padding: 8%;
-          img {
-            width: 15vw;
-          }
-          .label {
-            font-size: 1.2rem;
-            margin: 6% auto;
-          }
-          .text {
-            font-size: 0.9rem;
-          }
-        }
-      }
-    }
-    .banner {
-      width: 90vw;
-      margin: 16% auto;
-      padding: 9%;
-      .bannerHeader {
-        font-size: 2rem;
-        margin-bottom: 10%;
-      }
-      .bannerText {
+        padding: $spacing-unit;
+        background-color: rgba(0, 0, 0, 0.7);
+        border: 1px solid rgba($primary-color, 0.4);
+        border-radius: $border-radius;
         font-size: 1rem;
-      }
-    }
-    .banner2 {
-      .bannerButton {
-        button {
-          margin-top: 15%;
+        color: $text-color;
+        transition: all 0.3s ease;
+        
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+        }
+        
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.5);
         }
       }
-    }
-    .followContainer {
-      width: 80vw;
-      .first {
-        .firstLabel {
-          font-size: 1.8rem;
-        }
-        .firstText {
-          font-size: 1rem;
-          line-height: 30px;
+      
+      textarea {
+        min-height: 150px;
+        resize: vertical;
+        
+        @include respond-to("small") {
+          min-height: 120px;
         }
       }
-    }
-    .formContainer {
-      width: 90vw;
-      padding: 7%;
-      .form {
-        .formHeader {
-          font-size: 2.2rem;
+      
+      button {
+        background-color: $primary-color;
+        color: $background-color;
+        border: none;
+        border-radius: $border-radius;
+        padding: $spacing-unit $spacing-unit * 2;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: $spacing-unit;
+        align-self: flex-start;
+        min-width: 120px;
+        
+        &:hover {
+          background-color: darken($primary-color, 10%);
+          transform: translateY(-2px);
         }
-        form {
-          margin: 3% auto;
-          label {
-            font-size: 1.1rem;
-          }
-          p {
-            font-size: 1rem;
-            line-height: 30px;
-          }
+        
+        &:active {
+          transform: translateY(0);
         }
-      }
-      .formButton {
-        button {
-          margin-top: 8%;
-        }
-      }
-    }
-    .bottomContainer {
-      width: 90vw;
-      img {
-        width: 100%;
-        margin-top: 10%;
-      }
-      .bottomTexts {
-        .bottomText {
-          font-size: 1rem;
-        }
-      }
-    }
-    .footer {
-      width: 80vw;
-      div {
-        margin-top: 4%;
-        p {
-          margin-top: 3%;
-          font-size: 1rem;
-        }
-        .headers {
-          font-size: 1.2rem;
-        }
-        .smallText {
-          font-size: 0.8rem;
-        }
-        .inputContainer {
-          height: 8vw;
-          input {
-            font-size: 0.9rem;
-          }
-          button {
-            font-size: 0.9rem;
-          }
-        }
-      }
-      .last {
-        margin-top: 5%;
-        .copy {
-          font-size: 0.8rem;
+        
+        @include respond-to("small") {
+          align-self: center;
+          width: 100%;
         }
       }
     }
   }
 }
-@media only screen and (max-width: 400px) {
-  .rootDiv {
-    button {
-      width: 40vw;
-      height: 5.5vh;
-      font-size: 0.9rem;
-    }
-    .formContainer {
-      .formButton {
-        button {
-          font-size: 0.8rem;
-        }
-      }
-    }
-    .header {
-      .headerContainer {
-        width: 95vw;
-        margin: auto;
-        .content {
-          .texts {
-            .text {
-              font-size: 1.6rem;
-            }
-            .text2 {
-              font-size: 0.8rem;
-            }
-          }
-        }
-        .description {
-          font-size: 1.3rem;
-        }
-      }
-    }
-    .banner2 {
-      .bannerButton {
-        button {
-          font-size: 0.8rem;
-        }
-      }
-    }
-    .intro {
-      .content {
-        .texts {
-          .label {
-            font-size: 1.1rem;
-          }
-          .text {
-            font-size: 0.8rem;
-            line-height: 25px;
-          }
-        }
-      }
-    }
-    .cardComponent {
-      .cardHeader {
-        font-size: 1.7rem;
-      }
-      .cards {
-        .cardItem {
-          img {
-            width: 15vw;
-          }
-          .label {
-            font-size: 1rem;
-          }
-          .text {
-            font-size: 0.8rem;
-          }
-        }
-      }
-    }
-    .banner {
-      .bannerHeader {
-        font-size: 1.7rem;
-      }
-      .bannerText {
-        font-size: 0.9rem;
-      }
-    }
 
-    .followContainer {
-      .first {
-        .firstLabel {
-          font-size: 1.5rem;
-        }
-        .firstText {
-          font-size: 0.8rem;
-          line-height: 25px;
-        }
+.bannerBtn {
+  background-color: #b8ff04;
+  color: black;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: 2px black solid;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: black;
+    color: #b8ff04;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(184, 255, 4, 0.4);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(184, 255, 4, 0.2);
+  }
+  
+  &:focus {
+    outline: 2px solid black;
+    outline-offset: 2px;
+  }
+}
+
+.bottomImage {
+  width: 100%;
+  margin: $spacing-unit * 4 0;
+  padding: 0 $spacing-unit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    border: 1px solid rgba($primary-color, 0.3);
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+    
+    // Add lime green glow on the image
+    filter: drop-shadow(0 0 8px rgba($primary-color, 0.4));
+    
+    // Aspect ratio container for consistent image sizing
+    @media (min-width: 768px) {
+      max-height: 450px;
+      width: auto;
+    }
+    
+    @include respond-to("medium") {
+      width: 90%;
+    }
+    
+    @include respond-to("small") {
+      width: 100%;
+    }
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
+
+.footer {
+  width: 100%;
+  padding: $spacing-unit * 3 0;
+  background-color: $background-color;
+  
+  .socials {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-unit * 2;
+    
+    svg {
+      font-size: 2rem;
+      color: $primary-color;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        color: lighten($primary-color, 5%);
+        transform: translateY(-5px);
+        filter: drop-shadow(0 0 5px rgba($primary-color, 0.7));
+      }
+      
+      @include respond-to("small") {
+        font-size: 1.8rem;
       }
     }
-    .formContainer {
-      .form {
-        .formHeader {
-          font-size: 2rem;
-        }
-        form {
-          label {
-            font-size: 1rem;
-          }
-          p {
-            font-size: 0.8rem;
-            line-height: 25px;
-          }
-        }
+    
+    @include respond-to("small") {
+      gap: $spacing-unit * 1.5;
+    }
+  }
+}
+
+// Animation for form elements
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.contactForm .formBox form {
+  > * {
+    animation: fadeIn 0.4s ease forwards;
+    
+    @for $i from 1 through 4 {
+      &:nth-child(#{$i}) {
+        animation-delay: 0.1s * $i;
       }
     }
+  }
+}
+
+// High contrast focus styles for accessibility
+:focus {
+  outline: 2px solid $primary-color;
+  outline-offset: 2px;
+}
+
+// Media queries for responsive adjustments
+@media (max-width: 768px) {
+  .rootDiv {
+    .header .headerContainer .content,
+    .intro .content,
+    .banner2,
+    .formContainer,
     .bottomContainer {
-      .bottomTexts {
-        .bottomText {
-          font-size: 0.8rem;
-        }
-      }
+      flex-direction: column;
     }
-    .footer {
-      div {
-        p {
-          font-size: 0.8rem;
-        }
-        .headers {
-          font-size: 1rem;
-        }
-        .smallText {
-          font-size: 0.7rem;
-        }
-        .inputContainer {
-          height: 10vw;
-        }
-      }
-      .last {
-        .copy {
-          font-size: 0.7rem;
-        }
-      }
+    
+    .banner2 .bannerButton,
+    .formContainer .formButton {
+      justify-content: center;
+      margin-top: 1.5rem;
     }
+    
+    .intro .content img {
+      order: -1;
+    }
+    
+    button {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .rootDiv {
+    .cardComponent .cards .cardItem,
+    .cardComponent2 .cards .cardItem {
+      min-width: 100%;
+    }
+    
+    .formContainer {
+      padding: 2rem 1.5rem;
+    }
+    
   }
 }

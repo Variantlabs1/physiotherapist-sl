@@ -13,8 +13,7 @@ import {
 } from "firebase/firestore";
 import { 
   createUserWithEmailAndPassword, 
-  updateProfile,
-  signOut 
+  updateProfile 
 } from "firebase/auth";
 import { db, auth, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -190,9 +189,6 @@ const CreateClientID = () => {
       // Create user document in Firestore
       await setDoc(doc(db, "Users", user.uid), newUserData);
       
-      // Sign out the newly created user to avoid session conflict
-      await signOut(auth);
-      
       toast({
         title: "Account created.",
         description: "User account has been created successfully.",
@@ -201,8 +197,8 @@ const CreateClientID = () => {
         isClosable: true,
       });
       
-      // Navigate to requests page
-      navigate("/home");
+      // Navigate to user profile page
+      navigate(`/users/${user.uid}`);
       
     } catch (error) {
       console.error("Error creating user:", error);
@@ -220,204 +216,208 @@ const CreateClientID = () => {
   };
 
   return (
-    <div className="create-client-container">
-      <Box className="main-wrapper">
+    <div className="create-user-container">
+      <Box p="2% 4%">
         <div className="page-header">
           <h1>Create New User</h1>
-          <p className="date-display">{date}</p>
+          <p>{date}</p>
         </div>
         
-        <div className="form-wrapper">
-          <div className="form-card">
-            {/* Banner Section */}
-            <div className="banner-section">
+        <div className="form-container">
+          <div className="form-box">
+            <div className="banner">
               <div className="profile-section">
-                <div className="profile-image-wrapper">
-                  <label htmlFor="profile-image" className="image-upload-label">
+                <div>
+                  <label htmlFor="profile-image">
                     <div className="profile-image-container">
+                      <IoCameraOutline color="#4371cb" className="camera-icon" />
                       <img
                         className="profile-image"
                         src={file ? URL.createObjectURL(file) : userData.userProfilePhoto || "/default-avatar.png"}
                         alt="Profile"
                       />
-                      <IoCameraOutline className="camera-icon" />
                     </div>
                   </label>
                   <input
                     type="file"
                     id="profile-image"
-                    className="file-input"
+                    style={{ display: "none" }}
                     onChange={handleFileChange}
                     accept="image/*"
                   />
                 </div>
                 <div className="profile-text">
-                  <h2 className="profile-title">New User Profile</h2>
-                  <p className="profile-subtitle">Enter user details to create a new account</p>
+                  <h1>New User Profile</h1>
+                  <h2>Enter user details to create a new account</h2>
                 </div>
               </div>
-              
               {userData.referralCode && (
-                <div className="referral-section">
-                  <div className="referral-code">{userData.referralCode}</div>
-                  <span className="referral-label">Referral code</span>
+                <div className="referral">
+                  <Flex>
+                    <p>{userData.referralCode}</p>
+                    <Flex alignItems="flex-end" color="#4371cb" ml={2}>
+                      Referral code
+                    </Flex>
+                  </Flex>
                 </div>
               )}
             </div>
 
-            {/* Error Message */}
             {error && <div className="error-message">{error}</div>}
             
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="user-form">
-              <div className="form-fields">
-                {/* Full Name - Single Row */}
-                <div className="form-row single">
-                  <div className="form-field">
-                    <label className="field-label">Full Name:</label>
-                    <input
-                      type="text"
-                      name="userName"
-                      value={userData.userName}
-                      onChange={handleChange}
-                      placeholder="Enter full name"
-                      className="form-input"
-                      required
-                    />
-                  </div>
+            <form onSubmit={handleSubmit}>
+              <div className="form-details">
+                <div className="form-row">
+                  <Flex className="form-field">
+                    <div className="label">Full Name:</div>
+                    <div className="input-field">
+                      <input
+                        type="text"
+                        name="userName"
+                        value={userData.userName}
+                        onChange={handleChange}
+                        placeholder="Enter full name"
+                        required
+                      />
+                    </div>
+                  </Flex>
                 </div>
                 
-                {/* Email & Password - Double Row */}
                 <div className="form-row double">
-                  <div className="form-field">
-                    <label className="field-label">Email:</label>
-                    <input
-                      type="email"
-                      name="userEmail"
-                      value={userData.userEmail}
-                      onChange={handleChange}
-                      placeholder="Enter email address"
-                      className="form-input"
-                      required
-                    />
-                  </div>
-                  <div className="form-field">
-                    <label className="field-label">Password:</label>
-                    <input
-                      type="password"
-                      name="userPassword"
-                      value={userData.userPassword}
-                      onChange={handleChange}
-                      placeholder="Enter password"
-                      className="form-input"
-                      required
-                    />
-                  </div>
+                  <Flex className="form-field">
+                    <div className="label">Email:</div>
+                    <div className="input-field">
+                      <input
+                        type="email"
+                        name="userEmail"
+                        value={userData.userEmail}
+                        onChange={handleChange}
+                        placeholder="Enter email address"
+                        required
+                      />
+                    </div>
+                  </Flex>
+                  <Flex className="form-field">
+                    <div className="label">Password:</div>
+                    <div className="input-field">
+                      <input
+                        type="password"
+                        name="userPassword"
+                        value={userData.userPassword}
+                        onChange={handleChange}
+                        placeholder="Enter password"
+                        required
+                      />
+                    </div>
+                  </Flex>
                 </div>
                 
-                {/* Phone & Gender - Double Row */}
                 <div className="form-row double">
-                  <div className="form-field">
-                    <label className="field-label">Phone Number:</label>
-                    <input
-                      type="tel"
-                      name="userPhoneNumber"
-                      value={userData.userPhoneNumber}
-                      onChange={handleChange}
-                      placeholder="Enter phone number"
-                      className="form-input"
-                    />
-                  </div>
-                  <div className="form-field">
-                    <label className="field-label">Gender:</label>
-                    <select
-                      name="userGender"
-                      value={userData.userGender}
-                      onChange={handleChange}
-                      className="form-select"
-                    >
-                      <option value="">Select Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
+                  <Flex className="form-field">
+                    <div className="label">Phone Number:</div>
+                    <div className="input-field">
+                      <input
+                        type="tel"
+                        name="userPhoneNumber"
+                        value={userData.userPhoneNumber}
+                        onChange={handleChange}
+                        placeholder="Enter phone number"
+                      />
+                    </div>
+                  </Flex>
+                  <Flex className="form-field">
+                    <div className="label">Gender:</div>
+                    <div className="input-field">
+                      <select
+                        name="userGender"
+                        value={userData.userGender}
+                        onChange={handleChange}
+                      >
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </Flex>
                 </div>
                 
-                {/* Height & Weight - Double Row */}
                 <div className="form-row double">
-                  <div className="form-field">
-                    <label className="field-label">Height (cm):</label>
-                    <input
-                      type="text"
-                      name="userHeightInCm"
-                      value={userData.userHeightInCm}
-                      onChange={handleChange}
-                      placeholder="Enter height in cm"
-                      className="form-input"
-                    />
-                  </div>
-                  <div className="form-field">
-                    <label className="field-label">Weight (kg):</label>
-                    <input
-                      type="text"
-                      name="userWeight"
-                      value={userData.userWeight}
-                      onChange={handleChange}
-                      placeholder="Enter weight in kg"
-                      className="form-input"
-                    />
-                  </div>
+                  <Flex className="form-field">
+                    <div className="label">Height (cm):</div>
+                    <div className="input-field">
+                      <input
+                        type="text"
+                        name="userHeightInCm"
+                        value={userData.userHeightInCm}
+                        onChange={handleChange}
+                        placeholder="Enter height in cm"
+                      />
+                    </div>
+                  </Flex>
+                  <Flex className="form-field">
+                    <div className="label">Weight (kg):</div>
+                    <div className="input-field">
+                      <input
+                        type="text"
+                        name="userWeight"
+                        value={userData.userWeight}
+                        onChange={handleChange}
+                        placeholder="Enter weight in kg"
+                      />
+                    </div>
+                  </Flex>
                 </div>
                 
-                {/* DOB & Image URL - Double Row */}
                 <div className="form-row double">
-                  <div className="form-field">
-                    <label className="field-label">Date of Birth:</label>
-                    <input
-                      type="text"
-                      name="userDOB"
-                      value={userData.userDOB}
-                      onChange={handleChange}
-                      placeholder="DD/Month/YYYY/Day"
-                      className="form-input"
-                    />
-                  </div>
-                  <div className="form-field">
-                    <label className="field-label">External Image URL:</label>
-                    <input
-                      type="url"
-                      name="userProfilePhoto"
-                      value={userData.userProfilePhoto}
-                      onChange={handleChange}
-                      placeholder="https://example.com/image.jpg"
-                      className="form-input"
-                    />
-                  </div>
+                  <Flex className="form-field">
+                    <div className="label">Date of Birth:</div>
+                    <div className="input-field">
+                      <input
+                        type="text"
+                        name="userDOB"
+                        value={userData.userDOB}
+                        onChange={handleChange}
+                        placeholder="DD/Month/YYYY/Day"
+                      />
+                    </div>
+                  </Flex>
+                  <Flex className="form-field">
+                    <div className="label">External Image URL:</div>
+                    <div className="input-field">
+                      <input
+                        type="url"
+                        name="userProfilePhoto"
+                        value={userData.userProfilePhoto}
+                        onChange={handleChange}
+                        placeholder="https://example.com/image.jpg"
+                      />
+                    </div>
+                  </Flex>
                 </div>
                 
-                {/* Trainer Code & Verified - Double Row */}
                 <div className="form-row double">
-                  <div className="form-field">
-                    <label className="field-label">Trainer Code:</label>
-                    <select
-                      name="referralCode"
-                      value={userData.referralCode}
-                      onChange={handleChange}
-                      className="form-select"
-                    >
-                      <option value="">Select Trainer Code</option>
-                      {trainerData.map((trainer) => (
-                        <option key={trainer.id} value={trainer.referralCode}>
-                          {trainer.referralCode} - {trainer.name || trainer.username}
-                        </option>
-                      ))}
-                      <option value="Eg0I00">Eg0I00 - Default Trainer</option>
-                    </select>
-                  </div>
-                  <div className="form-field checkbox-field">
-                    <label className="field-label">Verified:</label>
-                    <div className="checkbox-wrapper">
+                  <Flex className="form-field">
+                    <div className="label">Trainer Code:</div>
+                    <div className="input-field">
+                      <select
+                        name="referralCode"
+                        value={userData.referralCode}
+                        onChange={handleChange}
+                      >
+                        <option value="">Select Trainer Code</option>
+                        {trainerData.map((trainer) => (
+                          <option key={trainer.id} value={trainer.referralCode}>
+                            {trainer.referralCode} - {trainer.name || trainer.username}
+                          </option>
+                        ))}
+                        <option value="Eg0I00">Eg0I00 - Default Trainer</option>
+                      </select>
+                    </div>
+                  </Flex>
+                  <Flex className="form-field checkbox">
+                    <div className="label">Verified:</div>
+                    <div className="input-field">
                       <input
                         type="checkbox"
                         name="verified"
@@ -428,15 +428,12 @@ const CreateClientID = () => {
                             verified: e.target.checked
                           }))
                         }
-                        className="form-checkbox"
                       />
-                      <span className="checkbox-label">Account verified</span>
                     </div>
-                  </div>
+                  </Flex>
                 </div>
               </div>
               
-              {/* Form Actions */}
               <div className="form-actions">
                 <button 
                   type="button" 
@@ -453,8 +450,7 @@ const CreateClientID = () => {
                   {isLoading ? (
                     <div className="loading-container">
                       <div className="loading-spinner"></div>
-                      <span>Creating...</span>
-                      {file && uploadProgress > 0 && <span>{uploadProgress}%</span>}
+                      {file && uploadProgress > 0 && <p>{uploadProgress}%</p>}
                     </div>
                   ) : (
                     "Create User"
